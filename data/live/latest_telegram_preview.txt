@@ -1,22 +1,15 @@
-<b>📡 BẢN TIN 05:00 SÁNG — THỨ 2 (26/10/2026)</b>
+<b>📡 BẢN TIN 05:00 SÁNG — THỨ 3 (27/10/2026)</b>
 ────────────
 
 <b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>
-👉 🟢 <b>CÓ — HÔM NAY NÊN ĐÁNH (Tín hiệu rất đẹp / PLAY_PEAK)</b>
+👉 🔴 <b>KHÔNG NÊN ĐÁNH — HÔM NAY NGHỈ (SKIP_NO_EDGE)</b>
 <i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>
 
 <b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>
-🏆 <b>Nên Đánh:</b> <b>Phú Yên - Miền Trung</b> (XSPY — Quay 17:15) với:
-+ <b>Bộ số nên đánh nhất (1x4 - 4 số, ROI +1.82%):</b> <b>11, 14, 18, 19</b>
-+ <b>Các bộ số tham khảo:</b>
-  • Bộ <code>2x2</code> (4 số, ROI -6.94%): <code>11, 14, 81, 84</code>
-  • Bộ <code>4x1</code> (4 số, ROI -0.37%): <code>01, 11, 81, 91</code>
-  • Bộ <code>3x3</code> (9 số, ROI -10.47%): <code>11, 14, 19, 81, 84, 89, 91, 94, 99</code>
-  • Bộ <code>core_2x2_sat_3x3</code> (9 số, ROI -9.38%): <code>11, 14, 81, 84, 19, 89, 91, 94, 99</code>
-
-• <b>Đài thứ nhì:</b> Không có đài thứ 2 đạt chuẩn hôm nay.
-• <i>Các đài còn lại không đánh: Đồng Tháp (XSDT), TP. Hồ Chí Minh (XSHCM), Thừa Thiên Huế (XSTTH), Cà Mau (XSCM).</i>
+• <b>Không đánh đài nào hôm nay (CHỈ QUAN SÁT).</b>
+• <i>Đài quan sát tham khảo (Đắk Lắk - Miền Trung, XSDLK):</i> Bộ <code>2x2</code>: <b>03, 09, 93, 99</b>
+• <i>Các đài nghỉ hôm nay: Đắk Lắk (XSDLK), Bến Tre (XSBT), Quảng Nam (XSQNM), Vũng Tàu (XSVT), Bạc Liêu (XSBL).</i>
 
 ────────────
 💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>
-🔗 <a href="https://xstk-family.pages.dev/daily/2026-10-26.html">Xem Trang Web Giải Trình Chi Tiết Ngày 26/10/2026 (2026-10-26)</a>
+🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-27.html">Xem Trang Web Giải Trình Chi Tiết Ngày 27/10/2026 (2026-10-27)</a>

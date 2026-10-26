@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 87500,
-  "current_bankroll_vnd": 3009000,
-  "house_money_surplus_vnd": 2009000,
+  "current_bankroll_vnd": 3163500,
+  "house_money_surplus_vnd": 2163500,
   "peak_bankroll_vnd": 3216750,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 705125,
-  "total_tracked_days": 299,
+  "total_tracked_days": 300,
   "played_days": 169,
-  "rest_days": 130,
-  "win_days": 109,
+  "rest_days": 131,
+  "win_days": 110,
   "loss_days": 59,
-  "total_cost_vnd": 17766000,
-  "total_revenue_vnd": 19775000,
-  "net_profit_vnd": 2009000,
-  "updated_at": "2026-10-26T05:00:00+07:00",
-  "sha256": "3bb2653b2c6c2b8d733f2bd56450dd5f78cdc172315f36abd00effd781972720",
+  "total_cost_vnd": 17874000,
+  "total_revenue_vnd": 20037500,
+  "net_profit_vnd": 2163500,
+  "updated_at": "2026-10-27T05:00:00+07:00",
+  "sha256": "4f541124d4070125dcf7297b75dfedce773ec46f2aef4a3376e71f8c849933ac",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -15166,7 +15166,7 @@
     {
       "draw_date": "2026-10-26",
       "weekday_vn": "Thứ 2",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_PEAK",
       "chosen_station_code": "XSPY",
       "chosen_station_name": "Phú Yên",
@@ -15182,13 +15182,70 @@
       "bankroll_before_vnd": 3009000,
       "house_money_before_vnd": 2009000,
       "cost_vnd": 108000,
+      "actual_prizes_last2": [
+        "37",
+        "02",
+        "61",
+        "35",
+        "49",
+        "44",
+        "17",
+        "46",
+        "61",
+        "93",
+        "18",
+        "14",
+        "56",
+        "94",
+        "65",
+        "79",
+        "93",
+        "28"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 10,
+          "prize_label": "Giải Tư (5)",
+          "number": "18"
+        },
+        {
+          "prize_index": 11,
+          "prize_label": "Giải Tư (6)",
+          "number": "14"
+        }
+      ],
+      "revenue_vnd": 262500,
+      "net_profit_vnd": 154500,
+      "bankroll_after_vnd": 3163500,
+      "house_money_after_vnd": 2163500
+    },
+    {
+      "draw_date": "2026-10-27",
+      "weekday_vn": "Thứ 3",
+      "settlement_status": "SETTLED",
+      "verdict_tier": "SKIP_NO_EDGE",
+      "chosen_station_code": "XSDLK",
+      "chosen_station_name": "Đắk Lắk",
+      "chosen_region": "Miền Trung",
+      "chosen_config_id": "2x2",
+      "selected_numbers": [
+        "03",
+        "09",
+        "93",
+        "99"
+      ],
+      "recommended_multiplier": 0.0,
+      "bankroll_before_vnd": 3163500,
+      "house_money_before_vnd": 2163500,
+      "cost_vnd": 0,
       "actual_prizes_last2": [],
-      "hit_count_k": null,
+      "hit_count_k": 0,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3009000,
-      "house_money_after_vnd": 2009000
+      "bankroll_after_vnd": 3163500,
+      "house_money_after_vnd": 2163500
     }
   ]
 }

@@ -30,11 +30,14 @@ jobs:
   quant-report-and-publish:
     name: "Sync 35 Stations, Settle Benchmark 1M Ledger, Publish Web & Send Telegram"
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     env:
       TZ: "Asia/Ho_Chi_Minh"
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      PUBLIC_REPORT_BASE_URL: ${{ secrets.PUBLIC_REPORT_BASE_URL }}
+      PUBLIC_REPORT_BASE_URL: ${{ secrets.PUBLIC_REPORT_BASE_URL || 'https://minhhoang2409.github.io/xstk-family-quant' }}
       INPUT_REPORT_DATE: ${{ github.event.inputs.report_date }}
       INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
       EVENT_NAME: ${{ github.event_name }}

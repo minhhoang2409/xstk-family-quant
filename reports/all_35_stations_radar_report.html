@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bảng Radar Tầm Soát 35 Đài Xổ Số Miền Nam (21 Đài) & Miền Trung (14 Đài)</title>
+  <style>
+    body {
+      margin: 0; padding: 24px;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: #0f172a; color: #f1f5f9;
+      line-height: 1.5;
+    }
+    .container { max-width: 1480px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 1.75rem; color: #fff; }
+    .sub { color: #94a3b8; margin-bottom: 20px; }
+    .kpi-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px;
+    }
+    .kpi {
+      background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 18px;
+    }
+    .kpi .val { font-size: 1.65rem; font-weight: 800; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; background: #1e293b; }
+    th, td { border: 1px solid #334155; padding: 8px 9px; text-align: center; }
+    th { background: #0b1324; color: #cbd5e1; position: sticky; top: 0; }
+    td.left, th.left { text-align: left; }
+    tr.row-pass { background: rgba(34, 197, 94, 0.13); }
+    tr.row-warn { background: rgba(245, 158, 11, 0.08); }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-weight: 700; font-size: 0.76rem; }
+    .badge.pass { background: rgba(34, 197, 94, 0.25); color: #4ade80; border: 1px solid #22c55e; }
+    .badge.warn { background: rgba(245, 158, 11, 0.22); color: #fbbf24; border: 1px solid #f59e0b; }
+    .badge.fail { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid #ef4444; }
+    .pos { color: #4ade80; font-weight: 700; }
+    .neg { color: #f87171; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>📡 Bảng Radar Tầm Soát 35 Đài Xổ Số Miền Nam (21 Đài) &amp; Miền Trung (14 Đài) — Khung 3 Năm Hiện Hành</h1>
+  <div class="sub">
+    Kiểm định thực nghiệm cuốn chiếu (Walk-Forward Backtest) trên toàn bộ 35 đài có cùng cơ cấu 18 giải/kỳ và lồng cầu 0–9. Sắp xếp từ Đài có Độ Lệch Vật Lý &amp; Lợi Nhuận Thực Nghiệm cao nhất xuống thấp nhất. (Ngưỡng hòa vốn bóng đơn: <b>10.69%</b> | Ngưỡng hòa vốn Bộ 4 số: <b>24.69 lô / 30 kỳ</b>).
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div>Tổng số đài đã quét (XSMN + XSMT)</div>
+      <div class="val" style="color:#38bdf8;">35 Đài</div>
+    </div>
+    <div class="kpi">
+      <div>🟢 Đạt chuẩn PASS_ALPHA (Lệch Mạnh)</div>
+      <div class="val" style="color:#4ade80;">3 Đài</div>
+    </div>
+    <div class="kpi">
+      <div>🟡 Tín hiệu WARN_WEAK_SIGNAL (Có Lợi Thế)</div>
+      <div class="val" style="color:#fbbf24;">10 Đài</div>
+    </div>
+    <div class="kpi">
+      <div>💰 Số đài đạt ROI Dương (Bộ 2x2 hoặc 1x4)</div>
+      <div class="val" style="color:#c084fc;">8 / 35 Đài</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Hạng</th>
+        <th class="left">Tên Đài (Mã)</th>
+        <th>Miền</th>
+        <th>Lịch Quay</th>
+        <th>Phán Quyết Gatekeeper</th>
+        <th>Độ Lệch χ² Hiện Tại<br><small>(Chục / Đơn Vị)</small></th>
+        <th>OOS Hạng 1 Lồng Chục<br><small>(Mốc BE: 10.69%)</small></th>
+        <th>OOS Hạng 1 Lồng Đơn Vị<br><small>(Mốc BE: 10.69%)</small></th>
+        <th>Lợi Nhuận Bộ `2x2` (4 số)<br><small>(ROI % | Lãi | Lô/30kỳ)</small></th>
+        <th>Lợi Nhuận Bộ `1x4` (4 số)<br><small>(ROI % | Lãi | Lô/30kỳ)</small></th>
+        <th class="left">Bộ Số Dự Báo Kỳ Tới<br><small>(Từ Dữ Liệu Mới Nhất)</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr class="row-pass">
+          <td>1</td>
+          <td class="left"><b>Vĩnh Long</b> <small>(XSVL)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 6<br><small>(156 kỳ)</small></td>
+          <td><span class="badge pass">🟢 PASS_ALPHA (Đánh chuẩn)</span></td>
+          <td><b>18.65</b> / <b>9.52</b><br><small>P95=19.3 | Đỉnh 3Y: 20.5/20.8</small></td>
+          <td class="pos"><b>11.16%</b><br><small>(Hạng 2: 9.86%)</small></td>
+          <td class=""><b>10.66%</b><br><small>(Hạng 2: 10.56%)</small></td>
+          <td class="neg"><b>-1.46%</b><br><small>(-6.5đ | 24.3 lô/30kỳ)</small></td>
+          <td class="pos"><b>+14.96%</b><br><small>(+66.4đ | 28.4 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [5, 9, 1] | Đuôi: [4, 1, 8, 6]</small><br>
+            2x2: <b>51</b>, <b>54</b>, <b>91</b>, <b>94</b><br>
+            1x4: <b>51</b>, <b>54</b>, <b>56</b>, <b>58</b>
+          </td>
+        </tr>
+        <tr class="row-pass">
+          <td>2</td>
+          <td class="left"><b>Bình Phước</b> <small>(XSBP)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 7<br><small>(156 kỳ)</small></td>
+          <td><span class="badge pass">🟢 PASS_ALPHA (Đánh chuẩn)</span></td>
+          <td><b>18.39</b> / <b>17.04</b><br><small>P95=19.3 | Đỉnh 3Y: 24.9/21.0</small></td>
+          <td class="pos"><b>12.01%</b><br><small>(Hạng 2: 10.21%)</small></td>
+          <td class="pos"><b>11.21%</b><br><small>(Hạng 2: 9.91%)</small></td>
+          <td class="pos"><b>+9.48%</b><br><small>(+42.1đ | 27.0 lô/30kỳ)</small></td>
+          <td class="pos"><b>+10.58%</b><br><small>(+47.0đ | 27.3 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [6, 5, 2] | Đuôi: [8, 3, 9, 0]</small><br>
+            2x2: <b>53</b>, <b>58</b>, <b>63</b>, <b>68</b><br>
+            1x4: <b>60</b>, <b>63</b>, <b>68</b>, <b>69</b>
+          </td>
+        </tr>
+        <tr class="row-pass">
+          <td>3</td>
+          <td class="left"><b>Quảng Bình</b> <small>(XSQB)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 5<br><small>(156 kỳ)</small></td>
+          <td><span class="badge pass">🟢 PASS_ALPHA (Đánh chuẩn)</span></td>
+          <td><b>7.48</b> / <b>6.37</b><br><small>P95=19.3 | Đỉnh 3Y: 25.3/21.9</small></td>
+          <td class="pos"><b>10.71%</b><br><small>(Hạng 2: 10.36%)</small></td>
+          <td class=""><b>9.96%</b><br><small>(Hạng 2: 11.46%)</small></td>
+          <td class="pos"><b>+8.39%</b><br><small>(+37.2đ | 26.8 lô/30kỳ)</small></td>
+          <td class="pos"><b>+4.01%</b><br><small>(+17.8đ | 25.7 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [5, 6, 0] | Đuôi: [0, 3, 9, 6]</small><br>
+            2x2: <b>50</b>, <b>53</b>, <b>60</b>, <b>63</b><br>
+            1x4: <b>50</b>, <b>53</b>, <b>56</b>, <b>59</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>4</td>
+          <td class="left"><b>Bình Thuận</b> <small>(XSBTH)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 5<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>11.11</b> / <b>5.41</b><br><small>P95=19.3 | Đỉnh 3Y: 18.2/14.8</small></td>
+          <td class=""><b>9.41%</b><br><small>(Hạng 2: 10.06%)</small></td>
+          <td class=""><b>10.01%</b><br><small>(Hạng 2: 9.16%)</small></td>
+          <td class="pos"><b>+6.20%</b><br><small>(+27.5đ | 26.2 lô/30kỳ)</small></td>
+          <td class="neg"><b>-3.65%</b><br><small>(-16.2đ | 23.8 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [0, 8, 2] | Đuôi: [7, 0, 1, 3]</small><br>
+            2x2: <b>00</b>, <b>07</b>, <b>80</b>, <b>87</b><br>
+            1x4: <b>00</b>, <b>01</b>, <b>03</b>, <b>07</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>5</td>
+          <td class="left"><b>Đắk Lắk</b> <small>(XSDLK)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 3<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>7.52</b> / <b>17.11</b><br><small>P95=19.3 | Đỉnh 3Y: 19.2/14.6</small></td>
+          <td class="pos"><b>10.91%</b><br><small>(Hạng 2: 10.61%)</small></td>
+          <td class=""><b>9.41%</b><br><small>(Hạng 2: 10.11%)</small></td>
+          <td class="pos"><b>+2.92%</b><br><small>(+12.9đ | 25.4 lô/30kỳ)</small></td>
+          <td class="pos"><b>+0.73%</b><br><small>(+3.2đ | 24.9 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [0, 9, 3] | Đuôi: [9, 3, 0, 6]</small><br>
+            2x2: <b>03</b>, <b>09</b>, <b>93</b>, <b>99</b><br>
+            1x4: <b>00</b>, <b>03</b>, <b>06</b>, <b>09</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>6</td>
+          <td class="left"><b>Hậu Giang</b> <small>(XSHG)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 7<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>14.15</b> / <b>9.70</b><br><small>P95=19.3 | Đỉnh 3Y: 21.2/19.1</small></td>
+          <td class="pos"><b>10.91%</b><br><small>(Hạng 2: 8.66%)</small></td>
+          <td class=""><b>10.01%</b><br><small>(Hạng 2: 9.71%)</small></td>
+          <td class="neg"><b>-11.32%</b><br><small>(-50.2đ | 21.9 lô/30kỳ)</small></td>
+          <td class="pos"><b>+1.82%</b><br><small>(+8.1đ | 25.1 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 9, 6] | Đuôi: [4, 6, 5, 8]</small><br>
+            2x2: <b>84</b>, <b>86</b>, <b>94</b>, <b>96</b><br>
+            1x4: <b>84</b>, <b>85</b>, <b>86</b>, <b>88</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>7</td>
+          <td class="left"><b>Phú Yên</b> <small>(XSPY)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 2<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>8.37</b> / <b>13.85</b><br><small>P95=19.3 | Đỉnh 3Y: 18.6/15.0</small></td>
+          <td class="pos"><b>10.76%</b><br><small>(Hạng 2: 10.21%)</small></td>
+          <td class="pos"><b>11.26%</b><br><small>(Hạng 2: 9.96%)</small></td>
+          <td class="neg"><b>-6.94%</b><br><small>(-30.8đ | 23.0 lô/30kỳ)</small></td>
+          <td class="pos"><b>+1.82%</b><br><small>(+8.1đ | 25.1 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [1, 8, 9] | Đuôi: [1, 4, 9, 8]</small><br>
+            2x2: <b>11</b>, <b>14</b>, <b>81</b>, <b>84</b><br>
+            1x4: <b>11</b>, <b>14</b>, <b>18</b>, <b>19</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>8</td>
+          <td class="left"><b>Gia Lai</b> <small>(XSGL)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 6<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>11.35</b> / <b>17.06</b><br><small>P95=19.3 | Đỉnh 3Y: 16.7/20.2</small></td>
+          <td class=""><b>10.06%</b><br><small>(Hạng 2: 9.56%)</small></td>
+          <td class=""><b>10.31%</b><br><small>(Hạng 2: 9.26%)</small></td>
+          <td class="neg"><b>-6.94%</b><br><small>(-30.8đ | 23.0 lô/30kỳ)</small></td>
+          <td class="pos"><b>+1.82%</b><br><small>(+8.1đ | 25.1 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [2, 9, 8] | Đuôi: [6, 0, 1, 3]</small><br>
+            2x2: <b>20</b>, <b>26</b>, <b>90</b>, <b>96</b><br>
+            1x4: <b>20</b>, <b>21</b>, <b>23</b>, <b>26</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>9</td>
+          <td class="left"><b>Tây Ninh</b> <small>(XSTN)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 5<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>10.74</b> / <b>16.52</b><br><small>P95=19.3 | Đỉnh 3Y: 28.0/19.1</small></td>
+          <td class=""><b>10.01%</b><br><small>(Hạng 2: 10.21%)</small></td>
+          <td class=""><b>10.31%</b><br><small>(Hạng 2: 10.01%)</small></td>
+          <td class="neg"><b>-12.41%</b><br><small>(-55.1đ | 21.6 lô/30kỳ)</small></td>
+          <td class="neg"><b>-4.75%</b><br><small>(-21.1đ | 23.5 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 1, 3] | Đuôi: [8, 7, 0, 5]</small><br>
+            2x2: <b>17</b>, <b>18</b>, <b>87</b>, <b>88</b><br>
+            1x4: <b>80</b>, <b>85</b>, <b>87</b>, <b>88</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>10</td>
+          <td class="left"><b>Bến Tre</b> <small>(XSBT)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 3<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>51.20</b> / <b>26.37</b><br><small>P95=19.3 | Đỉnh 3Y: 43.1/31.3</small></td>
+          <td class=""><b>10.66%</b><br><small>(Hạng 2: 10.91%)</small></td>
+          <td class=""><b>9.41%</b><br><small>(Hạng 2: 8.76%)</small></td>
+          <td class="neg"><b>-6.94%</b><br><small>(-30.8đ | 23.0 lô/30kỳ)</small></td>
+          <td class="neg"><b>-6.94%</b><br><small>(-30.8đ | 23.0 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [7, 0, 2] | Đuôi: [5, 4, 3, 8]</small><br>
+            2x2: <b>04</b>, <b>05</b>, <b>74</b>, <b>75</b><br>
+            1x4: <b>73</b>, <b>74</b>, <b>75</b>, <b>78</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>11</td>
+          <td class="left"><b>Quảng Ngãi</b> <small>(XSQNG)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 7<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>18.52</b> / <b>7.96</b><br><small>P95=19.3 | Đỉnh 3Y: 15.9/21.5</small></td>
+          <td class=""><b>9.56%</b><br><small>(Hạng 2: 9.01%)</small></td>
+          <td class="pos"><b>10.86%</b><br><small>(Hạng 2: 9.76%)</small></td>
+          <td class="neg"><b>-11.32%</b><br><small>(-50.2đ | 21.9 lô/30kỳ)</small></td>
+          <td class="neg"><b>-22.27%</b><br><small>(-98.9đ | 19.2 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [6, 3, 1] | Đuôi: [1, 4, 9, 7]</small><br>
+            2x2: <b>31</b>, <b>34</b>, <b>61</b>, <b>64</b><br>
+            1x4: <b>61</b>, <b>64</b>, <b>67</b>, <b>69</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>12</td>
+          <td class="left"><b>Đà Lạt (Lâm Đồng)</b> <small>(XSDL)</small></td>
+          <td>Miền Nam</td>
+          <td>Chủ Nhật<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>19.15</b> / <b>5.70</b><br><small>P95=19.3 | Đỉnh 3Y: 19.1/18.4</small></td>
+          <td class=""><b>9.76%</b><br><small>(Hạng 2: 9.41%)</small></td>
+          <td class=""><b>10.26%</b><br><small>(Hạng 2: 10.11%)</small></td>
+          <td class="neg"><b>-16.79%</b><br><small>(-74.6đ | 20.5 lô/30kỳ)</small></td>
+          <td class="neg"><b>-14.60%</b><br><small>(-64.8đ | 21.1 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [3, 5, 8] | Đuôi: [9, 1, 5, 7]</small><br>
+            2x2: <b>31</b>, <b>39</b>, <b>51</b>, <b>59</b><br>
+            1x4: <b>31</b>, <b>35</b>, <b>37</b>, <b>39</b>
+          </td>
+        </tr>
+        <tr class="row-warn">
+          <td>13</td>
+          <td class="left"><b>Bạc Liêu</b> <small>(XSBL)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 3<br><small>(156 kỳ)</small></td>
+          <td><span class="badge warn">🟡 WARN_SIGNAL (Thăm dò 0.25x)</span></td>
+          <td><b>6.74</b> / <b>15.04</b><br><small>P95=19.3 | Đỉnh 3Y: 14.8/23.5</small></td>
+          <td class=""><b>9.06%</b><br><small>(Hạng 2: 9.36%)</small></td>
+          <td class=""><b>10.31%</b><br><small>(Hạng 2: 9.76%)</small></td>
+          <td class="neg"><b>-23.36%</b><br><small>(-103.7đ | 18.9 lô/30kỳ)</small></td>
+          <td class="neg"><b>-24.46%</b><br><small>(-108.6đ | 18.6 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [7, 9, 0] | Đuôi: [0, 5, 2, 7]</small><br>
+            2x2: <b>70</b>, <b>75</b>, <b>90</b>, <b>95</b><br>
+            1x4: <b>70</b>, <b>72</b>, <b>75</b>, <b>77</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>14</td>
+          <td class="left"><b>Đồng Tháp</b> <small>(XSDT)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 2<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>10.96</b> / <b>12.02</b><br><small>P95=19.3 | Đỉnh 3Y: 17.8/20.6</small></td>
+          <td class=""><b>10.51%</b><br><small>(Hạng 2: 9.26%)</small></td>
+          <td class=""><b>10.21%</b><br><small>(Hạng 2: 9.46%)</small></td>
+          <td class="neg"><b>-15.70%</b><br><small>(-69.7đ | 20.8 lô/30kỳ)</small></td>
+          <td class="neg"><b>-1.46%</b><br><small>(-6.5đ | 24.3 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 9, 0] | Đuôi: [0, 2, 1, 8]</small><br>
+            2x2: <b>80</b>, <b>82</b>, <b>90</b>, <b>92</b><br>
+            1x4: <b>80</b>, <b>81</b>, <b>82</b>, <b>88</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>15</td>
+          <td class="left"><b>Quảng Trị</b> <small>(XSQT)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 5<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>15.74</b> / <b>7.26</b><br><small>P95=19.3 | Đỉnh 3Y: 18.1/15.7</small></td>
+          <td class=""><b>10.01%</b><br><small>(Hạng 2: 9.91%)</small></td>
+          <td class=""><b>9.91%</b><br><small>(Hạng 2: 9.61%)</small></td>
+          <td class="neg"><b>-2.56%</b><br><small>(-11.4đ | 24.1 lô/30kỳ)</small></td>
+          <td class="neg"><b>-10.22%</b><br><small>(-45.4đ | 22.2 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [5, 3, 8] | Đuôi: [7, 8, 0, 5]</small><br>
+            2x2: <b>37</b>, <b>38</b>, <b>57</b>, <b>58</b><br>
+            1x4: <b>50</b>, <b>55</b>, <b>57</b>, <b>58</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>16</td>
+          <td class="left"><b>Trà Vinh</b> <small>(XSTV)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 6<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>7.15</b> / <b>6.19</b><br><small>P95=19.3 | Đỉnh 3Y: 28.4/17.7</small></td>
+          <td class="pos"><b>10.86%</b><br><small>(Hạng 2: 9.51%)</small></td>
+          <td class=""><b>9.41%</b><br><small>(Hạng 2: 10.46%)</small></td>
+          <td class="neg"><b>-8.03%</b><br><small>(-35.7đ | 22.7 lô/30kỳ)</small></td>
+          <td class="neg"><b>-4.75%</b><br><small>(-21.1đ | 23.5 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [2, 5, 7] | Đuôi: [6, 3, 2, 0]</small><br>
+            2x2: <b>23</b>, <b>26</b>, <b>53</b>, <b>56</b><br>
+            1x4: <b>20</b>, <b>22</b>, <b>23</b>, <b>26</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>17</td>
+          <td class="left"><b>Bình Dương</b> <small>(XSBD)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 6<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>12.22</b> / <b>7.78</b><br><small>P95=19.3 | Đỉnh 3Y: 17.4/19.7</small></td>
+          <td class=""><b>10.66%</b><br><small>(Hạng 2: 9.51%)</small></td>
+          <td class=""><b>9.76%</b><br><small>(Hạng 2: 8.81%)</small></td>
+          <td class="neg"><b>-16.79%</b><br><small>(-74.6đ | 20.5 lô/30kỳ)</small></td>
+          <td class="neg"><b>-6.94%</b><br><small>(-30.8đ | 23.0 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [7, 0, 3] | Đuôi: [8, 2, 9, 1]</small><br>
+            2x2: <b>02</b>, <b>08</b>, <b>72</b>, <b>78</b><br>
+            1x4: <b>71</b>, <b>72</b>, <b>78</b>, <b>79</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>18</td>
+          <td class="left"><b>Khánh Hòa</b> <small>(XSKH)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 4, Chủ Nhật<br><small>(312 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>7.67</b> / <b>11.04</b><br><small>P95=20.0 | Đỉnh 3Y: 20.8/25.1</small></td>
+          <td class=""><b>9.20%</b><br><small>(Hạng 2: 10.53%)</small></td>
+          <td class=""><b>9.88%</b><br><small>(Hạng 2: 10.49%)</small></td>
+          <td class="neg"><b>-7.60%</b><br><small>(-81.2đ | 22.8 lô/30kỳ)</small></td>
+          <td class="neg"><b>-15.80%</b><br><small>(-168.7đ | 20.8 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [4, 2, 5] | Đuôi: [3, 6, 1, 5]</small><br>
+            2x2: <b>23</b>, <b>26</b>, <b>43</b>, <b>46</b><br>
+            1x4: <b>41</b>, <b>43</b>, <b>45</b>, <b>46</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>19</td>
+          <td class="left"><b>Vũng Tàu</b> <small>(XSVT)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 3<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>4.57</b> / <b>13.61</b><br><small>P95=19.3 | Đỉnh 3Y: 11.2/17.9</small></td>
+          <td class=""><b>10.06%</b><br><small>(Hạng 2: 8.86%)</small></td>
+          <td class=""><b>9.86%</b><br><small>(Hạng 2: 10.06%)</small></td>
+          <td class="neg"><b>-20.08%</b><br><small>(-89.1đ | 19.7 lô/30kỳ)</small></td>
+          <td class="neg"><b>-8.03%</b><br><small>(-35.7đ | 22.7 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [2, 1, 7] | Đuôi: [7, 2, 4, 1]</small><br>
+            2x2: <b>12</b>, <b>17</b>, <b>22</b>, <b>27</b><br>
+            1x4: <b>21</b>, <b>22</b>, <b>24</b>, <b>27</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>20</td>
+          <td class="left"><b>Cần Thơ</b> <small>(XSCT)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 4<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>9.11</b> / <b>7.72</b><br><small>P95=19.3 | Đỉnh 3Y: 23.0/20.3</small></td>
+          <td class="pos"><b>10.96%</b><br><small>(Hạng 2: 9.21%)</small></td>
+          <td class=""><b>9.26%</b><br><small>(Hạng 2: 10.16%)</small></td>
+          <td class="neg"><b>-10.22%</b><br><small>(-45.4đ | 22.2 lô/30kỳ)</small></td>
+          <td class="neg"><b>-9.13%</b><br><small>(-40.5đ | 22.4 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [4, 6, 9] | Đuôi: [5, 4, 6, 7]</small><br>
+            2x2: <b>44</b>, <b>45</b>, <b>64</b>, <b>65</b><br>
+            1x4: <b>44</b>, <b>45</b>, <b>46</b>, <b>47</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>21</td>
+          <td class="left"><b>Quảng Nam</b> <small>(XSQNM)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 3<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>11.41</b> / <b>7.52</b><br><small>P95=19.3 | Đỉnh 3Y: 24.0/17.8</small></td>
+          <td class=""><b>10.26%</b><br><small>(Hạng 2: 11.26%)</small></td>
+          <td class=""><b>9.76%</b><br><small>(Hạng 2: 9.61%)</small></td>
+          <td class="neg"><b>-9.13%</b><br><small>(-40.5đ | 22.4 lô/30kỳ)</small></td>
+          <td class="neg"><b>-12.41%</b><br><small>(-55.1đ | 21.6 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 7, 9] | Đuôi: [9, 2, 8, 1]</small><br>
+            2x2: <b>72</b>, <b>79</b>, <b>82</b>, <b>89</b><br>
+            1x4: <b>81</b>, <b>82</b>, <b>88</b>, <b>89</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>22</td>
+          <td class="left"><b>Ninh Thuận</b> <small>(XSNT)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 6<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>10.44</b> / <b>14.48</b><br><small>P95=19.3 | Đỉnh 3Y: 17.6/17.5</small></td>
+          <td class=""><b>9.51%</b><br><small>(Hạng 2: 9.76%)</small></td>
+          <td class=""><b>9.71%</b><br><small>(Hạng 2: 10.06%)</small></td>
+          <td class="neg"><b>-9.13%</b><br><small>(-40.5đ | 22.4 lô/30kỳ)</small></td>
+          <td class="neg"><b>-23.36%</b><br><small>(-103.7đ | 18.9 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [1, 9, 0] | Đuôi: [9, 4, 3, 1]</small><br>
+            2x2: <b>14</b>, <b>19</b>, <b>94</b>, <b>99</b><br>
+            1x4: <b>11</b>, <b>13</b>, <b>14</b>, <b>19</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>23</td>
+          <td class="left"><b>Tiền Giang</b> <small>(XSTG)</small></td>
+          <td>Miền Nam</td>
+          <td>Chủ Nhật<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>10.41</b> / <b>8.15</b><br><small>P95=19.3 | Đỉnh 3Y: 14.3/14.9</small></td>
+          <td class=""><b>10.01%</b><br><small>(Hạng 2: 9.76%)</small></td>
+          <td class=""><b>10.06%</b><br><small>(Hạng 2: 10.31%)</small></td>
+          <td class="neg"><b>-15.70%</b><br><small>(-69.7đ | 20.8 lô/30kỳ)</small></td>
+          <td class="neg"><b>-11.32%</b><br><small>(-50.2đ | 21.9 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [2, 6, 9] | Đuôi: [7, 6, 5, 8]</small><br>
+            2x2: <b>26</b>, <b>27</b>, <b>66</b>, <b>67</b><br>
+            1x4: <b>25</b>, <b>26</b>, <b>27</b>, <b>28</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>24</td>
+          <td class="left"><b>Đắk Nông</b> <small>(XSDNO)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 7<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>4.83</b> / <b>9.93</b><br><small>P95=19.3 | Đỉnh 3Y: 17.1/19.9</small></td>
+          <td class=""><b>10.01%</b><br><small>(Hạng 2: 10.11%)</small></td>
+          <td class=""><b>9.16%</b><br><small>(Hạng 2: 10.46%)</small></td>
+          <td class="neg"><b>-11.32%</b><br><small>(-50.2đ | 21.9 lô/30kỳ)</small></td>
+          <td class="neg"><b>-12.41%</b><br><small>(-55.1đ | 21.6 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [0, 9, 6] | Đuôi: [4, 2, 9, 6]</small><br>
+            2x2: <b>02</b>, <b>04</b>, <b>92</b>, <b>94</b><br>
+            1x4: <b>02</b>, <b>04</b>, <b>06</b>, <b>09</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>25</td>
+          <td class="left"><b>Kiên Giang</b> <small>(XSKG)</small></td>
+          <td>Miền Nam</td>
+          <td>Chủ Nhật<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>11.11</b> / <b>12.15</b><br><small>P95=19.3 | Đỉnh 3Y: 16.6/20.3</small></td>
+          <td class=""><b>10.26%</b><br><small>(Hạng 2: 8.51%)</small></td>
+          <td class=""><b>9.36%</b><br><small>(Hạng 2: 10.16%)</small></td>
+          <td class="neg"><b>-29.93%</b><br><small>(-132.9đ | 17.3 lô/30kỳ)</small></td>
+          <td class="neg"><b>-12.41%</b><br><small>(-55.1đ | 21.6 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [4, 5, 7] | Đuôi: [5, 8, 7, 9]</small><br>
+            2x2: <b>45</b>, <b>48</b>, <b>55</b>, <b>58</b><br>
+            1x4: <b>45</b>, <b>47</b>, <b>48</b>, <b>49</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>26</td>
+          <td class="left"><b>TP. Hồ Chí Minh</b> <small>(XSHCM)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 2, Thứ 7<br><small>(312 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>9.33</b> / <b>13.30</b><br><small>P95=20.0 | Đỉnh 3Y: 19.5/20.3</small></td>
+          <td class=""><b>10.22%</b><br><small>(Hạng 2: 9.95%)</small></td>
+          <td class=""><b>10.32%</b><br><small>(Hạng 2: 9.84%)</small></td>
+          <td class="neg"><b>-13.52%</b><br><small>(-144.4đ | 21.4 lô/30kỳ)</small></td>
+          <td class="neg"><b>-12.61%</b><br><small>(-134.7đ | 21.6 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [9, 8, 2] | Đuôi: [1, 5, 7, 3]</small><br>
+            2x2: <b>81</b>, <b>85</b>, <b>91</b>, <b>95</b><br>
+            1x4: <b>91</b>, <b>93</b>, <b>95</b>, <b>97</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>27</td>
+          <td class="left"><b>An Giang</b> <small>(XSAG)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 5<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>13.19</b> / <b>12.22</b><br><small>P95=19.3 | Đỉnh 3Y: 23.0/21.2</small></td>
+          <td class=""><b>9.26%</b><br><small>(Hạng 2: 10.96%)</small></td>
+          <td class=""><b>10.56%</b><br><small>(Hạng 2: 10.06%)</small></td>
+          <td class="neg"><b>-14.60%</b><br><small>(-64.8đ | 21.1 lô/30kỳ)</small></td>
+          <td class="neg"><b>-15.70%</b><br><small>(-69.7đ | 20.8 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 1, 7] | Đuôi: [6, 5, 2, 0]</small><br>
+            2x2: <b>15</b>, <b>16</b>, <b>85</b>, <b>86</b><br>
+            1x4: <b>80</b>, <b>82</b>, <b>85</b>, <b>86</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>28</td>
+          <td class="left"><b>Bình Định</b> <small>(XSBDI)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 5<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>12.22</b> / <b>6.02</b><br><small>P95=19.3 | Đỉnh 3Y: 30.7/21.0</small></td>
+          <td class=""><b>10.66%</b><br><small>(Hạng 2: 9.71%)</small></td>
+          <td class=""><b>9.81%</b><br><small>(Hạng 2: 9.41%)</small></td>
+          <td class="neg"><b>-14.60%</b><br><small>(-64.8đ | 21.1 lô/30kỳ)</small></td>
+          <td class="neg"><b>-14.60%</b><br><small>(-64.8đ | 21.1 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [4, 7, 0] | Đuôi: [4, 1, 6, 0]</small><br>
+            2x2: <b>41</b>, <b>44</b>, <b>71</b>, <b>74</b><br>
+            1x4: <b>40</b>, <b>41</b>, <b>44</b>, <b>46</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>29</td>
+          <td class="left"><b>Kon Tum</b> <small>(XSKT)</small></td>
+          <td>Miền Trung</td>
+          <td>Chủ Nhật<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>4.76</b> / <b>14.07</b><br><small>P95=19.3 | Đỉnh 3Y: 16.6/24.0</small></td>
+          <td class=""><b>10.21%</b><br><small>(Hạng 2: 10.11%)</small></td>
+          <td class=""><b>7.86%</b><br><small>(Hạng 2: 10.81%)</small></td>
+          <td class="neg"><b>-14.60%</b><br><small>(-64.8đ | 21.1 lô/30kỳ)</small></td>
+          <td class="neg"><b>-20.08%</b><br><small>(-89.1đ | 19.7 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [4, 5, 8] | Đuôi: [0, 5, 9, 1]</small><br>
+            2x2: <b>40</b>, <b>45</b>, <b>50</b>, <b>55</b><br>
+            1x4: <b>40</b>, <b>41</b>, <b>45</b>, <b>49</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>30</td>
+          <td class="left"><b>Đà Nẵng</b> <small>(XSDNG)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 4, Thứ 7<br><small>(312 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>11.85</b> / <b>6.59</b><br><small>P95=20.0 | Đỉnh 3Y: 19.9/19.5</small></td>
+          <td class=""><b>10.09%</b><br><small>(Hạng 2: 10.03%)</small></td>
+          <td class=""><b>9.82%</b><br><small>(Hạng 2: 9.57%)</small></td>
+          <td class="neg"><b>-16.25%</b><br><small>(-173.6đ | 20.7 lô/30kỳ)</small></td>
+          <td class="neg"><b>-21.26%</b><br><small>(-227.0đ | 19.4 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 5, 0] | Đuôi: [9, 0, 5, 7]</small><br>
+            2x2: <b>50</b>, <b>59</b>, <b>80</b>, <b>89</b><br>
+            1x4: <b>80</b>, <b>85</b>, <b>87</b>, <b>89</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>31</td>
+          <td class="left"><b>Long An</b> <small>(XSLA)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 7<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>10.67</b> / <b>14.44</b><br><small>P95=19.3 | Đỉnh 3Y: 13.6/19.5</small></td>
+          <td class=""><b>9.71%</b><br><small>(Hạng 2: 10.06%)</small></td>
+          <td class="pos"><b>10.81%</b><br><small>(Hạng 2: 9.36%)</small></td>
+          <td class="neg"><b>-18.98%</b><br><small>(-84.3đ | 20.0 lô/30kỳ)</small></td>
+          <td class="neg"><b>-21.17%</b><br><small>(-94.0đ | 19.5 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [3, 1, 5] | Đuôi: [9, 1, 0, 7]</small><br>
+            2x2: <b>11</b>, <b>19</b>, <b>31</b>, <b>39</b><br>
+            1x4: <b>30</b>, <b>31</b>, <b>37</b>, <b>39</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>32</td>
+          <td class="left"><b>Sóc Trăng</b> <small>(XSST)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 4<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>12.78</b> / <b>9.33</b><br><small>P95=19.3 | Đỉnh 3Y: 20.3/14.4</small></td>
+          <td class=""><b>9.61%</b><br><small>(Hạng 2: 10.11%)</small></td>
+          <td class=""><b>9.51%</b><br><small>(Hạng 2: 8.81%)</small></td>
+          <td class="neg"><b>-24.46%</b><br><small>(-108.6đ | 18.6 lô/30kỳ)</small></td>
+          <td class="neg"><b>-20.08%</b><br><small>(-89.1đ | 19.7 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [3, 0, 6] | Đuôi: [8, 7, 4, 1]</small><br>
+            2x2: <b>07</b>, <b>08</b>, <b>37</b>, <b>38</b><br>
+            1x4: <b>31</b>, <b>34</b>, <b>37</b>, <b>38</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>33</td>
+          <td class="left"><b>Cà Mau</b> <small>(XSCM)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 2<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>8.26</b> / <b>7.89</b><br><small>P95=19.3 | Đỉnh 3Y: 12.5/22.5</small></td>
+          <td class=""><b>9.76%</b><br><small>(Hạng 2: 8.76%)</small></td>
+          <td class=""><b>9.36%</b><br><small>(Hạng 2: 10.66%)</small></td>
+          <td class="neg"><b>-23.36%</b><br><small>(-103.7đ | 18.9 lô/30kỳ)</small></td>
+          <td class="neg"><b>-21.17%</b><br><small>(-94.0đ | 19.5 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [0, 8, 6] | Đuôi: [7, 2, 5, 4]</small><br>
+            2x2: <b>02</b>, <b>07</b>, <b>82</b>, <b>87</b><br>
+            1x4: <b>02</b>, <b>04</b>, <b>05</b>, <b>07</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>34</td>
+          <td class="left"><b>Thừa Thiên Huế</b> <small>(XSTTH)</small></td>
+          <td>Miền Trung</td>
+          <td>Thứ 2, Chủ Nhật<br><small>(312 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>10.72</b> / <b>14.54</b><br><small>P95=20.0 | Đỉnh 3Y: 19.3/20.7</small></td>
+          <td class=""><b>9.65%</b><br><small>(Hạng 2: 8.74%)</small></td>
+          <td class=""><b>10.61%</b><br><small>(Hạng 2: 9.51%)</small></td>
+          <td class="neg"><b>-25.35%</b><br><small>(-270.8đ | 18.4 lô/30kỳ)</small></td>
+          <td class="neg"><b>-24.44%</b><br><small>(-261.1đ | 18.6 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [8, 0, 9] | Đuôi: [6, 3, 5, 4]</small><br>
+            2x2: <b>03</b>, <b>06</b>, <b>83</b>, <b>86</b><br>
+            1x4: <b>83</b>, <b>84</b>, <b>85</b>, <b>86</b>
+          </td>
+        </tr>
+        <tr class="">
+          <td>35</td>
+          <td class="left"><b>Đồng Nai</b> <small>(XSDN)</small></td>
+          <td>Miền Nam</td>
+          <td>Thứ 4<br><small>(156 kỳ)</small></td>
+          <td><span class="badge fail">🔴 CASH_BRAKE (Đứng ngoài 0x)</span></td>
+          <td><b>14.19</b> / <b>12.30</b><br><small>P95=19.3 | Đỉnh 3Y: 17.4/17.0</small></td>
+          <td class=""><b>10.41%</b><br><small>(Hạng 2: 9.06%)</small></td>
+          <td class=""><b>8.21%</b><br><small>(Hạng 2: 9.26%)</small></td>
+          <td class="neg"><b>-25.55%</b><br><small>(-113.4đ | 18.4 lô/30kỳ)</small></td>
+          <td class="neg"><b>-29.93%</b><br><small>(-132.9đ | 17.3 lô/30kỳ)</small></td>
+          <td class="left">
+            <small>Đầu: [1, 8, 4] | Đuôi: [3, 4, 0, 6]</small><br>
+            2x2: <b>13</b>, <b>14</b>, <b>83</b>, <b>84</b><br>
+            1x4: <b>10</b>, <b>13</b>, <b>14</b>, <b>16</b>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

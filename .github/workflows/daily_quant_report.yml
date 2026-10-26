@@ -1,0 +1,139 @@
+name: "Stage 3: 05:00 AM Daily Quantitative Reporter & Web Audit Publisher"
+
+on:
+  schedule:
+    # 05:00 ICT (22:00 UTC previous day): Settle yesterday, score today's 5-7 stations, publish Web & send Telegram
+    - cron: "0 22 * * *"
+    # 17:35 ICT (10:35 UTC): Post-draw incremental 18-prize sync & ledger settlement after XSMN (16:15) & XSMT (17:15)
+    - cron: "35 10 * * *"
+  workflow_dispatch:
+    inputs:
+      report_date:
+        description: "Target report date (YYYY-MM-DD in Asia/Ho_Chi_Minh). Leave blank for current ICT date."
+        required: false
+        default: ""
+      dry_run:
+        description: "Run Telegram dispatcher in --dry-run mode (save preview without sending live message)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "stage3-daily-quant-report"
+  cancel-in-progress: false
+
+jobs:
+  quant-report-and-publish:
+    name: "Sync 35 Stations, Settle Benchmark 1M Ledger, Publish Web & Send Telegram"
+    runs-on: ubuntu-latest
+    env:
+      TZ: "Asia/Ho_Chi_Minh"
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      PUBLIC_REPORT_BASE_URL: ${{ secrets.PUBLIC_REPORT_BASE_URL }}
+      INPUT_REPORT_DATE: ${{ github.event.inputs.report_date }}
+      INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+      EVENT_NAME: ${{ github.event_name }}
+      EVENT_SCHEDULE: ${{ github.event.schedule }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv and Python 3.11
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+          python-version: "3.11"
+
+      - name: Sync dependencies
+        run: uv sync --all-extras
+
+      - name: Resolve target ICT dates (D and D-1)
+        id: dates
+        run: |
+          if [ -n "${INPUT_REPORT_DATE}" ]; then
+            if ! printf '%s\n' "${INPUT_REPORT_DATE}" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+              echo "::error::Invalid report_date input: must match YYYY-MM-DD"
+              exit 1
+            fi
+            REPORT_DATE="${INPUT_REPORT_DATE}"
+          else
+            REPORT_DATE="$(date +%Y-%m-%d)"
+          fi
+          YESTERDAY_DATE="$(date -d "${REPORT_DATE} - 1 day" +%Y-%m-%d)"
+          echo "report_date=${REPORT_DATE}" >> "$GITHUB_OUTPUT"
+          echo "yesterday_date=${YESTERDAY_DATE}" >> "$GITHUB_OUTPUT"
+
+      - name: Incremental 35-Station Sync (XSMN 16:15 + XSMT 17:15)
+        run: |
+          if [ "${EVENT_SCHEDULE}" = "35 10 * * *" ]; then
+            SYNC_TARGET_DATE="${{ steps.dates.outputs.report_date }}"
+          else
+            SYNC_TARGET_DATE="${{ steps.dates.outputs.yesterday_date }}"
+          fi
+          uv run python -m xsmn_alpha.cli sync-35 \
+            --date "${SYNC_TARGET_DATE}" \
+            --raw-dir data/raw_all/
+
+      - name: Settle Yesterday's Benchmark Ledger (1,000,000 VND Reference Fund)
+        run: |
+          if [ -f data/live/benchmark_ledger.json ]; then
+            if [ "${EVENT_SCHEDULE}" = "35 10 * * *" ]; then
+              SETTLE_TARGET_DATE="${{ steps.dates.outputs.report_date }}"
+            else
+              SETTLE_TARGET_DATE="${{ steps.dates.outputs.yesterday_date }}"
+            fi
+            uv run python -m xsmn_alpha.cli settle-ledger \
+              --date "${SETTLE_TARGET_DATE}" \
+              --ledger data/live/benchmark_ledger.json \
+              --raw-dir data/raw_all/
+          fi
+
+      - name: Generate 05:00 AM Daily Quantitative Report, 5-Section Web Audit & Telegram Briefing
+        if: github.event.schedule != '35 10 * * *'
+        run: |
+          DRY_RUN_FLAG=""
+          if [ "${INPUT_DRY_RUN}" = "true" ] || [ -z "${TELEGRAM_BOT_TOKEN}" ]; then
+            DRY_RUN_FLAG="--dry-run"
+          fi
+          uv run python -m xsmn_alpha.cli daily-report \
+            --date "${{ steps.dates.outputs.report_date }}" \
+            --raw-dir data/raw_all/ \
+            --ledger data/live/benchmark_ledger.json \
+            --public-dir public/ \
+            --send-telegram ${DRY_RUN_FLAG}
+
+      - name: Refresh Post-Draw Static Web Audit (17:35 ICT — No Morning Telegram Re-Send)
+        if: github.event.schedule == '35 10 * * *'
+        run: |
+          uv run python -m xsmn_alpha.cli daily-report \
+            --date "${{ steps.dates.outputs.report_date }}" \
+            --raw-dir data/raw_all/ \
+            --ledger data/live/benchmark_ledger.json \
+            --public-dir public/
+
+      - name: Commit & Push Updated Cache, Benchmark Ledger & Static Web Reports
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw_all/ data/live/ public/
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(stage3): automated quant report & ledger settlement for ${{ steps.dates.outputs.report_date }}"
+            git push
+          fi
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Static Web Audit Artifact (public/)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "public/"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

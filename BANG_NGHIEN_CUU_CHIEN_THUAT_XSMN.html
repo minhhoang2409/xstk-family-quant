@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hệ Thống Tính Điểm Hòa Vốn & Nghiên Cứu Định Lượng XSMN</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-alt: #162032;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --emerald: #10b981;
+      --emerald-bg: rgba(16, 185, 129, 0.12);
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --rose: #f43f5e;
+      --rose-bg: rgba(244, 63, 94, 0.12);
+      --purple: #a855f7;
+      --border: #334155;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.65;
+      padding: 28px 18px 80px;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .report-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--emerald);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .badge.emerald {
+      background: var(--emerald-bg);
+      color: var(--emerald);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .badge.amber {
+      background: var(--amber-bg);
+      color: var(--amber);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 1020px;
+    }
+
+    /* Master Control Panel (Break-Even & Odds Converter) */
+    .master-panel {
+      background: linear-gradient(180deg, #1e293b 0%, #131d31 100%);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      padding: 26px 30px;
+      margin-bottom: 28px;
+      box-shadow: 0 12px 35px rgba(56, 189, 248, 0.12);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preset-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      background: #0f172a;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .preset-btn:hover, .preset-btn.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .converter-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.15fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 960px) {
+      .converter-grid {
+        grid-template-columns: 1fr;
+      }
+      .arrow-divider {
+        transform: rotate(90deg);
+      }
+    }
+
+    .conv-box {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .conv-box.highlight {
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.06);
+    }
+
+    .conv-box-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .conv-box.highlight .conv-box-title {
+      color: var(--emerald);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+    }
+
+    .field input.emerald-input {
+      border-color: var(--emerald);
+      color: var(--emerald);
+      font-size: 18px;
+    }
+
+    .field .hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .arrow-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .kpi-value.emerald { color: var(--emerald); }
+    .kpi-value.amber { color: var(--amber); }
+    .kpi-value.rose { color: var(--rose); }
+
+    .kpi-desc {
+      font-size: 12.8px;
+      color: var(--text-muted);
+    }
+
+    /* Custom N Calculator */
+    .custom-calc-bar {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .custom-calc-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      font-size: 13.5px;
+    }
+
+    .calc-res-item {
+      background: #162032;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .calc-res-item.emerald { border-left-color: var(--emerald); }
+    .calc-res-item.amber { border-left-color: var(--amber); }
+
+    /* Section Styling */
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 30px;
+      margin-bottom: 26px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      background: var(--accent);
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 18px 0 10px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      font-size: 14.8px;
+    }
+
+    /* Callouts */
+    .callout {
+      border-radius: 8px;
+      padding: 15px 18px;
+      margin: 14px 0;
+      border-left: 4px solid var(--accent);
+      background: var(--bg-card-alt);
+    }
+
+    .callout.emerald {
+      border-left-color: var(--emerald);
+      background: var(--emerald-bg);
+    }
+
+    .callout.amber {
+      border-left-color: var(--amber);
+      background: var(--amber-bg);
+    }
+
+    .callout.rose {
+      border-left-color: var(--rose);
+      background: var(--rose-bg);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 14.8px;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.8px;
+      text-align: left;
+    }
+
+    th {
+      background: #0f172a;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11.8px;
+      letter-spacing: 0.04em;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+      font-variant-numeric: tabular-nums;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr.highlight-row {
+      background: rgba(16, 185, 129, 0.09);
+    }
+
+    tr.highlight-row td {
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .mono { font-family: var(--mono); }
+    .pos { color: var(--emerald); font-weight: 700; }
+    .neg { color: var(--rose); font-weight: 700; }
+    .warn { color: var(--amber); font-weight: 700; }
+    .info { color: var(--accent); font-weight: 700; }
+
+    /* Grid 2 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 18px;
+      margin: 14px 0;
+    }
+
+    .subcard {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .subcard h4 {
+      font-size: 15.5px;
+      margin-bottom: 10px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    ul.clean-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.clean-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 7px;
+      font-size: 14.2px;
+    }
+
+    ul.clean-list li::before {
+      content: "•";
+      position: absolute;
+      left: 3px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .formula-box {
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: var(--mono);
+      font-size: 13.5px;
+      color: #e2e8f0;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+
+    /* Simulator */
+    .sim-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      background: var(--bg-card-alt);
+      padding: 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .control-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .control-group select {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13.8px;
+      font-family: var(--font);
+    }
+
+    .btn-sim {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      align-self: end;
+    }
+
+    .btn-sim:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    canvas#equityChart {
+      width: 100%;
+      height: 290px;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="report-header">
+      <div class="badge-row">
+        <span class="badge emerald">Giai Đoạn 1: Hệ Thống Tính Điểm Hòa Vốn Chuẩn Hóa</span>
+        <span class="badge">Xổ Số Miền Nam (18 Giải)</span>
+        <span class="badge amber">Chuẩn Bị Bước Sang Giai Đoạn 2: Khai Thác Bất Thường 2 Lồng Cầu</span>
+      </div>
+      <h1>HỆ THỐNG QUY ĐỔI TỶ LỆ CƯỢC, TÍNH ĐIỂM HÒA VỐN &amp; NGHIÊN CỨU ĐỊNH LƯỢNG XSMN</h1>
+      <p class="subtitle">
+        Công cụ tự động quy đổi mọi tỷ lệ trả thưởng khác nhau tại Việt Nam (tiền xác, tiền cò, tiền thưởng) về hệ quy chiếu duy nhất: <strong>Bỏ <code>1 đồng thực tế</code> &rarr; Nhận lại <code>R đồng</code> khi thắng</strong> (mặc định <code>1 : 87.5</code>). Mọi bảng điểm hòa vốn, ma trận bộ số 2 lồng cầu và trình mô phỏng bên dưới đều tự động tính toán lại theo thời gian thực khi bạn thay đổi thông số.
+      </p>
+    </header>
+
+    <!-- MASTER BREAK-EVEN & ODDS CONVERTER PANEL -->
+    <div class="master-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>&#9881; BỘ QUY ĐỔI TỶ LỆ CƯỢC &amp; HỆ THỐNG TÍNH ĐIỂM HÒA VỐN TỰ ĐỘNG</span>
+        </div>
+        <div class="preset-btns">
+          <button class="preset-btn active" onclick="applyPreset(0.8, 70, 18, this)">Mặc định XSMN (Đưa 0.8 ăn 70 &rarr; 1:87.5)</button>
+          <button class="preset-btn" onclick="applyPreset(0.8, 75, 18, this)">Cò trả cao (Đưa 0.8 ăn 75 &rarr; 1:93.75)</button>
+          <button class="preset-btn" onclick="applyPreset(0.75, 70, 18, this)">Bảng Cấp 1 (Đưa 0.75 ăn 70 &rarr; 1:93.33)</button>
+          <button class="preset-btn" onclick="applyPreset(1.0, 99, 18, this)">Tỷ lệ Online (Đưa 1 ăn 99 &rarr; 1:99.0)</button>
+        </div>
+      </div>
+
+      <!-- CONVERTER ROW -->
+      <div class="converter-grid">
+        <!-- Box 1: Quy đổi từ thực tế Cò đề -->
+        <div class="conv-box">
+          <div class="conv-box-title">1. Bảng Quy Đổi Từ Cách Tính Của Cò / Nhà Cái Thực Tế</div>
+          <div class="input-row">
+            <div class="field">
+              <label>Tiền mua gốc (Danh nghĩa)</label>
+              <input type="number" id="inpNominal" value="1" step="0.1" min="0.1" oninput="syncFromCo()" />
+              <div class="hint">Mặc định: <code>1 đồng</code> xác</div>
+            </div>
+            <div class="field">
+              <label>Số tiền đưa cho Cò</label>
+              <input type="number" id="inpCoCost" value="0.8" step="0.01" min="0.01" oninput="syncFromCo()" />
+              <div class="hint">Thực trả (VD: <code>0.8</code>)</div>
+            </div>
+            <div class="field">
+              <label>Số tiền nhận khi trúng</label>
+              <input type="number" id="inpRawWin" value="70" step="0.5" min="1" oninput="syncFromCo()" />
+              <div class="hint">Nhà cái chung (VD: <code>70</code>)</div>
+            </div>
+            <div class="field">
+              <label>Số giải Bao Lô / đài</label>
+              <input type="number" id="inpNumPrizes" value="18" step="1" min="1" max="100" oninput="recalcAll()" />
+              <div class="hint">XSMN = <code>18</code> giải</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="arrow-divider">&rArr;</div>
+
+        <!-- Box 2: Tỷ lệ Chuẩn hóa 1 : R -->
+        <div class="conv-box highlight">
+          <div class="conv-box-title">2. Hệ Quy Chiếu Chuẩn Hóa Kinh Doanh (1 Đồng Thực : Ăn R)</div>
+          <div class="input-row">
+            <div class="field">
+              <label>Số tiền thực mua 1 số</label>
+              <input type="number" value="1" disabled style="opacity:0.85;" />
+              <div class="hint">Luôn cố định = <code>1 đồng thực</code></div>
+            </div>
+            <div class="field">
+              <label>Hệ số nhận lại chuẩn (1 ăn R)</label>
+              <input type="number" id="inpNormalizedR" class="emerald-input" value="87.5" step="0.25" min="1" oninput="syncFromDirectR()" />
+              <div class="hint" id="hintFormulaR">= 70 / 0.8 = <strong>87.50 đồng</strong></div>
+            </div>
+            <div class="field">
+              <label>Nhận lại mỗi Lô (Bao Lô)</label>
+              <input type="text" id="outPerLo" value="4.8611" disabled style="color:var(--accent);" />
+              <div class="hint" id="hintPerLo">= 87.5 / 18 = <strong>4.8611 đ/lô</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DYNAMIC BREAK-EVEN KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Điểm Hòa Vốn Đầu / Đuôi (1 Giải)</div>
+          <div class="kpi-value emerald" id="kpiBeDuoi">87.50 số</div>
+          <div class="kpi-desc" id="kpiBeDuoiDesc">Mua tối đa <strong>87 số</strong> (tốn 87đ, trúng 100% thu 87.5đ &rarr; Lãi +0.50đ). Cần loại bỏ ít nhất <strong>13 số</strong>.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Điểm Hòa Vốn Bao Lô (Khi trúng 1 Lô)</div>
+          <div class="kpi-value" id="kpiBeBaoLo1">4.8611 số</div>
+          <div class="kpi-desc" id="kpiBeBaoLo1Desc">Nếu mỗi ngày chỉ trúng 1 lô: Mua tối đa <strong>4 số</strong> (tốn 4đ, thu 4.86đ &rarr; Lãi <strong>+0.86đ = +21.5%</strong>).</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Biên Lợi Nhuận Nhà Cái (House Edge)</div>
+          <div class="kpi-value amber" id="kpiHouseEdge">12.50%</div>
+          <div class="kpi-desc" id="kpiHouseEdgeDesc">Ngẫu nhiên bỏ ra 100đ nhà cái trả lại 87.5đ (Giữ lại 12.5đ).</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Ngưỡng Bất Thường AI Cần Đạt (GĐ 2)</div>
+          <div class="kpi-value info" id="kpiReqAlpha">+14.29%</div>
+          <div class="kpi-desc" id="kpiReqAlphaDesc">Xác suất chọn số phải &ge; <strong>1.1429%</strong>/số (tức mỗi lồng cầu chỉ cần lệch <strong>+6.90%</strong>!).</div>
+        </div>
+      </div>
+
+      <!-- CUSTOM N CALCULATOR -->
+      <div class="custom-calc-bar">
+        <div class="field">
+          <label style="color:#fff; font-size:13px;">&#128269; Máy tính nhanh cho Bộ N số:</label>
+          <input type="number" id="inpCustomN" value="4" min="1" max="99" step="1" oninput="updateCustomCalc()" style="border-color:var(--accent); font-size:17px;" />
+          <div class="hint">Nhập số lượng con số định đánh mỗi ngày</div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-res-item">
+            <div style="font-size:11.5px; color:var(--text-muted); text-transform:uppercase;">Hòa vốn trong 1 ngày (Bao Lô)</div>
+            <div id="calcDayBaoLo" style="margin-top:3px; font-weight:600;">--</div>
+          </div>
+          <div class="calc-res-item emerald">
+            <div style="font-size:11.5px; color:var(--text-muted); text-transform:uppercase;">Hòa vốn trong 1 Tháng (30 ngày Bao Lô)</div>
+            <div id="calcMonthBaoLo" style="margin-top:3px; font-weight:600;">--</div>
+          </div>
+          <div class="calc-res-item amber">
+            <div style="font-size:11.5px; color:var(--text-muted); text-transform:uppercase;">Nếu đánh ở Đầu / Đuôi (1 giải)</div>
+            <div id="calcDuoi" style="margin-top:3px; font-weight:600;">--</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: MA TRẬN TƯƠNG QUAN ĐIỂM HÒA VỐN BAO LÔ (DYNAMIC TABLE) -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-num">1</span>
+        <span>Bảng Tra Cứu Điểm Hòa Vốn Bao Lô Theo Số Lô Trúng (Tự Động Cập Nhật Theo Hệ Số <span id="lblTitleR" class="mono info">1 : 87.5</span>)</span>
+      </div>
+      <p>
+        Bảng dưới đây trả lời chính xác câu hỏi: <strong>"Với tỷ lệ trả thưởng hiện tại, nếu mục tiêu mỗi ngày trúng tối thiểu $K$ lô ($K = 1, 2, 3\dots$), chúng ta được phép mua tối đa bao nhiêu con số ($N_{\max}$) để chắc chắn có lãi?"</strong>
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Số Lô Trúng<br/>Trong Ngày (K)</th>
+              <th>Tiền Thu Về<br/>(K &times; Đơn giá Lô)</th>
+              <th>Điểm Hòa Vốn Lý Thuyết<br/>(N<sub>BE</sub> = Thu về)</th>
+              <th>Số Lượng Số Tối Đa<br/>Được Mua Để Có Lãi (N<sub>max</sub>)</th>
+              <th>Lãi Ròng Trong Ngày<br/>(Khi đánh N<sub>max</sub> số &amp; trúng K lô)</th>
+              <th>Cách Ghép 2 Lồng Cầu Gợi Ý<br/>(Chục &times; Đơn vị &le; N<sub>max</sub>)</th>
+              <th>Xác Suất Tự Nhiên<br/>Đạt &ge; K Lô (Với N<sub>max</sub> số)</th>
+            </tr>
+          </thead>
+          <tbody id="beMatrixBody">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PHÂN BIỆT "TỶ LỆ NGÀY THẮNG" VS "ĐIỂM HÒA VỐN THÁNG" -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-num">2</span>
+        <span>Bảng Phân Tích Chu Kỳ 30 Ngày: Tại Sao Cấu Hình Nhỏ (2&times;2, 3&times;3) Giảm Áp Lực Tính Toán Nhất?</span>
+      </div>
+      <p>
+        Khi đánh liên tục <strong>30 ngày/tháng</strong> (tổng cộng <span id="lblTotalMonthPrizes" class="mono">540</span> giải mở thưởng), bảng dưới đây đối chiếu <strong>Tỷ lệ ngày có lãi (Daily Win Rate)</strong> và <strong>Tổng số lô cần đạt trong 30 ngày để Hòa Vốn Tháng</strong> theo đúng tỷ lệ cược bạn đang nhập:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cấu hình Bộ số<br/>(2 Lồng Cầu)</th>
+              <th>Vốn / Ngày<br/>(Vốn 30 ngày)</th>
+              <th>Số lô cần trúng / ngày<br/>để ngày đó có lãi</th>
+              <th>Biên lãi ngày thắng<br/>ở mốc tối thiểu</th>
+              <th>Tỷ lệ ngày có lãi<br/>(Ngẫu nhiên &rarr; Lồng lệch +10%)</th>
+              <th>Số lô tự nhiên<br/>nổ / 30 ngày</th>
+              <th>Số lô CẦN ĐẠT<br/>để Hòa vốn 30 ngày</th>
+              <th>Số lô AI cần bù thêm<br/>trong cả tháng</th>
+            </tr>
+          </thead>
+          <tbody id="monthlyCompareBody">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout emerald">
+        <div class="callout-title">Quy luật Bảo toàn Xác suất trong 2 Lồng Cầu (&Sigma; P<sub>i</sub> = 100%):</div>
+        <p style="margin-bottom:0;">
+          Mỗi lồng cầu chỉ có <strong>10 quả bóng (<code>0–9</code>)</strong>. Nếu lồng cầu có sự bất thường vật lý, lợi thế xác suất chỉ tập trung đậm đặc ở <strong>Top 2 hoặc Top 3 quả bóng đứng đầu</strong>. Nếu chọn bộ quá lớn (lấy 6–8 quả bóng/lồng cầu), các quả bóng yếu sẽ <strong>pha loãng (dilute)</strong> xác suất về mức trung bình 10%. Do đó, cấu hình <strong>2&times;2 (4 số)</strong> và <strong>3&times;3 (9 số)</strong> giúp giảm áp lực tính toán nhiều nhất.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: GIẢI PHẪU 1-3-2-6 & ĐỊNH DANH CHUYÊN NGÀNH CỦA BÀI TOÁN -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-num">3</span>
+        <span>Định Danh Chuyên Ngành, Giải Phẫu Bẫy "1-3-2-6" &amp; Lộ Trình Bước Sang Giai Đoạn 2 (AI Chọn Số)</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="subcard">
+          <h4>1. Định danh Chuyên ngành Toán Tài Chính <span class="badge">Academic Classification</span></h4>
+          <ul class="clean-list">
+            <li><strong>Trò chơi 1:1 (Tài Xỉu / Baccarat):</strong> <em>Phép thử Nhị phân Đối xứng (Symmetric Binary Bernoulli Trial)</em>.</li>
+            <li><strong>Đánh Đầu / Đuôi (1 giải):</strong> <em>Bài toán Nhị phân Bất đối xứng Cực đoan (Highly Skewed Binary Option)</em> — chỉ có 1 phép thử ($n=1$), ăn lớn hoặc mất trắng.</li>
+            <li><strong>Đánh Bao Lô (18 giải):</strong> <em>Bài toán Tổ hợp Đa phép thử Nhị thức có Trả thưởng Tuyến tính &amp; Phân phối Lệch phải (Multi-Trial Binomial Portfolio with Positive Skewness)</em> — có 18 phép thử/ngày, có cơ chế <strong>Thu hồi vốn một phần (Partial Recovery)</strong> và <strong>Đột biến đa nháy (Multi-hit Upside)</strong>.</li>
+            <li><strong>Quản lý vốn chuẩn chuyên ngành:</strong> Sử dụng <em>Tiêu chuẩn Kelly Đa Kết Quả (Multi-Outcome Kelly Criterion)</em> và <em>Đi vốn theo Độ tin cậy Tín hiệu (Conviction Sizing)</em>.</li>
+          </ul>
+        </div>
+
+        <div class="subcard">
+          <h4>2. Tại sao "1-3-2-6" thất bại nặng ở Bao Lô? <span class="badge amber">Cảnh báo Rủi ro</span></h4>
+          <ul class="clean-list">
+            <li><strong>Bẫy Thắng - Thua xen kẽ (W - L - W - L):</strong> Ngay ở trò 1 ăn 1, thắng mức 1 (`+1đ`) rồi thua mức 3 (`-3đ`) đã làm bạn lỗ ròng <code>-2đ</code> cho mỗi cặp Thắng-Thua.</li>
+            <li><strong>Lệch pha Tỷ lệ Lãi/Vốn trong Bao Lô:</strong> Ở Bộ 4 số (vốn <code>4đ</code>), trúng 1 lô chỉ lãi <strong id="lbl1326Win1">+0.86đ (+21.5%)</strong>. Nếu ngày hôm sau nhân 3 vốn lên mức <code>3x</code> (<code>12đ</code>) và bị trượt, bạn mất <code>-12.00đ</code> &rarr; Chuỗi 1 Thắng - 1 Thua làm âm nặng <strong id="lbl1326WL">-11.14đ</strong>!</li>
+            <li><strong>Giải pháp thay thế của Quỹ:</strong> Chỉ nâng vốn từ <strong>Quỹ Lãi Ròng đã cất két (House-Money Compounding)</strong> hoặc chỉ nâng vốn khi dữ liệu AI báo tín hiệu bất thường đạt đỉnh.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout amber">
+        <div class="callout-title">ĐỊNH LÝ PHỤ THUỘC &amp; CHỐT LỘ TRÌNH CHUYỂN SANG GIAI ĐOẠN 2:</div>
+        <p style="margin-bottom:0;">
+          Đúng như bạn đã đúc kết: <strong>Cả Chiến thuật chơi (chọn bộ bao nhiêu số $N$) lẫn Quản lý vốn đều phụ thuộc hoàn toàn vào Tỷ lệ trúng thực tế của phương pháp chọn số!</strong><br/>
+          &bull; <strong>Giai đoạn 1 (Hoàn tất tại bảng này):</strong> Xác định Điểm Hòa Vốn động theo tỷ lệ nhà cái.<br/>
+          &bull; <strong>Giai đoạn 2 (Bước tiếp theo):</strong> Dùng AI &amp; Thống kê phân tích dữ liệu lịch sử XSMN để kiểm định xem <strong>2 lồng cầu (Hàng Chục &amp; Hàng Đơn Vị) có bất thường không, bất thường ở quy mô nào (Top 1, 2, 3 bóng hay bóng chết) và vượt Điểm Hòa Vốn bao nhiêu %</strong>.<br/>
+          &bull; <strong>Giai đoạn 3:</strong> Từ tỷ lệ thực tế của AI ở Giai đoạn 2, chốt Bộ số và Công thức Quản lý vốn để tối ưu lợi nhuận tháng.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MÔ PHỎNG TƯƠNG TÁC 30 NGÀY -->
+    <section class="section">
+      <div class="section-title">
+        <span class="section-num">4</span>
+        <span>Trình Mô Phỏng Kinh Doanh 30 Ngày (Tự Động Áp Dụng Tỷ Lệ <span id="lblSimR" class="mono info">1 : 87.5</span> Ở Trên)</span>
+      </div>
+
+      <div class="sim-controls">
+        <div class="control-group">
+          <label>1. Cấu hình Bộ Số (2 Lồng Cầu)</label>
+          <select id="cfgSet">
+            <option value="4" selected>Bộ 2&times;2 = 4 số (Vốn gốc 4đ/ngày)</option>
+            <option value="9">Bộ 3&times;3 = 9 số (Vốn gốc 9đ/ngày)</option>
+            <option value="core_sat">Danh mục Core 2&times;2 + Vệ tinh 3&times;3 (6.5đ/ngày)</option>
+            <option value="14">Bộ 2&times;7 = 14 số (Vốn gốc 14đ/ngày)</option>
+            <option value="18">Bộ 3&times;6 = 18 số (Vốn gốc 18đ/ngày)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>2. Lợi thế Chọn Bóng mỗi Lồng Cầu</label>
+          <select id="cfgEdge">
+            <option value="1.00">Ngẫu nhiên hoàn toàn (0% - Chưa có AI)</option>
+            <option value="1.069">Chạm ngưỡng Hòa vốn (+6.9%/lồng &rarr; Gộp +14.3%)</option>
+            <option value="1.10" selected>Bất thường +10%/lồng (&rarr; Gộp +21% Thực tế)</option>
+            <option value="1.15">Bất thường tốt +15%/lồng (&rarr; Gộp +32%)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label>3. Chiến lược Quản lý Vốn</label>
+          <select id="cfgMM">
+            <option value="flat">1. Đi vốn đều (Flat Betting 1.0x mỗi ngày)</option>
+            <option value="conviction">2. Quỹ Tín hiệu (1.0x thường / 2.0x ngày đỉnh)</option>
+            <option value="recovery" selected>3. Quỹ Động: Bậc thang mềm (1.0x - 1.4x - 1.8x) + Khóa lãi</option>
+            <option value="house_money">4. Quỹ Tái đầu tư Lãi Ròng (An toàn chống bẫy W-L)</option>
+            <option value="1326">5. Chiêu 1-3-2-6 (Cờ bạc truyền thống - Dễ dính bẫy W-L)</option>
+          </select>
+        </div>
+
+        <button class="btn-sim" onclick="runSimulation()">&#9654; Chạy Mô Phỏng 30 Ngày</button>
+      </div>
+
+      <div class="kpi-grid" id="simKpis" style="margin-bottom: 16px;">
+        <div class="kpi-card">
+          <div class="kpi-label">Tổng Vốn Luân Chuyển 30 Ngày</div>
+          <div class="kpi-value" id="simTotalCost">--</div>
+          <div class="kpi-desc" id="simMaxDD">Mức sụt giảm vốn tối đa (Max Drawdown): --</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Tổng Tiền Thu Về 30 Ngày</div>
+          <div class="kpi-value info" id="simTotalRev">--</div>
+          <div class="kpi-desc" id="simTotalHits">Tổng số lô trúng trong tháng: --</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Lợi Nhuận Ròng Cuối Tháng</div>
+          <div class="kpi-value emerald" id="simNetPnL">--</div>
+          <div class="kpi-desc" id="simROI">Tỷ suất ROI trên vốn dự phòng: --</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Số Ngày Có Lãi / 30 Ngày</div>
+          <div class="kpi-value amber" id="simWinDays">--</div>
+          <div class="kpi-desc" id="simMultiHitDays">Số ngày nổ đột biến (&ge;2 lô): --</div>
+        </div>
+      </div>
+
+      <canvas id="equityChart" width="1200" height="290"></canvas>
+
+      <div class="table-wrap" style="max-height: 380px; overflow-y: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Ngày</th>
+              <th>Chế độ Vốn / Hệ số</th>
+              <th>Vốn bỏ ra trong ngày</th>
+              <th>Kết quả Mở thưởng (Số lô trúng)</th>
+              <th>Tiền thu về trong ngày</th>
+              <th>Lãi / Lỗ trong ngày</th>
+              <th>Lợi Nhuận Lũy Kế Tháng</th>
+            </tr>
+          </thead>
+          <tbody id="simTableBody">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Global state
+    let CURRENT_R = 87.5;
+    let NUM_PRIZES = 18;
+    let PAYOUT_PER_HIT = CURRENT_R / NUM_PRIZES;
+
+    function comb(n, k) {
+      if (k < 0 || k > n) return 0;
+      let res = 1;
+      for (let i = 1; i <= k; i++) {
+        res = (res * (n - i + 1)) / i;
+      }
+      return res;
+    }
+
+    function binomPMF(k, n, p) {
+      return comb(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+    }
+
+    function binomSF(kMin, n, p) {
+      let s = 0;
+      for (let k = kMin; k <= n; k++) {
+        s += binomPMF(k, n, p);
+      }
+      return s;
+    }
+
+    function applyPreset(coCost, rawWin, prizes, btnEl) {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      document.getElementById('inpNominal').value = 1;
+      document.getElementById('inpCoCost').value = coCost;
+      document.getElementById('inpRawWin').value = rawWin;
+      document.getElementById('inpNumPrizes').value = prizes;
+      syncFromCo();
+    }
+
+    function syncFromCo() {
+      const nominal = parseFloat(document.getElementById('inpNominal').value) || 1;
+      const coCost = parseFloat(document.getElementById('inpCoCost').value) || 0.8;
+      const rawWin = parseFloat(document.getElementById('inpRawWin').value) || 70;
+
+      // Nếu danh nghĩa là nominal, thực đưa là coCost, nhận là rawWin -> 1 đồng thực nhận:
+      const realR = (rawWin / coCost) * nominal;
+      document.getElementById('inpNormalizedR').value = parseFloat(realR.toFixed(4));
+      document.getElementById('hintFormulaR').innerHTML = `= ${rawWin} / ${coCost} = <strong>${realR.toFixed(2)} đồng</strong>`;
+      recalcAll();
+    }
+
+    function syncFromDirectR() {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      const directR = parseFloat(document.getElementById('inpNormalizedR').value) || 87.5;
+      const coCost = parseFloat(document.getElementById('inpCoCost').value) || 0.8;
+      const impliedRawWin = directR * coCost;
+      document.getElementById('inpRawWin').value = parseFloat(impliedRawWin.toFixed(2));
+      document.getElementById('hintFormulaR').innerHTML = `Nhập trực tiếp: <strong>1 ăn ${directR.toFixed(2)}</strong>`;
+      recalcAll();
+    }
+
+    function suggestGrid(nMax) {
+      const grids = {
+        1: '1&times;1 = 1 số',
+        2: '1&times;2 = 2 số',
+        3: '1&times;3 = 3 số',
+        4: '<strong>2&times;2 = 4 số</strong> ★',
+        5: '1&times;5 = 5 số',
+        6: '2&times;3 = 6 số',
+        7: '1&times;7 = 7 số',
+        8: '2&times;4 = 8 số',
+        9: '<strong>3&times;3 = 9 số</strong> ★',
+        10: '2&times;5 = 10 số',
+        12: '3&times;4 = 12 số',
+        14: '<strong>2&times;7 = 14 số</strong> ★',
+        15: '3&times;5 = 15 số',
+        16: '4&times;4 = 16 số',
+        18: '<strong>3&times;6 = 18 số</strong> ★',
+        19: '3&times;6 = 18 số (hoặc 19 số)',
+        20: '4&times;5 = 20 số',
+        21: '3&times;7 = 21 số',
+        24: '<strong>4&times;6 = 24 số</strong> ★',
+        25: '5&times;5 = 25 số',
+        28: '4&times;7 = 28 số',
+        30: '5&times;6 = 30 số',
+        32: '4&times;8 = 32 số',
+        36: '6&times;6 = 36 số',
+        42: '6&times;7 = 42 số',
+        48: '6&times;8 = 48 số',
+        49: '7&times;7 = 49 số',
+        56: '7&times;8 = 56 số',
+        64: '8&times;8 = 64 số',
+        72: '8&times;9 = 72 số',
+        81: '9&times;9 = 81 số'
+      };
+      if (grids[nMax]) return grids[nMax];
+      // Find closest A*B <= nMax
+      let bestA = 1, bestB = nMax, bestProd = 1;
+      for (let a = 1; a <= 10; a++) {
+        for (let b = a; b <= 10; b++) {
+          if (a * b <= nMax && a * b > bestProd) {
+            bestProd = a * b;
+            bestA = a;
+            bestB = b;
+          }
+        }
+      }
+      return `${bestA}&times;${bestB} = ${bestProd} số (Tối đa ${nMax})`;
+    }
+
+    function recalcAll() {
+      CURRENT_R = parseFloat(document.getElementById('inpNormalizedR').value) || 87.5;
+      NUM_PRIZES = parseInt(document.getElementById('inpNumPrizes').value, 10) || 18;
+      PAYOUT_PER_HIT = CURRENT_R / NUM_PRIZES;
+
+      document.getElementById('outPerLo').value = PAYOUT_PER_HIT.toFixed(4);
+      document.getElementById('hintPerLo').innerHTML = `= ${CURRENT_R.toFixed(2)} / ${NUM_PRIZES} = <strong>${PAYOUT_PER_HIT.toFixed(4)} đ/lô</strong>`;
+      document.getElementById('lblTitleR').textContent = `1 : ${CURRENT_R.toFixed(2)}`;
+      document.getElementById('lblSimR').textContent = `1 : ${CURRENT_R.toFixed(2)}`;
+      document.getElementById('lblTotalMonthPrizes').textContent = (30 * NUM_PRIZES).toString();
+
+      // Update Top KPIs
+      const maxDuoi = Math.floor(CURRENT_R);
+      const profitDuoi = CURRENT_R - maxDuoi;
+      const elimCount = Math.max(0, 100 - maxDuoi);
+      document.getElementById('kpiBeDuoi').textContent = `${CURRENT_R.toFixed(2)} số`;
+      document.getElementById('kpiBeDuoiDesc').innerHTML =
+        `Mua tối đa <strong>${maxDuoi} số</strong> (tốn ${maxDuoi}đ, trúng thu ${CURRENT_R.toFixed(2)}đ &rarr; Lãi +${profitDuoi.toFixed(2)}đ). Cần loại bỏ ít nhất <strong>${elimCount} số</strong>.`;
+
+      const maxLo1 = Math.floor(PAYOUT_PER_HIT);
+      const profitLo1 = PAYOUT_PER_HIT - maxLo1;
+      const roiLo1 = maxLo1 > 0 ? (profitLo1 / maxLo1) * 100 : 0;
+      document.getElementById('kpiBeBaoLo1').textContent = `${PAYOUT_PER_HIT.toFixed(2)} số`;
+      document.getElementById('kpiBeBaoLo1Desc').innerHTML =
+        `Nếu chỉ trúng 1 lô: Mua tối đa <strong>${maxLo1} số</strong> (tốn ${maxLo1}đ, thu ${PAYOUT_PER_HIT.toFixed(2)}đ &rarr; Lãi <strong>+${profitLo1.toFixed(2)}đ = +${roiLo1.toFixed(1)}%</strong>).`;
+
+      const houseEdge = 100 - CURRENT_R;
+      document.getElementById('kpiHouseEdge').textContent = `${houseEdge.toFixed(2)}%`;
+      document.getElementById('kpiHouseEdgeDesc').innerHTML =
+        `Ngẫu nhiên bỏ ra 100đ nhà cái trả lại ${CURRENT_R.toFixed(2)}đ (Nhà cái giữ ${houseEdge.toFixed(2)}%).`;
+
+      const reqProbPerNum = 100 / CURRENT_R; // %
+      const reqAlphaTotal = ((100 / CURRENT_R) - 1) * 100;
+      const reqAlphaPerCage = (Math.sqrt(100 / CURRENT_R) - 1) * 100;
+      document.getElementById('kpiReqAlpha').textContent = `${reqAlphaTotal >= 0 ? '+' : ''}${reqAlphaTotal.toFixed(2)}%`;
+      document.getElementById('kpiReqAlphaDesc').innerHTML =
+        `Xác suất chọn số phải &ge; <strong>${reqProbPerNum.toFixed(4)}%</strong>/số (tức mỗi lồng cầu chỉ cần lệch <strong>+${reqAlphaPerCage.toFixed(2)}%</strong>!).`;
+
+      // Update 1-3-2-6 warning labels
+      const win1Profit4 = PAYOUT_PER_HIT - 4;
+      const wlNet4 = win1Profit4 - 12;
+      document.getElementById('lbl1326Win1').textContent = `+${win1Profit4.toFixed(2)}đ (+${((win1Profit4/4)*100).toFixed(1)}%)`;
+      document.getElementById('lbl1326WL').textContent = `${wlNet4.toFixed(2)}đ`;
+
+      // Update Custom N Calculator
+      updateCustomCalc();
+
+      // Update Section 1 Matrix Table (K = 1..12 and K = NUM_PRIZES)
+      const kList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, NUM_PRIZES];
+      const uniqueK = [...new Set(kList)].filter(k => k <= NUM_PRIZES);
+      const matrixRows = [];
+
+      uniqueK.forEach(k => {
+        const rev = k * PAYOUT_PER_HIT;
+        const nMax = Math.min(99, Math.floor(rev));
+        const netProfit = rev - nMax;
+        const roi = nMax > 0 ? (netProfit / nMax) * 100 : 0;
+        const pRand = binomSF(k, NUM_PRIZES, nMax / 100.0) * 100;
+        const isSweet = (k <= 5);
+
+        matrixRows.push(`
+          <tr class="${isSweet ? 'highlight-row' : ''}">
+            <td class="mono"><strong>Trúng K = ${k} lô</strong></td>
+            <td class="mono info">${rev.toFixed(2)} đồng</td>
+            <td class="mono">${rev.toFixed(2)} số</td>
+            <td class="mono pos">Tối đa ${nMax} số</td>
+            <td class="mono pos">+${netProfit.toFixed(2)} đ (+${roi.toFixed(1)}%)</td>
+            <td>${suggestGrid(nMax)}</td>
+            <td class="mono">${pRand.toFixed(2)}%</td>
+          </tr>
+        `);
+      });
+      document.getElementById('beMatrixBody').innerHTML = matrixRows.join('');
+
+      // Update Section 2 Monthly Comparison Table
+      const configs = [
+        { name: 'Bộ 2&times;2 = 4 số', n: 4, highlight: true },
+        { name: 'Bộ 3&times;3 = 9 số', n: 9, highlight: true },
+        { name: 'Bộ 2&times;7 = 14 số', n: 14, highlight: false },
+        { name: 'Bộ 3&times;6 = 18 số', n: 18, highlight: false },
+        { name: 'Bộ 4&times;6 = 24 số', n: 24, highlight: false },
+        { name: 'Bộ 6&times;6 = 36 số', n: 36, highlight: false }
+      ];
+      const monthlyRows = [];
+      configs.forEach(cfg => {
+        const n = cfg.n;
+        const monthCost = 30 * n;
+        const kMinDay = Math.ceil(n / PAYOUT_PER_HIT);
+        const revMinDay = kMinDay * PAYOUT_PER_HIT;
+        const roiMinDay = ((revMinDay - n) / n) * 100;
+
+        const pWinRand = binomSF(kMinDay, NUM_PRIZES, n / 100.0) * 100;
+        const pWinAI = binomSF(kMinDay, NUM_PRIZES, Math.min(0.99, (n / 100.0) * 1.21)) * 100;
+
+        const hitsMonthRand = 30 * NUM_PRIZES * (n / 100.0);
+        const hitsMonthBE = monthCost / PAYOUT_PER_HIT;
+        const extraHitsNeeded = Math.max(0, hitsMonthBE - hitsMonthRand);
+
+        monthlyRows.push(`
+          <tr class="${cfg.highlight ? 'highlight-row' : ''}">
+            <td class="mono"><strong>${cfg.name}</strong></td>
+            <td class="mono">${n} đ/ngày<br/><span style="font-size:12px; color:var(--text-muted);">(${monthCost} đ/tháng)</span></td>
+            <td class="mono">K &ge; ${kMinDay} lô/ngày<br/><span style="font-size:12px; color:var(--text-muted);">(Thu ${revMinDay.toFixed(2)}đ)</span></td>
+            <td class="mono pos">+${(revMinDay - n).toFixed(2)} đ (+${roiMinDay.toFixed(1)}%)</td>
+            <td class="mono">${pWinRand.toFixed(1)}% &rarr; <strong class="pos">${pWinAI.toFixed(1)}%</strong></td>
+            <td class="mono">${hitsMonthRand.toFixed(1)} lô</td>
+            <td class="mono info">${hitsMonthBE.toFixed(1)} lô<br/><span style="font-size:12px;">(Từ ${Math.ceil(hitsMonthBE)} lô là lãi)</span></td>
+            <td class="mono pos">+${extraHitsNeeded.toFixed(1)} lô / 30 ngày</td>
+          </tr>
+        `);
+      });
+      document.getElementById('monthlyCompareBody').innerHTML = monthlyRows.join('');
+
+      runSimulation();
+    }
+
+    function updateCustomCalc() {
+      const n = parseInt(document.getElementById('inpCustomN').value, 10) || 4;
+      const kDay = Math.ceil(n / PAYOUT_PER_HIT);
+      const revDay = kDay * PAYOUT_PER_HIT;
+      const profitDay = revDay - n;
+      const pDayRand = binomSF(kDay, NUM_PRIZES, n / 100.0) * 100;
+
+      document.getElementById('calcDayBaoLo').innerHTML =
+        `Vốn <code>${n}đ/ngày</code> &rarr; Cần trúng <strong>&ge; ${kDay} lô</strong> (Thu <code>${revDay.toFixed(2)}đ</code>, Lãi <span class="pos">+${profitDay.toFixed(2)}đ</span>). Xác suất tự nhiên: <code>${pDayRand.toFixed(1)}%</code>.`;
+
+      const monthCost = 30 * n;
+      const monthHitsRand = 30 * NUM_PRIZES * (n / 100.0);
+      const monthHitsBE = monthCost / PAYOUT_PER_HIT;
+      const diffMonth = Math.max(0, monthHitsBE - monthHitsRand);
+
+      document.getElementById('calcMonthBaoLo').innerHTML =
+        `Tổng vốn <code>${monthCost}đ</code> &rarr; Cần đạt <strong>${monthHitsBE.toFixed(1)} lô/tháng</strong> (Từ <strong>${Math.ceil(monthHitsBE)} lô</strong> là có lãi). Ngẫu nhiên nổ <code>${monthHitsRand.toFixed(1)} lô</code> (Cần AI bù <span class="pos">+${diffMonth.toFixed(1)} lô</span>).`;
+
+      const duoiProfitDay = CURRENT_R - n;
+      const duoiMonthWinsBE = monthCost / CURRENT_R;
+      document.getElementById('calcDuoi').innerHTML =
+        `Nếu trúng thu <code>${CURRENT_R.toFixed(2)}đ</code> (${duoiProfitDay >= 0 ? `<span class="pos">Lãi +${duoiProfitDay.toFixed(2)}đ</span>` : `<span class="neg">Lỗ ${duoiProfitDay.toFixed(2)}đ</span>`}). Cả tháng 30 ngày cần trúng <strong>&ge; ${duoiMonthWinsBE.toFixed(1)} ngày</strong> (Ngẫu nhiên trúng <code>${(0.3 * n).toFixed(1)} ngày</code>).`;
+    }
+
+    function simulateBinomial(trials, p) {
+      let hits = 0;
+      for (let i = 0; i < trials; i++) {
+        if (Math.random() < p) hits++;
+      }
+      return hits;
+    }
+
+    function runSimulation() {
+      const setType = document.getElementById('cfgSet').value;
+      const cageBoost = parseFloat(document.getElementById('cfgEdge').value);
+      const mmStrategy = document.getElementById('cfgMM').value;
+
+      const combinedBoost = cageBoost * cageBoost;
+
+      let baseCost = 4;
+      if (setType === '9') baseCost = 9;
+      else if (setType === 'core_sat') baseCost = 6.5;
+      else if (setType === '14') baseCost = 14;
+      else if (setType === '18') baseCost = 18;
+
+      let cumPnL = 0;
+      let peakPnL = 0;
+      let maxDrawdown = 0;
+      let totalCost = 0;
+      let totalRev = 0;
+      let totalHits = 0;
+      let winDays = 0;
+      let multiHitDays = 0;
+
+      let lossStreak = 0;
+      let winStep1326 = 0;
+      let profitBuffer = 0;
+      const steps1326 = [1.0, 3.0, 2.0, 6.0];
+      const equityCurve = [0];
+      const rowsHtml = [];
+
+      const reserveBankroll = baseCost * 10;
+
+      for (let day = 1; day <= 30; day++) {
+        let mult = 1.0;
+        let regimeLabel = '1.0x (Chuẩn)';
+        const isHighSignalDay = (day % 3 === 0);
+
+        if (mmStrategy === 'conviction') {
+          if (isHighSignalDay) {
+            mult = 2.0;
+            regimeLabel = '2.0x (Hội tụ cao)';
+          }
+        } else if (mmStrategy === 'recovery') {
+          if (cumPnL >= reserveBankroll * 0.35) {
+            mult = 0.7;
+            regimeLabel = '0.7x (Khóa lãi tháng)';
+          } else if (lossStreak === 1) {
+            mult = 1.4;
+            regimeLabel = '1.4x (Bậc 2 - Bù nhẹ)';
+          } else if (lossStreak >= 2) {
+            mult = 1.8;
+            regimeLabel = '1.8x (Bậc 3 - Tối đa)';
+          } else if (isHighSignalDay) {
+            mult = 1.3;
+            regimeLabel = '1.3x (Tín hiệu tốt)';
+          }
+        } else if (mmStrategy === 'house_money') {
+          if (profitBuffer >= baseCost) {
+            const bonusUnit = Math.min(1.0, (profitBuffer * 0.5) / baseCost);
+            mult = parseFloat((1.0 + bonusUnit).toFixed(2));
+            regimeLabel = `${mult}x (Tái đầu tư Lãi ròng)`;
+          } else {
+            mult = 1.0;
+            regimeLabel = '1.0x (Tích lũy Lãi)';
+          }
+        } else if (mmStrategy === '1326') {
+          mult = steps1326[winStep1326];
+          regimeLabel = `${mult}.0x (Bậc ${winStep1326 + 1} của 1-3-2-6)`;
+        }
+
+        const dayBoost = (cageBoost > 1.0 && isHighSignalDay) ? combinedBoost * 1.08 : combinedBoost;
+
+        let dayCost = baseCost * mult;
+        let dayRev = 0;
+        let hitDesc = '';
+        let dayHitsCount = 0;
+
+        if (setType === 'core_sat') {
+          const pCore = Math.min(0.95, 0.04 * dayBoost * 1.06);
+          const pSat = Math.min(0.95, 0.05 * dayBoost * 0.94);
+          let coreHits = 0;
+          let satHits = 0;
+          for (let g = 0; g < NUM_PRIZES; g++) {
+            const r = Math.random();
+            if (r < pCore) coreHits++;
+            else if (r < pCore + pSat) satHits++;
+          }
+          dayHitsCount = coreHits + satHits;
+          dayRev = mult * (coreHits * 1.0 * PAYOUT_PER_HIT + satHits * 0.5 * PAYOUT_PER_HIT);
+          hitDesc = `${dayHitsCount} lô (${coreHits} Lõi, ${satHits} Vệ tinh)`;
+        } else {
+          const N = parseInt(setType, 10);
+          const p = Math.min(0.95, (N / 100.0) * dayBoost);
+          dayHitsCount = simulateBinomial(NUM_PRIZES, p);
+          dayRev = dayHitsCount * mult * PAYOUT_PER_HIT;
+          hitDesc = `${dayHitsCount} lô`;
+        }
+
+        const dayPnL = dayRev - dayCost;
+        cumPnL += dayPnL;
+        totalCost += dayCost;
+        totalRev += dayRev;
+        totalHits += dayHitsCount;
+
+        if (dayPnL > 0) {
+          winDays++;
+          lossStreak = 0;
+          winStep1326 = (winStep1326 + 1) % 4;
+          profitBuffer += dayPnL;
+        } else {
+          lossStreak++;
+          winStep1326 = 0;
+          profitBuffer = Math.max(0, profitBuffer + dayPnL);
+        }
+
+        if (dayHitsCount >= 2) multiHitDays++;
+
+        if (cumPnL > peakPnL) peakPnL = cumPnL;
+        const dd = peakPnL - cumPnL;
+        if (dd > maxDrawdown) maxDrawdown = dd;
+
+        equityCurve.push(cumPnL);
+
+        const pnlClass = dayPnL >= 0 ? 'pos' : 'neg';
+        const cumClass = cumPnL >= 0 ? 'pos' : 'neg';
+        const signDay = dayPnL >= 0 ? '+' : '';
+        const signCum = cumPnL >= 0 ? '+' : '';
+
+        rowsHtml.push(`
+          <tr>
+            <td class="mono">Ngày ${day < 10 ? '0' + day : day}</td>
+            <td>${regimeLabel}</td>
+            <td class="mono">${dayCost.toFixed(2)} đ</td>
+            <td class="mono"><strong>${hitDesc}</strong></td>
+            <td class="mono">${dayRev.toFixed(2)} đ</td>
+            <td class="mono ${pnlClass}">${signDay}${dayPnL.toFixed(2)} đ</td>
+            <td class="mono ${cumClass}">${signCum}${cumPnL.toFixed(2)} đ</td>
+          </tr>
+        `);
+      }
+
+      document.getElementById('simTableBody').innerHTML = rowsHtml.join('');
+      document.getElementById('simTotalCost').textContent = `${totalCost.toFixed(1)} đ`;
+      document.getElementById('simMaxDD').textContent = `Sụt giảm tối đa (Max Drawdown): -${maxDrawdown.toFixed(2)} đ (Quỹ dự phòng: ${reserveBankroll} đ)`;
+      document.getElementById('simTotalRev').textContent = `${totalRev.toFixed(1)} đ`;
+      document.getElementById('simTotalHits').textContent = `Tổng số lô trúng trong tháng: ${totalHits} lô / ${30 * NUM_PRIZES} giải`;
+
+      const pnlEl = document.getElementById('simNetPnL');
+      const signNet = cumPnL >= 0 ? '+' : '';
+      pnlEl.textContent = `${signNet}${cumPnL.toFixed(2)} đ`;
+      pnlEl.className = 'kpi-value ' + (cumPnL >= 0 ? 'emerald' : 'rose');
+
+      const roiTurn = (cumPnL / totalCost) * 100;
+      const roiBank = (cumPnL / reserveBankroll) * 100;
+      document.getElementById('simROI').textContent = `ROI/Vốn quay vòng: ${signNet}${roiTurn.toFixed(1)}% | ROI/Quỹ dự phòng: ${signNet}${roiBank.toFixed(1)}%`;
+
+      document.getElementById('simWinDays').textContent = `${winDays} / 30 ngày (${((winDays/30)*100).toFixed(0)}%)`;
+      document.getElementById('simMultiHitDays').textContent = `Số ngày nổ từ 2 lô trở lên: ${multiHitDays} ngày`;
+
+      drawChart(equityCurve);
+    }
+
+    function drawChart(data) {
+      const canvas = document.getElementById('equityChart');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const padL = 65, padR = 30, padT = 30, padB = 40;
+      const plotW = w - padL - padR;
+      const plotH = h - padT - padB;
+
+      const minVal = Math.min(0, ...data) - 4;
+      const maxVal = Math.max(4, ...data) + 4;
+      const range = maxVal - minVal || 1;
+
+      const toX = (i) => padL + (i / (data.length - 1)) * plotW;
+      const toY = (v) => padT + plotH - ((v - minVal) / range) * plotH;
+
+      ctx.strokeStyle = '#1e293b';
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const val = minVal + (g / 4) * range;
+        const y = toY(val);
+        ctx.beginPath();
+        ctx.moveTo(padL, y);
+        ctx.lineTo(w - padR, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#64748b';
+        ctx.font = '12px monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText(`${val >= 0 ? '+' : ''}${val.toFixed(1)}đ`, padL - 8, y + 4);
+      }
+
+      const yZero = toY(0);
+      ctx.strokeStyle = '#f59e0b';
+      ctx.setLineDash([6, 4]);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(padL, yZero);
+      ctx.lineTo(w - padR, yZero);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('Mốc Hòa Vốn Tháng (0.0đ)', padL + 8, yZero - 6);
+
+      const finalVal = data[data.length - 1];
+      const lineColor = finalVal >= 0 ? '#10b981' : '#f43f5e';
+
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      data.forEach((v, i) => {
+        const x = toX(i);
+        const y = toY(v);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      data.forEach((v, i) => {
+        const x = toX(i);
+        const y = toY(v);
+        ctx.fillStyle = v >= 0 ? '#10b981' : '#f43f5e';
+        ctx.beginPath();
+        ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (i % 5 === 0) {
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '11px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(`N${i}`, x, h - 12);
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', recalcAll);
+  </script>
+</body>
+</html>

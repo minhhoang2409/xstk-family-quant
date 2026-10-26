@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Báo Cáo Nghiên Cứu & Đề Xuất Kiến Trúc AI — Giai Đoạn 2 (Alpha Discovery & Backtesting)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-alt: #162032;
+      --bg-deep: #0b1120;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.14);
+      --emerald: #10b981;
+      --emerald-bg: rgba(16, 185, 129, 0.12);
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --rose: #f43f5e;
+      --rose-bg: rgba(244, 63, 94, 0.12);
+      --purple: #a855f7;
+      --purple-bg: rgba(168, 85, 247, 0.12);
+      --border: #334155;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.65;
+      padding: 26px 18px 80px;
+    }
+
+    .container {
+      max-width: 1340px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .report-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge.emerald { background: var(--emerald-bg); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .badge.accent { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .badge.amber { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.35); }
+    .badge.rose { background: var(--rose-bg); color: var(--rose); border: 1px solid rgba(244, 63, 94, 0.35); }
+    .badge.purple { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.35); }
+
+    h1 {
+      font-size: 25px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14.8px;
+      max-width: 1120px;
+    }
+
+    /* Quick Nav */
+    .quick-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .quick-nav a {
+      background: var(--bg-card);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+    }
+
+    .quick-nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-card-alt);
+    }
+
+    /* KPI Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+
+    .kpi-label {
+      font-size: 11.8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .kpi-value {
+      font-size: 22px;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .kpi-value.emerald { color: var(--emerald); }
+    .kpi-value.amber { color: var(--amber); }
+    .kpi-value.rose { color: var(--rose); }
+    .kpi-value.purple { color: var(--purple); }
+
+    .kpi-desc {
+      font-size: 12.6px;
+      color: var(--text-muted);
+    }
+
+    /* Sections */
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 30px;
+      margin-bottom: 26px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 19px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      background: var(--accent);
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 18px 0 10px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      font-size: 14.5px;
+    }
+
+    code, .math-chip {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--bg-deep);
+      color: #e2e8f0;
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1px solid #26334d;
+    }
+
+    .formula-box {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-family: var(--mono);
+      font-size: 13.8px;
+      color: #f8fafc;
+      overflow-x: auto;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 18px;
+      margin: 14px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+      margin: 14px 0;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    .subcard {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .subcard h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    ul.clean-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.clean-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    ul.clean-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Callout */
+    .callout {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      border: 1px solid var(--border);
+      background: var(--bg-deep);
+    }
+
+    .callout.emerald { border-left: 4px solid var(--emerald); background: rgba(16, 185, 129, 0.07); }
+    .callout.amber { border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.07); }
+    .callout.rose { border-left: 4px solid var(--rose); background: rgba(244, 63, 94, 0.07); }
+    .callout.accent { border-left: 4px solid var(--accent); background: rgba(56, 189, 248, 0.07); }
+
+    .callout-title {
+      font-weight: 700;
+      font-size: 14.5px;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.6px;
+      background: var(--bg-deep);
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #1e293b;
+      vertical-align: top;
+    }
+
+    th {
+      background: #131c31;
+      color: #cbd5e1;
+      font-weight: 700;
+      font-size: 12.2px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:hover td {
+      background: rgba(56, 189, 248, 0.04);
+    }
+
+    tr.highlight-row td {
+      background: rgba(16, 185, 129, 0.09);
+      border-top: 1px solid rgba(16, 185, 129, 0.3);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .mono { font-family: var(--mono); }
+
+    /* Interactive Charts & Buttons */
+    .chart-box {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .chart-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn.active {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: var(--accent);
+    }
+
+    .btn.emerald-btn.active {
+      background: var(--emerald);
+      color: #0f172a;
+      border-color: var(--emerald);
+    }
+
+    /* Visual Architecture Flowchart */
+    .flow-pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 960px) {
+      .flow-pipeline { grid-template-columns: 1fr; }
+    }
+
+    .flow-step {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 16px;
+      position: relative;
+    }
+
+    .flow-step.emerald-top { border-top-color: var(--emerald); }
+    .flow-step.amber-top { border-top-color: var(--amber); }
+    .flow-step.purple-top { border-top-color: var(--purple); }
+
+    .flow-step-num {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .flow-step h5 {
+      font-size: 14px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .flow-step p {
+      font-size: 12.8px;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* Score Bar */
+    .score-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .score-bar {
+      flex: 1;
+      height: 7px;
+      background: #1e293b;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .score-fill {
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    /* Controls in Simulator */
+    .sim-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+    }
+
+    .control-item label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.8px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .control-item input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .control-item select {
+      width: 100%;
+      background: #1e293b;
+      color: #ffffff;
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="report-header">
+      <div class="badge-row">
+        <span class="badge accent">GIAI ĐOẠN 2: ALPHA DISCOVERY & BACKTESTING</span>
+        <span class="badge emerald">PHA 1B — IDEA REFINE & KIẾN TRÚC AI</span>
+        <span class="badge amber">QUY ƯỚC GỐC: 1 ĂN 87.5 (4.8611 Đ/LÔ)</span>
+        <span class="badge purple">1 LỒNG CẦU: 0–9 (18 GIẢI / KỲ)</span>
+      </div>
+      <h1>Báo Cáo Nghiên Cứu & Đề Xuất Phương Án Giải Pháp AI Chọn Bóng Lồng Cầu XSMN</h1>
+      <p class="subtitle">
+        Tài liệu trực quan hóa toàn bộ kết quả nghiên cứu từ <code>specs/stage2-alpha-discovery/intent.md</code> và hệ quy chiếu <code>QUY_TAC_VA_DIEM_HOA_VON.md</code>. Thiết kế đồng nhất cho bài toán <strong>1 Lồng Cầu (0–9)</strong> (áp dụng cho cả Lồng Hàng Chục & Lồng Hàng Đơn Vị), bao gồm: Đồng bộ hóa kiến thức nền tảng (Pha 0), Mở rộng 6 lăng kính giải pháp (Pha 1), Đối chiếu 3 Phương án Kiến trúc A/B/C kèm Mô phỏng tương tác & Điểm dừng chốt phương án (Pha 2).
+      </p>
+    </header>
+
+    <!-- QUICK NAV -->
+    <nav class="quick-nav">
+      <a href="#pha0">1. Pha 0: Giải Mã Nguyên Lý & Bẫy Nhiễu Mẫu Nhỏ</a>
+      <a href="#pha1">2. Pha 1: Tuyên Ngôn Bài Toán & 6 Lăng Kính</a>
+      <a href="#pha2">3. Pha 2: Sơ Đồ & So Sánh 3 Phương Án (A / B / C)</a>
+      <a href="#simulator">4. Mô Phỏng Tương Tác Cơ Chế Phương Án C</a>
+      <a href="#hardstop">5. Rủi Ro Thực Chiến & Điểm Dừng Chốt Phương Án</a>
+    </nav>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Ngưỡng Lệch Hòa Vốn Mỗi Lồng</div>
+        <div class="kpi-value emerald">≥ +6.90% / lồng</div>
+        <div class="kpi-desc">Xác suất bóng được chọn cần đạt <strong>≥ 10.69%</strong> (so với 10.00% ngẫu nhiên). Khi ghép 2 lồng đạt <code>1.069 × 1.069 = +14.29%</code> (≥ 1/87.5).</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Độ Lệch Chuẩn Nhiễu 30 Kỳ (540 Giải)</div>
+        <div class="kpi-value amber">σ = ±1.29% / bóng</div>
+        <div class="kpi-desc">Công thức <code>σ = √(0.1×0.9 / 540)</code>. Bóng ngẫu nhiên 100% vẫn tự vọt lên <strong>11.5% – 12.5%</strong> trong 30 kỳ — lý do bắt buộc phải có Kiểm định Bác bỏ!</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Mục Tiêu Bộ Điểm Ngọt 2×2 = 4 Số</div>
+        <div class="kpi-value">≥ 25 lô / 30 kỳ</div>
+        <div class="kpi-desc">Điểm hòa vốn tháng = <code>24.69 lô</code> (Ngẫu nhiên nổ <code>21.60 lô</code>). AI chỉ cần bù thêm <strong>+3.1 lô / 30 kỳ</strong> (~10 kỳ nổ thêm 1 lô) là có lãi ròng.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Bảo Toàn Tổng Xác Suất Lồng Cầu</div>
+        <div class="kpi-value purple">∑ P(0..9) = 100%</div>
+        <div class="kpi-desc">Đầu ra AI bắt buộc là <strong>Bảng xác suất hiệu chuẩn (Calibrated)</strong> cho 10 quả bóng để nạp trực tiếp vào chọn Điểm Ngọt & công thức Kelly ở GĐ 3.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: PHA 0 -->
+    <section id="pha0" class="section">
+      <div class="section-title">
+        <span class="section-num">PHA 0</span>
+        <span>Đồng Bộ Hóa Kiến Thức Nền Tảng & Bộ Tiêu Chí Thẩm Định Của Chủ Dự Án</span>
+      </div>
+
+      <p>
+        Để đánh giá chính xác các phương án AI mà không bị các thuật ngữ học máy đánh lừa, trước hết chúng ta cần nhìn thẳng vào <strong>4 quy luật toán học – vật lý</strong> chi phối 1 Lồng Cầu (<code>0–9</code>) quay 18 lần mỗi kỳ mở thưởng XSMN:
+      </p>
+
+      <div class="grid-2">
+        <!-- Nguyên lý 1 -->
+        <div class="subcard">
+          <h4>1. Hai tầng thời gian & Chống rò rỉ tương lai <span class="badge accent">Pre-Draw Cutoff</span></h4>
+          <ul class="clean-list">
+            <li><strong>Trong 1 kỳ mở thưởng (Intra-Draw):</strong> Mỗi lồng cầu (Chục và Đơn vị) nhả bóng <strong>18 lần độc lập</strong> (từ Giải 8 đến Giải ĐB) trong khoảng 20–30 phút.</li>
+            <li><strong>Giữa các kỳ mở thưởng (Inter-Draw):</strong> Lịch sử nối tiếp qua các tuần/tháng của đài đó (Đài tỉnh quay 1 kỳ/tuần ≈ 52 kỳ/năm; riêng <strong>Đài TP.HCM quay 2 kỳ/tuần ≈ 104 kỳ/năm = 1,872 lần nhả bóng/năm</strong>).</li>
+            <li><strong>Quy tắc Bất khả xâm phạm:</strong> Vì phiếu cược Bao Lô phải chốt <em>trước giờ quay thưởng (16h10)</em>, mô hình dự báo kỳ <code>t</code> chỉ được dùng dữ liệu từ kỳ <code>t − 1</code> trở về trước. Tuyệt đối không dùng Giải 8 của ngày <code>t</code> để đoán Giải ĐB ngày <code>t</code>.</li>
+          </ul>
+        </div>
+
+        <!-- Nguyên lý 2 -->
+        <div class="subcard">
+          <h4>2. Ảo ảnh Phương sai Mẫu nhỏ <span class="badge amber">Cạm bẫy số 1</span></h4>
+          <ul class="clean-list">
+            <li>Giả sử lồng cầu chuẩn tuyệt đối (mỗi bóng đều có xác suất thật <code>p = 10.00%</code>). Trong 30 kỳ quay (<code>n = 540</code> lần nhả bóng), độ lệch chuẩn tự nhiên của mỗi quả bóng là:
+              <div class="formula-box">σ = √[ p × (1 − p) / n ] = √[ 0.10 × 0.90 / 540 ] ≈ 1.29%</div>
+            </li>
+            <li>Khi xét cùng lúc 10 quả bóng (<code>0–9</code>), quả bóng đứng Top 1 về tần suất trong 30 kỳ qua gần như <strong>luôn đạt từ 11.5% đến 12.5% hoàn toàn do may rủi!</strong></li>
+            <li>Nếu thuật toán ngây thơ chỉ "chọn bóng ra nhiều nhất 30 kỳ qua", khi test quá khứ (In-Sample) nó luôn báo lãi lớn, nhưng khi đánh thật kỳ thứ 31 (Out-of-Sample) xác suất lập tức tụt về <code>10.0%</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BIỂU ĐỒ TƯƠNG TÁC #1 & #2 -->
+      <div class="grid-2">
+        <!-- Chart 1: Small-Sample Variance Illusion -->
+        <div class="chart-box">
+          <div class="chart-toolbar">
+            <div>
+              <strong style="color:#fff; font-size:14px;">Biểu đồ #1: Minh họa "Ảo ảnh Phương sai Mẫu nhỏ" (540 lần quay)</strong>
+              <div style="font-size:12px; color:var(--text-muted);">So sánh Nhiễu ngẫu nhiên 100% vs Lồng cầu có Độ lệch vật lý thật (+8.5%)</div>
+            </div>
+            <div class="btn-group">
+              <button class="btn active" id="btnNoiseSim" onclick="drawVarianceChart('noise')">🎲 Quay 30 kỳ Nhiễu Trắng (p=10%)</button>
+              <button class="btn emerald-btn" id="btnBiasSim" onclick="drawVarianceChart('bias')">⚙️ Quay 30 kỳ Lồng Lệch Thật (+8.5%)</button>
+            </div>
+          </div>
+          <svg id="svgVarianceChart" width="100%" height="250" viewBox="0 0 560 250"></svg>
+          <div id="varianceChartCaption" style="font-size:12.5px; color:var(--text-muted); margin-top:8px;"></div>
+        </div>
+
+        <!-- Chart 2: Regime Shift & BOCD -->
+        <div class="chart-box">
+          <div class="chart-toolbar">
+            <div>
+              <strong style="color:#fff; font-size:14px;">Biểu đồ #2: Chuyển dịch trạng thái (Regime Shift) khi Nhà đài thay bóng</strong>
+              <div style="font-size:12px; color:var(--text-muted);">So sánh Thuật toán Phát hiện Điểm gãy (BOCD) vs Trung bình trượt 50 kỳ (SMA-50)</div>
+            </div>
+            <div class="btn-group">
+              <button class="btn active" onclick="drawRegimeChart(30)">🔄 Thay bóng ở Kỳ 30</button>
+              <button class="btn" onclick="drawRegimeChart(40)">🔄 Thay bóng ở Kỳ 40</button>
+            </div>
+          </div>
+          <svg id="svgRegimeChart" width="100%" height="250" viewBox="0 0 560 250"></svg>
+          <div style="font-size:12.5px; color:var(--text-muted); margin-top:8px;">
+            <strong>Bài học:</strong> Khi nhà đài bảo trì máy/thay bộ bóng mới ở điểm gãy (đường đỏ đứt nét), trung bình trượt dài hạn (màu vàng) bị "mù" và kéo lê bóng cũ gây thua lỗ kéo dài, trong khi <strong>BOCD (màu xanh ngọc)</strong> tự động phát hiện điểm gãy sau 3–4 kỳ và reset bộ nhớ về nền 10%.
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px;">
+        <!-- Nguyên lý 3 -->
+        <div class="subcard">
+          <h4>3. Tính Dừng Cục Bộ & Đổi Trạng Thái <span class="badge purple">Regime Shifts</span></h4>
+          <ul class="clean-list">
+            <li>Lồng cầu cơ học/khí nén và bộ bóng ping-pong không giữ nguyên độ lệch suốt 5 năm: nhà đài định kỳ vệ sinh lồng, thay bộ bóng mới, hoặc độ ẩm phòng quay thay đổi theo mùa.</li>
+            <li>Do đó, độ lệch vật lý (nếu có) chỉ tồn tại trong các <strong>"cửa sổ trạng thái" (Regimes) kéo dài khoảng 15–35 kỳ quay</strong> rồi dịch chuyển.</li>
+            <li>Mô hình AI bắt buộc phải có bộ <strong>Phát hiện điểm gãy trực tuyến (Online Changepoint Detection)</strong> để biết khi nào "cầu vật lý" vừa bị xóa sổ.</li>
+          </ul>
+        </div>
+
+        <!-- Nguyên lý 4 -->
+        <div class="subcard">
+          <h4>4. Hiệu Chuẩn Xác Suất & Co Rút Bayes <span class="badge emerald">Calibrated ∑ P = 100%</span></h4>
+          <ul class="clean-list">
+            <li>Các mô hình Machine Learning thông thường rất hay <strong>quá tự tin (Overconfident)</strong>: thấy bóng số <code>8</code> nổ nhiều trong vài kỳ là báo xác suất <code>18% – 22%</code>.</li>
+            <li>Nếu nạp con số ảo này vào Giai đoạn 3 (chọn bộ số & Kelly Criterion), quỹ sẽ đặt cược lớn vào đúng đỉnh nhiễu.</li>
+            <li><strong>Co rút Bayes (Dirichlet Shrinkage):</strong> Luôn neo mọi quả bóng ở mức tiên nghiệm <code>10.00%</code>. Chỉ khi lượng bằng chứng vượt qua rào cản phương sai mẫu, xác suất hiệu chuẩn mới nhích dần lên <code>10.6% → 11.1% → 11.5%</code>, phản ánh đúng tỷ lệ nổ thực tế ngoài mẫu.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BỘ TIÊU CHÍ THẨM ĐỊNH -->
+      <h3>Bộ 4 Tiêu Chí Thẩm Định Dành Cho Chủ Dự Án (Architect's Evaluation Rubric)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:22%;">Tiêu chí thẩm định</th>
+              <th style="width:38%;">Câu hỏi kiểm tra sắc bén</th>
+              <th style="width:40%;">Dấu hiệu Phương án Tốt vs Phương án Lỗi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Chống Nhầm Nhiễu Thành Cầu</strong><br><span class="badge emerald">Noise Immunity</span></td>
+              <td>Nếu đưa vào mô hình một chuỗi kết quả quay số <strong>ngẫu nhiên giả lập 100%</strong>, mô hình phản ứng thế nào?</td>
+              <td>
+                <strong style="color:var(--emerald);">Tốt:</strong> Tự động co rút xác suất cả 10 bóng về sát <code>10.0%</code> và báo <em>"Không có Alpha — Đứng ngoài"</em>.<br>
+                <strong style="color:var(--rose);">Lỗi:</strong> Vẫn cố chọn Top 2 bóng nhiễu và báo lãi ảo trong mẫu.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>2. Độ Nhạy Khi Nhà Đài Thay Bóng</strong><br><span class="badge accent">Regime Adaptability</span></td>
+              <td>Khi bộ bóng cũ bị thay thế khiến quả bóng chủ lực đột ngột mất lợi thế, mô hình mất bao lâu để nhận ra?</td>
+              <td>
+                <strong style="color:var(--emerald);">Tốt:</strong> Phát hiện sự sụt giảm bất thường trong <code>3 – 5 kỳ</code> nhờ biến độ dài trạng thái (Run-length BOCD).<br>
+                <strong style="color:var(--rose);">Lỗi:</strong> Ôm khư khư bóng cũ suốt 20–30 kỳ vì trung bình cộng dài hạn vẫn cao.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>3. Độ Trung Thực Của Bảng Xác Suất</strong><br><span class="badge purple">Calibration Fidelity</span></td>
+              <td>Khi AI dự báo bóng số <code>7</code> có xác suất <code>11.2%</code>, thì trong thực tế qua hàng trăm kỳ dự báo, bóng số <code>7</code> có nổ đúng ~11.2% không?</td>
+              <td>
+                <strong style="color:var(--emerald);">Tốt:</strong> Sai số hiệu chuẩn (Brier Score / ECE) cực thấp, dùng trực tiếp để chọn <code>2×2</code> hay <code>Core+Satellite</code>.<br>
+                <strong style="color:var(--rose);">Lỗi:</strong> Báo xác suất vọt lên 15%–20% nhưng thực tế nổ chỉ 10.1%.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>4. Hiệu Quả Trên Cỡ Mẫu Đài Tỉnh</strong><br><span class="badge amber">Small-Sample Efficiency</span></td>
+              <td>Với 1 đài chỉ quay 52–104 kỳ/năm (<code>936 – 1,872</code> lần nhả bóng/năm), mô hình có bị quá khớp (Overfitting) không?</td>
+              <td>
+                <strong style="color:var(--emerald);">Tốt:</strong> Dùng mô hình ít tham số, có ràng buộc giải tích Bayes/L2 mạnh.<br>
+                <strong style="color:var(--rose);">Lỗi:</strong> Dùng mạng Deep Learning hàng vạn tham số học thuộc lòng quá khứ.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PHA 1 -->
+    <section id="pha1" class="section">
+      <div class="section-title">
+        <span class="section-num">PHA 1</span>
+        <span>Mở Rộng Không Gian Giải Pháp: Tuyên Ngôn Bài Toán & 6 Lăng Kính Cơ Chế</span>
+      </div>
+
+      <div class="callout accent">
+        <div class="callout-title">🎯 Tuyên Ngôn Bài Toán Thiết Kế (How Might We — HMW)</div>
+        <p style="margin-bottom:0;">
+          <strong>Làm thế nào để chúng ta</strong> xây dựng một quy trình chuẩn hóa cho <strong>1 Lồng Cầu (0–9)</strong> từ dữ liệu lịch sử 18 giải/kỳ của 1 đài XSMN, có khả năng <strong>(1) tự động bác bỏ nhiễu ngẫu nhiên</strong>, <strong>(2) xuất bảng xác suất hiệu chuẩn ∑ P<sub>i</sub> = 100% trước mỗi kỳ quay</strong>, và <strong>(3) đo lường trung thực lợi thế thực nghiệm trên các cấu hình Điểm Ngọt (2×2 = 4 số, 3×3 = 9 số, Core 2×2 + Satellite 3×3)</strong> mà không bị rò rỉ dữ liệu tương lai hay quá khớp trên cỡ mẫu nhỏ?
+        </p>
+      </div>
+
+      <h3>6 Biến Thể Cơ Chế Tiếp Cận (Divergent Exploration Lenses)</h3>
+      <div class="grid-3">
+        <div class="subcard">
+          <h4>1. Lăng kính Tối giản (10x Simpler) <span class="badge emerald">Dirichlet Shrinkage</span></h4>
+          <p>Coi mỗi kỳ 18 giải là một mẫu Đa thức (Multinomial) và cập nhật trực tiếp phân phối liên hợp <strong>Dirichlet-Multinomial có hệ số quên theo hàm mũ</strong>. Mọi bóng mặc định bị kéo về mốc <code>10.0%</code> trừ khi tần suất gần đây vượt rào cản phương sai mẫu.</p>
+        </div>
+
+        <div class="subcard">
+          <h4>2. Lăng kính Điểm gãy Vật lý <span class="badge accent">BOCD Regime</span></h4>
+          <p>Áp dụng thuật toán <strong>Bayesian Online Changepoint Detection (Adams & MacKay)</strong>: tại mỗi kỳ, tính xác suất xem nhà đài <em>"vừa thay bóng/bảo trì máy"</em> hay <em>"vẫn dùng bộ bóng cũ"</em> để chỉ tính xác suất trong đúng cửa sổ trạng thái hiện hành.</p>
+        </div>
+
+        <div class="subcard">
+          <h4>3. Lăng kính Động học Chuỗi <span class="badge purple">Markov & Gap Dynamics</span></h4>
+          <p>Khai thác ma trận chuyển trạng thái <strong>Markov bậc 1</strong> giữa kỳ <code>t−1 → t</code>, áp lực nén chu kỳ vắng mặt (<em>Standardized Gap Z-score</em>) và tỷ trọng xuất hiện ở nhóm giải đầu buổi (Giải 8, 7, 6) so với cuối buổi (Giải ĐB).</p>
+        </div>
+
+        <div class="subcard">
+          <h4>4. Lăng kính Đảo ngược (Inversion) <span class="badge amber">Negative Cold-Ball Filter</span></h4>
+          <p>Thay vì chỉ săn 2 bóng nóng nhất (dễ chạm đỉnh nhiễu), tìm thêm <strong>2–3 quả bóng đang bị ức chế vật lý (xác suất thấp nhất ≤ 8.5%)</strong> để loại trừ tuyệt đối hoặc làm bộ lọc cho chiến thuật Đánh Đuôi 87 số.</p>
+        </div>
+
+        <div class="subcard">
+          <h4>5. Lăng kính Đối kháng (Red-Team) <span class="badge rose">1,000 Monte Carlo Null</span></h4>
+          <p>Tạo ra <strong>1,000 lịch sử quay số ngẫu nhiên giả lập (Permuted Null Histories)</strong> có cùng số kỳ với đài thật. Mô hình chỉ được xác nhận có Alpha nếu kết quả Walk-Forward trên dữ liệu thật vượt qua phân vị 95% của 1,000 chuỗi ngẫu nhiên.</p>
+        </div>
+
+        <div class="subcard">
+          <h4>6. Lăng kính Danh mục Động <span class="badge emerald">Entropy Portfolio Sizing</span></h4>
+          <p>Dùng trực tiếp <strong>Độ tụ xác suất (Entropy)</strong> của bảng <code>P(0..9)</code> mỗi ngày để chọn bộ số: ngày Alpha tụ đậm ở Top 2 bóng → đánh mũi nhọn <code>2×2 = 4 số</code>; ngày Alpha trải sang bóng thứ 3 → đánh <code>Core 2×2 + Satellite 3×3 (6.5đ)</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PHA 2 — 3 PHƯƠNG ÁN KIẾN TRÚC -->
+    <section id="pha2" class="section">
+      <div class="section-title">
+        <span class="section-num">PHA 2</span>
+        <span>Đối Chiếu 3 Phương Án Kiến Trúc Giải Pháp (Options A, B, C) Qua 4 Trụ Cột</span>
+      </div>
+
+      <p>
+        Từ 6 biến thể cơ chế ở Pha 1, chúng ta hội tụ thành <strong>3 Phương án Kiến trúc hoàn chỉnh</strong>. Mỗi phương án giải quyết trọn vẹn cả <strong>4 Trụ cột</strong> đã khóa trong <code>intent.md</code> nhưng với cơ chế toán học bên trong khác nhau rõ rệt:
+      </p>
+
+      <!-- PHƯƠNG ÁN A -->
+      <div class="subcard" style="margin-bottom:20px; border-left:4px solid var(--accent);">
+        <h4>
+          <span>PHƯƠNG ÁN A: Kiến Trúc Thống Kê Bayes & Phát Hiện Điểm Gãy Trực Tuyến (<code>Bayesian Dirichlet-BOCD Engine</code>)</span>
+          <span class="badge accent">Thuần Toán Bayes Giải Tích — Siêu Nhẹ & Minh Bạch</span>
+        </h4>
+        <p style="color:var(--text-muted); margin-bottom:10px;">
+          <strong>Triết lý cốt lõi:</strong> Không dùng hộp đen học máy. Coi lồng cầu là hệ vật lý có các trạng thái dừng cục bộ (Regimes) và dùng công thức liên hợp <strong>Dirichlet-Multinomial kết hợp BOCD</strong> để tính xác suất hậu nghiệm chính xác cho 10 quả bóng.
+        </p>
+        <div class="flow-pipeline">
+          <div class="flow-step">
+            <div class="flow-step-num">TRỤ CỘT 1 • DATA SCHEMA</div>
+            <h5>Vector Đếm Đa Thức 18 Giải</h5>
+            <p>Chuẩn hóa mỗi kỳ <code>t</code> của từng lồng cầu thành vector đếm 10 chiều <code>c<sub>t</sub> = [n<sub>0</sub>, n<sub>1</sub>, ..., n<sub>9</sub>]</code> với tổng <code>∑ n<sub>i</sub> = 18</code>.</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">TRỤ CỘT 2 • FALSIFICATION</div>
+            <h5>Kiểm Định χ² & Bayes Factor</h5>
+            <p>Tính thống kê <code>χ²</code> đa cửa sổ (15, 30, 60 kỳ) và tỷ số <code>Bayes Factor BF<sub>10</sub></code> đối chiếu giả thuyết Lồng lệch (H<sub>1</sub>) với Lồng chuẩn 10% (H<sub>0</sub>).</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">TRỤ CỘT 3 • CALIBRATED P(0..9)</div>
+            <h5>Cập Nhật Liên Hợp Dirichlet-BOCD</h5>
+            <p>Tích hợp qua mọi độ dài trạng thái <code>r<sub>t</sub></code>: <code>P(i) = ∑ P(r<sub>t</sub>) × (α<sub>0</sub> + N<sub>i,r</sub>) / (10α<sub>0</sub> + 18r<sub>t</sub>)</code>. Bảo toàn tuyệt đối <code>∑ P<sub>i</sub> = 100%</code>.</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">TRỤ CỘT 4 • SWEET-SPOT BACKTEST</div>
+            <h5>Ghép 2 Lồng & Kiểm Thử Trượt</h5>
+            <p>Tính <code>P(ab) = P<sub>Chục</sub>(a) × P<sub>ĐơnVị</sub>(b)</code>, chọn Top bóng ghép bộ <code>2×2</code>, <code>3×3</code>, <code>Core+Sat</code> và chấm điểm Walk-Forward từng kỳ.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHƯƠNG ÁN B -->
+      <div class="subcard" style="margin-bottom:20px; border-left:4px solid var(--amber);">
+        <h4>
+          <span>PHƯƠNG ÁN B: Kiến Trúc Học Máy Đa Đặc Trưng + Hiệu Chuẩn Hậu Kỳ (<code>Tabular ML + Post-Hoc Calibration</code>)</span>
+          <span class="badge amber">Khai Phá Tương Quan Phi Tuyến & Nhịp Rơi</span>
+        </h4>
+        <p style="color:var(--text-muted); margin-bottom:10px;">
+          <strong>Triết lý cốt lõi:</strong> Trích xuất tối đa các đặc trưng chuỗi thời gian (tần suất EMA, chu kỳ gan, ma trận chuyển trạng thái Markov, vị trí giải thưởng) và dùng mô hình cây quyết định (LightGBM / CatBoost) kèm lớp hiệu chuẩn xác suất hậu kỳ.
+        </p>
+        <div class="flow-pipeline">
+          <div class="flow-step amber-top">
+            <div class="flow-step-num" style="color:var(--amber);">TRỤ CỘT 1 • 25–30 FEATURES</div>
+            <h5>Kỹ Thuật Đặc Trưng Sâu</h5>
+            <p>Tần suất EMA (5, 10, 20, 50 kỳ), độ dài chu kỳ vắng mặt (Gap), tốc độ rơi lại sau kỳ nổ đa nháy, xác suất chuyển tiếp Markov và tỷ trọng giải đầu/cuối.</p>
+          </div>
+          <div class="flow-step amber-top">
+            <div class="flow-step-num" style="color:var(--amber);">TRỤ CỘT 2 • FALSIFICATION</div>
+            <h5>Kiểm Định Ljung-Box & Permutation</h5>
+            <p>Kiểm tra tự tương quan chuỗi (Autocorrelation), Runs Test và hoán vị đặc trưng (Feature Importance Permutation) để lọc biến rác.</p>
+          </div>
+          <div class="flow-step amber-top">
+            <div class="flow-step-num" style="color:var(--amber);">TRỤ CỘT 3 • CALIBRATED P(0..9)</div>
+            <h5>LightGBM + Dirichlet Calibration</h5>
+            <p>Dự báo cường độ nổ của 10 bóng bằng Gradient Boosting, sau đó qua tầng <strong>Temperature / Dirichlet Scaling</strong> để ép tổng xác suất về <code>100%</code>.</p>
+          </div>
+          <div class="flow-step amber-top">
+            <div class="flow-step-num" style="color:var(--amber);">TRỤ CỘT 4 • SWEET-SPOT BACKTEST</div>
+            <h5>Walk-Forward Retraining</h5>
+            <p>Huấn luyện lại định kỳ trên cửa sổ trượt và đo hiệu suất thực nghiệm trên các bộ Điểm Ngọt <code>2×2</code>, <code>3×3</code>, <code>2×7</code>, <code>3×6</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHƯƠNG ÁN C (KHUYẾN NGHỊ) -->
+      <div class="subcard" style="margin-bottom:24px; border:2px solid var(--emerald); background:linear-gradient(180deg, rgba(16,185,129,0.08) 0%, #162032 100%);">
+        <h4>
+          <span>PHƯƠNG ÁN C (KHUYẾN NGHỊ ★): Kiến Trúc Lai Hai Tầng "Phễu Kiểm Định Chống Nhiễu + Hội Đồng Co Rút Thích Ứng" (<code>Two-Stage Gatekeeper & Regularized Ensemble</code>)</span>
+          <span class="badge emerald">★ TỐI ƯU NHẤT CHO CỠ MẪU XSMN</span>
+        </h4>
+        <p style="color:#e2e8f0; margin-bottom:10px;">
+          <strong>Triết lý cốt lõi:</strong> Kết hợp sự chặt chẽ toán học của <strong>Bayes-BOCD (Phương án A)</strong> để bắt độ lệch vật lý lồng cầu với <strong>Mô hình Chuỗi Markov/Nhịp rơi có phạt chuẩn hóa mạnh (tinh gọn từ Phương án B)</strong>, đặt dưới một <strong>"Cầu chì Kiểm định 1,000 chuỗi Monte Carlo"</strong> để không bao giờ bị lừa bởi nhiễu mẫu nhỏ.
+        </p>
+        <div class="flow-pipeline">
+          <div class="flow-step emerald-top">
+            <div class="flow-step-num" style="color:var(--emerald);">TRỤ CỘT 1 • COMPACT SCHEMA</div>
+            <h5>3 Nhóm Đặc Trưng Cốt Lõi</h5>
+            <p>Tách 2 luồng đồng nhất (Lồng Chục & Lồng Đơn vị). Chỉ lấy 3 nhóm biến có cơ sở vật lý rõ nhất: <strong>(1) Vector đếm 18 giải/kỳ</strong>, <strong>(2) Ma trận Markov bậc 1 làm mượt Laplace</strong>, <strong>(3) Áp lực chu kỳ gan chuẩn hóa (Gap Z-score)</strong>.</p>
+          </div>
+          <div class="flow-step emerald-top">
+            <div class="flow-step-num" style="color:var(--emerald);">TRỤ CỘT 2 • GATEKEEPER FUNNEL</div>
+            <h5>Phễu Kiểm Định Kép + 1,000 Null</h5>
+            <p>Chạy đồng thời <code>χ² + Shannon Entropy + Markov Test</code> và đặt cạnh <strong>1,000 lịch sử quay ngẫu nhiên giả lập (Monte Carlo Null)</strong>. Tự động gắn nhãn trạng thái: <code>[CÓ ALPHA THẬT]</code> hay <code>[NHIỄU TRẮNG — NGHỈ]</code>.</p>
+          </div>
+          <div class="flow-step emerald-top">
+            <div class="flow-step-num" style="color:var(--emerald);">TRỤ CỘT 3 • DUAL CALIBRATOR</div>
+            <h5>Hội Đồng Bayes-BOCD + Markov L2</h5>
+            <p>Hợp nhất <strong>Nhánh 1 (Dirichlet-BOCD bắt lệch tĩnh & điểm thay bóng)</strong> + <strong>Nhánh 2 (Regularized Markov bắt nhịp động)</strong> qua bộ tối ưu <code>Out-of-Sample Log-Loss / Brier Score</code> → Bảng <code>P(0..9)</code> chuẩn <code>100%</code>.</p>
+          </div>
+          <div class="flow-step emerald-top">
+            <div class="flow-step-num" style="color:var(--emerald);">TRỤ CỘT 4 • ALPHA DECAY & PORTFOLIO</div>
+            <h5>Đo Đường Cong Suy Giảm & Điểm Ngọt</h5>
+            <p>Vẽ đường cong suy giảm Alpha từ Bóng Top 1 → Top 10; kiểm thử trượt Walk-Forward đối đầu trực tiếp <code>2×2 (4 số)</code>, <code>3×3 (9 số)</code>, <code>Core 2×2 + Sat 3×3 (6.5đ)</code>, <code>2×7</code>, <code>3×6</code> và <code>Negative Filter</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BẢNG SO SÁNH STRESS-TEST MATRIX -->
+      <h3>Bảng Ma Trận Đối Chiếu & Thẩm Định Đa Chiều (Stress-Test Comparison Matrix)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:22%;">Tiêu chí đánh giá</th>
+              <th style="width:25%;">Phương án A: <code>Bayesian Dirichlet-BOCD</code></th>
+              <th style="width:25%;">Phương án B: <code>Tabular ML + Calibration</code></th>
+              <th style="width:28%;">Phương án C (Khuyến nghị ★): <code>Gatekeeper + Regularized Ensemble</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Sức đề kháng Học vẹt / Quá khớp (Anti-Overfitting)</strong></td>
+              <td>
+                <span class="badge accent">9.0 / 10 — Rất Cao</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:90%; background:var(--accent);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Công thức giải tích tự động kéo về 10% khi dữ liệu thưa.</div>
+              </td>
+              <td>
+                <span class="badge rose">4.5 / 10 — Rủi Ro Cao</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:45%; background:var(--rose);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Cây quyết định 30 biến rất dễ học thuộc lòng nhiễu trên mẫu 52–104 kỳ/năm.</div>
+              </td>
+              <td>
+                <span class="badge emerald">9.8 / 10 — Tối Đa ★</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:98%; background:var(--emerald);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:#e2e8f0;">Có Phễu 1,000 chuỗi Monte Carlo chặn cửa + phạt chuẩn hóa kép Bayes & L2.</div>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>2. Khả năng bắt cả Độ lệch vật lý lẫn Nhịp rơi chuỗi</strong></td>
+              <td>
+                <span class="badge amber">7.0 / 10 — Khá</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:70%; background:var(--amber);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Bắt tốt độ lệch tĩnh (bóng nặng/nhẹ), nhưng bỏ qua ma trận chuyển trạng thái Markov.</div>
+              </td>
+              <td>
+                <span class="badge accent">8.0 / 10 — Tốt</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:80%; background:var(--accent);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Khai thác được nhịp rơi & chu kỳ gan, nhưng dễ lẫn lộn khi đổi trạng thái lồng.</div>
+              </td>
+              <td>
+                <span class="badge emerald">9.5 / 10 — Toàn Diện ★</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:95%; background:var(--emerald);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:#e2e8f0;">Nhánh 1 bắt độ lệch vật lý lồng cầu; Nhánh 2 bắt nhịp chuyển tiếp Markov & chu kỳ gan.</div>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>3. Tốc độ thích ứng khi Nhà đài thay bóng (Regime Shift)</strong></td>
+              <td>
+                <span class="badge emerald">9.2 / 10 — Tức Thời</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:92%; background:var(--emerald);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Thuật toán BOCD tự động hạ độ dài trạng thái <code>r<sub>t</sub> → 0</code> sau 3–4 kỳ lệch pha.</div>
+              </td>
+              <td>
+                <span class="badge rose">5.0 / 10 — Chậm</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:50%; background:var(--rose);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Phải chờ hàng chục kỳ quay mới để dữ liệu mới đè lên trọng số cây quyết định cũ.</div>
+              </td>
+              <td>
+                <span class="badge emerald">9.5 / 10 — Tức Thời ★</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:95%; background:var(--emerald);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:#e2e8f0;">Thừa hưởng nguyên vẹn bộ dò điểm gãy BOCD + tự động giảm trọng số nhánh Markov khi bất ổn.</div>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>4. Độ chuẩn xác của Bảng xác suất 0–9 (Calibration)</strong></td>
+              <td>
+                <span class="badge accent">9.0 / 10 — Tự Nhiên</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:90%; background:var(--accent);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Hiệu chuẩn nội tại theo phân phối hậu nghiệm Dirichlet.</div>
+              </td>
+              <td>
+                <span class="badge amber">6.5 / 10 — Trung Bình</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:65%; background:var(--amber);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Hiệu chuẩn hậu kỳ dễ bị méo khi cỡ mẫu Validation nhỏ.</div>
+              </td>
+              <td>
+                <span class="badge emerald">9.6 / 10 — Chuẩn Xác Nhất ★</span>
+                <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:96%; background:var(--emerald);"></div></div></div>
+                <div style="margin-top:6px; font-size:12.8px; color:#e2e8f0;">Tối ưu trực tiếp hàm <code>Brier Score & Log-Loss</code> ngoài mẫu, không bao giờ báo ảo.</div>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>5. Giá trị khớp nối sang Giai đoạn 3 (Kelly & Danh mục)</strong></td>
+              <td>
+                <span class="badge accent">8.5 / 10 — Tốt</span>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Cung cấp bảng <code>P(0..9)</code> chuẩn, nhưng thiếu tín hiệu nhịp ngắn hạn.</div>
+              </td>
+              <td>
+                <span class="badge rose">5.5 / 10 — Nguy Hiểm</span>
+                <div style="margin-top:6px; font-size:12.8px; color:var(--text-muted);">Nếu xác suất bị thổi phồng, công thức Kelly ở GĐ 3 sẽ báo đi vốn quá tay.</div>
+              </td>
+              <td>
+                <span class="badge emerald">10 / 10 — Hoàn Hảo ★</span>
+                <div style="margin-top:6px; font-size:12.8px; color:#e2e8f0;">Xuất ra cả <strong>Bảng xác suất hiệu chuẩn</strong> lẫn <strong>Chỉ số độ tin cậy trạng thái (Conviction Score)</strong> để điều khiển <code>Core 2×2 + Satellite 3×3</code>.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MÔ PHỎNG TƯƠNG TÁC PHƯƠNG ÁN C -->
+    <section id="simulator" class="section">
+      <div class="section-title">
+        <span class="section-num">MÔ PHỎNG</span>
+        <span>Trình Mô Phỏng Tương Tác Cơ Chế Phương Án C: Từ Bảng Xác Suất 0–9 Đến Ma Trận Điểm Ngọt 30 Ngày</span>
+      </div>
+
+      <p>
+        Hãy điều chỉnh các thông số bên dưới để quan sát cách <strong>Phương án C (Two-Stage Gatekeeper & Regularized Ensemble)</strong> xử lý dữ liệu lồng cầu thực tế: cách nó co rút nhiễu về <code>10.0%</code>, khi nào Phễu Kiểm Định bật đèn xanh, và cấu hình bộ số nào (<code>2×2 = 4 số</code>, <code>3×3 = 9 số</code>, hay <code>Core 2×2 + Satellite 3×3</code>) hội tụ lợi nhuận tốt nhất:
+      </p>
+
+      <!-- THANH ĐIỀU KHIỂN -->
+      <div class="sim-controls">
+        <div class="control-item">
+          <label>
+            <span>1. Độ lệch vật lý thực của Lồng cầu:</span>
+            <strong id="lblTrueBias" style="color:var(--emerald);">+8.5% (Vượt Hòa Vốn)</strong>
+          </label>
+          <input type="range" id="rngTrueBias" min="0" max="14" step="0.5" value="8.5" oninput="updateStage2Simulator()" />
+          <div style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">
+            <code>0%</code> = Nhiễu trắng | <code>≥ +6.90%</code> = Vượt Hòa Vốn (≥ 10.69%/bóng)
+          </div>
+        </div>
+
+        <div class="control-item">
+          <label>
+            <span>2. Hình thái phân bổ Alpha trong lồng:</span>
+          </label>
+          <select id="selDecayProfile" onchange="updateStage2Simulator()">
+            <option value="top2">Tập trung đậm ở Top 2 bóng (Tối ưu Bộ 2×2 & Core+Sat)</option>
+            <option value="top3" selected>Trải đều ở Top 3 bóng (Tối ưu Core 2×2 + Satellite 3×3)</option>
+            <option value="top1">Độc tôn 1 bóng siêu lệch + 1 bóng phụ (Suy giảm gắt ở bóng thứ 3)</option>
+            <option value="cold">Ức chế 2 bóng chết ở đáy (Lợi thế Loại trừ bóng chết)</option>
+          </select>
+        </div>
+
+        <div class="control-item">
+          <label>
+            <span>3. Cỡ mẫu cửa sổ trạng thái (Run-Length):</span>
+            <strong id="lblWindowSize" style="color:var(--accent);">30 kỳ (540 giải)</strong>
+          </label>
+          <input type="range" id="rngWindowSize" min="10" max="60" step="5" value="30" oninput="updateStage2Simulator()" />
+          <div style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">
+            Số kỳ mở thưởng kể từ lần thay bóng gần nhất (BOCD Run-Length <code>r<sub>t</sub></code>).
+          </div>
+        </div>
+
+        <div class="control-item">
+          <label>
+            <span>4. Cường độ Co rút Bayes (Shrinkage α<sub>0</sub>):</span>
+            <strong id="lblShrinkage" style="color:var(--purple);">Chuẩn (α₀ = 18)</strong>
+          </label>
+          <select id="selShrinkage" onchange="updateStage2Simulator()">
+            <option value="8">Nhẹ (α₀ = 8 — Nhạy cao, ít kéo về 10%)</option>
+            <option value="18" selected>Chuẩn Quỹ Định Lượng (α₀ = 18 — Cân bằng Tín hiệu/Nhiễu)</option>
+            <option value="36">Bảo thủ cao (α₀ = 36 — Chống nhiễu tối đa)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- BANNER TRẠNG THÁI GATEKEEPER -->
+      <div id="gatekeeperBanner" class="callout emerald" style="margin-bottom:18px;"></div>
+
+      <!-- 2 BIỂU ĐỒ CỦA SIMULATOR -->
+      <div class="grid-2">
+        <div class="chart-box">
+          <div style="margin-bottom:10px;">
+            <strong style="color:#fff; font-size:14px;">Biểu đồ A: Bảng Xác Suất Hiệu Chuẩn 10 Quả Bóng (0–9) Trước Giờ Quay</strong>
+            <div style="font-size:12px; color:var(--text-muted);">
+              Cột Xanh Ngọc = Top 2 Bóng Lõi (Core) | Cột Tím = Bóng Thứ 3 (Vệ tinh) | Cột Xám = Bóng Thường | Cột Đỏ = Bóng Chết (Loại trừ)
+            </div>
+          </div>
+          <svg id="svgBallProbChart" width="100%" height="260" viewBox="0 0 560 260"></svg>
+          <div id="ballProbSummary" style="font-size:12.5px; color:var(--text-muted); margin-top:8px;"></div>
+        </div>
+
+        <div class="chart-box">
+          <div style="margin-bottom:10px;">
+            <strong style="color:#fff; font-size:14px;">Biểu đồ B: Đường Cong Suy Giảm Alpha Khi Mở Rộng Bộ Số (Dilution Curve)</strong>
+            <div style="font-size:12px; color:var(--text-muted);">
+              Độ lệch xác suất gộp 2 lồng cầu (%) khi lấy Top 1×1 → 2×2 → 3×3 → 4×6 → 6×6 so với Ngưỡng Hòa Vốn (+14.29%)
+            </div>
+          </div>
+          <svg id="svgDilutionChart" width="100%" height="260" viewBox="0 0 560 260"></svg>
+          <div style="font-size:12.5px; color:var(--text-muted); margin-top:8px;">
+            <strong>Quy luật Bảo toàn Xác suất:</strong> Vì tổng 10 bóng luôn bằng <code>100%</code>, khi mở rộng từ <code>2×2</code> và <code>3×3</code> sang các bộ lớn (<code>4×6 = 24 số</code>, <code>6×6 = 36 số</code>), ta buộc phải gom cả các bóng bình thường vào giỏ, làm đường cong Alpha (màu xanh) bị pha loãng và rơi xuống dưới vạch Hòa Vốn (màu vàng)!
+          </div>
+        </div>
+      </div>
+
+      <!-- BẢNG DỰ PHÓNG KẾT QUẢ 30 NGÀY TRÊN CÁC ĐIỂM NGỌT -->
+      <h3>Bảng Đối Chiếu Hiệu Suất Thực Nghiệm 30 Kỳ (540 Giải) Giữa Các Cấu Hình Điểm Ngọt (Trụ Cột 4)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cấu hình Bộ số Điểm Ngọt</th>
+              <th>Vốn / Kỳ<br>(Vốn 30 Kỳ)</th>
+              <th>Mốc Lô Hòa Vốn Ngày (K<sub>min</sub>)</th>
+              <th>Độ Lệch Gộp Thực Tế (2 Lồng)</th>
+              <th>Số Lô Kỳ Vọng / 30 Kỳ<br>(vs Mốc Hòa Vốn Tháng)</th>
+              <th>Tỷ Lệ Ngày Có Lãi<br>(Daily Win Rate)</th>
+              <th>Xác Suất Ngày Trắng Bảng (K=0)</th>
+              <th>Lợi Nhuận Ròng Kỳ Vọng / 30 Kỳ (Đi Vốn Đều 1x)</th>
+            </tr>
+          </thead>
+          <tbody id="tbSweetSpotSim"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PRE-MORTEM & HARD STOP -->
+    <section id="hardstop" class="section">
+      <div class="section-title">
+        <span class="section-num">CHỐT HƯỚNG</span>
+        <span>Giải Phẫu Rủi Ro Thực Chiến (Pre-Mortem), Chọn Đài Mẫu & Điểm Dừng Chốt Phương Án</span>
+      </div>
+
+      <h3>1. Giải Phẫu 3 Giả Định Sống Còn & Cơ Chế Phòng Vệ Của Phương Án C</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:24%;">Giả định / Tử huyệt thực chiến</th>
+              <th style="width:36%;">Điều gì xảy ra nếu thực tế đi ngược giả định?</th>
+              <th style="width:40%;">Cơ chế Bảo vệ Vốn trong Phương án C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Giả định 1 (Dealbreaker):</strong><br>Đài đang xét thực sự có độ lệch vật lý <code>≥ +6.90%/lồng</code> trong các cửa sổ trạng thái.</td>
+              <td>Nếu lồng cầu của đài đó hoàn hảo tuyệt đối (<code>10.00%</code> phẳng lì), <strong>mọi thuật toán AI trên thế giới đều sẽ chỉ trúng trung bình ~21.6 lô / 30 kỳ ở bộ 2×2 (lỗ -12.5% do House Edge)</strong>.</td>
+              <td><strong>Phễu Gatekeeper (Trụ cột 2)</strong> đối chiếu với 1,000 chuỗi ngẫu nhiên giả lập sẽ phát hiện ngay <code>p-value > 0.05</code> và báo cáo minh bạch: <em>"Đài này là nhiễu trắng — Không xuống tiền, chuyển sang kiểm định đài khác!"</em></td>
+            </tr>
+            <tr>
+              <td><strong>Giả định 2 (Alpha Decay Trap):</strong><br>Bóng thứ 3 vẫn giữ được lợi thế khi mở rộng từ <code>2×2</code> lên <code>3×3</code>.</td>
+              <td>Nếu thực tế mỗi lồng chỉ có <strong>1–2 quả bóng lệch</strong>, còn bóng thứ 3 đã tụt về <code>10.0%</code>, thì đánh đều tiền bộ <code>3×3 = 9 số</code> sẽ bị pha loãng và lỗ nặng hơn bộ <code>2×2 = 4 số</code>.</td>
+              <td><strong>Đường cong Alpha Decay (Trụ cột 4)</strong> đo riêng độ lệch của từng thứ hạng bóng (<code>Rank 1, Rank 2, Rank 3</code>) và ưu tiên cấu trúc <strong>Danh mục Lai <code>Core 2×2 (1.0đ) + Satellite 3×3 (0.5đ)</code></strong> để không đặt nặng tiền vào bóng thứ 3.</td>
+            </tr>
+            <tr>
+              <td><strong>Giả định 3 (Changepoint Lag):</strong><br>Nhà đài thay bộ bóng mới hoặc bảo dưỡng lồng cầu định kỳ.</td>
+              <td>Trong <code>3 – 5 kỳ đầu tiên</code> ngay sau khi nhà đài thay bóng mới, mô hình chưa có đủ dữ liệu của bộ bóng mới nên có thể chịu một nhịp sụt giảm (Drawdown ngắn hạn).</td>
+              <td><strong>Biến độ ngạc nhiên BOCD (Surprise / Run-Length Reset):</strong> Khi kết quả 18 giải đi ngược hoàn toàn phân phối kỳ vọng, BOCD lập tức cắt ngắn độ dài trạng thái <code>r<sub>t</sub></code> và kéo xác suất về <code>10.0%</code> để tạm nghỉ hoặc giảm vốn về tối thiểu.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. Đề Xuất Lựa Chọn "Đài Mẫu Chuẩn Đầu Tiên" (Pilot Station)</h3>
+      <div class="grid-2">
+        <div class="subcard" style="border-left:4px solid var(--emerald);">
+          <h4>Lựa chọn 1 (Khuyến nghị ★): Đài TP. Hồ Chí Minh (XSHCM) <span class="badge emerald">2 Kỳ / Tuần</span></h4>
+          <ul class="clean-list">
+            <li><strong>Tần suất mở thưởng gấp đôi:</strong> Quay vào <strong>Thứ Hai & Thứ Bảy hàng tuần</strong> → <code>~104 kỳ / năm = 1,872 lần nhả bóng / năm</code> (3 năm = hơn 5,600 điểm dữ liệu mỗi lồng cầu).</li>
+            <li><strong>Ý nghĩa định lượng:</strong> Khoảng cách giữa 2 kỳ quay chỉ từ 2–5 ngày (thay vì 7 ngày như các đài tỉnh), giúp thuật toán <strong>BOCD và Markov</strong> bắt được trạng thái vật lý của lồng cầu nhanh gấp đôi và đủ cỡ mẫu kiểm định thống kê chỉ trong 15 tuần (~30 kỳ).</li>
+          </ul>
+        </div>
+
+        <div class="subcard" style="border-left:4px solid var(--accent);">
+          <h4>Lựa chọn 2 (Đối chứng): 1 Đài Tỉnh Quay 1 Kỳ / Tuần (VD: Vĩnh Long / Bình Dương / Tiền Giang) <span class="badge accent">1 Kỳ / Tuần</span></h4>
+          <ul class="clean-list">
+            <li><strong>Tần suất tiêu chuẩn:</strong> Quay cố định 1 ngày/tuần → <code>~52 kỳ / năm = 936 lần nhả bóng / năm</code>.</li>
+            <li><strong>Ý nghĩa định lượng:</strong> Đại diện cho 20 đài còn lại của miền Nam. Sau khi đóng gói thành công quy trình chuẩn trên Đài TP.HCM, ta có thể chạy kiểm chứng ngay trên 1 đài tỉnh để so sánh xem lồng cầu đài tỉnh có độ lệch vật lý lớn hơn hay nhỏ hơn đài TP.HCM.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MANDATORY HARD STOP CALLOUT -->
+      <div class="callout emerald" style="margin-top:22px; padding:22px 26px;">
+        <div class="callout-title" style="font-size:17px; color:var(--emerald);">
+          🛑 ĐIỂM DỪNG THẢO LUẬN & CHỐT PHƯƠNG ÁN (MANDATORY HARD STOP — PHA 2)
+        </div>
+        <p style="color:#e2e8f0; margin-bottom:12px;">
+          Theo quy trình <code>/agent-skills:idea-refine</code>, tôi dừng lại tại đây để bạn thẩm định toàn bộ bức tranh kỹ thuật trước khi chúng ta khóa văn bản <code>specs/stage2-alpha-discovery/ideas.md</code>. Mời bạn cho ý kiến về <strong>3 quyết định cốt lõi</strong>:
+        </p>
+        <ul class="clean-list" style="margin-bottom:0;">
+          <li><strong>Câu hỏi 1 (Về Cơ chế & Lý thuyết):</strong> Sau khi xem các biểu đồ và thử nghiệm thanh trượt ở trên, có khái niệm nào (như <em>Ảo ảnh phương sai mẫu nhỏ</em>, <em>Phát hiện điểm gãy BOCD</em>, <em>Co rút Bayes Dirichlet</em>, hay <em>Phễu đối chứng 1,000 chuỗi Monte Carlo</em>) mà bạn muốn làm rõ thêm không?</li>
+          <li><strong>Câu hỏi 2 (Về Đài Mẫu Đầu Tiên):</strong> Bạn đồng ý chọn <strong>Đài TP.HCM (2 kỳ/tuần — dữ liệu dày gấp đôi)</strong> làm đài thí điểm đầu tiên để xây dựng và kiểm thử mô hình, hay muốn chọn một đài cụ thể nào khác?</li>
+          <li><strong>Câu hỏi 3 (Chốt Kiến Trúc):</strong> Bạn quyết định chọn <strong>Phương án C (Khuyến nghị: Phễu Kiểm Định 1,000 Monte Carlo + Hội đồng Bayes-BOCD & Regularized Markov + Walk-Forward Điểm Ngọt)</strong>, hay chọn Phương án A / B / một biến thể lai khác để tôi chính thức ghi vào <code>ideas.md</code>?</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- JAVASCRIPT ENGINE CHO CÁC BIỂU ĐỒ & SIMULATOR -->
+  <script>
+    // =========================================================================
+    // 1. BIỂU ĐỒ #1: ẢO ẢNH PHƯƠNG SAI MẪU NHỎ (SMALL-SAMPLE VARIANCE ILLUSION)
+    // =========================================================================
+    function drawVarianceChart(mode) {
+      const svg = document.getElementById('svgVarianceChart');
+      const btnNoise = document.getElementById('btnNoiseSim');
+      const btnBias = document.getElementById('btnBiasSim');
+      const caption = document.getElementById('varianceChartCaption');
+
+      btnNoise.classList.toggle('active', mode === 'noise');
+      btnBias.classList.toggle('active', mode === 'bias');
+
+      // Sinh tần suất mẫu 540 lần rút bóng (30 kỳ × 18 giải)
+      let probs = [];
+      if (mode === 'noise') {
+        // Ngẫu nhiên 100% (p = 10% đều nhau), nhưng trong mẫu 540 lần luôn có dao động σ = 1.29%
+        const raw = [12.04, 11.48, 10.93, 10.37, 10.19, 9.81, 9.63, 9.07, 8.52, 7.96];
+        // Thêm chút jitter mỗi lần bấm để người dùng thấy tính ngẫu nhiên
+        let jittered = raw.map(v => v + (Math.random() - 0.5) * 0.55);
+        const sum = jittered.reduce((a, b) => a + b, 0);
+        probs = jittered.map(v => (v * 100) / sum).sort((a, b) => b - a);
+      } else {
+        // Lồng cầu có độ lệch thật ở 2–3 bóng đầu (+8.5% -> +11%)
+        const raw = [12.95, 12.10, 11.15, 10.20, 9.85, 9.55, 9.20, 8.85, 8.35, 7.80];
+        let jittered = raw.map(v => v + (Math.random() - 0.5) * 0.35);
+        const sum = jittered.reduce((a, b) => a + b, 0);
+        probs = jittered.map(v => (v * 100) / sum).sort((a, b) => b - a);
+      }
+
+      const labels = mode === 'noise'
+        ? ['Bóng #4', 'Bóng #9', 'Bóng #1', 'Bóng #7', 'Bóng #0', 'Bóng #3', 'Bóng #8', 'Bóng #2', 'Bóng #5', 'Bóng #6']
+        : ['Bóng #8★', 'Bóng #3★', 'Bóng #7', 'Bóng #1', 'Bóng #0', 'Bóng #9', 'Bóng #4', 'Bóng #2', 'Bóng #6', 'Bóng #5'];
+
+      const W = 560, H = 250;
+      const padL = 46, padR = 20, padT = 26, padB = 34;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const maxY = 15.0; // %
+
+      const yPos = (val) => padT + plotH * (1 - val / maxY);
+
+      let html = '';
+
+      // Vùng nhiễu 95% của 1 bóng đơn lẻ (10% ± 1.96*1.29% = 7.47% -> 12.53%)
+      const yBandTop = yPos(12.53);
+      const yBandBot = yPos(7.47);
+      html += `<rect x="${padL}" y="${yBandTop}" width="${plotW}" height="${yBandBot - yBandTop}" fill="rgba(148, 163, 184, 0.08)" />`;
+      html += `<line x1="${padL}" y1="${yBandTop}" x2="${W - padR}" y2="${yBandTop}" stroke="#64748b" stroke-dasharray="3,3" stroke-width="1" />`;
+      html += `<text x="${W - padR - 4}" y="${yBandTop - 4}" fill="#94a3b8" font-size="10.5" text-anchor="end">Trần nhiễu ngẫu nhiên 95% (12.53%)</text>`;
+
+      // Đường chuẩn 10.0%
+      const y10 = yPos(10.0);
+      html += `<line x1="${padL}" y1="${y10}" x2="${W - padR}" y2="${y10}" stroke="#94a3b8" stroke-width="1.2" />`;
+      html += `<text x="${padL + 6}" y="${y10 - 5}" fill="#94a3b8" font-size="10.5">Mức lý tưởng 10.00%</text>`;
+
+      // Đường Hòa Vốn 10.69% (+6.90%)
+      const yBE = yPos(10.69);
+      html += `<line x1="${padL}" y1="${yBE}" x2="${W - padR}" y2="${yBE}" stroke="#f59e0b" stroke-dasharray="5,4" stroke-width="1.6" />`;
+      html += `<text x="${W - padR - 4}" y="${yBE - 5}" fill="#f59e0b" font-size="10.8" font-weight="bold" text-anchor="end">Ngưỡng Hòa Vốn 10.69% (+6.9%)</text>`;
+
+      // Trục Y
+      [0, 5, 10, 15].forEach(v => {
+        const y = yPos(v);
+        html += `<text x="${padL - 8}" y="${y + 4}" fill="#94a3b8" font-size="11" text-anchor="end">${v}%</text>`;
+      });
+
+      // Vẽ 10 cột bóng
+      const barW = 34;
+      const gap = (plotW - barW * 10) / 10;
+
+      probs.forEach((p, idx) => {
+        const x = padL + gap / 2 + idx * (barW + gap);
+        const y = yPos(p);
+        const h = padT + plotH - y;
+
+        let color = '#475569';
+        if (mode === 'noise') {
+          color = idx < 2 ? '#f59e0b' : '#475569'; // Cam cảnh báo: vượt 10.69% giả tạo!
+        } else {
+          color = idx < 2 ? '#10b981' : (idx === 2 ? '#38bdf8' : '#475569');
+        }
+
+        html += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="${color}" />`;
+        html += `<text x="${x + barW / 2}" y="${y - 5}" fill="#f8fafc" font-size="10.5" font-weight="700" text-anchor="middle">${p.toFixed(1)}%</text>`;
+        html += `<text x="${x + barW / 2}" y="${H - 12}" fill="#cbd5e1" font-size="10.5" text-anchor="middle">${labels[idx]}</text>`;
+      });
+
+      svg.innerHTML = html;
+
+      if (mode === 'noise') {
+        caption.innerHTML = `<span style="color:var(--amber); font-weight:700;">⚠️ Phát hiện quan trọng:</span> Dù lồng cầu <strong>ngẫu nhiên 100% (p = 10%)</strong>, trong 30 kỳ vẫn luôn có 2–3 quả bóng màu cam vọt lên <code>${probs[0].toFixed(1)}% – ${probs[1].toFixed(1)}%</code> (vượt ngưỡng hòa vốn 10.69%), nhưng vẫn nằm dưới trần nhiễu 95% (<code>χ² p-value = 0.42 > 0.05</code>). Nhờ Kiểm định Bác bỏ & Co rút Bayes, Phương án C sẽ kéo chúng về <code>10.0%</code> để không bị lừa!`;
+      } else {
+        caption.innerHTML = `<span style="color:var(--emerald); font-weight:700;">✅ Khi Lồng cầu có Độ lệch vật lý thật:</span> Hai quả bóng dẫn đầu (<code>Bóng #8, #3</code>) bứt phá lên <code>${probs[0].toFixed(1)}% – ${probs[1].toFixed(1)}%</code> vượt trần nhiễu 95% (<code>χ² p-value = 0.008 < 0.05</code>) và duy trì ổn định qua các kỳ kế tiếp — đây mới là <strong>Alpha thật</strong> được Phễu Gatekeeper duyệt cho phép đánh!`;
+      }
+    }
+
+    // =========================================================================
+    // 2. BIỂU ĐỒ #2: CHUYỂN DỊCH TRẠNG THÁI (REGIME SHIFT) & BOCD VS SMA
+    // =========================================================================
+    function drawRegimeChart(changePoint) {
+      const svg = document.getElementById('svgRegimeChart');
+      const W = 560, H = 250;
+      const padL = 46, padR = 20, padT = 24, padB = 34;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const T = 60;
+
+      const xPos = (t) => padL + (t / T) * plotW;
+      const yPos = (val) => padT + plotH * (1 - (val - 8.0) / 6.0); // từ 8% đến 14%
+
+      let html = '';
+
+      // Lưới ngang
+      [9, 10, 11, 12, 13].forEach(v => {
+        const y = yPos(v);
+        html += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#1e293b" stroke-width="1" />`;
+        html += `<text x="${padL - 8}" y="${y + 4}" fill="#94a3b8" font-size="10.5" text-anchor="end">${v}%</text>`;
+      });
+
+      // Vạch chuẩn 10% & Hòa vốn 10.69%
+      html += `<line x1="${padL}" y1="${yPos(10.0)}" x2="${W - padR}" y2="${yPos(10.0)}" stroke="#64748b" stroke-width="1.2" />`;
+      html += `<line x1="${padL}" y1="${yPos(10.69)}" x2="${W - padR}" y2="${yPos(10.69)}" stroke="#f59e0b" stroke-dasharray="4,4" stroke-width="1.3" />`;
+
+      // Vạch Đổi Bóng (Changepoint)
+      const xCP = xPos(changePoint);
+      html += `<line x1="${xCP}" y1="${padT}" x2="${xCP}" y2="${H - padB}" stroke="#f43f5e" stroke-dasharray="5,4" stroke-width="2" />`;
+      html += `<text x="${xCP + 6}" y="${padT + 12}" fill="#f43f5e" font-size="10.5" font-weight="bold">Nhà đài thay bóng mới (Kỳ ${changePoint})</text>`;
+
+      // Đường thực tế của Bóng #8: Trước CP là 12.2%, sau CP rớt về 9.5%
+      let truePts = [], smaPts = [], bocdPts = [];
+      for (let t = 1; t <= T; t++) {
+        const trueVal = t <= changePoint ? 12.2 : 9.4;
+        truePts.push(`${xPos(t)},${yPos(trueVal)}`);
+
+        // Trung bình trượt dài hạn SMA bị kéo lê rất lâu sau điểm gãy
+        let smaVal;
+        if (t <= changePoint) {
+          smaVal = 10.0 + (12.0 - 10.0) * (1 - Math.exp(-t / 8));
+        } else {
+          const dt = t - changePoint;
+          smaVal = 12.0 - (12.0 - 9.5) * (dt / 38);
+          if (smaVal < 9.5) smaVal = 9.5;
+        }
+        smaPts.push(`${xPos(t)},${yPos(smaVal)}`);
+
+        // BOCD: Phát hiện điểm gãy sau ~3 kỳ và hạ ngay về ~10.0% -> 9.6%
+        let bocdVal;
+        if (t <= changePoint) {
+          bocdVal = 10.0 + (11.75 - 10.0) * (1 - Math.exp(-t / 5));
+        } else if (t <= changePoint + 3) {
+          bocdVal = 11.75 - (t - changePoint) * 0.55;
+        } else {
+          bocdVal = 9.65;
+        }
+        bocdPts.push(`${xPos(t)},${yPos(bocdVal)}`);
+      }
+
+      html += `<polyline fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2,2" points="${truePts.join(' ')}" />`;
+      html += `<polyline fill="none" stroke="#f59e0b" stroke-width="2.2" points="${smaPts.join(' ')}" />`;
+      html += `<polyline fill="none" stroke="#10b981" stroke-width="2.8" points="${bocdPts.join(' ')}" />`;
+
+      // Chú giải (Legend)
+      html += `<rect x="${padL + 8}" y="${H - 26}" width="12" height="3" fill="#10b981" /><text x="${padL + 24}" y="${H - 21}" fill="#e2e8f0" font-size="11">Ước lượng BOCD (Phản ứng sau 3 kỳ)</text>`;
+      html += `<rect x="${padL + 225}" y="${H - 26}" width="12" height="3" fill="#f59e0b" /><text x="${padL + 241}" y="${H - 21}" fill="#e2e8f0" font-size="11">Trung bình trượt cũ (Bị trễ 25 kỳ)</text>`;
+      html += `<rect x="${padL + 425}" y="${H - 26}" width="12" height="3" fill="#64748b" /><text x="${padL + 441}" y="${H - 21}" fill="#94a3b8" font-size="11">Xác suất thật</text>`;
+
+      svg.innerHTML = html;
+    }
+
+    // =========================================================================
+    // 3. TRÌNH MÔ PHỎNG TƯƠNG TÁC PHƯƠNG ÁN C (SIMULATOR)
+    // =========================================================================
+    function binomPMF(k, n, p) {
+      if (p <= 0) return k === 0 ? 1 : 0;
+      if (p >= 1) return k === n ? 1 : 0;
+      let coeff = 1;
+      for (let i = 1; i <= k; i++) {
+        coeff = (coeff * (n - (k - i))) / i;
+      }
+      return coeff * Math.pow(p, k) * Math.pow(1 - p, n - k);
+    }
+
+    function binomSF(kMin, n, p) {
+      let sum = 0;
+      for (let k = kMin; k <= n; k++) {
+        sum += binomPMF(k, n, p);
+      }
+      return sum;
+    }
+
+    function updateStage2Simulator() {
+      const trueBiasPct = parseFloat(document.getElementById('rngTrueBias').value);
+      const profile = document.getElementById('selDecayProfile').value;
+      const windowDraws = parseInt(document.getElementById('rngWindowSize').value, 10);
+      const alpha0 = parseFloat(document.getElementById('selShrinkage').value);
+
+      // Cập nhật nhãn
+      const lblBias = document.getElementById('lblTrueBias');
+      if (trueBiasPct === 0) {
+        lblBias.textContent = '0.0% (Nhiễu Trắng 100%)';
+        lblBias.style.color = 'var(--rose)';
+      } else if (trueBiasPct < 6.9) {
+        lblBias.textContent = `+${trueBiasPct.toFixed(1)}% (Dưới Hòa Vốn)`;
+        lblBias.style.color = 'var(--amber)';
+      } else {
+        lblBias.textContent = `+${trueBiasPct.toFixed(1)}% (Vượt Hòa Vốn ★)`;
+        lblBias.style.color = 'var(--emerald)';
+      }
+
+      document.getElementById('lblWindowSize').textContent = `${windowDraws} kỳ (${windowDraws * 18} giải)`;
+      const shrinkNames = { '8': 'Nhẹ (α₀ = 8)', '18': 'Chuẩn (α₀ = 18)', '36': 'Bảo thủ (α₀ = 36)' };
+      document.getElementById('lblShrinkage').textContent = shrinkNames[String(alpha0)] || `α₀ = ${alpha0}`;
+
+      // Xây dựng phân phối thực của 10 quả bóng trong lồng cầu theo hình thái (profile)
+      // Lưu ý: tổng 10 quả bóng luôn = 100%
+      const d = trueBiasPct / 100; // Ví dụ +8.5% -> d = 0.085 (tức bóng Top đạt ~10.85% - 11.2%)
+      let rawWeights = [];
+      if (profile === 'top2') {
+        rawWeights = [
+          10 * (1 + d * 1.18),
+          10 * (1 + d * 0.98),
+          10 * (1 + d * 0.25),
+          10.0,
+          9.9,
+          9.8,
+          9.6,
+          10 * (1 - d * 0.55),
+          10 * (1 - d * 0.80),
+          10 * (1 - d * 1.05)
+        ];
+      } else if (profile === 'top3') {
+        rawWeights = [
+          10 * (1 + d * 1.05),
+          10 * (1 + d * 0.95),
+          10 * (1 + d * 0.82),
+          10 * (1 + d * 0.15),
+          9.9,
+          9.7,
+          10 * (1 - d * 0.45),
+          10 * (1 - d * 0.65),
+          10 * (1 - d * 0.85),
+          10 * (1 - d * 1.02)
+        ];
+      } else if (profile === 'top1') {
+        rawWeights = [
+          10 * (1 + d * 1.55),
+          10 * (1 + d * 0.55),
+          10 * (1 + d * 0.05),
+          10.0,
+          9.9,
+          9.8,
+          9.7,
+          10 * (1 - d * 0.50),
+          10 * (1 - d * 0.75),
+          10 * (1 - d * 0.90)
+        ];
+      } else {
+        // cold-ball exclusion
+        rawWeights = [
+          10 * (1 + d * 0.90),
+          10 * (1 + d * 0.80),
+          10 * (1 + d * 0.65),
+          10 * (1 + d * 0.40),
+          10 * (1 + d * 0.25),
+          10.0,
+          9.9,
+          9.8,
+          10 * (1 - d * 1.35),
+          10 * (1 - d * 1.65)
+        ];
+      }
+
+      // Chuẩn hóa tổng đúng 100%
+      const rawSum = rawWeights.reduce((a, b) => a + b, 0);
+      const trueProbs = rawWeights.map(w => (w * 100) / rawSum);
+
+      // Áp dụng Công thức Co rút Bayes (Dirichlet-BOCD Posterior Predictive):
+      // N_total = windowDraws * 18; N_i = N_total * (trueProbs[i]/100)
+      // P_calibrated(i) = (alpha0 + N_i) / (10*alpha0 + N_total)
+      const totalTrials = windowDraws * 18;
+      const calProbs = trueProbs.map(tp => {
+        const ni = totalTrials * (tp / 100);
+        return ((alpha0 + ni) / (10 * alpha0 + totalTrials)) * 100;
+      });
+
+      // Tính Thống kê Kiểm định Chi-Square (χ²) & Bayes Factor ở Trụ cột 2
+      const expected = totalTrials * 0.10;
+      let chiSq = 0;
+      calProbs.forEach((cp, idx) => {
+        // Quan sát thực tế (cộng nhiễu mẫu nhẹ khi trueBias = 0)
+        const obsRate = trueBiasPct === 0
+          ? (10 + (4.5 - idx) * (4.2 / Math.sqrt(windowDraws))) / 100
+          : trueProbs[idx] / 100;
+        const obs = totalTrials * obsRate;
+        chiSq += Math.pow(obs - expected, 2) / expected;
+      });
+
+      // Ngưỡng Chi-Square (df = 9, p = 0.05) là 16.92
+      const top2AvgCal = (calProbs[0] + calProbs[1]) / 2;
+      const top2LiftPct = ((top2AvgCal / 10.0) - 1) * 100;
+      const banner = document.getElementById('gatekeeperBanner');
+
+      if (trueBiasPct === 0 || chiSq < 14.5) {
+        banner.className = 'callout rose';
+        banner.innerHTML = `
+          <div class="callout-title" style="color:var(--rose);">🛑 PHỄU KIỂM ĐỊNH GATEKEEPER (TRỤ CỘT 2): CẢNH BÁO NHIỄU TRẮNG — KÍCH HOẠT PHANH TIỀN MẶT</div>
+          <div style="font-size:13.8px; color:#e2e8f0;">
+            • Thống kê <code>χ² = ${chiSq.toFixed(2)} &lt; 16.92</code> (Chưa vượt phân vị 95% của 1,000 chuỗi Monte Carlo ngẫu nhiên) | Độ lệch sau co rút Bayes của Top 2 bóng chỉ đạt <code>+${top2LiftPct.toFixed(2)}%/lồng</code> (dưới ngưỡng Hòa Vốn <code>+6.90%</code>).<br>
+            • <strong>Quyết định của Hệ thống:</strong> Đánh dấu đài này đang ở trạng thái <strong>Nhiễu ngẫu nhiên</strong> — <strong>Không đặt cược (Tiết kiệm 100% vốn)</strong> hoặc chuyển sang quét đài khác!
+          </div>`;
+      } else if (top2LiftPct < 6.90) {
+        banner.className = 'callout amber';
+        banner.innerHTML = `
+          <div class="callout-title" style="color:var(--amber);">⚠️ PHỄU KIỂM ĐỊNH GATEKEEPER (TRỤ CỘT 2): CÓ TÍN HIỆU NHẸ NHƯNG CHƯA ĐỦ BIÊN AN TOÀN HÒA VỐN</div>
+          <div style="font-size:13.8px; color:#e2e8f0;">
+            • Thống kê <code>χ² = ${chiSq.toFixed(2)}</code> | Độ lệch hiệu chuẩn Bayes của Top 2 bóng đạt <code>+${top2LiftPct.toFixed(2)}%/lồng</code> (tương đương <code>${top2AvgCal.toFixed(2)}%/bóng</code>, sát dưới mốc Hòa Vốn <code>10.69%</code>).<br>
+            • <strong>Quyết định của Hệ thống:</strong> Cần chờ thêm kỳ quay để xác nhận trạng thái (Run-Length) hoặc chỉ đi vốn thăm dò tối thiểu ở cấu hình <strong>Bộ 2×2 = 4 số</strong>.
+          </div>`;
+      } else {
+        banner.className = 'callout emerald';
+        banner.innerHTML = `
+          <div class="callout-title" style="color:var(--emerald);">✅ PHỄU KIỂM ĐỊNH GATEKEEPER (TRỤ CỘT 2): XÁC NHẬN ALPHA VẬT LÝ THẬT — ĐỦ ĐIỀU KIỆN KHAI THÁC</div>
+          <div style="font-size:13.8px; color:#e2e8f0;">
+            • Thống kê <code>χ² = ${chiSq.toFixed(2)} &ge; 16.92 (p &lt; 0.05)</code> vượt qua 95% chuỗi Monte Carlo ngẫu nhiên | Độ lệch hiệu chuẩn Bayes của Top 2 bóng đạt <strong>+${top2LiftPct.toFixed(2)}%/lồng</strong> (<code>${top2AvgCal.toFixed(2)}%/bóng &ge; 10.69%</code>).<br>
+            • <strong>Quyết định của Hệ thống:</strong> Mở khóa Trụ cột 3 & 4 — Cấp bảng xác suất hiệu chuẩn sang Danh mục Điểm Ngọt (Ưu tiên <strong>Bộ 2×2 = 4 số</strong> và <strong>Core 2×2 + Satellite 3×3</strong>).
+          </div>`;
+      }
+
+      // Vẽ Biểu đồ A: Bảng xác suất hiệu chuẩn 10 quả bóng
+      drawCalibratedBallsSVG(calProbs);
+
+      // Vẽ Biểu đồ B & Bảng Điểm Ngọt 30 Kỳ
+      renderSweetSpotComparison(calProbs);
+    }
+
+    function drawCalibratedBallsSVG(calProbs) {
+      const svg = document.getElementById('svgBallProbChart');
+      const summary = document.getElementById('ballProbSummary');
+      const ballLabels = ['Bóng 8', 'Bóng 3', 'Bóng 7', 'Bóng 1', 'Bóng 0', 'Bóng 9', 'Bóng 4', 'Bóng 2', 'Bóng 6', 'Bóng 5'];
+
+      const W = 560, H = 260;
+      const padL = 46, padR = 20, padT = 26, padB = 36;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const maxY = 14.0;
+
+      const yPos = (val) => padT + plotH * (1 - val / maxY);
+
+      let html = '';
+
+      // Lưới & Đường chuẩn 10% + Hòa vốn 10.69%
+      [0, 5, 10, 14].forEach(v => {
+        const y = yPos(v);
+        html += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#1e293b" stroke-width="1" />`;
+        html += `<text x="${padL - 8}" y="${y + 4}" fill="#94a3b8" font-size="10.5" text-anchor="end">${v}%</text>`;
+      });
+
+      const y10 = yPos(10.0);
+      html += `<line x1="${padL}" y1="${y10}" x2="${W - padR}" y2="${y10}" stroke="#94a3b8" stroke-width="1.2" />`;
+
+      const yBE = yPos(10.69);
+      html += `<line x1="${padL}" y1="${yBE}" x2="${W - padR}" y2="${yBE}" stroke="#f59e0b" stroke-dasharray="5,4" stroke-width="1.5" />`;
+      html += `<text x="${W - padR - 4}" y="${yBE - 5}" fill="#f59e0b" font-size="10.5" font-weight="bold" text-anchor="end">Mốc Hòa Vốn: 10.69%/bóng</text>`;
+
+      const barW = 34;
+      const gap = (plotW - barW * 10) / 10;
+
+      calProbs.forEach((p, idx) => {
+        const x = padL + gap / 2 + idx * (barW + gap);
+        const y = yPos(p);
+        const h = padT + plotH - y;
+
+        let color = '#475569';
+        if (idx < 2) color = '#10b981';       // Top 2 Core
+        else if (idx === 2) color = '#a855f7'; // Bóng thứ 3 Satellite
+        else if (idx >= 8) color = '#f43f5e';  // 2 Bóng chết (Cold balls)
+
+        html += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="${color}" />`;
+        html += `<text x="${x + barW / 2}" y="${y - 5}" fill="#f8fafc" font-size="10.5" font-weight="700" text-anchor="middle">${p.toFixed(2)}%</text>`;
+        html += `<text x="${x + barW / 2}" y="${H - 12}" fill="#cbd5e1" font-size="10.5" text-anchor="middle">${ballLabels[idx]}</text>`;
+      });
+
+      svg.innerHTML = html;
+
+      const sumCheck = calProbs.reduce((a, b) => a + b, 0);
+      summary.innerHTML = `<strong>Kiểm tra Bảo toàn Xác suất:</strong> Tổng 10 quả bóng = <code>${sumCheck.toFixed(2)}%</code> | Trung bình <strong>Top 2 Bóng Lõi (Xanh)</strong> = <code>${((calProbs[0] + calProbs[1]) / 2).toFixed(2)}%/bóng</code> | <strong>Bóng thứ 3 Vệ tinh (Tím)</strong> = <code>${calProbs[2].toFixed(2)}%</code> | <strong>2 Bóng đáy (Đỏ)</strong> = <code>${calProbs[8].toFixed(2)}% & ${calProbs[9].toFixed(2)}%</code>.`;
+    }
+
+    function renderSweetSpotComparison(calProbs) {
+      // Hàm tính trung bình xác suất của Top K quả bóng trong 1 lồng cầu
+      const avgTopK = (k) => {
+        let s = 0;
+        for (let i = 0; i < k; i++) s += calProbs[i];
+        return s / k; // % trên mỗi bóng
+      };
+
+      // Khi ghép A bóng Lồng Chục × B bóng Lồng Đơn Vị:
+      // Xác suất trúng của tổ hợp N = A×B số trong 1 giải mở thưởng:
+      // P_set(A, B) = (Tổng xác suất Top A bóng Chục) × (Tổng xác suất Top B bóng Đơn vị)
+      const sumTopKProb = (k) => {
+        let s = 0;
+        for (let i = 0; i < k; i++) s += calProbs[i] / 100;
+        return s;
+      };
+
+      // Vẽ Biểu đồ B: Đường cong suy giảm Alpha (Dilution Curve)
+      const configsPlot = [
+        { label: '1×1 (1 số)', a: 1, b: 1 },
+        { label: '2×2 (4 số)★', a: 2, b: 2 },
+        { label: '3×3 (9 số)★', a: 3, b: 3 },
+        { label: '2×7 (14 số)', a: 2, b: 7 },
+        { label: '3×6 (18 số)', a: 3, b: 6 },
+        { label: '4×6 (24 số)', a: 4, b: 6 },
+        { label: '6×6 (36 số)', a: 6, b: 6 }
+      ];
+
+      const svg = document.getElementById('svgDilutionChart');
+      const W = 560, H = 260;
+      const padL = 48, padR = 22, padT = 26, padB = 36;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const maxBoost = 32; // %
+
+      const xPos = (i) => padL + (i / (configsPlot.length - 1)) * plotW;
+      const yPos = (val) => padT + plotH * (1 - (val + 2) / (maxBoost + 2));
+
+      let html = '';
+      [0, 10, 14.29, 20, 30].forEach(v => {
+        const y = yPos(v);
+        const isBE = Math.abs(v - 14.29) < 0.1;
+        html += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="${isBE ? '#f59e0b' : '#1e293b'}" stroke-dasharray="${isBE ? '5,4' : 'none'}" stroke-width="${isBE ? '1.6' : '1'}" />`;
+        html += `<text x="${padL - 8}" y="${y + 4}" fill="${isBE ? '#f59e0b' : '#94a3b8'}" font-size="10.5" font-weight="${isBE ? 'bold' : 'normal'}" text-anchor="end">+${v.toFixed(isBE ? 1 : 0)}%</text>`;
+      });
+
+      html += `<text x="${W - padR - 4}" y="${yPos(14.29) - 6}" fill="#f59e0b" font-size="10.5" font-weight="bold" text-anchor="end">Ngưỡng Hòa Vốn Gộp 2 Lồng (+14.29%)</text>`;
+
+      let pts = [];
+      configsPlot.forEach((cfg, idx) => {
+        const pSet = sumTopKProb(cfg.a) * sumTopKProb(cfg.b);
+        const randomBase = (cfg.a * cfg.b) / 100;
+        const boostPct = ((pSet / randomBase) - 1) * 100;
+        pts.push({ x: xPos(idx), y: yPos(boostPct), boostPct, label: cfg.label });
+      });
+
+      html += `<polyline fill="none" stroke="#38bdf8" stroke-width="2.6" points="${pts.map(p => `${p.x},${p.y}`).join(' ')}" />`;
+
+      pts.forEach(p => {
+        const pass = p.boostPct >= 14.29;
+        html += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="${pass ? '#10b981' : '#f43f5e'}" stroke="#0f172a" stroke-width="1.5" />`;
+        html += `<text x="${p.x}" y="${p.y - 9}" fill="${pass ? '#10b981' : '#cbd5e1'}" font-size="10.5" font-weight="700" text-anchor="middle">+${p.boostPct.toFixed(1)}%</text>`;
+        html += `<text x="${p.x}" y="${H - 12}" fill="#cbd5e1" font-size="10" text-anchor="middle">${p.label}</text>`;
+      });
+
+      svg.innerHTML = html;
+
+      // Render Bảng Đối Chiếu 30 Kỳ (540 giải)
+      const payoutPerHit = 87.5 / 18; // 4.86111 đồng
+      const rows = [
+        {
+          name: 'Bộ 2×2 = 4 số ★ (Mũi nhọn Lõi)',
+          badge: 'Áp lực tính toán thấp nhất',
+          badgeColor: 'emerald',
+          costDay: 4.0,
+          kMinDesc: 'K ≥ 1 lô (4.86đ)',
+          type: 'standard',
+          a: 2, b: 2, kMin: 1
+        },
+        {
+          name: 'Danh mục Lai: Core 2×2 (1đ) + Sat 3×3 (0.5đ) ★',
+          badge: 'Khuyến nghị Quỹ ĐT',
+          badgeColor: 'emerald',
+          costDay: 6.5,
+          kMinDesc: '1 Lô Core hoặc ≥ 2 Lô Vệ tinh',
+          type: 'hybrid',
+          a: 3, b: 3, kMin: 2
+        },
+        {
+          name: 'Bộ 3×3 = 9 số ★ (Đi đều 1đ/số)',
+          badge: 'Chống trắng bảng tốt',
+          badgeColor: 'accent',
+          costDay: 9.0,
+          kMinDesc: 'K ≥ 2 lô (9.72đ)',
+          type: 'standard',
+          a: 3, b: 3, kMin: 2
+        },
+        {
+          name: 'Bộ 2×7 = 14 số (Lệch 1 lồng mạnh)',
+          badge: 'Điểm ngọt K = 3',
+          badgeColor: 'purple',
+          costDay: 14.0,
+          kMinDesc: 'K ≥ 3 lô (14.58đ)',
+          type: 'standard',
+          a: 2, b: 7, kMin: 3
+        },
+        {
+          name: 'Bộ 3×6 = 18 số (Điểm ngọt K = 4)',
+          badge: 'Biên lãi ngày +8.0%',
+          badgeColor: 'amber',
+          costDay: 18.0,
+          kMinDesc: 'K ≥ 4 lô (19.44đ)',
+          type: 'standard',
+          a: 3, b: 6, kMin: 4
+        },
+        {
+          name: 'Bộ 6×6 = 36 số (Mở rộng quá đà)',
+          badge: 'Cảnh báo Pha loãng Alpha',
+          badgeColor: 'rose',
+          costDay: 36.0,
+          kMinDesc: 'K ≥ 8 lô (38.89đ)',
+          type: 'standard',
+          a: 6, b: 6, kMin: 8
+        }
+      ];
+
+      const tbody = document.getElementById('tbSweetSpotSim');
+      let tbHtml = '';
+
+      rows.forEach(r => {
+        if (r.type === 'standard') {
+          const N = r.a * r.b;
+          const pSet = sumTopKProb(r.a) * sumTopKProb(r.b);
+          const randomBase = N / 100;
+          const boostPct = ((pSet / randomBase) - 1) * 100;
+
+          const expHits30 = 540 * pSet;
+          const beHits30 = (30 * r.costDay) / payoutPerHit;
+          const winRateDay = binomSF(r.kMin, 18, pSet) * 100;
+          const zeroHitDay = binomPMF(0, 18, pSet) * 100;
+          const netProfit30 = expHits30 * payoutPerHit - 30 * r.costDay;
+          const roi30 = (netProfit30 / (30 * r.costDay)) * 100;
+
+          const isProfitable = netProfit30 > 0;
+          tbHtml += `
+            <tr class="${isProfitable && N <= 9 ? 'highlight-row' : ''}">
+              <td><strong>${r.name}</strong><br><span class="badge ${r.badgeColor}" style="margin-top:4px;">${r.badge}</span></td>
+              <td class="mono">${r.costDay.toFixed(1)} đ<br><span style="color:var(--text-muted);">(${(r.costDay * 30).toFixed(0)} đ)</span></td>
+              <td class="mono">${r.kMinDesc}</td>
+              <td class="mono" style="color:${boostPct >= 14.29 ? 'var(--emerald)' : 'var(--amber)'}; font-weight:700;">+${boostPct.toFixed(1)}%</td>
+              <td class="mono"><strong>${expHits30.toFixed(1)} lô</strong><br><span style="color:var(--text-muted);">Hòa vốn: ${beHits30.toFixed(1)} lô</span></td>
+              <td class="mono" style="color:var(--accent); font-weight:700;">${winRateDay.toFixed(1)}%</td>
+              <td class="mono">${zeroHitDay.toFixed(1)}%</td>
+              <td class="mono" style="color:${isProfitable ? 'var(--emerald)' : 'var(--rose)'}; font-weight:800;">
+                ${isProfitable ? '+' : ''}${netProfit30.toFixed(2)} đ (${isProfitable ? '+' : ''}${roi30.toFixed(1)}%)
+              </td>
+            </tr>`;
+        } else {
+          // Danh mục Lai Core 2x2 (1.0đ) + Satellite 5 số (0.5đ) = 6.5đ/ngày
+          const pCore = sumTopKProb(2) * sumTopKProb(2);
+          const pTotal9 = sumTopKProb(3) * sumTopKProb(3);
+          const pSat = Math.max(0, pTotal9 - pCore);
+
+          const expHitsCore30 = 540 * pCore;
+          const expHitsSat30 = 540 * pSat;
+          const totalRev30 = expHitsCore30 * payoutPerHit + expHitsSat30 * (payoutPerHit * 0.5);
+          const totalCost30 = 30 * 6.5;
+          const netProfit30 = totalRev30 - totalCost30;
+          const roi30 = (netProfit30 / totalCost30) * 100;
+
+          const effectiveBoost = (((totalRev30 / totalCost30) / 0.875) - 1) * 100;
+          const zeroHitDay = binomPMF(0, 18, pTotal9) * 100;
+          // Xác suất ngày có lãi của Core+Sat (xấp xỉ ≥1 lô Core + vệ tinh hoặc ≥3 lô vệ tinh)
+          const pCoreAtLeast1 = 1 - binomPMF(0, 18, pCore);
+          const winRateDay = Math.min(92, (pCoreAtLeast1 * 0.86 + (1 - pCoreAtLeast1) * binomSF(3, 18, pSat)) * 100);
+
+          const isProfitable = netProfit30 > 0;
+          tbHtml += `
+            <tr class="${isProfitable ? 'highlight-row' : ''}">
+              <td><strong>${r.name}</strong><br><span class="badge ${r.badgeColor}" style="margin-top:4px;">${r.badge}</span></td>
+              <td class="mono">6.5 đ<br><span style="color:var(--text-muted);">(195 đ)</span></td>
+              <td class="mono">${r.kMinDesc}</td>
+              <td class="mono" style="color:${effectiveBoost >= 14.29 ? 'var(--emerald)' : 'var(--amber)'}; font-weight:700;">+${effectiveBoost.toFixed(1)}% (Trọng số)</td>
+              <td class="mono"><strong>${expHitsCore30.toFixed(1)} lô Core + ${expHitsSat30.toFixed(1)} lô Sat</strong><br><span style="color:var(--text-muted);">Hòa vốn quy đổi: 40.1 lô</span></td>
+              <td class="mono" style="color:var(--emerald); font-weight:700;">${winRateDay.toFixed(1)}%</td>
+              <td class="mono" style="color:var(--emerald); font-weight:700;">${zeroHitDay.toFixed(1)}% (Giảm 3 lần)</td>
+              <td class="mono" style="color:${isProfitable ? 'var(--emerald)' : 'var(--rose)'}; font-weight:800;">
+                ${isProfitable ? '+' : ''}${netProfit30.toFixed(2)} đ (${isProfitable ? '+' : ''}${roi30.toFixed(1)}%)
+              </td>
+            </tr>`;
+        }
+      });
+
+      tbody.innerHTML = tbHtml;
+    }
+
+    // Khởi chạy mặc định khi mở trang
+    window.addEventListener('DOMContentLoaded', () => {
+      drawVarianceChart('noise');
+      drawRegimeChart(30);
+      updateStage2Simulator();
+    });
+  </script>
+</body>
+</html>

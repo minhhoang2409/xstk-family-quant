@@ -238,7 +238,7 @@ class TestStage3ConstantsAndRegistry:
         assert BENCHMARK_INITIAL_BANKROLL_VND == 1_000_000
         assert BENCHMARK_STAKE_PER_NUMBER_VND == 18_000
         assert BENCHMARK_BASE_DAILY_COST_4NUM_VND == 72_000
-        assert BENCHMARK_PAYOUT_PER_HIT_VND == 87_500
+        assert BENCHMARK_PAYOUT_PER_HIT_VND == 99_500
         assert HOUSE_MONEY_MIN_BUFFER_DAYS == 2
         assert HOUSE_MONEY_MAX_SURPLUS_FRACTION == pytest.approx(0.50)
         assert SELECTIVE_ALPHA_JOINT_R1_MIN_PCT == pytest.approx(1.105)
@@ -516,12 +516,12 @@ class TestStage3SchemasAndAdversarialGates:
             actual_prizes_last2=_valid_18_prizes(),
             hit_count_k=1,
             hit_details=[HitDetailRecord(prize_index=10, prize_label="Giải Tư (5)", number="23")],
-            revenue_vnd=131_250,
-            net_profit_vnd=23_250,
-            bankroll_after_vnd=2_982_875,
-            house_money_after_vnd=1_982_875,
+            revenue_vnd=149_250,
+            net_profit_vnd=41_250,
+            bankroll_after_vnd=3_000_875,
+            house_money_after_vnd=2_000_875,
         )
-        assert entry.net_profit_vnd == 23_250
+        assert entry.net_profit_vnd == 41_250
 
         # Negative Mutation 1 (Todo Task 2 Manual Check):
         # multiplier=1.5 when house_money_before_vnd=50_000 (< 144_000) -> CapitalDisciplineError
@@ -610,7 +610,7 @@ class TestStage3SchemasAndAdversarialGates:
             house_money_surplus_vnd=500_000,
             benchmark_bet_vnd=108_000,
             stake_per_number_vnd=27_000,
-            payout_per_hit_vnd=131_250,
+            payout_per_hit_vnd=149_250,
             sample_allocations=_make_sample_allocations(1.5),
             sizing_rationale_vi="Đủ đệm lãi ròng >= 144.000đ, kích hoạt 1.5x.",
         )
@@ -1319,10 +1319,10 @@ class TestStage3ReconcileNegativeMutationsBatch1:
             actual_prizes_last2=prizes,
             hit_count_k=1,
             hit_details=[HitDetailRecord(prize_index=10, prize_label="Giải Tư (5)", number="23")],
-            revenue_vnd=87_500,
-            net_profit_vnd=15_500,
-            bankroll_after_vnd=1_015_500,
-            house_money_after_vnd=15_500,
+            revenue_vnd=99_500,
+            net_profit_vnd=27_500,
+            bankroll_after_vnd=1_027_500,
+            house_money_after_vnd=27_500,
         )
         with pytest.raises((CapitalDisciplineError, DataIntegrityError)):
             BenchmarkLedgerState(
@@ -1370,7 +1370,7 @@ class TestStage3ReconcileNegativeMutationsBatch1:
             house_money_surplus_vnd=500_000,
             benchmark_bet_vnd=108_000,
             stake_per_number_vnd=27_000,
-            payout_per_hit_vnd=131_250,
+            payout_per_hit_vnd=149_250,
             sample_allocations=_make_sample_allocations(1.5),
         )
         nlg = ExecutiveNLGContract(

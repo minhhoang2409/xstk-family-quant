@@ -2,22 +2,22 @@
   "schema_version": "3.0.0",
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
-  "payout_per_hit_vnd": 87500,
-  "current_bankroll_vnd": 3163500,
-  "house_money_surplus_vnd": 2163500,
-  "peak_bankroll_vnd": 3216750,
+  "payout_per_hit_vnd": 99500,
+  "current_bankroll_vnd": 5911500,
+  "house_money_surplus_vnd": 4911500,
+  "peak_bankroll_vnd": 5911500,
   "min_bankroll_vnd": 1000000,
-  "max_drawdown_vnd": 705125,
+  "max_drawdown_vnd": 416250,
   "total_tracked_days": 300,
   "played_days": 169,
   "rest_days": 131,
   "win_days": 110,
   "loss_days": 59,
   "total_cost_vnd": 17874000,
-  "total_revenue_vnd": 20037500,
-  "net_profit_vnd": 2163500,
+  "total_revenue_vnd": 22785500,
+  "net_profit_vnd": 4911500,
   "updated_at": "2026-10-27T05:00:00+07:00",
-  "sha256": "4f541124d4070125dcf7297b75dfedce773ec46f2aef4a3376e71f8c849933ac",
+  "sha256": "daf44536da04ea5ff01a1273954d33a86a083feb3f66b799a9b3ca5534f73006",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -66,10 +66,10 @@
           "number": "98"
         }
       ],
-      "revenue_vnd": 87500,
-      "net_profit_vnd": 15500,
-      "bankroll_after_vnd": 1015500,
-      "house_money_after_vnd": 15500
+      "revenue_vnd": 99500,
+      "net_profit_vnd": 27500,
+      "bankroll_after_vnd": 1027500,
+      "house_money_after_vnd": 27500
     },
     {
       "draw_date": "2026-01-02",
@@ -87,8 +87,8 @@
         "99"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 1015500,
-      "house_money_before_vnd": 15500,
+      "bankroll_before_vnd": 1027500,
+      "house_money_before_vnd": 27500,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "08",
@@ -128,10 +128,10 @@
           "number": "93"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 190500,
-      "bankroll_after_vnd": 1206000,
-      "house_money_after_vnd": 206000
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 226500,
+      "bankroll_after_vnd": 1254000,
+      "house_money_after_vnd": 254000
     },
     {
       "draw_date": "2026-01-03",
@@ -149,8 +149,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1206000,
-      "house_money_before_vnd": 206000,
+      "bankroll_before_vnd": 1254000,
+      "house_money_before_vnd": 254000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "24",
@@ -185,10 +185,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1360500,
-      "house_money_after_vnd": 360500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 1444500,
+      "house_money_after_vnd": 444500
     },
     {
       "draw_date": "2026-01-04",
@@ -206,8 +206,8 @@
         "59"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1360500,
-      "house_money_before_vnd": 360500,
+      "bankroll_before_vnd": 1444500,
+      "house_money_before_vnd": 444500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "81",
@@ -239,8 +239,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1360500,
-      "house_money_after_vnd": 360500
+      "bankroll_after_vnd": 1444500,
+      "house_money_after_vnd": 444500
     },
     {
       "draw_date": "2026-01-05",
@@ -258,8 +258,8 @@
         "43"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1360500,
-      "house_money_before_vnd": 360500,
+      "bankroll_before_vnd": 1444500,
+      "house_money_before_vnd": 444500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "59",
@@ -289,10 +289,10 @@
           "number": "33"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1383750,
-      "house_money_after_vnd": 383750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 1485750,
+      "house_money_after_vnd": 485750
     },
     {
       "draw_date": "2026-01-06",
@@ -310,8 +310,8 @@
         "98"
       ],
       "recommended_multiplier": 1.25,
-      "bankroll_before_vnd": 1383750,
-      "house_money_before_vnd": 383750,
+      "bankroll_before_vnd": 1485750,
+      "house_money_before_vnd": 485750,
       "cost_vnd": 90000,
       "actual_prizes_last2": [
         "32",
@@ -341,10 +341,10 @@
           "number": "93"
         }
       ],
-      "revenue_vnd": 109375,
-      "net_profit_vnd": 19375,
-      "bankroll_after_vnd": 1403125,
-      "house_money_after_vnd": 403125
+      "revenue_vnd": 124375,
+      "net_profit_vnd": 34375,
+      "bankroll_after_vnd": 1520125,
+      "house_money_after_vnd": 520125
     },
     {
       "draw_date": "2026-01-07",
@@ -362,8 +362,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1403125,
-      "house_money_before_vnd": 403125,
+      "bankroll_before_vnd": 1520125,
+      "house_money_before_vnd": 520125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "01",
@@ -389,8 +389,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1403125,
-      "house_money_after_vnd": 403125
+      "bankroll_after_vnd": 1520125,
+      "house_money_after_vnd": 520125
     },
     {
       "draw_date": "2026-01-08",
@@ -408,8 +408,8 @@
         "48"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1403125,
-      "house_money_before_vnd": 403125,
+      "bankroll_before_vnd": 1520125,
+      "house_money_before_vnd": 520125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "13",
@@ -439,10 +439,10 @@
           "number": "17"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1426375,
-      "house_money_after_vnd": 426375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 1561375,
+      "house_money_after_vnd": 561375
     },
     {
       "draw_date": "2026-01-09",
@@ -460,8 +460,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1426375,
-      "house_money_before_vnd": 426375,
+      "bankroll_before_vnd": 1561375,
+      "house_money_before_vnd": 561375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "26",
@@ -491,10 +491,10 @@
           "number": "92"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1449625,
-      "house_money_after_vnd": 449625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 1602625,
+      "house_money_after_vnd": 602625
     },
     {
       "draw_date": "2026-01-10",
@@ -512,8 +512,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1449625,
-      "house_money_before_vnd": 449625,
+      "bankroll_before_vnd": 1602625,
+      "house_money_before_vnd": 602625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "08",
@@ -558,10 +558,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 525000,
-      "net_profit_vnd": 417000,
-      "bankroll_after_vnd": 1866625,
-      "house_money_after_vnd": 866625
+      "revenue_vnd": 597000,
+      "net_profit_vnd": 489000,
+      "bankroll_after_vnd": 2091625,
+      "house_money_after_vnd": 1091625
     },
     {
       "draw_date": "2026-01-11",
@@ -579,8 +579,8 @@
         "59"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1866625,
-      "house_money_before_vnd": 866625,
+      "bankroll_before_vnd": 2091625,
+      "house_money_before_vnd": 1091625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "25",
@@ -612,8 +612,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1866625,
-      "house_money_after_vnd": 866625
+      "bankroll_after_vnd": 2091625,
+      "house_money_after_vnd": 1091625
     },
     {
       "draw_date": "2026-01-12",
@@ -631,8 +631,8 @@
         "33"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1866625,
-      "house_money_before_vnd": 866625,
+      "bankroll_before_vnd": 2091625,
+      "house_money_before_vnd": 1091625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "06",
@@ -662,10 +662,10 @@
           "number": "13"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1889875,
-      "house_money_after_vnd": 889875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2132875,
+      "house_money_after_vnd": 1132875
     },
     {
       "draw_date": "2026-01-13",
@@ -683,8 +683,8 @@
         "98"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1889875,
-      "house_money_before_vnd": 889875,
+      "bankroll_before_vnd": 2132875,
+      "house_money_before_vnd": 1132875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "57",
@@ -716,8 +716,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1889875,
-      "house_money_after_vnd": 889875
+      "bankroll_after_vnd": 2132875,
+      "house_money_after_vnd": 1132875
     },
     {
       "draw_date": "2026-01-14",
@@ -735,8 +735,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1889875,
-      "house_money_before_vnd": 889875,
+      "bankroll_before_vnd": 2132875,
+      "house_money_before_vnd": 1132875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "66",
@@ -762,8 +762,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1889875,
-      "house_money_after_vnd": 889875
+      "bankroll_after_vnd": 2132875,
+      "house_money_after_vnd": 1132875
     },
     {
       "draw_date": "2026-01-15",
@@ -781,8 +781,8 @@
         "48"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1889875,
-      "house_money_before_vnd": 889875,
+      "bankroll_before_vnd": 2132875,
+      "house_money_before_vnd": 1132875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "89",
@@ -808,8 +808,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1781875,
-      "house_money_after_vnd": 781875
+      "bankroll_after_vnd": 2024875,
+      "house_money_after_vnd": 1024875
     },
     {
       "draw_date": "2026-01-16",
@@ -827,8 +827,8 @@
         "92"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1781875,
-      "house_money_before_vnd": 781875,
+      "bankroll_before_vnd": 2024875,
+      "house_money_before_vnd": 1024875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "21",
@@ -854,8 +854,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1673875,
-      "house_money_after_vnd": 673875
+      "bankroll_after_vnd": 1916875,
+      "house_money_after_vnd": 916875
     },
     {
       "draw_date": "2026-01-17",
@@ -873,8 +873,8 @@
         "88"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1673875,
-      "house_money_before_vnd": 673875,
+      "bankroll_before_vnd": 1916875,
+      "house_money_before_vnd": 916875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "30",
@@ -906,8 +906,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1673875,
-      "house_money_after_vnd": 673875
+      "bankroll_after_vnd": 1916875,
+      "house_money_after_vnd": 916875
     },
     {
       "draw_date": "2026-01-18",
@@ -925,8 +925,8 @@
         "75"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1673875,
-      "house_money_before_vnd": 673875,
+      "bankroll_before_vnd": 1916875,
+      "house_money_before_vnd": 916875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "25",
@@ -958,8 +958,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1673875,
-      "house_money_after_vnd": 673875
+      "bankroll_after_vnd": 1916875,
+      "house_money_after_vnd": 916875
     },
     {
       "draw_date": "2026-01-19",
@@ -977,8 +977,8 @@
         "19"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1673875,
-      "house_money_before_vnd": 673875,
+      "bankroll_before_vnd": 1916875,
+      "house_money_before_vnd": 916875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "15",
@@ -1008,10 +1008,10 @@
           "number": "18"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1697125,
-      "house_money_after_vnd": 697125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 1958125,
+      "house_money_after_vnd": 958125
     },
     {
       "draw_date": "2026-01-20",
@@ -1029,8 +1029,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1697125,
-      "house_money_before_vnd": 697125,
+      "bankroll_before_vnd": 1958125,
+      "house_money_before_vnd": 958125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "85",
@@ -1062,8 +1062,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1697125,
-      "house_money_after_vnd": 697125
+      "bankroll_after_vnd": 1958125,
+      "house_money_after_vnd": 958125
     },
     {
       "draw_date": "2026-01-21",
@@ -1081,8 +1081,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1697125,
-      "house_money_before_vnd": 697125,
+      "bankroll_before_vnd": 1958125,
+      "house_money_before_vnd": 958125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "21",
@@ -1124,8 +1124,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1697125,
-      "house_money_after_vnd": 697125
+      "bankroll_after_vnd": 1958125,
+      "house_money_after_vnd": 958125
     },
     {
       "draw_date": "2026-01-22",
@@ -1143,8 +1143,8 @@
         "88"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1697125,
-      "house_money_before_vnd": 697125,
+      "bankroll_before_vnd": 1958125,
+      "house_money_before_vnd": 958125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "54",
@@ -1170,8 +1170,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1697125,
-      "house_money_after_vnd": 697125
+      "bankroll_after_vnd": 1958125,
+      "house_money_after_vnd": 958125
     },
     {
       "draw_date": "2026-01-23",
@@ -1189,8 +1189,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1697125,
-      "house_money_before_vnd": 697125,
+      "bankroll_before_vnd": 1958125,
+      "house_money_before_vnd": 958125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "59",
@@ -1220,10 +1220,10 @@
           "number": "93"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1720375,
-      "house_money_after_vnd": 720375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 1999375,
+      "house_money_after_vnd": 999375
     },
     {
       "draw_date": "2026-01-24",
@@ -1241,8 +1241,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1720375,
-      "house_money_before_vnd": 720375,
+      "bankroll_before_vnd": 1999375,
+      "house_money_before_vnd": 999375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "22",
@@ -1272,10 +1272,10 @@
           "number": "33"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1743625,
-      "house_money_after_vnd": 743625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2040625,
+      "house_money_after_vnd": 1040625
     },
     {
       "draw_date": "2026-01-25",
@@ -1293,8 +1293,8 @@
         "59"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1743625,
-      "house_money_before_vnd": 743625,
+      "bankroll_before_vnd": 2040625,
+      "house_money_before_vnd": 1040625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "23",
@@ -1320,8 +1320,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1743625,
-      "house_money_after_vnd": 743625
+      "bankroll_after_vnd": 2040625,
+      "house_money_after_vnd": 1040625
     },
     {
       "draw_date": "2026-01-26",
@@ -1339,8 +1339,8 @@
         "33"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1743625,
-      "house_money_before_vnd": 743625,
+      "bankroll_before_vnd": 2040625,
+      "house_money_before_vnd": 1040625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "68",
@@ -1366,8 +1366,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1635625,
-      "house_money_after_vnd": 635625
+      "bankroll_after_vnd": 1932625,
+      "house_money_after_vnd": 932625
     },
     {
       "draw_date": "2026-01-27",
@@ -1385,8 +1385,8 @@
         "98"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1635625,
-      "house_money_before_vnd": 635625,
+      "bankroll_before_vnd": 1932625,
+      "house_money_before_vnd": 932625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "92",
@@ -1418,8 +1418,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1635625,
-      "house_money_after_vnd": 635625
+      "bankroll_after_vnd": 1932625,
+      "house_money_after_vnd": 932625
     },
     {
       "draw_date": "2026-01-28",
@@ -1437,8 +1437,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1635625,
-      "house_money_before_vnd": 635625,
+      "bankroll_before_vnd": 1932625,
+      "house_money_before_vnd": 932625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "04",
@@ -1464,8 +1464,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1635625,
-      "house_money_after_vnd": 635625
+      "bankroll_after_vnd": 1932625,
+      "house_money_after_vnd": 932625
     },
     {
       "draw_date": "2026-01-29",
@@ -1483,8 +1483,8 @@
         "88"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1635625,
-      "house_money_before_vnd": 635625,
+      "bankroll_before_vnd": 1932625,
+      "house_money_before_vnd": 932625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "28",
@@ -1516,8 +1516,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1635625,
-      "house_money_after_vnd": 635625
+      "bankroll_after_vnd": 1932625,
+      "house_money_after_vnd": 932625
     },
     {
       "draw_date": "2026-01-30",
@@ -1535,8 +1535,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1635625,
-      "house_money_before_vnd": 635625,
+      "bankroll_before_vnd": 1932625,
+      "house_money_before_vnd": 932625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "22",
@@ -1562,8 +1562,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1527625,
-      "house_money_after_vnd": 527625
+      "bankroll_after_vnd": 1824625,
+      "house_money_after_vnd": 824625
     },
     {
       "draw_date": "2026-01-31",
@@ -1581,8 +1581,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1527625,
-      "house_money_before_vnd": 527625,
+      "bankroll_before_vnd": 1824625,
+      "house_money_before_vnd": 824625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "51",
@@ -1608,8 +1608,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1419625,
-      "house_money_after_vnd": 419625
+      "bankroll_after_vnd": 1716625,
+      "house_money_after_vnd": 716625
     },
     {
       "draw_date": "2026-02-01",
@@ -1627,8 +1627,8 @@
         "49"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1419625,
-      "house_money_before_vnd": 419625,
+      "bankroll_before_vnd": 1716625,
+      "house_money_before_vnd": 716625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "85",
@@ -1654,8 +1654,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1419625,
-      "house_money_after_vnd": 419625
+      "bankroll_after_vnd": 1716625,
+      "house_money_after_vnd": 716625
     },
     {
       "draw_date": "2026-02-02",
@@ -1673,8 +1673,8 @@
         "38"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1419625,
-      "house_money_before_vnd": 419625,
+      "bankroll_before_vnd": 1716625,
+      "house_money_before_vnd": 716625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "46",
@@ -1709,10 +1709,10 @@
           "number": "33"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1574125,
-      "house_money_after_vnd": 574125
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 1907125,
+      "house_money_after_vnd": 907125
     },
     {
       "draw_date": "2026-02-03",
@@ -1730,8 +1730,8 @@
         "98"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1574125,
-      "house_money_before_vnd": 574125,
+      "bankroll_before_vnd": 1907125,
+      "house_money_before_vnd": 907125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "75",
@@ -1757,8 +1757,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1574125,
-      "house_money_after_vnd": 574125
+      "bankroll_after_vnd": 1907125,
+      "house_money_after_vnd": 907125
     },
     {
       "draw_date": "2026-02-04",
@@ -1776,8 +1776,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1574125,
-      "house_money_before_vnd": 574125,
+      "bankroll_before_vnd": 1907125,
+      "house_money_before_vnd": 907125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "76",
@@ -1803,8 +1803,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1574125,
-      "house_money_after_vnd": 574125
+      "bankroll_after_vnd": 1907125,
+      "house_money_after_vnd": 907125
     },
     {
       "draw_date": "2026-02-05",
@@ -1822,8 +1822,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1574125,
-      "house_money_before_vnd": 574125,
+      "bankroll_before_vnd": 1907125,
+      "house_money_before_vnd": 907125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "06",
@@ -1858,10 +1858,10 @@
           "number": "86"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1728625,
-      "house_money_after_vnd": 728625
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 2097625,
+      "house_money_after_vnd": 1097625
     },
     {
       "draw_date": "2026-02-06",
@@ -1879,8 +1879,8 @@
         "29"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1728625,
-      "house_money_before_vnd": 728625,
+      "bankroll_before_vnd": 2097625,
+      "house_money_before_vnd": 1097625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "05",
@@ -1910,10 +1910,10 @@
           "number": "22"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1751875,
-      "house_money_after_vnd": 751875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2138875,
+      "house_money_after_vnd": 1138875
     },
     {
       "draw_date": "2026-02-07",
@@ -1931,8 +1931,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1751875,
-      "house_money_before_vnd": 751875,
+      "bankroll_before_vnd": 2138875,
+      "house_money_before_vnd": 1138875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "24",
@@ -1958,8 +1958,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1643875,
-      "house_money_after_vnd": 643875
+      "bankroll_after_vnd": 2030875,
+      "house_money_after_vnd": 1030875
     },
     {
       "draw_date": "2026-02-08",
@@ -1977,8 +1977,8 @@
         "49"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1643875,
-      "house_money_before_vnd": 643875,
+      "bankroll_before_vnd": 2030875,
+      "house_money_before_vnd": 1030875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "37",
@@ -2004,8 +2004,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1643875,
-      "house_money_after_vnd": 643875
+      "bankroll_after_vnd": 2030875,
+      "house_money_after_vnd": 1030875
     },
     {
       "draw_date": "2026-02-09",
@@ -2023,8 +2023,8 @@
         "38"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1643875,
-      "house_money_before_vnd": 643875,
+      "bankroll_before_vnd": 2030875,
+      "house_money_before_vnd": 1030875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "53",
@@ -2050,8 +2050,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1535875,
-      "house_money_after_vnd": 535875
+      "bankroll_after_vnd": 1922875,
+      "house_money_after_vnd": 922875
     },
     {
       "draw_date": "2026-02-10",
@@ -2069,8 +2069,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1535875,
-      "house_money_before_vnd": 535875,
+      "bankroll_before_vnd": 1922875,
+      "house_money_before_vnd": 922875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "11",
@@ -2102,8 +2102,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1535875,
-      "house_money_after_vnd": 535875
+      "bankroll_after_vnd": 1922875,
+      "house_money_after_vnd": 922875
     },
     {
       "draw_date": "2026-02-11",
@@ -2121,8 +2121,8 @@
         "79"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1535875,
-      "house_money_before_vnd": 535875,
+      "bankroll_before_vnd": 1922875,
+      "house_money_before_vnd": 922875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "92",
@@ -2148,8 +2148,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1535875,
-      "house_money_after_vnd": 535875
+      "bankroll_after_vnd": 1922875,
+      "house_money_after_vnd": 922875
     },
     {
       "draw_date": "2026-02-12",
@@ -2167,8 +2167,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1535875,
-      "house_money_before_vnd": 535875,
+      "bankroll_before_vnd": 1922875,
+      "house_money_before_vnd": 922875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "12",
@@ -2194,8 +2194,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1427875,
-      "house_money_after_vnd": 427875
+      "bankroll_after_vnd": 1814875,
+      "house_money_after_vnd": 814875
     },
     {
       "draw_date": "2026-02-13",
@@ -2213,8 +2213,8 @@
         "29"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1427875,
-      "house_money_before_vnd": 427875,
+      "bankroll_before_vnd": 1814875,
+      "house_money_before_vnd": 814875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "41",
@@ -2244,10 +2244,10 @@
           "number": "20"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1451125,
-      "house_money_after_vnd": 451125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 1856125,
+      "house_money_after_vnd": 856125
     },
     {
       "draw_date": "2026-02-14",
@@ -2265,8 +2265,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1451125,
-      "house_money_before_vnd": 451125,
+      "bankroll_before_vnd": 1856125,
+      "house_money_before_vnd": 856125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "17",
@@ -2301,10 +2301,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1605625,
-      "house_money_after_vnd": 605625
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 2046625,
+      "house_money_after_vnd": 1046625
     },
     {
       "draw_date": "2026-02-15",
@@ -2322,8 +2322,8 @@
         "38"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1605625,
-      "house_money_before_vnd": 605625,
+      "bankroll_before_vnd": 2046625,
+      "house_money_before_vnd": 1046625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "54",
@@ -2349,8 +2349,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1605625,
-      "house_money_after_vnd": 605625
+      "bankroll_after_vnd": 2046625,
+      "house_money_after_vnd": 1046625
     },
     {
       "draw_date": "2026-02-16",
@@ -2368,8 +2368,8 @@
         "39"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1605625,
-      "house_money_before_vnd": 605625,
+      "bankroll_before_vnd": 2046625,
+      "house_money_before_vnd": 1046625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "71",
@@ -2399,10 +2399,10 @@
           "number": "39"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1628875,
-      "house_money_after_vnd": 628875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2087875,
+      "house_money_after_vnd": 1087875
     },
     {
       "draw_date": "2026-02-17",
@@ -2420,8 +2420,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1628875,
-      "house_money_before_vnd": 628875,
+      "bankroll_before_vnd": 2087875,
+      "house_money_before_vnd": 1087875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "51",
@@ -2447,8 +2447,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1628875,
-      "house_money_after_vnd": 628875
+      "bankroll_after_vnd": 2087875,
+      "house_money_after_vnd": 1087875
     },
     {
       "draw_date": "2026-02-18",
@@ -2466,8 +2466,8 @@
         "79"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1628875,
-      "house_money_before_vnd": 628875,
+      "bankroll_before_vnd": 2087875,
+      "house_money_before_vnd": 1087875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "98",
@@ -2493,8 +2493,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1628875,
-      "house_money_after_vnd": 628875
+      "bankroll_after_vnd": 2087875,
+      "house_money_after_vnd": 1087875
     },
     {
       "draw_date": "2026-02-19",
@@ -2512,8 +2512,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1628875,
-      "house_money_before_vnd": 628875,
+      "bankroll_before_vnd": 2087875,
+      "house_money_before_vnd": 1087875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "19",
@@ -2543,10 +2543,10 @@
           "number": "84"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1652125,
-      "house_money_after_vnd": 652125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2129125,
+      "house_money_after_vnd": 1129125
     },
     {
       "draw_date": "2026-02-20",
@@ -2564,8 +2564,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1652125,
-      "house_money_before_vnd": 652125,
+      "bankroll_before_vnd": 2129125,
+      "house_money_before_vnd": 1129125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "59",
@@ -2591,8 +2591,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1544125,
-      "house_money_after_vnd": 544125
+      "bankroll_after_vnd": 2021125,
+      "house_money_after_vnd": 1021125
     },
     {
       "draw_date": "2026-02-21",
@@ -2610,8 +2610,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1544125,
-      "house_money_before_vnd": 544125,
+      "bankroll_before_vnd": 2021125,
+      "house_money_before_vnd": 1021125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "73",
@@ -2641,10 +2641,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1567375,
-      "house_money_after_vnd": 567375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2062375,
+      "house_money_after_vnd": 1062375
     },
     {
       "draw_date": "2026-02-22",
@@ -2662,8 +2662,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1567375,
-      "house_money_before_vnd": 567375,
+      "bankroll_before_vnd": 2062375,
+      "house_money_before_vnd": 1062375,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "66",
@@ -2689,8 +2689,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1567375,
-      "house_money_after_vnd": 567375
+      "bankroll_after_vnd": 2062375,
+      "house_money_after_vnd": 1062375
     },
     {
       "draw_date": "2026-02-23",
@@ -2708,8 +2708,8 @@
         "34"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1567375,
-      "house_money_before_vnd": 567375,
+      "bankroll_before_vnd": 2062375,
+      "house_money_before_vnd": 1062375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "63",
@@ -2735,8 +2735,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1459375,
-      "house_money_after_vnd": 459375
+      "bankroll_after_vnd": 1954375,
+      "house_money_after_vnd": 954375
     },
     {
       "draw_date": "2026-02-24",
@@ -2754,8 +2754,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1459375,
-      "house_money_before_vnd": 459375,
+      "bankroll_before_vnd": 1954375,
+      "house_money_before_vnd": 954375,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "79",
@@ -2802,8 +2802,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1459375,
-      "house_money_after_vnd": 459375
+      "bankroll_after_vnd": 1954375,
+      "house_money_after_vnd": 954375
     },
     {
       "draw_date": "2026-02-25",
@@ -2821,8 +2821,8 @@
         "77"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1459375,
-      "house_money_before_vnd": 459375,
+      "bankroll_before_vnd": 1954375,
+      "house_money_before_vnd": 954375,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "56",
@@ -2848,8 +2848,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1459375,
-      "house_money_after_vnd": 459375
+      "bankroll_after_vnd": 1954375,
+      "house_money_after_vnd": 954375
     },
     {
       "draw_date": "2026-02-26",
@@ -2867,8 +2867,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1459375,
-      "house_money_before_vnd": 459375,
+      "bankroll_before_vnd": 1954375,
+      "house_money_before_vnd": 954375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "61",
@@ -2908,10 +2908,10 @@
           "number": "14"
         }
       ],
-      "revenue_vnd": 393750,
-      "net_profit_vnd": 285750,
-      "bankroll_after_vnd": 1745125,
-      "house_money_after_vnd": 745125
+      "revenue_vnd": 447750,
+      "net_profit_vnd": 339750,
+      "bankroll_after_vnd": 2294125,
+      "house_money_after_vnd": 1294125
     },
     {
       "draw_date": "2026-02-27",
@@ -2929,8 +2929,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1745125,
-      "house_money_before_vnd": 745125,
+      "bankroll_before_vnd": 2294125,
+      "house_money_before_vnd": 1294125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "90",
@@ -2960,10 +2960,10 @@
           "number": "90"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1768375,
-      "house_money_after_vnd": 768375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2335375,
+      "house_money_after_vnd": 1335375
     },
     {
       "draw_date": "2026-02-28",
@@ -2981,8 +2981,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1768375,
-      "house_money_before_vnd": 768375,
+      "bankroll_before_vnd": 2335375,
+      "house_money_before_vnd": 1335375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "17",
@@ -3012,10 +3012,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1791625,
-      "house_money_after_vnd": 791625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2376625,
+      "house_money_after_vnd": 1376625
     },
     {
       "draw_date": "2026-03-01",
@@ -3033,8 +3033,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1791625,
-      "house_money_before_vnd": 791625,
+      "bankroll_before_vnd": 2376625,
+      "house_money_before_vnd": 1376625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "08",
@@ -3060,8 +3060,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1791625,
-      "house_money_after_vnd": 791625
+      "bankroll_after_vnd": 2376625,
+      "house_money_after_vnd": 1376625
     },
     {
       "draw_date": "2026-03-02",
@@ -3079,8 +3079,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1791625,
-      "house_money_before_vnd": 791625,
+      "bankroll_before_vnd": 2376625,
+      "house_money_before_vnd": 1376625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "94",
@@ -3106,8 +3106,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1683625,
-      "house_money_after_vnd": 683625
+      "bankroll_after_vnd": 2268625,
+      "house_money_after_vnd": 1268625
     },
     {
       "draw_date": "2026-03-03",
@@ -3125,8 +3125,8 @@
         "99"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 1683625,
-      "house_money_before_vnd": 683625,
+      "bankroll_before_vnd": 2268625,
+      "house_money_before_vnd": 1268625,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "80",
@@ -3152,8 +3152,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -72000,
-      "bankroll_after_vnd": 1611625,
-      "house_money_after_vnd": 611625
+      "bankroll_after_vnd": 2196625,
+      "house_money_after_vnd": 1196625
     },
     {
       "draw_date": "2026-03-04",
@@ -3171,8 +3171,8 @@
         "77"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1611625,
-      "house_money_before_vnd": 611625,
+      "bankroll_before_vnd": 2196625,
+      "house_money_before_vnd": 1196625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "96",
@@ -3198,8 +3198,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1611625,
-      "house_money_after_vnd": 611625
+      "bankroll_after_vnd": 2196625,
+      "house_money_after_vnd": 1196625
     },
     {
       "draw_date": "2026-03-05",
@@ -3217,8 +3217,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1611625,
-      "house_money_before_vnd": 611625,
+      "bankroll_before_vnd": 2196625,
+      "house_money_before_vnd": 1196625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "86",
@@ -3248,10 +3248,10 @@
           "number": "14"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1634875,
-      "house_money_after_vnd": 634875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2237875,
+      "house_money_after_vnd": 1237875
     },
     {
       "draw_date": "2026-03-06",
@@ -3269,8 +3269,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1634875,
-      "house_money_before_vnd": 634875,
+      "bankroll_before_vnd": 2237875,
+      "house_money_before_vnd": 1237875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "60",
@@ -3300,10 +3300,10 @@
           "number": "90"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1658125,
-      "house_money_after_vnd": 658125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2279125,
+      "house_money_after_vnd": 1279125
     },
     {
       "draw_date": "2026-03-07",
@@ -3321,8 +3321,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1658125,
-      "house_money_before_vnd": 658125,
+      "bankroll_before_vnd": 2279125,
+      "house_money_before_vnd": 1279125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "45",
@@ -3352,10 +3352,10 @@
           "number": "08"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1681375,
-      "house_money_after_vnd": 681375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2320375,
+      "house_money_after_vnd": 1320375
     },
     {
       "draw_date": "2026-03-08",
@@ -3373,8 +3373,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1681375,
-      "house_money_before_vnd": 681375,
+      "bankroll_before_vnd": 2320375,
+      "house_money_before_vnd": 1320375,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "50",
@@ -3411,8 +3411,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1681375,
-      "house_money_after_vnd": 681375
+      "bankroll_after_vnd": 2320375,
+      "house_money_after_vnd": 1320375
     },
     {
       "draw_date": "2026-03-09",
@@ -3430,8 +3430,8 @@
         "28"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1681375,
-      "house_money_before_vnd": 681375,
+      "bankroll_before_vnd": 2320375,
+      "house_money_before_vnd": 1320375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "70",
@@ -3457,8 +3457,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1573375,
-      "house_money_after_vnd": 573375
+      "bankroll_after_vnd": 2212375,
+      "house_money_after_vnd": 1212375
     },
     {
       "draw_date": "2026-03-10",
@@ -3476,8 +3476,8 @@
         "99"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 1573375,
-      "house_money_before_vnd": 573375,
+      "bankroll_before_vnd": 2212375,
+      "house_money_before_vnd": 1212375,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "74",
@@ -3503,8 +3503,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -72000,
-      "bankroll_after_vnd": 1501375,
-      "house_money_after_vnd": 501375
+      "bankroll_after_vnd": 2140375,
+      "house_money_after_vnd": 1140375
     },
     {
       "draw_date": "2026-03-11",
@@ -3522,8 +3522,8 @@
         "97"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1501375,
-      "house_money_before_vnd": 501375,
+      "bankroll_before_vnd": 2140375,
+      "house_money_before_vnd": 1140375,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "67",
@@ -3549,8 +3549,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1501375,
-      "house_money_after_vnd": 501375
+      "bankroll_after_vnd": 2140375,
+      "house_money_after_vnd": 1140375
     },
     {
       "draw_date": "2026-03-12",
@@ -3568,8 +3568,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1501375,
-      "house_money_before_vnd": 501375,
+      "bankroll_before_vnd": 2140375,
+      "house_money_before_vnd": 1140375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "66",
@@ -3604,10 +3604,10 @@
           "number": "18"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1655875,
-      "house_money_after_vnd": 655875
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 2330875,
+      "house_money_after_vnd": 1330875
     },
     {
       "draw_date": "2026-03-13",
@@ -3625,8 +3625,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1655875,
-      "house_money_before_vnd": 655875,
+      "bankroll_before_vnd": 2330875,
+      "house_money_before_vnd": 1330875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "48",
@@ -3666,10 +3666,10 @@
           "number": "95"
         }
       ],
-      "revenue_vnd": 393750,
-      "net_profit_vnd": 285750,
-      "bankroll_after_vnd": 1941625,
-      "house_money_after_vnd": 941625
+      "revenue_vnd": 447750,
+      "net_profit_vnd": 339750,
+      "bankroll_after_vnd": 2670625,
+      "house_money_after_vnd": 1670625
     },
     {
       "draw_date": "2026-03-14",
@@ -3687,8 +3687,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1941625,
-      "house_money_before_vnd": 941625,
+      "bankroll_before_vnd": 2670625,
+      "house_money_before_vnd": 1670625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "17",
@@ -3718,10 +3718,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1964875,
-      "house_money_after_vnd": 964875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2711875,
+      "house_money_after_vnd": 1711875
     },
     {
       "draw_date": "2026-03-15",
@@ -3739,8 +3739,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1964875,
-      "house_money_before_vnd": 964875,
+      "bankroll_before_vnd": 2711875,
+      "house_money_before_vnd": 1711875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "87",
@@ -3766,8 +3766,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1964875,
-      "house_money_after_vnd": 964875
+      "bankroll_after_vnd": 2711875,
+      "house_money_after_vnd": 1711875
     },
     {
       "draw_date": "2026-03-16",
@@ -3785,8 +3785,8 @@
         "38"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1964875,
-      "house_money_before_vnd": 964875,
+      "bankroll_before_vnd": 2711875,
+      "house_money_before_vnd": 1711875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "64",
@@ -3816,10 +3816,10 @@
           "number": "30"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1988125,
-      "house_money_after_vnd": 988125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2753125,
+      "house_money_after_vnd": 1753125
     },
     {
       "draw_date": "2026-03-17",
@@ -3837,8 +3837,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1988125,
-      "house_money_before_vnd": 988125,
+      "bankroll_before_vnd": 2753125,
+      "house_money_before_vnd": 1753125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "48",
@@ -3880,8 +3880,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1988125,
-      "house_money_after_vnd": 988125
+      "bankroll_after_vnd": 2753125,
+      "house_money_after_vnd": 1753125
     },
     {
       "draw_date": "2026-03-18",
@@ -3899,8 +3899,8 @@
         "59"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1988125,
-      "house_money_before_vnd": 988125,
+      "bankroll_before_vnd": 2753125,
+      "house_money_before_vnd": 1753125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "44",
@@ -3926,8 +3926,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1988125,
-      "house_money_after_vnd": 988125
+      "bankroll_after_vnd": 2753125,
+      "house_money_after_vnd": 1753125
     },
     {
       "draw_date": "2026-03-19",
@@ -3945,8 +3945,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1988125,
-      "house_money_before_vnd": 988125,
+      "bankroll_before_vnd": 2753125,
+      "house_money_before_vnd": 1753125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "17",
@@ -3972,8 +3972,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1880125,
-      "house_money_after_vnd": 880125
+      "bankroll_after_vnd": 2645125,
+      "house_money_after_vnd": 1645125
     },
     {
       "draw_date": "2026-03-20",
@@ -3991,8 +3991,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1880125,
-      "house_money_before_vnd": 880125,
+      "bankroll_before_vnd": 2645125,
+      "house_money_before_vnd": 1645125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "46",
@@ -4018,8 +4018,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1772125,
-      "house_money_after_vnd": 772125
+      "bankroll_after_vnd": 2537125,
+      "house_money_after_vnd": 1537125
     },
     {
       "draw_date": "2026-03-21",
@@ -4037,8 +4037,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1772125,
-      "house_money_before_vnd": 772125,
+      "bankroll_before_vnd": 2537125,
+      "house_money_before_vnd": 1537125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "99",
@@ -4068,10 +4068,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1795375,
-      "house_money_after_vnd": 795375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2578375,
+      "house_money_after_vnd": 1578375
     },
     {
       "draw_date": "2026-03-22",
@@ -4089,8 +4089,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1795375,
-      "house_money_before_vnd": 795375,
+      "bankroll_before_vnd": 2578375,
+      "house_money_before_vnd": 1578375,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "94",
@@ -4116,8 +4116,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1795375,
-      "house_money_after_vnd": 795375
+      "bankroll_after_vnd": 2578375,
+      "house_money_after_vnd": 1578375
     },
     {
       "draw_date": "2026-03-23",
@@ -4135,8 +4135,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1795375,
-      "house_money_before_vnd": 795375,
+      "bankroll_before_vnd": 2578375,
+      "house_money_before_vnd": 1578375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "05",
@@ -4166,10 +4166,10 @@
           "number": "89"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1818625,
-      "house_money_after_vnd": 818625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2619625,
+      "house_money_after_vnd": 1619625
     },
     {
       "draw_date": "2026-03-24",
@@ -4187,8 +4187,8 @@
         "99"
       ],
       "recommended_multiplier": 1.25,
-      "bankroll_before_vnd": 1818625,
-      "house_money_before_vnd": 818625,
+      "bankroll_before_vnd": 2619625,
+      "house_money_before_vnd": 1619625,
       "cost_vnd": 90000,
       "actual_prizes_last2": [
         "67",
@@ -4214,8 +4214,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -90000,
-      "bankroll_after_vnd": 1728625,
-      "house_money_after_vnd": 728625
+      "bankroll_after_vnd": 2529625,
+      "house_money_after_vnd": 1529625
     },
     {
       "draw_date": "2026-03-25",
@@ -4233,8 +4233,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1728625,
-      "house_money_before_vnd": 728625,
+      "bankroll_before_vnd": 2529625,
+      "house_money_before_vnd": 1529625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "38",
@@ -4266,8 +4266,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1728625,
-      "house_money_after_vnd": 728625
+      "bankroll_after_vnd": 2529625,
+      "house_money_after_vnd": 1529625
     },
     {
       "draw_date": "2026-03-26",
@@ -4285,8 +4285,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1728625,
-      "house_money_before_vnd": 728625,
+      "bankroll_before_vnd": 2529625,
+      "house_money_before_vnd": 1529625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "71",
@@ -4316,10 +4316,10 @@
           "number": "84"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1751875,
-      "house_money_after_vnd": 751875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2570875,
+      "house_money_after_vnd": 1570875
     },
     {
       "draw_date": "2026-03-27",
@@ -4337,8 +4337,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1751875,
-      "house_money_before_vnd": 751875,
+      "bankroll_before_vnd": 2570875,
+      "house_money_before_vnd": 1570875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "07",
@@ -4373,10 +4373,10 @@
           "number": "99"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1906375,
-      "house_money_after_vnd": 906375
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 2761375,
+      "house_money_after_vnd": 1761375
     },
     {
       "draw_date": "2026-03-28",
@@ -4394,8 +4394,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1906375,
-      "house_money_before_vnd": 906375,
+      "bankroll_before_vnd": 2761375,
+      "house_money_before_vnd": 1761375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "70",
@@ -4425,10 +4425,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1929625,
-      "house_money_after_vnd": 929625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 2802625,
+      "house_money_after_vnd": 1802625
     },
     {
       "draw_date": "2026-03-29",
@@ -4446,8 +4446,8 @@
         "39"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1929625,
-      "house_money_before_vnd": 929625,
+      "bankroll_before_vnd": 2802625,
+      "house_money_before_vnd": 1802625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "66",
@@ -4473,8 +4473,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1929625,
-      "house_money_after_vnd": 929625
+      "bankroll_after_vnd": 2802625,
+      "house_money_after_vnd": 1802625
     },
     {
       "draw_date": "2026-03-30",
@@ -4492,8 +4492,8 @@
         "18"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1929625,
-      "house_money_before_vnd": 929625,
+      "bankroll_before_vnd": 2802625,
+      "house_money_before_vnd": 1802625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "64",
@@ -4519,8 +4519,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1821625,
-      "house_money_after_vnd": 821625
+      "bankroll_after_vnd": 2694625,
+      "house_money_after_vnd": 1694625
     },
     {
       "draw_date": "2026-03-31",
@@ -4538,8 +4538,8 @@
         "99"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 1821625,
-      "house_money_before_vnd": 821625,
+      "bankroll_before_vnd": 2694625,
+      "house_money_before_vnd": 1694625,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "21",
@@ -4569,10 +4569,10 @@
           "number": "99"
         }
       ],
-      "revenue_vnd": 87500,
-      "net_profit_vnd": 15500,
-      "bankroll_after_vnd": 1837125,
-      "house_money_after_vnd": 837125
+      "revenue_vnd": 99500,
+      "net_profit_vnd": 27500,
+      "bankroll_after_vnd": 2722125,
+      "house_money_after_vnd": 1722125
     },
     {
       "draw_date": "2026-04-01",
@@ -4590,8 +4590,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1837125,
-      "house_money_before_vnd": 837125,
+      "bankroll_before_vnd": 2722125,
+      "house_money_before_vnd": 1722125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "15",
@@ -4623,8 +4623,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1837125,
-      "house_money_after_vnd": 837125
+      "bankroll_after_vnd": 2722125,
+      "house_money_after_vnd": 1722125
     },
     {
       "draw_date": "2026-04-02",
@@ -4642,8 +4642,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1837125,
-      "house_money_before_vnd": 837125,
+      "bankroll_before_vnd": 2722125,
+      "house_money_before_vnd": 1722125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "21",
@@ -4678,10 +4678,10 @@
           "number": "18"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 1991625,
-      "house_money_after_vnd": 991625
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 2912625,
+      "house_money_after_vnd": 1912625
     },
     {
       "draw_date": "2026-04-03",
@@ -4699,8 +4699,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1991625,
-      "house_money_before_vnd": 991625,
+      "bankroll_before_vnd": 2912625,
+      "house_money_before_vnd": 1912625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "69",
@@ -4735,10 +4735,10 @@
           "number": "95"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2146125,
-      "house_money_after_vnd": 1146125
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3103125,
+      "house_money_after_vnd": 2103125
     },
     {
       "draw_date": "2026-04-04",
@@ -4756,8 +4756,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2146125,
-      "house_money_before_vnd": 1146125,
+      "bankroll_before_vnd": 3103125,
+      "house_money_before_vnd": 2103125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "59",
@@ -4792,10 +4792,10 @@
           "number": "89"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2300625,
-      "house_money_after_vnd": 1300625
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3293625,
+      "house_money_after_vnd": 2293625
     },
     {
       "draw_date": "2026-04-05",
@@ -4813,8 +4813,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2300625,
-      "house_money_before_vnd": 1300625,
+      "bankroll_before_vnd": 3293625,
+      "house_money_before_vnd": 2293625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "70",
@@ -4840,8 +4840,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2300625,
-      "house_money_after_vnd": 1300625
+      "bankroll_after_vnd": 3293625,
+      "house_money_after_vnd": 2293625
     },
     {
       "draw_date": "2026-04-06",
@@ -4859,8 +4859,8 @@
         "19"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2300625,
-      "house_money_before_vnd": 1300625,
+      "bankroll_before_vnd": 3293625,
+      "house_money_before_vnd": 2293625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "83",
@@ -4886,8 +4886,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2192625,
-      "house_money_after_vnd": 1192625
+      "bankroll_after_vnd": 3185625,
+      "house_money_after_vnd": 2185625
     },
     {
       "draw_date": "2026-04-07",
@@ -4905,8 +4905,8 @@
         "99"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 2192625,
-      "house_money_before_vnd": 1192625,
+      "bankroll_before_vnd": 3185625,
+      "house_money_before_vnd": 2185625,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "73",
@@ -4932,8 +4932,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -72000,
-      "bankroll_after_vnd": 2120625,
-      "house_money_after_vnd": 1120625
+      "bankroll_after_vnd": 3113625,
+      "house_money_after_vnd": 2113625
     },
     {
       "draw_date": "2026-04-08",
@@ -4951,8 +4951,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2120625,
-      "house_money_before_vnd": 1120625,
+      "bankroll_before_vnd": 3113625,
+      "house_money_before_vnd": 2113625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "91",
@@ -4984,8 +4984,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2120625,
-      "house_money_after_vnd": 1120625
+      "bankroll_after_vnd": 3113625,
+      "house_money_after_vnd": 2113625
     },
     {
       "draw_date": "2026-04-09",
@@ -5003,8 +5003,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2120625,
-      "house_money_before_vnd": 1120625,
+      "bankroll_before_vnd": 3113625,
+      "house_money_before_vnd": 2113625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "16",
@@ -5034,10 +5034,10 @@
           "number": "84"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2143875,
-      "house_money_after_vnd": 1143875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3154875,
+      "house_money_after_vnd": 2154875
     },
     {
       "draw_date": "2026-04-10",
@@ -5055,8 +5055,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2143875,
-      "house_money_before_vnd": 1143875,
+      "bankroll_before_vnd": 3154875,
+      "house_money_before_vnd": 2154875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "66",
@@ -5086,10 +5086,10 @@
           "number": "95"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2167125,
-      "house_money_after_vnd": 1167125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3196125,
+      "house_money_after_vnd": 2196125
     },
     {
       "draw_date": "2026-04-11",
@@ -5107,8 +5107,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2167125,
-      "house_money_before_vnd": 1167125,
+      "bankroll_before_vnd": 3196125,
+      "house_money_before_vnd": 2196125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "31",
@@ -5134,8 +5134,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2059125,
-      "house_money_after_vnd": 1059125
+      "bankroll_after_vnd": 3088125,
+      "house_money_after_vnd": 2088125
     },
     {
       "draw_date": "2026-04-12",
@@ -5153,8 +5153,8 @@
         "66"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2059125,
-      "house_money_before_vnd": 1059125,
+      "bankroll_before_vnd": 3088125,
+      "house_money_before_vnd": 2088125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "03",
@@ -5186,8 +5186,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2059125,
-      "house_money_after_vnd": 1059125
+      "bankroll_after_vnd": 3088125,
+      "house_money_after_vnd": 2088125
     },
     {
       "draw_date": "2026-04-13",
@@ -5205,8 +5205,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2059125,
-      "house_money_before_vnd": 1059125,
+      "bankroll_before_vnd": 3088125,
+      "house_money_before_vnd": 2088125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "80",
@@ -5251,10 +5251,10 @@
           "number": "88"
         }
       ],
-      "revenue_vnd": 525000,
-      "net_profit_vnd": 417000,
-      "bankroll_after_vnd": 2476125,
-      "house_money_after_vnd": 1476125
+      "revenue_vnd": 597000,
+      "net_profit_vnd": 489000,
+      "bankroll_after_vnd": 3577125,
+      "house_money_after_vnd": 2577125
     },
     {
       "draw_date": "2026-04-14",
@@ -5272,8 +5272,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2476125,
-      "house_money_before_vnd": 1476125,
+      "bankroll_before_vnd": 3577125,
+      "house_money_before_vnd": 2577125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "13",
@@ -5299,8 +5299,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2476125,
-      "house_money_after_vnd": 1476125
+      "bankroll_after_vnd": 3577125,
+      "house_money_after_vnd": 2577125
     },
     {
       "draw_date": "2026-04-15",
@@ -5318,8 +5318,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2476125,
-      "house_money_before_vnd": 1476125,
+      "bankroll_before_vnd": 3577125,
+      "house_money_before_vnd": 2577125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "31",
@@ -5345,8 +5345,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2476125,
-      "house_money_after_vnd": 1476125
+      "bankroll_after_vnd": 3577125,
+      "house_money_after_vnd": 2577125
     },
     {
       "draw_date": "2026-04-16",
@@ -5364,8 +5364,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2476125,
-      "house_money_before_vnd": 1476125,
+      "bankroll_before_vnd": 3577125,
+      "house_money_before_vnd": 2577125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "30",
@@ -5391,8 +5391,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2368125,
-      "house_money_after_vnd": 1368125
+      "bankroll_after_vnd": 3469125,
+      "house_money_after_vnd": 2469125
     },
     {
       "draw_date": "2026-04-17",
@@ -5410,8 +5410,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2368125,
-      "house_money_before_vnd": 1368125,
+      "bankroll_before_vnd": 3469125,
+      "house_money_before_vnd": 2469125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "31",
@@ -5441,10 +5441,10 @@
           "number": "90"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2391375,
-      "house_money_after_vnd": 1391375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3510375,
+      "house_money_after_vnd": 2510375
     },
     {
       "draw_date": "2026-04-18",
@@ -5462,8 +5462,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2391375,
-      "house_money_before_vnd": 1391375,
+      "bankroll_before_vnd": 3510375,
+      "house_money_before_vnd": 2510375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "68",
@@ -5498,10 +5498,10 @@
           "number": "89"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2545875,
-      "house_money_after_vnd": 1545875
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3700875,
+      "house_money_after_vnd": 2700875
     },
     {
       "draw_date": "2026-04-19",
@@ -5519,8 +5519,8 @@
         "66"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2545875,
-      "house_money_before_vnd": 1545875,
+      "bankroll_before_vnd": 3700875,
+      "house_money_before_vnd": 2700875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "56",
@@ -5552,8 +5552,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2545875,
-      "house_money_after_vnd": 1545875
+      "bankroll_after_vnd": 3700875,
+      "house_money_after_vnd": 2700875
     },
     {
       "draw_date": "2026-04-20",
@@ -5571,8 +5571,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2545875,
-      "house_money_before_vnd": 1545875,
+      "bankroll_before_vnd": 3700875,
+      "house_money_before_vnd": 2700875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "42",
@@ -5602,10 +5602,10 @@
           "number": "88"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2569125,
-      "house_money_after_vnd": 1569125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3742125,
+      "house_money_after_vnd": 2742125
     },
     {
       "draw_date": "2026-04-21",
@@ -5623,8 +5623,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2569125,
-      "house_money_before_vnd": 1569125,
+      "bankroll_before_vnd": 3742125,
+      "house_money_before_vnd": 2742125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "04",
@@ -5650,8 +5650,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2569125,
-      "house_money_after_vnd": 1569125
+      "bankroll_after_vnd": 3742125,
+      "house_money_after_vnd": 2742125
     },
     {
       "draw_date": "2026-04-22",
@@ -5669,8 +5669,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2569125,
-      "house_money_before_vnd": 1569125,
+      "bankroll_before_vnd": 3742125,
+      "house_money_before_vnd": 2742125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "50",
@@ -5717,8 +5717,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2569125,
-      "house_money_after_vnd": 1569125
+      "bankroll_after_vnd": 3742125,
+      "house_money_after_vnd": 2742125
     },
     {
       "draw_date": "2026-04-23",
@@ -5736,8 +5736,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2569125,
-      "house_money_before_vnd": 1569125,
+      "bankroll_before_vnd": 3742125,
+      "house_money_before_vnd": 2742125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "25",
@@ -5763,8 +5763,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2461125,
-      "house_money_after_vnd": 1461125
+      "bankroll_after_vnd": 3634125,
+      "house_money_after_vnd": 2634125
     },
     {
       "draw_date": "2026-04-24",
@@ -5782,8 +5782,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2461125,
-      "house_money_before_vnd": 1461125,
+      "bankroll_before_vnd": 3634125,
+      "house_money_before_vnd": 2634125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "60",
@@ -5809,8 +5809,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2353125,
-      "house_money_after_vnd": 1353125
+      "bankroll_after_vnd": 3526125,
+      "house_money_after_vnd": 2526125
     },
     {
       "draw_date": "2026-04-25",
@@ -5828,8 +5828,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2353125,
-      "house_money_before_vnd": 1353125,
+      "bankroll_before_vnd": 3526125,
+      "house_money_before_vnd": 2526125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "12",
@@ -5864,10 +5864,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2507625,
-      "house_money_after_vnd": 1507625
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3716625,
+      "house_money_after_vnd": 2716625
     },
     {
       "draw_date": "2026-04-26",
@@ -5885,8 +5885,8 @@
         "64"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2507625,
-      "house_money_before_vnd": 1507625,
+      "bankroll_before_vnd": 3716625,
+      "house_money_before_vnd": 2716625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "74",
@@ -5918,8 +5918,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2507625,
-      "house_money_after_vnd": 1507625
+      "bankroll_after_vnd": 3716625,
+      "house_money_after_vnd": 2716625
     },
     {
       "draw_date": "2026-04-27",
@@ -5937,8 +5937,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2507625,
-      "house_money_before_vnd": 1507625,
+      "bankroll_before_vnd": 3716625,
+      "house_money_before_vnd": 2716625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "42",
@@ -5964,8 +5964,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2399625,
-      "house_money_after_vnd": 1399625
+      "bankroll_after_vnd": 3608625,
+      "house_money_after_vnd": 2608625
     },
     {
       "draw_date": "2026-04-28",
@@ -5983,8 +5983,8 @@
         "79"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2399625,
-      "house_money_before_vnd": 1399625,
+      "bankroll_before_vnd": 3608625,
+      "house_money_before_vnd": 2608625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "02",
@@ -6010,8 +6010,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2399625,
-      "house_money_after_vnd": 1399625
+      "bankroll_after_vnd": 3608625,
+      "house_money_after_vnd": 2608625
     },
     {
       "draw_date": "2026-04-29",
@@ -6029,8 +6029,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2399625,
-      "house_money_before_vnd": 1399625,
+      "bankroll_before_vnd": 3608625,
+      "house_money_before_vnd": 2608625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "86",
@@ -6062,8 +6062,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2399625,
-      "house_money_after_vnd": 1399625
+      "bankroll_after_vnd": 3608625,
+      "house_money_after_vnd": 2608625
     },
     {
       "draw_date": "2026-04-30",
@@ -6081,8 +6081,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2399625,
-      "house_money_before_vnd": 1399625,
+      "bankroll_before_vnd": 3608625,
+      "house_money_before_vnd": 2608625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "91",
@@ -6108,8 +6108,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2291625,
-      "house_money_after_vnd": 1291625
+      "bankroll_after_vnd": 3500625,
+      "house_money_after_vnd": 2500625
     },
     {
       "draw_date": "2026-05-01",
@@ -6127,8 +6127,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2291625,
-      "house_money_before_vnd": 1291625,
+      "bankroll_before_vnd": 3500625,
+      "house_money_before_vnd": 2500625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "23",
@@ -6154,8 +6154,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2183625,
-      "house_money_after_vnd": 1183625
+      "bankroll_after_vnd": 3392625,
+      "house_money_after_vnd": 2392625
     },
     {
       "draw_date": "2026-05-02",
@@ -6173,8 +6173,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2183625,
-      "house_money_before_vnd": 1183625,
+      "bankroll_before_vnd": 3392625,
+      "house_money_before_vnd": 2392625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "15",
@@ -6204,10 +6204,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2206875,
-      "house_money_after_vnd": 1206875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3433875,
+      "house_money_after_vnd": 2433875
     },
     {
       "draw_date": "2026-05-03",
@@ -6225,8 +6225,8 @@
         "56"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2206875,
-      "house_money_before_vnd": 1206875,
+      "bankroll_before_vnd": 3433875,
+      "house_money_before_vnd": 2433875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "08",
@@ -6252,8 +6252,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2206875,
-      "house_money_after_vnd": 1206875
+      "bankroll_after_vnd": 3433875,
+      "house_money_after_vnd": 2433875
     },
     {
       "draw_date": "2026-05-04",
@@ -6271,8 +6271,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2206875,
-      "house_money_before_vnd": 1206875,
+      "bankroll_before_vnd": 3433875,
+      "house_money_before_vnd": 2433875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "41",
@@ -6302,10 +6302,10 @@
           "number": "39"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2230125,
-      "house_money_after_vnd": 1230125
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3475125,
+      "house_money_after_vnd": 2475125
     },
     {
       "draw_date": "2026-05-05",
@@ -6323,8 +6323,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2230125,
-      "house_money_before_vnd": 1230125,
+      "bankroll_before_vnd": 3475125,
+      "house_money_before_vnd": 2475125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "89",
@@ -6366,8 +6366,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2230125,
-      "house_money_after_vnd": 1230125
+      "bankroll_after_vnd": 3475125,
+      "house_money_after_vnd": 2475125
     },
     {
       "draw_date": "2026-05-06",
@@ -6385,8 +6385,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2230125,
-      "house_money_before_vnd": 1230125,
+      "bankroll_before_vnd": 3475125,
+      "house_money_before_vnd": 2475125,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "94",
@@ -6418,8 +6418,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2230125,
-      "house_money_after_vnd": 1230125
+      "bankroll_after_vnd": 3475125,
+      "house_money_after_vnd": 2475125
     },
     {
       "draw_date": "2026-05-07",
@@ -6437,8 +6437,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2230125,
-      "house_money_before_vnd": 1230125,
+      "bankroll_before_vnd": 3475125,
+      "house_money_before_vnd": 2475125,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "79",
@@ -6468,10 +6468,10 @@
           "number": "84"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2253375,
-      "house_money_after_vnd": 1253375
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3516375,
+      "house_money_after_vnd": 2516375
     },
     {
       "draw_date": "2026-05-08",
@@ -6489,8 +6489,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2253375,
-      "house_money_before_vnd": 1253375,
+      "bankroll_before_vnd": 3516375,
+      "house_money_before_vnd": 2516375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "68",
@@ -6520,10 +6520,10 @@
           "number": "68"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2276625,
-      "house_money_after_vnd": 1276625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3557625,
+      "house_money_after_vnd": 2557625
     },
     {
       "draw_date": "2026-05-09",
@@ -6541,8 +6541,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2276625,
-      "house_money_before_vnd": 1276625,
+      "bankroll_before_vnd": 3557625,
+      "house_money_before_vnd": 2557625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "15",
@@ -6568,8 +6568,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2168625,
-      "house_money_after_vnd": 1168625
+      "bankroll_after_vnd": 3449625,
+      "house_money_after_vnd": 2449625
     },
     {
       "draw_date": "2026-05-10",
@@ -6587,8 +6587,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2168625,
-      "house_money_before_vnd": 1168625,
+      "bankroll_before_vnd": 3449625,
+      "house_money_before_vnd": 2449625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "39",
@@ -6614,8 +6614,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2168625,
-      "house_money_after_vnd": 1168625
+      "bankroll_after_vnd": 3449625,
+      "house_money_after_vnd": 2449625
     },
     {
       "draw_date": "2026-05-11",
@@ -6633,8 +6633,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2168625,
-      "house_money_before_vnd": 1168625,
+      "bankroll_before_vnd": 3449625,
+      "house_money_before_vnd": 2449625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "20",
@@ -6664,10 +6664,10 @@
           "number": "30"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2191875,
-      "house_money_after_vnd": 1191875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3490875,
+      "house_money_after_vnd": 2490875
     },
     {
       "draw_date": "2026-05-12",
@@ -6685,8 +6685,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2191875,
-      "house_money_before_vnd": 1191875,
+      "bankroll_before_vnd": 3490875,
+      "house_money_before_vnd": 2490875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "63",
@@ -6728,8 +6728,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2191875,
-      "house_money_after_vnd": 1191875
+      "bankroll_after_vnd": 3490875,
+      "house_money_after_vnd": 2490875
     },
     {
       "draw_date": "2026-05-13",
@@ -6747,8 +6747,8 @@
         "85"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2191875,
-      "house_money_before_vnd": 1191875,
+      "bankroll_before_vnd": 3490875,
+      "house_money_before_vnd": 2490875,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "35",
@@ -6780,8 +6780,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2191875,
-      "house_money_after_vnd": 1191875
+      "bankroll_after_vnd": 3490875,
+      "house_money_after_vnd": 2490875
     },
     {
       "draw_date": "2026-05-14",
@@ -6799,8 +6799,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2191875,
-      "house_money_before_vnd": 1191875,
+      "bankroll_before_vnd": 3490875,
+      "house_money_before_vnd": 2490875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "72",
@@ -6826,8 +6826,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2083875,
-      "house_money_after_vnd": 1083875
+      "bankroll_after_vnd": 3382875,
+      "house_money_after_vnd": 2382875
     },
     {
       "draw_date": "2026-05-15",
@@ -6845,8 +6845,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2083875,
-      "house_money_before_vnd": 1083875,
+      "bankroll_before_vnd": 3382875,
+      "house_money_before_vnd": 2382875,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "51",
@@ -6881,10 +6881,10 @@
           "number": "90"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2238375,
-      "house_money_after_vnd": 1238375
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3573375,
+      "house_money_after_vnd": 2573375
     },
     {
       "draw_date": "2026-05-16",
@@ -6902,8 +6902,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2238375,
-      "house_money_before_vnd": 1238375,
+      "bankroll_before_vnd": 3573375,
+      "house_money_before_vnd": 2573375,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "83",
@@ -6933,10 +6933,10 @@
           "number": "18"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2261625,
-      "house_money_after_vnd": 1261625
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3614625,
+      "house_money_after_vnd": 2614625
     },
     {
       "draw_date": "2026-05-17",
@@ -6954,8 +6954,8 @@
         "07"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2261625,
-      "house_money_before_vnd": 1261625,
+      "bankroll_before_vnd": 3614625,
+      "house_money_before_vnd": 2614625,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "74",
@@ -6987,8 +6987,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2261625,
-      "house_money_after_vnd": 1261625
+      "bankroll_after_vnd": 3614625,
+      "house_money_after_vnd": 2614625
     },
     {
       "draw_date": "2026-05-18",
@@ -7006,8 +7006,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2261625,
-      "house_money_before_vnd": 1261625,
+      "bankroll_before_vnd": 3614625,
+      "house_money_before_vnd": 2614625,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "76",
@@ -7037,10 +7037,10 @@
           "number": "88"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2284875,
-      "house_money_after_vnd": 1284875
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3655875,
+      "house_money_after_vnd": 2655875
     },
     {
       "draw_date": "2026-05-19",
@@ -7058,8 +7058,8 @@
         "89"
       ],
       "recommended_multiplier": 1.25,
-      "bankroll_before_vnd": 2284875,
-      "house_money_before_vnd": 1284875,
+      "bankroll_before_vnd": 3655875,
+      "house_money_before_vnd": 2655875,
       "cost_vnd": 90000,
       "actual_prizes_last2": [
         "34",
@@ -7089,10 +7089,10 @@
           "number": "89"
         }
       ],
-      "revenue_vnd": 109375,
-      "net_profit_vnd": 19375,
-      "bankroll_after_vnd": 2304250,
-      "house_money_after_vnd": 1304250
+      "revenue_vnd": 124375,
+      "net_profit_vnd": 34375,
+      "bankroll_after_vnd": 3690250,
+      "house_money_after_vnd": 2690250
     },
     {
       "draw_date": "2026-05-20",
@@ -7110,8 +7110,8 @@
         "45"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2304250,
-      "house_money_before_vnd": 1304250,
+      "bankroll_before_vnd": 3690250,
+      "house_money_before_vnd": 2690250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "94",
@@ -7143,8 +7143,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2304250,
-      "house_money_after_vnd": 1304250
+      "bankroll_after_vnd": 3690250,
+      "house_money_after_vnd": 2690250
     },
     {
       "draw_date": "2026-05-21",
@@ -7162,8 +7162,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2304250,
-      "house_money_before_vnd": 1304250,
+      "bankroll_before_vnd": 3690250,
+      "house_money_before_vnd": 2690250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "93",
@@ -7189,8 +7189,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2196250,
-      "house_money_after_vnd": 1196250
+      "bankroll_after_vnd": 3582250,
+      "house_money_after_vnd": 2582250
     },
     {
       "draw_date": "2026-05-22",
@@ -7208,8 +7208,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2196250,
-      "house_money_before_vnd": 1196250,
+      "bankroll_before_vnd": 3582250,
+      "house_money_before_vnd": 2582250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "85",
@@ -7244,10 +7244,10 @@
           "number": "95"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2350750,
-      "house_money_after_vnd": 1350750
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3772750,
+      "house_money_after_vnd": 2772750
     },
     {
       "draw_date": "2026-05-23",
@@ -7265,8 +7265,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2350750,
-      "house_money_before_vnd": 1350750,
+      "bankroll_before_vnd": 3772750,
+      "house_money_before_vnd": 2772750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "66",
@@ -7301,10 +7301,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2505250,
-      "house_money_after_vnd": 1505250
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3963250,
+      "house_money_after_vnd": 2963250
     },
     {
       "draw_date": "2026-05-24",
@@ -7322,8 +7322,8 @@
         "07"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2505250,
-      "house_money_before_vnd": 1505250,
+      "bankroll_before_vnd": 3963250,
+      "house_money_before_vnd": 2963250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "97",
@@ -7355,8 +7355,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2505250,
-      "house_money_after_vnd": 1505250
+      "bankroll_after_vnd": 3963250,
+      "house_money_after_vnd": 2963250
     },
     {
       "draw_date": "2026-05-25",
@@ -7374,8 +7374,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2505250,
-      "house_money_before_vnd": 1505250,
+      "bankroll_before_vnd": 3963250,
+      "house_money_before_vnd": 2963250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "72",
@@ -7401,8 +7401,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2397250,
-      "house_money_after_vnd": 1397250
+      "bankroll_after_vnd": 3855250,
+      "house_money_after_vnd": 2855250
     },
     {
       "draw_date": "2026-05-26",
@@ -7420,8 +7420,8 @@
         "69"
       ],
       "recommended_multiplier": 1.25,
-      "bankroll_before_vnd": 2397250,
-      "house_money_before_vnd": 1397250,
+      "bankroll_before_vnd": 3855250,
+      "house_money_before_vnd": 2855250,
       "cost_vnd": 90000,
       "actual_prizes_last2": [
         "13",
@@ -7447,8 +7447,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -90000,
-      "bankroll_after_vnd": 2307250,
-      "house_money_after_vnd": 1307250
+      "bankroll_after_vnd": 3765250,
+      "house_money_after_vnd": 2765250
     },
     {
       "draw_date": "2026-05-27",
@@ -7466,8 +7466,8 @@
         "45"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2307250,
-      "house_money_before_vnd": 1307250,
+      "bankroll_before_vnd": 3765250,
+      "house_money_before_vnd": 2765250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "94",
@@ -7509,8 +7509,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2307250,
-      "house_money_after_vnd": 1307250
+      "bankroll_after_vnd": 3765250,
+      "house_money_after_vnd": 2765250
     },
     {
       "draw_date": "2026-05-28",
@@ -7528,8 +7528,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2307250,
-      "house_money_before_vnd": 1307250,
+      "bankroll_before_vnd": 3765250,
+      "house_money_before_vnd": 2765250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "37",
@@ -7555,8 +7555,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2199250,
-      "house_money_after_vnd": 1199250
+      "bankroll_after_vnd": 3657250,
+      "house_money_after_vnd": 2657250
     },
     {
       "draw_date": "2026-05-29",
@@ -7574,8 +7574,8 @@
         "95"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2199250,
-      "house_money_before_vnd": 1199250,
+      "bankroll_before_vnd": 3657250,
+      "house_money_before_vnd": 2657250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "54",
@@ -7601,8 +7601,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2091250,
-      "house_money_after_vnd": 1091250
+      "bankroll_after_vnd": 3549250,
+      "house_money_after_vnd": 2549250
     },
     {
       "draw_date": "2026-05-30",
@@ -7620,8 +7620,8 @@
         "59"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2091250,
-      "house_money_before_vnd": 1091250,
+      "bankroll_before_vnd": 3549250,
+      "house_money_before_vnd": 2549250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "00",
@@ -7651,10 +7651,10 @@
           "number": "59"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2114500,
-      "house_money_after_vnd": 1114500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3590500,
+      "house_money_after_vnd": 2590500
     },
     {
       "draw_date": "2026-05-31",
@@ -7672,8 +7672,8 @@
         "98"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2114500,
-      "house_money_before_vnd": 1114500,
+      "bankroll_before_vnd": 3590500,
+      "house_money_before_vnd": 2590500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "92",
@@ -7705,8 +7705,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2114500,
-      "house_money_after_vnd": 1114500
+      "bankroll_after_vnd": 3590500,
+      "house_money_after_vnd": 2590500
     },
     {
       "draw_date": "2026-06-01",
@@ -7724,8 +7724,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2114500,
-      "house_money_before_vnd": 1114500,
+      "bankroll_before_vnd": 3590500,
+      "house_money_before_vnd": 2590500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "42",
@@ -7755,10 +7755,10 @@
           "number": "83"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2137750,
-      "house_money_after_vnd": 1137750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3631750,
+      "house_money_after_vnd": 2631750
     },
     {
       "draw_date": "2026-06-02",
@@ -7776,8 +7776,8 @@
         "69"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 2137750,
-      "house_money_before_vnd": 1137750,
+      "bankroll_before_vnd": 3631750,
+      "house_money_before_vnd": 2631750,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "26",
@@ -7803,8 +7803,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -72000,
-      "bankroll_after_vnd": 2065750,
-      "house_money_after_vnd": 1065750
+      "bankroll_after_vnd": 3559750,
+      "house_money_after_vnd": 2559750
     },
     {
       "draw_date": "2026-06-03",
@@ -7822,8 +7822,8 @@
         "45"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2065750,
-      "house_money_before_vnd": 1065750,
+      "bankroll_before_vnd": 3559750,
+      "house_money_before_vnd": 2559750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "48",
@@ -7849,8 +7849,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2065750,
-      "house_money_after_vnd": 1065750
+      "bankroll_after_vnd": 3559750,
+      "house_money_after_vnd": 2559750
     },
     {
       "draw_date": "2026-06-04",
@@ -7868,8 +7868,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2065750,
-      "house_money_before_vnd": 1065750,
+      "bankroll_before_vnd": 3559750,
+      "house_money_before_vnd": 2559750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "98",
@@ -7899,10 +7899,10 @@
           "number": "84"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2089000,
-      "house_money_after_vnd": 1089000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3601000,
+      "house_money_after_vnd": 2601000
     },
     {
       "draw_date": "2026-06-05",
@@ -7920,8 +7920,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2089000,
-      "house_money_before_vnd": 1089000,
+      "bankroll_before_vnd": 3601000,
+      "house_money_before_vnd": 2601000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "64",
@@ -7956,10 +7956,10 @@
           "number": "93"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2243500,
-      "house_money_after_vnd": 1243500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3791500,
+      "house_money_after_vnd": 2791500
     },
     {
       "draw_date": "2026-06-06",
@@ -7977,8 +7977,8 @@
         "55"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2243500,
-      "house_money_before_vnd": 1243500,
+      "bankroll_before_vnd": 3791500,
+      "house_money_before_vnd": 2791500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "97",
@@ -8013,10 +8013,10 @@
           "number": "55"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2398000,
-      "house_money_after_vnd": 1398000
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3982000,
+      "house_money_after_vnd": 2982000
     },
     {
       "draw_date": "2026-06-07",
@@ -8034,8 +8034,8 @@
         "96"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2398000,
-      "house_money_before_vnd": 1398000,
+      "bankroll_before_vnd": 3982000,
+      "house_money_before_vnd": 2982000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "89",
@@ -8061,8 +8061,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2398000,
-      "house_money_after_vnd": 1398000
+      "bankroll_after_vnd": 3982000,
+      "house_money_after_vnd": 2982000
     },
     {
       "draw_date": "2026-06-08",
@@ -8080,8 +8080,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2398000,
-      "house_money_before_vnd": 1398000,
+      "bankroll_before_vnd": 3982000,
+      "house_money_before_vnd": 2982000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "58",
@@ -8107,8 +8107,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2290000,
-      "house_money_after_vnd": 1290000
+      "bankroll_after_vnd": 3874000,
+      "house_money_after_vnd": 2874000
     },
     {
       "draw_date": "2026-06-09",
@@ -8126,8 +8126,8 @@
         "69"
       ],
       "recommended_multiplier": 1.0,
-      "bankroll_before_vnd": 2290000,
-      "house_money_before_vnd": 1290000,
+      "bankroll_before_vnd": 3874000,
+      "house_money_before_vnd": 2874000,
       "cost_vnd": 72000,
       "actual_prizes_last2": [
         "87",
@@ -8153,8 +8153,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -72000,
-      "bankroll_after_vnd": 2218000,
-      "house_money_after_vnd": 1218000
+      "bankroll_after_vnd": 3802000,
+      "house_money_after_vnd": 2802000
     },
     {
       "draw_date": "2026-06-10",
@@ -8172,8 +8172,8 @@
         "95"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2218000,
-      "house_money_before_vnd": 1218000,
+      "bankroll_before_vnd": 3802000,
+      "house_money_before_vnd": 2802000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "63",
@@ -8205,8 +8205,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2218000,
-      "house_money_after_vnd": 1218000
+      "bankroll_after_vnd": 3802000,
+      "house_money_after_vnd": 2802000
     },
     {
       "draw_date": "2026-06-11",
@@ -8224,8 +8224,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2218000,
-      "house_money_before_vnd": 1218000,
+      "bankroll_before_vnd": 3802000,
+      "house_money_before_vnd": 2802000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "66",
@@ -8255,10 +8255,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2241250,
-      "house_money_after_vnd": 1241250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3843250,
+      "house_money_after_vnd": 2843250
     },
     {
       "draw_date": "2026-06-12",
@@ -8276,8 +8276,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2241250,
-      "house_money_before_vnd": 1241250,
+      "bankroll_before_vnd": 3843250,
+      "house_money_before_vnd": 2843250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "90",
@@ -8307,10 +8307,10 @@
           "number": "90"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2264500,
-      "house_money_after_vnd": 1264500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3884500,
+      "house_money_after_vnd": 2884500
     },
     {
       "draw_date": "2026-06-13",
@@ -8328,8 +8328,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2264500,
-      "house_money_before_vnd": 1264500,
+      "bankroll_before_vnd": 3884500,
+      "house_money_before_vnd": 2884500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "72",
@@ -8355,8 +8355,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2156500,
-      "house_money_after_vnd": 1156500
+      "bankroll_after_vnd": 3776500,
+      "house_money_after_vnd": 2776500
     },
     {
       "draw_date": "2026-06-14",
@@ -8374,8 +8374,8 @@
         "96"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2156500,
-      "house_money_before_vnd": 1156500,
+      "bankroll_before_vnd": 3776500,
+      "house_money_before_vnd": 2776500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "62",
@@ -8407,8 +8407,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2156500,
-      "house_money_after_vnd": 1156500
+      "bankroll_after_vnd": 3776500,
+      "house_money_after_vnd": 2776500
     },
     {
       "draw_date": "2026-06-15",
@@ -8426,8 +8426,8 @@
         "39"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2156500,
-      "house_money_before_vnd": 1156500,
+      "bankroll_before_vnd": 3776500,
+      "house_money_before_vnd": 2776500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "92",
@@ -8457,10 +8457,10 @@
           "number": "33"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2179750,
-      "house_money_after_vnd": 1179750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3817750,
+      "house_money_after_vnd": 2817750
     },
     {
       "draw_date": "2026-06-16",
@@ -8478,8 +8478,8 @@
         "37"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2179750,
-      "house_money_before_vnd": 1179750,
+      "bankroll_before_vnd": 3817750,
+      "house_money_before_vnd": 2817750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "48",
@@ -8511,8 +8511,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2179750,
-      "house_money_after_vnd": 1179750
+      "bankroll_after_vnd": 3817750,
+      "house_money_after_vnd": 2817750
     },
     {
       "draw_date": "2026-06-17",
@@ -8530,8 +8530,8 @@
         "35"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2179750,
-      "house_money_before_vnd": 1179750,
+      "bankroll_before_vnd": 3817750,
+      "house_money_before_vnd": 2817750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "60",
@@ -8557,8 +8557,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2179750,
-      "house_money_after_vnd": 1179750
+      "bankroll_after_vnd": 3817750,
+      "house_money_after_vnd": 2817750
     },
     {
       "draw_date": "2026-06-18",
@@ -8576,8 +8576,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2179750,
-      "house_money_before_vnd": 1179750,
+      "bankroll_before_vnd": 3817750,
+      "house_money_before_vnd": 2817750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "85",
@@ -8607,10 +8607,10 @@
           "number": "54"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2203000,
-      "house_money_after_vnd": 1203000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3859000,
+      "house_money_after_vnd": 2859000
     },
     {
       "draw_date": "2026-06-19",
@@ -8628,8 +8628,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2203000,
-      "house_money_before_vnd": 1203000,
+      "bankroll_before_vnd": 3859000,
+      "house_money_before_vnd": 2859000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "46",
@@ -8655,8 +8655,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2095000,
-      "house_money_after_vnd": 1095000
+      "bankroll_after_vnd": 3751000,
+      "house_money_after_vnd": 2751000
     },
     {
       "draw_date": "2026-06-20",
@@ -8674,8 +8674,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2095000,
-      "house_money_before_vnd": 1095000,
+      "bankroll_before_vnd": 3751000,
+      "house_money_before_vnd": 2751000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "60",
@@ -8705,10 +8705,10 @@
           "number": "03"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2118250,
-      "house_money_after_vnd": 1118250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3792250,
+      "house_money_after_vnd": 2792250
     },
     {
       "draw_date": "2026-06-21",
@@ -8726,8 +8726,8 @@
         "96"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2118250,
-      "house_money_before_vnd": 1118250,
+      "bankroll_before_vnd": 3792250,
+      "house_money_before_vnd": 2792250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "74",
@@ -8764,8 +8764,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2118250,
-      "house_money_after_vnd": 1118250
+      "bankroll_after_vnd": 3792250,
+      "house_money_after_vnd": 2792250
     },
     {
       "draw_date": "2026-06-22",
@@ -8783,8 +8783,8 @@
         "38"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2118250,
-      "house_money_before_vnd": 1118250,
+      "bankroll_before_vnd": 3792250,
+      "house_money_before_vnd": 2792250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "70",
@@ -8810,8 +8810,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2010250,
-      "house_money_after_vnd": 1010250
+      "bankroll_after_vnd": 3684250,
+      "house_money_after_vnd": 2684250
     },
     {
       "draw_date": "2026-06-23",
@@ -8829,8 +8829,8 @@
         "87"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2010250,
-      "house_money_before_vnd": 1010250,
+      "bankroll_before_vnd": 3684250,
+      "house_money_before_vnd": 2684250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "42",
@@ -8856,8 +8856,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2010250,
-      "house_money_after_vnd": 1010250
+      "bankroll_after_vnd": 3684250,
+      "house_money_after_vnd": 2684250
     },
     {
       "draw_date": "2026-06-24",
@@ -8875,8 +8875,8 @@
         "45"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2010250,
-      "house_money_before_vnd": 1010250,
+      "bankroll_before_vnd": 3684250,
+      "house_money_before_vnd": 2684250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "57",
@@ -8902,8 +8902,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2010250,
-      "house_money_after_vnd": 1010250
+      "bankroll_after_vnd": 3684250,
+      "house_money_after_vnd": 2684250
     },
     {
       "draw_date": "2026-06-25",
@@ -8921,8 +8921,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2010250,
-      "house_money_before_vnd": 1010250,
+      "bankroll_before_vnd": 3684250,
+      "house_money_before_vnd": 2684250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "69",
@@ -8952,10 +8952,10 @@
           "number": "84"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2033500,
-      "house_money_after_vnd": 1033500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3725500,
+      "house_money_after_vnd": 2725500
     },
     {
       "draw_date": "2026-06-26",
@@ -8973,8 +8973,8 @@
         "96"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2033500,
-      "house_money_before_vnd": 1033500,
+      "bankroll_before_vnd": 3725500,
+      "house_money_before_vnd": 2725500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "19",
@@ -9004,10 +9004,10 @@
           "number": "13"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2056750,
-      "house_money_after_vnd": 1056750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3766750,
+      "house_money_after_vnd": 2766750
     },
     {
       "draw_date": "2026-06-27",
@@ -9025,8 +9025,8 @@
         "58"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2056750,
-      "house_money_before_vnd": 1056750,
+      "bankroll_before_vnd": 3766750,
+      "house_money_before_vnd": 2766750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "70",
@@ -9056,10 +9056,10 @@
           "number": "08"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2080000,
-      "house_money_after_vnd": 1080000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3808000,
+      "house_money_after_vnd": 2808000
     },
     {
       "draw_date": "2026-06-28",
@@ -9077,8 +9077,8 @@
         "26"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2080000,
-      "house_money_before_vnd": 1080000,
+      "bankroll_before_vnd": 3808000,
+      "house_money_before_vnd": 2808000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "31",
@@ -9104,8 +9104,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2080000,
-      "house_money_after_vnd": 1080000
+      "bankroll_after_vnd": 3808000,
+      "house_money_after_vnd": 2808000
     },
     {
       "draw_date": "2026-06-29",
@@ -9123,8 +9123,8 @@
         "49"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2080000,
-      "house_money_before_vnd": 1080000,
+      "bankroll_before_vnd": 3808000,
+      "house_money_before_vnd": 2808000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "46",
@@ -9150,8 +9150,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1972000,
-      "house_money_after_vnd": 972000
+      "bankroll_after_vnd": 3700000,
+      "house_money_after_vnd": 2700000
     },
     {
       "draw_date": "2026-06-30",
@@ -9169,8 +9169,8 @@
         "87"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1972000,
-      "house_money_before_vnd": 972000,
+      "bankroll_before_vnd": 3700000,
+      "house_money_before_vnd": 2700000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "35",
@@ -9207,8 +9207,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1972000,
-      "house_money_after_vnd": 972000
+      "bankroll_after_vnd": 3700000,
+      "house_money_after_vnd": 2700000
     },
     {
       "draw_date": "2026-07-01",
@@ -9226,8 +9226,8 @@
         "35"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1972000,
-      "house_money_before_vnd": 972000,
+      "bankroll_before_vnd": 3700000,
+      "house_money_before_vnd": 2700000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "40",
@@ -9259,8 +9259,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1972000,
-      "house_money_after_vnd": 972000
+      "bankroll_after_vnd": 3700000,
+      "house_money_after_vnd": 2700000
     },
     {
       "draw_date": "2026-07-02",
@@ -9278,8 +9278,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1972000,
-      "house_money_before_vnd": 972000,
+      "bankroll_before_vnd": 3700000,
+      "house_money_before_vnd": 2700000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "10",
@@ -9305,8 +9305,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1864000,
-      "house_money_after_vnd": 864000
+      "bankroll_after_vnd": 3592000,
+      "house_money_after_vnd": 2592000
     },
     {
       "draw_date": "2026-07-03",
@@ -9324,8 +9324,8 @@
         "96"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1864000,
-      "house_money_before_vnd": 864000,
+      "bankroll_before_vnd": 3592000,
+      "house_money_before_vnd": 2592000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "57",
@@ -9360,10 +9360,10 @@
           "number": "96"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2018500,
-      "house_money_after_vnd": 1018500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3782500,
+      "house_money_after_vnd": 2782500
     },
     {
       "draw_date": "2026-07-04",
@@ -9381,8 +9381,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2018500,
-      "house_money_before_vnd": 1018500,
+      "bankroll_before_vnd": 3782500,
+      "house_money_before_vnd": 2782500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "73",
@@ -9408,8 +9408,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1910500,
-      "house_money_after_vnd": 910500
+      "bankroll_after_vnd": 3674500,
+      "house_money_after_vnd": 2674500
     },
     {
       "draw_date": "2026-07-05",
@@ -9427,8 +9427,8 @@
         "16"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1910500,
-      "house_money_before_vnd": 910500,
+      "bankroll_before_vnd": 3674500,
+      "house_money_before_vnd": 2674500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "52",
@@ -9454,8 +9454,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1910500,
-      "house_money_after_vnd": 910500
+      "bankroll_after_vnd": 3674500,
+      "house_money_after_vnd": 2674500
     },
     {
       "draw_date": "2026-07-06",
@@ -9473,8 +9473,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1910500,
-      "house_money_before_vnd": 910500,
+      "bankroll_before_vnd": 3674500,
+      "house_money_before_vnd": 2674500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "61",
@@ -9511,8 +9511,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1910500,
-      "house_money_after_vnd": 910500
+      "bankroll_after_vnd": 3674500,
+      "house_money_after_vnd": 2674500
     },
     {
       "draw_date": "2026-07-07",
@@ -9530,8 +9530,8 @@
         "87"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1910500,
-      "house_money_before_vnd": 910500,
+      "bankroll_before_vnd": 3674500,
+      "house_money_before_vnd": 2674500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "36",
@@ -9563,8 +9563,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1910500,
-      "house_money_after_vnd": 910500
+      "bankroll_after_vnd": 3674500,
+      "house_money_after_vnd": 2674500
     },
     {
       "draw_date": "2026-07-08",
@@ -9582,8 +9582,8 @@
         "45"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1910500,
-      "house_money_before_vnd": 910500,
+      "bankroll_before_vnd": 3674500,
+      "house_money_before_vnd": 2674500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "68",
@@ -9615,8 +9615,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1910500,
-      "house_money_after_vnd": 910500
+      "bankroll_after_vnd": 3674500,
+      "house_money_after_vnd": 2674500
     },
     {
       "draw_date": "2026-07-09",
@@ -9634,8 +9634,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1910500,
-      "house_money_before_vnd": 910500,
+      "bankroll_before_vnd": 3674500,
+      "house_money_before_vnd": 2674500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "41",
@@ -9665,10 +9665,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1933750,
-      "house_money_after_vnd": 933750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3715750,
+      "house_money_after_vnd": 2715750
     },
     {
       "draw_date": "2026-07-10",
@@ -9686,8 +9686,8 @@
         "96"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1933750,
-      "house_money_before_vnd": 933750,
+      "bankroll_before_vnd": 3715750,
+      "house_money_before_vnd": 2715750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "95",
@@ -9717,10 +9717,10 @@
           "number": "46"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1957000,
-      "house_money_after_vnd": 957000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3757000,
+      "house_money_after_vnd": 2757000
     },
     {
       "draw_date": "2026-07-11",
@@ -9738,8 +9738,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1957000,
-      "house_money_before_vnd": 957000,
+      "bankroll_before_vnd": 3757000,
+      "house_money_before_vnd": 2757000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "96",
@@ -9774,10 +9774,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2111500,
-      "house_money_after_vnd": 1111500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 3947500,
+      "house_money_after_vnd": 2947500
     },
     {
       "draw_date": "2026-07-12",
@@ -9795,8 +9795,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2111500,
-      "house_money_before_vnd": 1111500,
+      "bankroll_before_vnd": 3947500,
+      "house_money_before_vnd": 2947500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "65",
@@ -9828,8 +9828,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2111500,
-      "house_money_after_vnd": 1111500
+      "bankroll_after_vnd": 3947500,
+      "house_money_after_vnd": 2947500
     },
     {
       "draw_date": "2026-07-13",
@@ -9847,8 +9847,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2111500,
-      "house_money_before_vnd": 1111500,
+      "bankroll_before_vnd": 3947500,
+      "house_money_before_vnd": 2947500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "42",
@@ -9874,8 +9874,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2003500,
-      "house_money_after_vnd": 1003500
+      "bankroll_after_vnd": 3839500,
+      "house_money_after_vnd": 2839500
     },
     {
       "draw_date": "2026-07-14",
@@ -9893,8 +9893,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2003500,
-      "house_money_before_vnd": 1003500,
+      "bankroll_before_vnd": 3839500,
+      "house_money_before_vnd": 2839500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "36",
@@ -9926,8 +9926,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2003500,
-      "house_money_after_vnd": 1003500
+      "bankroll_after_vnd": 3839500,
+      "house_money_after_vnd": 2839500
     },
     {
       "draw_date": "2026-07-15",
@@ -9945,8 +9945,8 @@
         "55"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2003500,
-      "house_money_before_vnd": 1003500,
+      "bankroll_before_vnd": 3839500,
+      "house_money_before_vnd": 2839500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "05",
@@ -9978,8 +9978,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2003500,
-      "house_money_after_vnd": 1003500
+      "bankroll_after_vnd": 3839500,
+      "house_money_after_vnd": 2839500
     },
     {
       "draw_date": "2026-07-16",
@@ -9997,8 +9997,8 @@
         "83"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2003500,
-      "house_money_before_vnd": 1003500,
+      "bankroll_before_vnd": 3839500,
+      "house_money_before_vnd": 2839500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "50",
@@ -10028,10 +10028,10 @@
           "number": "50"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2026750,
-      "house_money_after_vnd": 1026750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3880750,
+      "house_money_after_vnd": 2880750
     },
     {
       "draw_date": "2026-07-17",
@@ -10049,8 +10049,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2026750,
-      "house_money_before_vnd": 1026750,
+      "bankroll_before_vnd": 3880750,
+      "house_money_before_vnd": 2880750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "33",
@@ -10076,8 +10076,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1918750,
-      "house_money_after_vnd": 918750
+      "bankroll_after_vnd": 3772750,
+      "house_money_after_vnd": 2772750
     },
     {
       "draw_date": "2026-07-18",
@@ -10095,8 +10095,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1918750,
-      "house_money_before_vnd": 918750,
+      "bankroll_before_vnd": 3772750,
+      "house_money_before_vnd": 2772750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "11",
@@ -10126,10 +10126,10 @@
           "number": "68"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 1942000,
-      "house_money_after_vnd": 942000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 3814000,
+      "house_money_after_vnd": 2814000
     },
     {
       "draw_date": "2026-07-19",
@@ -10147,8 +10147,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 1942000,
-      "house_money_before_vnd": 942000,
+      "bankroll_before_vnd": 3814000,
+      "house_money_before_vnd": 2814000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "36",
@@ -10174,8 +10174,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 1942000,
-      "house_money_after_vnd": 942000
+      "bankroll_after_vnd": 3814000,
+      "house_money_after_vnd": 2814000
     },
     {
       "draw_date": "2026-07-20",
@@ -10193,8 +10193,8 @@
         "89"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1942000,
-      "house_money_before_vnd": 942000,
+      "bankroll_before_vnd": 3814000,
+      "house_money_before_vnd": 2814000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "88",
@@ -10229,10 +10229,10 @@
           "number": "83"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2096500,
-      "house_money_after_vnd": 1096500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 4004500,
+      "house_money_after_vnd": 3004500
     },
     {
       "draw_date": "2026-07-21",
@@ -10250,8 +10250,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2096500,
-      "house_money_before_vnd": 1096500,
+      "bankroll_before_vnd": 4004500,
+      "house_money_before_vnd": 3004500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "07",
@@ -10283,8 +10283,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2096500,
-      "house_money_after_vnd": 1096500
+      "bankroll_after_vnd": 4004500,
+      "house_money_after_vnd": 3004500
     },
     {
       "draw_date": "2026-07-22",
@@ -10302,8 +10302,8 @@
         "45"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2096500,
-      "house_money_before_vnd": 1096500,
+      "bankroll_before_vnd": 4004500,
+      "house_money_before_vnd": 3004500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "78",
@@ -10335,8 +10335,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2096500,
-      "house_money_after_vnd": 1096500
+      "bankroll_after_vnd": 4004500,
+      "house_money_after_vnd": 3004500
     },
     {
       "draw_date": "2026-07-23",
@@ -10354,8 +10354,8 @@
         "81"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2096500,
-      "house_money_before_vnd": 1096500,
+      "bankroll_before_vnd": 4004500,
+      "house_money_before_vnd": 3004500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "53",
@@ -10381,8 +10381,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 1988500,
-      "house_money_after_vnd": 988500
+      "bankroll_after_vnd": 3896500,
+      "house_money_after_vnd": 2896500
     },
     {
       "draw_date": "2026-07-24",
@@ -10400,8 +10400,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 1988500,
-      "house_money_before_vnd": 988500,
+      "bankroll_before_vnd": 3896500,
+      "house_money_before_vnd": 2896500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "64",
@@ -10441,10 +10441,10 @@
           "number": "96"
         }
       ],
-      "revenue_vnd": 393750,
-      "net_profit_vnd": 285750,
-      "bankroll_after_vnd": 2274250,
-      "house_money_after_vnd": 1274250
+      "revenue_vnd": 447750,
+      "net_profit_vnd": 339750,
+      "bankroll_after_vnd": 4236250,
+      "house_money_after_vnd": 3236250
     },
     {
       "draw_date": "2026-07-25",
@@ -10462,8 +10462,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2274250,
-      "house_money_before_vnd": 1274250,
+      "bankroll_before_vnd": 4236250,
+      "house_money_before_vnd": 3236250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "69",
@@ -10498,10 +10498,10 @@
           "number": "63"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2428750,
-      "house_money_after_vnd": 1428750
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 4426750,
+      "house_money_after_vnd": 3426750
     },
     {
       "draw_date": "2026-07-26",
@@ -10519,8 +10519,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2428750,
-      "house_money_before_vnd": 1428750,
+      "bankroll_before_vnd": 4426750,
+      "house_money_before_vnd": 3426750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "10",
@@ -10546,8 +10546,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2428750,
-      "house_money_after_vnd": 1428750
+      "bankroll_after_vnd": 4426750,
+      "house_money_after_vnd": 3426750
     },
     {
       "draw_date": "2026-07-27",
@@ -10565,8 +10565,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2428750,
-      "house_money_before_vnd": 1428750,
+      "bankroll_before_vnd": 4426750,
+      "house_money_before_vnd": 3426750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "77",
@@ -10596,10 +10596,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2452000,
-      "house_money_after_vnd": 1452000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4468000,
+      "house_money_after_vnd": 3468000
     },
     {
       "draw_date": "2026-07-28",
@@ -10617,8 +10617,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2452000,
-      "house_money_before_vnd": 1452000,
+      "bankroll_before_vnd": 4468000,
+      "house_money_before_vnd": 3468000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "81",
@@ -10644,8 +10644,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2452000,
-      "house_money_after_vnd": 1452000
+      "bankroll_after_vnd": 4468000,
+      "house_money_after_vnd": 3468000
     },
     {
       "draw_date": "2026-07-29",
@@ -10663,8 +10663,8 @@
         "65"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2452000,
-      "house_money_before_vnd": 1452000,
+      "bankroll_before_vnd": 4468000,
+      "house_money_before_vnd": 3468000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "17",
@@ -10701,8 +10701,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2452000,
-      "house_money_after_vnd": 1452000
+      "bankroll_after_vnd": 4468000,
+      "house_money_after_vnd": 3468000
     },
     {
       "draw_date": "2026-07-30",
@@ -10720,8 +10720,8 @@
         "81"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2452000,
-      "house_money_before_vnd": 1452000,
+      "bankroll_before_vnd": 4468000,
+      "house_money_before_vnd": 3468000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "28",
@@ -10761,10 +10761,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 393750,
-      "net_profit_vnd": 285750,
-      "bankroll_after_vnd": 2737750,
-      "house_money_after_vnd": 1737750
+      "revenue_vnd": 447750,
+      "net_profit_vnd": 339750,
+      "bankroll_after_vnd": 4807750,
+      "house_money_after_vnd": 3807750
     },
     {
       "draw_date": "2026-07-31",
@@ -10782,8 +10782,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2737750,
-      "house_money_before_vnd": 1737750,
+      "bankroll_before_vnd": 4807750,
+      "house_money_before_vnd": 3807750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "98",
@@ -10813,10 +10813,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2761000,
-      "house_money_after_vnd": 1761000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4849000,
+      "house_money_after_vnd": 3849000
     },
     {
       "draw_date": "2026-08-01",
@@ -10834,8 +10834,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2761000,
-      "house_money_before_vnd": 1761000,
+      "bankroll_before_vnd": 4849000,
+      "house_money_before_vnd": 3849000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "41",
@@ -10861,8 +10861,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2653000,
-      "house_money_after_vnd": 1653000
+      "bankroll_after_vnd": 4741000,
+      "house_money_after_vnd": 3741000
     },
     {
       "draw_date": "2026-08-02",
@@ -10880,8 +10880,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2653000,
-      "house_money_before_vnd": 1653000,
+      "bankroll_before_vnd": 4741000,
+      "house_money_before_vnd": 3741000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "98",
@@ -10907,8 +10907,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2653000,
-      "house_money_after_vnd": 1653000
+      "bankroll_after_vnd": 4741000,
+      "house_money_after_vnd": 3741000
     },
     {
       "draw_date": "2026-08-03",
@@ -10926,8 +10926,8 @@
         "88"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2653000,
-      "house_money_before_vnd": 1653000,
+      "bankroll_before_vnd": 4741000,
+      "house_money_before_vnd": 3741000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "30",
@@ -10957,10 +10957,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2676250,
-      "house_money_after_vnd": 1676250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4782250,
+      "house_money_after_vnd": 3782250
     },
     {
       "draw_date": "2026-08-04",
@@ -10978,8 +10978,8 @@
         "82"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2676250,
-      "house_money_before_vnd": 1676250,
+      "bankroll_before_vnd": 4782250,
+      "house_money_before_vnd": 3782250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "46",
@@ -11016,8 +11016,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2676250,
-      "house_money_after_vnd": 1676250
+      "bankroll_after_vnd": 4782250,
+      "house_money_after_vnd": 3782250
     },
     {
       "draw_date": "2026-08-05",
@@ -11035,8 +11035,8 @@
         "65"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2676250,
-      "house_money_before_vnd": 1676250,
+      "bankroll_before_vnd": 4782250,
+      "house_money_before_vnd": 3782250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "62",
@@ -11078,8 +11078,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2676250,
-      "house_money_after_vnd": 1676250
+      "bankroll_after_vnd": 4782250,
+      "house_money_after_vnd": 3782250
     },
     {
       "draw_date": "2026-08-06",
@@ -11097,8 +11097,8 @@
         "81"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2676250,
-      "house_money_before_vnd": 1676250,
+      "bankroll_before_vnd": 4782250,
+      "house_money_before_vnd": 3782250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "61",
@@ -11124,8 +11124,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2568250,
-      "house_money_after_vnd": 1568250
+      "bankroll_after_vnd": 4674250,
+      "house_money_after_vnd": 3674250
     },
     {
       "draw_date": "2026-08-07",
@@ -11143,8 +11143,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2568250,
-      "house_money_before_vnd": 1568250,
+      "bankroll_before_vnd": 4674250,
+      "house_money_before_vnd": 3674250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "99",
@@ -11174,10 +11174,10 @@
           "number": "99"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2591500,
-      "house_money_after_vnd": 1591500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4715500,
+      "house_money_after_vnd": 3715500
     },
     {
       "draw_date": "2026-08-08",
@@ -11195,8 +11195,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2591500,
-      "house_money_before_vnd": 1591500,
+      "bankroll_before_vnd": 4715500,
+      "house_money_before_vnd": 3715500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "88",
@@ -11231,10 +11231,10 @@
           "number": "63"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2746000,
-      "house_money_after_vnd": 1746000
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 4906000,
+      "house_money_after_vnd": 3906000
     },
     {
       "draw_date": "2026-08-09",
@@ -11252,8 +11252,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2746000,
-      "house_money_before_vnd": 1746000,
+      "bankroll_before_vnd": 4906000,
+      "house_money_before_vnd": 3906000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "79",
@@ -11290,8 +11290,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2746000,
-      "house_money_after_vnd": 1746000
+      "bankroll_after_vnd": 4906000,
+      "house_money_after_vnd": 3906000
     },
     {
       "draw_date": "2026-08-10",
@@ -11309,8 +11309,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2746000,
-      "house_money_before_vnd": 1746000,
+      "bankroll_before_vnd": 4906000,
+      "house_money_before_vnd": 3906000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "37",
@@ -11336,8 +11336,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2638000,
-      "house_money_after_vnd": 1638000
+      "bankroll_after_vnd": 4798000,
+      "house_money_after_vnd": 3798000
     },
     {
       "draw_date": "2026-08-11",
@@ -11355,8 +11355,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2638000,
-      "house_money_before_vnd": 1638000,
+      "bankroll_before_vnd": 4798000,
+      "house_money_before_vnd": 3798000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "09",
@@ -11388,8 +11388,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2638000,
-      "house_money_after_vnd": 1638000
+      "bankroll_after_vnd": 4798000,
+      "house_money_after_vnd": 3798000
     },
     {
       "draw_date": "2026-08-12",
@@ -11407,8 +11407,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2638000,
-      "house_money_before_vnd": 1638000,
+      "bankroll_before_vnd": 4798000,
+      "house_money_before_vnd": 3798000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "04",
@@ -11434,8 +11434,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2638000,
-      "house_money_after_vnd": 1638000
+      "bankroll_after_vnd": 4798000,
+      "house_money_after_vnd": 3798000
     },
     {
       "draw_date": "2026-08-13",
@@ -11453,8 +11453,8 @@
         "81"
       ],
       "recommended_multiplier": 1.25,
-      "bankroll_before_vnd": 2638000,
-      "house_money_before_vnd": 1638000,
+      "bankroll_before_vnd": 4798000,
+      "house_money_before_vnd": 3798000,
       "cost_vnd": 90000,
       "actual_prizes_last2": [
         "76",
@@ -11489,10 +11489,10 @@
           "number": "51"
         }
       ],
-      "revenue_vnd": 218750,
-      "net_profit_vnd": 128750,
-      "bankroll_after_vnd": 2766750,
-      "house_money_after_vnd": 1766750
+      "revenue_vnd": 248750,
+      "net_profit_vnd": 158750,
+      "bankroll_after_vnd": 4956750,
+      "house_money_after_vnd": 3956750
     },
     {
       "draw_date": "2026-08-14",
@@ -11510,8 +11510,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2766750,
-      "house_money_before_vnd": 1766750,
+      "bankroll_before_vnd": 4956750,
+      "house_money_before_vnd": 3956750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "72",
@@ -11541,10 +11541,10 @@
           "number": "93"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2790000,
-      "house_money_after_vnd": 1790000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4998000,
+      "house_money_after_vnd": 3998000
     },
     {
       "draw_date": "2026-08-15",
@@ -11562,8 +11562,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2790000,
-      "house_money_before_vnd": 1790000,
+      "bankroll_before_vnd": 4998000,
+      "house_money_before_vnd": 3998000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "18",
@@ -11589,8 +11589,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2682000,
-      "house_money_after_vnd": 1682000
+      "bankroll_after_vnd": 4890000,
+      "house_money_after_vnd": 3890000
     },
     {
       "draw_date": "2026-08-16",
@@ -11608,8 +11608,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2682000,
-      "house_money_before_vnd": 1682000,
+      "bankroll_before_vnd": 4890000,
+      "house_money_before_vnd": 3890000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "90",
@@ -11635,8 +11635,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2682000,
-      "house_money_after_vnd": 1682000
+      "bankroll_after_vnd": 4890000,
+      "house_money_after_vnd": 3890000
     },
     {
       "draw_date": "2026-08-17",
@@ -11654,8 +11654,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2682000,
-      "house_money_before_vnd": 1682000,
+      "bankroll_before_vnd": 4890000,
+      "house_money_before_vnd": 3890000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "51",
@@ -11685,10 +11685,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2705250,
-      "house_money_after_vnd": 1705250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4931250,
+      "house_money_after_vnd": 3931250
     },
     {
       "draw_date": "2026-08-18",
@@ -11706,8 +11706,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2705250,
-      "house_money_before_vnd": 1705250,
+      "bankroll_before_vnd": 4931250,
+      "house_money_before_vnd": 3931250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "02",
@@ -11739,8 +11739,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2705250,
-      "house_money_after_vnd": 1705250
+      "bankroll_after_vnd": 4931250,
+      "house_money_after_vnd": 3931250
     },
     {
       "draw_date": "2026-08-19",
@@ -11758,8 +11758,8 @@
         "48"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2705250,
-      "house_money_before_vnd": 1705250,
+      "bankroll_before_vnd": 4931250,
+      "house_money_before_vnd": 3931250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "13",
@@ -11791,8 +11791,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2705250,
-      "house_money_after_vnd": 1705250
+      "bankroll_after_vnd": 4931250,
+      "house_money_after_vnd": 3931250
     },
     {
       "draw_date": "2026-08-20",
@@ -11810,8 +11810,8 @@
         "81"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2705250,
-      "house_money_before_vnd": 1705250,
+      "bankroll_before_vnd": 4931250,
+      "house_money_before_vnd": 3931250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "99",
@@ -11837,8 +11837,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2597250,
-      "house_money_after_vnd": 1597250
+      "bankroll_after_vnd": 4823250,
+      "house_money_after_vnd": 3823250
     },
     {
       "draw_date": "2026-08-21",
@@ -11856,8 +11856,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2597250,
-      "house_money_before_vnd": 1597250,
+      "bankroll_before_vnd": 4823250,
+      "house_money_before_vnd": 3823250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "18",
@@ -11887,10 +11887,10 @@
           "number": "59"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2620500,
-      "house_money_after_vnd": 1620500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4864500,
+      "house_money_after_vnd": 3864500
     },
     {
       "draw_date": "2026-08-22",
@@ -11908,8 +11908,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2620500,
-      "house_money_before_vnd": 1620500,
+      "bankroll_before_vnd": 4864500,
+      "house_money_before_vnd": 3864500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "11",
@@ -11939,10 +11939,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2643750,
-      "house_money_after_vnd": 1643750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 4905750,
+      "house_money_after_vnd": 3905750
     },
     {
       "draw_date": "2026-08-23",
@@ -11960,8 +11960,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2643750,
-      "house_money_before_vnd": 1643750,
+      "bankroll_before_vnd": 4905750,
+      "house_money_before_vnd": 3905750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "32",
@@ -11993,8 +11993,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2643750,
-      "house_money_after_vnd": 1643750
+      "bankroll_after_vnd": 4905750,
+      "house_money_after_vnd": 3905750
     },
     {
       "draw_date": "2026-08-24",
@@ -12012,8 +12012,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2643750,
-      "house_money_before_vnd": 1643750,
+      "bankroll_before_vnd": 4905750,
+      "house_money_before_vnd": 3905750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "56",
@@ -12048,10 +12048,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2798250,
-      "house_money_after_vnd": 1798250
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5096250,
+      "house_money_after_vnd": 4096250
     },
     {
       "draw_date": "2026-08-25",
@@ -12069,8 +12069,8 @@
         "82"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2798250,
-      "house_money_before_vnd": 1798250,
+      "bankroll_before_vnd": 5096250,
+      "house_money_before_vnd": 4096250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "70",
@@ -12102,8 +12102,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2798250,
-      "house_money_after_vnd": 1798250
+      "bankroll_after_vnd": 5096250,
+      "house_money_after_vnd": 4096250
     },
     {
       "draw_date": "2026-08-26",
@@ -12121,8 +12121,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2798250,
-      "house_money_before_vnd": 1798250,
+      "bankroll_before_vnd": 5096250,
+      "house_money_before_vnd": 4096250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "77",
@@ -12148,8 +12148,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2798250,
-      "house_money_after_vnd": 1798250
+      "bankroll_after_vnd": 5096250,
+      "house_money_after_vnd": 4096250
     },
     {
       "draw_date": "2026-08-27",
@@ -12167,8 +12167,8 @@
         "81"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2798250,
-      "house_money_before_vnd": 1798250,
+      "bankroll_before_vnd": 5096250,
+      "house_money_before_vnd": 4096250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "43",
@@ -12194,8 +12194,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2798250,
-      "house_money_after_vnd": 1798250
+      "bankroll_after_vnd": 5096250,
+      "house_money_after_vnd": 4096250
     },
     {
       "draw_date": "2026-08-28",
@@ -12213,8 +12213,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2798250,
-      "house_money_before_vnd": 1798250,
+      "bankroll_before_vnd": 5096250,
+      "house_money_before_vnd": 4096250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "09",
@@ -12244,10 +12244,10 @@
           "number": "53"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2821500,
-      "house_money_after_vnd": 1821500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5137500,
+      "house_money_after_vnd": 4137500
     },
     {
       "draw_date": "2026-08-29",
@@ -12265,8 +12265,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2821500,
-      "house_money_before_vnd": 1821500,
+      "bankroll_before_vnd": 5137500,
+      "house_money_before_vnd": 4137500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "50",
@@ -12296,10 +12296,10 @@
           "number": "98"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2844750,
-      "house_money_after_vnd": 1844750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5178750,
+      "house_money_after_vnd": 4178750
     },
     {
       "draw_date": "2026-08-30",
@@ -12317,8 +12317,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2844750,
-      "house_money_before_vnd": 1844750,
+      "bankroll_before_vnd": 5178750,
+      "house_money_before_vnd": 4178750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "97",
@@ -12344,8 +12344,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2844750,
-      "house_money_after_vnd": 1844750
+      "bankroll_after_vnd": 5178750,
+      "house_money_after_vnd": 4178750
     },
     {
       "draw_date": "2026-08-31",
@@ -12363,8 +12363,8 @@
         "84"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2844750,
-      "house_money_before_vnd": 1844750,
+      "bankroll_before_vnd": 5178750,
+      "house_money_before_vnd": 4178750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "90",
@@ -12394,10 +12394,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2868000,
-      "house_money_after_vnd": 1868000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5220000,
+      "house_money_after_vnd": 4220000
     },
     {
       "draw_date": "2026-09-01",
@@ -12415,8 +12415,8 @@
         "82"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2868000,
-      "house_money_before_vnd": 1868000,
+      "bankroll_before_vnd": 5220000,
+      "house_money_before_vnd": 4220000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "25",
@@ -12442,8 +12442,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2868000,
-      "house_money_after_vnd": 1868000
+      "bankroll_after_vnd": 5220000,
+      "house_money_after_vnd": 4220000
     },
     {
       "draw_date": "2026-09-02",
@@ -12461,8 +12461,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2868000,
-      "house_money_before_vnd": 1868000,
+      "bankroll_before_vnd": 5220000,
+      "house_money_before_vnd": 4220000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "78",
@@ -12494,8 +12494,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2868000,
-      "house_money_after_vnd": 1868000
+      "bankroll_after_vnd": 5220000,
+      "house_money_after_vnd": 4220000
     },
     {
       "draw_date": "2026-09-03",
@@ -12513,8 +12513,8 @@
         "83"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2868000,
-      "house_money_before_vnd": 1868000,
+      "bankroll_before_vnd": 5220000,
+      "house_money_before_vnd": 4220000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "59",
@@ -12551,8 +12551,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2868000,
-      "house_money_after_vnd": 1868000
+      "bankroll_after_vnd": 5220000,
+      "house_money_after_vnd": 4220000
     },
     {
       "draw_date": "2026-09-04",
@@ -12570,8 +12570,8 @@
         "59"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2868000,
-      "house_money_before_vnd": 1868000,
+      "bankroll_before_vnd": 5220000,
+      "house_money_before_vnd": 4220000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "16",
@@ -12601,10 +12601,10 @@
           "number": "49"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2891250,
-      "house_money_after_vnd": 1891250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5261250,
+      "house_money_after_vnd": 4261250
     },
     {
       "draw_date": "2026-09-05",
@@ -12622,8 +12622,8 @@
         "98"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2891250,
-      "house_money_before_vnd": 1891250,
+      "bankroll_before_vnd": 5261250,
+      "house_money_before_vnd": 4261250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "79",
@@ -12658,10 +12658,10 @@
           "number": "98"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 3045750,
-      "house_money_after_vnd": 2045750
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5451750,
+      "house_money_after_vnd": 4451750
     },
     {
       "draw_date": "2026-09-06",
@@ -12679,8 +12679,8 @@
         "18"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3045750,
-      "house_money_before_vnd": 2045750,
+      "bankroll_before_vnd": 5451750,
+      "house_money_before_vnd": 4451750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "73",
@@ -12706,8 +12706,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3045750,
-      "house_money_after_vnd": 2045750
+      "bankroll_after_vnd": 5451750,
+      "house_money_after_vnd": 4451750
     },
     {
       "draw_date": "2026-09-07",
@@ -12725,8 +12725,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3045750,
-      "house_money_before_vnd": 2045750,
+      "bankroll_before_vnd": 5451750,
+      "house_money_before_vnd": 4451750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "59",
@@ -12752,8 +12752,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2937750,
-      "house_money_after_vnd": 1937750
+      "bankroll_after_vnd": 5343750,
+      "house_money_after_vnd": 4343750
     },
     {
       "draw_date": "2026-09-08",
@@ -12771,8 +12771,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2937750,
-      "house_money_before_vnd": 1937750,
+      "bankroll_before_vnd": 5343750,
+      "house_money_before_vnd": 4343750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "06",
@@ -12798,8 +12798,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2937750,
-      "house_money_after_vnd": 1937750
+      "bankroll_after_vnd": 5343750,
+      "house_money_after_vnd": 4343750
     },
     {
       "draw_date": "2026-09-09",
@@ -12817,8 +12817,8 @@
         "78"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2937750,
-      "house_money_before_vnd": 1937750,
+      "bankroll_before_vnd": 5343750,
+      "house_money_before_vnd": 4343750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "31",
@@ -12850,8 +12850,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2937750,
-      "house_money_after_vnd": 1937750
+      "bankroll_after_vnd": 5343750,
+      "house_money_after_vnd": 4343750
     },
     {
       "draw_date": "2026-09-10",
@@ -12869,8 +12869,8 @@
         "53"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2937750,
-      "house_money_before_vnd": 1937750,
+      "bankroll_before_vnd": 5343750,
+      "house_money_before_vnd": 4343750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "62",
@@ -12896,8 +12896,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2937750,
-      "house_money_after_vnd": 1937750
+      "bankroll_after_vnd": 5343750,
+      "house_money_after_vnd": 4343750
     },
     {
       "draw_date": "2026-09-11",
@@ -12915,8 +12915,8 @@
         "54"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2937750,
-      "house_money_before_vnd": 1937750,
+      "bankroll_before_vnd": 5343750,
+      "house_money_before_vnd": 4343750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "04",
@@ -12942,8 +12942,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2829750,
-      "house_money_after_vnd": 1829750
+      "bankroll_after_vnd": 5235750,
+      "house_money_after_vnd": 4235750
     },
     {
       "draw_date": "2026-09-12",
@@ -12961,8 +12961,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2829750,
-      "house_money_before_vnd": 1829750,
+      "bankroll_before_vnd": 5235750,
+      "house_money_before_vnd": 4235750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "17",
@@ -12992,10 +12992,10 @@
           "number": "63"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2853000,
-      "house_money_after_vnd": 1853000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5277000,
+      "house_money_after_vnd": 4277000
     },
     {
       "draw_date": "2026-09-13",
@@ -13013,8 +13013,8 @@
         "96"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2853000,
-      "house_money_before_vnd": 1853000,
+      "bankroll_before_vnd": 5277000,
+      "house_money_before_vnd": 4277000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "43",
@@ -13040,8 +13040,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2853000,
-      "house_money_after_vnd": 1853000
+      "bankroll_after_vnd": 5277000,
+      "house_money_after_vnd": 4277000
     },
     {
       "draw_date": "2026-09-14",
@@ -13059,8 +13059,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2853000,
-      "house_money_before_vnd": 1853000,
+      "bankroll_before_vnd": 5277000,
+      "house_money_before_vnd": 4277000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "06",
@@ -13086,8 +13086,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2745000,
-      "house_money_after_vnd": 1745000
+      "bankroll_after_vnd": 5169000,
+      "house_money_after_vnd": 4169000
     },
     {
       "draw_date": "2026-09-15",
@@ -13105,8 +13105,8 @@
         "89"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2745000,
-      "house_money_before_vnd": 1745000,
+      "bankroll_before_vnd": 5169000,
+      "house_money_before_vnd": 4169000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "36",
@@ -13132,8 +13132,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2745000,
-      "house_money_after_vnd": 1745000
+      "bankroll_after_vnd": 5169000,
+      "house_money_after_vnd": 4169000
     },
     {
       "draw_date": "2026-09-16",
@@ -13151,8 +13151,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2745000,
-      "house_money_before_vnd": 1745000,
+      "bankroll_before_vnd": 5169000,
+      "house_money_before_vnd": 4169000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "90",
@@ -13178,8 +13178,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2745000,
-      "house_money_after_vnd": 1745000
+      "bankroll_after_vnd": 5169000,
+      "house_money_after_vnd": 4169000
     },
     {
       "draw_date": "2026-09-17",
@@ -13197,8 +13197,8 @@
         "53"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2745000,
-      "house_money_before_vnd": 1745000,
+      "bankroll_before_vnd": 5169000,
+      "house_money_before_vnd": 4169000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "48",
@@ -13230,8 +13230,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2745000,
-      "house_money_after_vnd": 1745000
+      "bankroll_after_vnd": 5169000,
+      "house_money_after_vnd": 4169000
     },
     {
       "draw_date": "2026-09-18",
@@ -13249,8 +13249,8 @@
         "57"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2745000,
-      "house_money_before_vnd": 1745000,
+      "bankroll_before_vnd": 5169000,
+      "house_money_before_vnd": 4169000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "16",
@@ -13280,10 +13280,10 @@
           "number": "57"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2768250,
-      "house_money_after_vnd": 1768250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5210250,
+      "house_money_after_vnd": 4210250
     },
     {
       "draw_date": "2026-09-19",
@@ -13301,8 +13301,8 @@
         "69"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2768250,
-      "house_money_before_vnd": 1768250,
+      "bankroll_before_vnd": 5210250,
+      "house_money_before_vnd": 4210250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "68",
@@ -13337,10 +13337,10 @@
           "number": "69"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2922750,
-      "house_money_after_vnd": 1922750
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5400750,
+      "house_money_after_vnd": 4400750
     },
     {
       "draw_date": "2026-09-20",
@@ -13358,8 +13358,8 @@
         "96"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2922750,
-      "house_money_before_vnd": 1922750,
+      "bankroll_before_vnd": 5400750,
+      "house_money_before_vnd": 4400750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "08",
@@ -13385,8 +13385,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2922750,
-      "house_money_after_vnd": 1922750
+      "bankroll_after_vnd": 5400750,
+      "house_money_after_vnd": 4400750
     },
     {
       "draw_date": "2026-09-21",
@@ -13404,8 +13404,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2922750,
-      "house_money_before_vnd": 1922750,
+      "bankroll_before_vnd": 5400750,
+      "house_money_before_vnd": 4400750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "92",
@@ -13435,10 +13435,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2946000,
-      "house_money_after_vnd": 1946000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5442000,
+      "house_money_after_vnd": 4442000
     },
     {
       "draw_date": "2026-09-22",
@@ -13456,8 +13456,8 @@
         "86"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2946000,
-      "house_money_before_vnd": 1946000,
+      "bankroll_before_vnd": 5442000,
+      "house_money_before_vnd": 4442000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "09",
@@ -13489,8 +13489,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2946000,
-      "house_money_after_vnd": 1946000
+      "bankroll_after_vnd": 5442000,
+      "house_money_after_vnd": 4442000
     },
     {
       "draw_date": "2026-09-23",
@@ -13508,8 +13508,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2946000,
-      "house_money_before_vnd": 1946000,
+      "bankroll_before_vnd": 5442000,
+      "house_money_before_vnd": 4442000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "50",
@@ -13546,8 +13546,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2946000,
-      "house_money_after_vnd": 1946000
+      "bankroll_after_vnd": 5442000,
+      "house_money_after_vnd": 4442000
     },
     {
       "draw_date": "2026-09-24",
@@ -13565,8 +13565,8 @@
         "59"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2946000,
-      "house_money_before_vnd": 1946000,
+      "bankroll_before_vnd": 5442000,
+      "house_money_before_vnd": 4442000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "99",
@@ -13592,8 +13592,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2946000,
-      "house_money_after_vnd": 1946000
+      "bankroll_after_vnd": 5442000,
+      "house_money_after_vnd": 4442000
     },
     {
       "draw_date": "2026-09-25",
@@ -13611,8 +13611,8 @@
         "57"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2946000,
-      "house_money_before_vnd": 1946000,
+      "bankroll_before_vnd": 5442000,
+      "house_money_before_vnd": 4442000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "42",
@@ -13638,8 +13638,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2838000,
-      "house_money_after_vnd": 1838000
+      "bankroll_after_vnd": 5334000,
+      "house_money_after_vnd": 4334000
     },
     {
       "draw_date": "2026-09-26",
@@ -13657,8 +13657,8 @@
         "69"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2838000,
-      "house_money_before_vnd": 1838000,
+      "bankroll_before_vnd": 5334000,
+      "house_money_before_vnd": 4334000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "17",
@@ -13688,10 +13688,10 @@
           "number": "68"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2861250,
-      "house_money_after_vnd": 1861250
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5375250,
+      "house_money_after_vnd": 4375250
     },
     {
       "draw_date": "2026-09-27",
@@ -13709,8 +13709,8 @@
         "19"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2861250,
-      "house_money_before_vnd": 1861250,
+      "bankroll_before_vnd": 5375250,
+      "house_money_before_vnd": 4375250,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "95",
@@ -13736,8 +13736,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2861250,
-      "house_money_after_vnd": 1861250
+      "bankroll_after_vnd": 5375250,
+      "house_money_after_vnd": 4375250
     },
     {
       "draw_date": "2026-09-28",
@@ -13755,8 +13755,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2861250,
-      "house_money_before_vnd": 1861250,
+      "bankroll_before_vnd": 5375250,
+      "house_money_before_vnd": 4375250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "39",
@@ -13791,10 +13791,10 @@
           "number": "91"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 3015750,
-      "house_money_after_vnd": 2015750
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5565750,
+      "house_money_after_vnd": 4565750
     },
     {
       "draw_date": "2026-09-29",
@@ -13812,8 +13812,8 @@
         "97"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3015750,
-      "house_money_before_vnd": 2015750,
+      "bankroll_before_vnd": 5565750,
+      "house_money_before_vnd": 4565750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "98",
@@ -13839,8 +13839,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3015750,
-      "house_money_after_vnd": 2015750
+      "bankroll_after_vnd": 5565750,
+      "house_money_after_vnd": 4565750
     },
     {
       "draw_date": "2026-09-30",
@@ -13858,8 +13858,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3015750,
-      "house_money_before_vnd": 2015750,
+      "bankroll_before_vnd": 5565750,
+      "house_money_before_vnd": 4565750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "36",
@@ -13885,8 +13885,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3015750,
-      "house_money_after_vnd": 2015750
+      "bankroll_after_vnd": 5565750,
+      "house_money_after_vnd": 4565750
     },
     {
       "draw_date": "2026-10-01",
@@ -13904,8 +13904,8 @@
         "53"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3015750,
-      "house_money_before_vnd": 2015750,
+      "bankroll_before_vnd": 5565750,
+      "house_money_before_vnd": 4565750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "05",
@@ -13942,8 +13942,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3015750,
-      "house_money_after_vnd": 2015750
+      "bankroll_after_vnd": 5565750,
+      "house_money_after_vnd": 4565750
     },
     {
       "draw_date": "2026-10-02",
@@ -13961,8 +13961,8 @@
         "97"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3015750,
-      "house_money_before_vnd": 2015750,
+      "bankroll_before_vnd": 5565750,
+      "house_money_before_vnd": 4565750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "40",
@@ -13997,10 +13997,10 @@
           "number": "97"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 3170250,
-      "house_money_after_vnd": 2170250
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5756250,
+      "house_money_after_vnd": 4756250
     },
     {
       "draw_date": "2026-10-03",
@@ -14018,8 +14018,8 @@
         "69"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3170250,
-      "house_money_before_vnd": 2170250,
+      "bankroll_before_vnd": 5756250,
+      "house_money_before_vnd": 4756250,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "49",
@@ -14049,10 +14049,10 @@
           "number": "69"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 3193500,
-      "house_money_after_vnd": 2193500
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5797500,
+      "house_money_after_vnd": 4797500
     },
     {
       "draw_date": "2026-10-04",
@@ -14070,8 +14070,8 @@
         "98"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3193500,
-      "house_money_before_vnd": 2193500,
+      "bankroll_before_vnd": 5797500,
+      "house_money_before_vnd": 4797500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "75",
@@ -14097,8 +14097,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3193500,
-      "house_money_after_vnd": 2193500
+      "bankroll_after_vnd": 5797500,
+      "house_money_after_vnd": 4797500
     },
     {
       "draw_date": "2026-10-05",
@@ -14116,8 +14116,8 @@
         "94"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3193500,
-      "house_money_before_vnd": 2193500,
+      "bankroll_before_vnd": 5797500,
+      "house_money_before_vnd": 4797500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "72",
@@ -14147,10 +14147,10 @@
           "number": "81"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 3216750,
-      "house_money_after_vnd": 2216750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5838750,
+      "house_money_after_vnd": 4838750
     },
     {
       "draw_date": "2026-10-06",
@@ -14168,8 +14168,8 @@
         "78"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3216750,
-      "house_money_before_vnd": 2216750,
+      "bankroll_before_vnd": 5838750,
+      "house_money_before_vnd": 4838750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "93",
@@ -14206,8 +14206,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3216750,
-      "house_money_after_vnd": 2216750
+      "bankroll_after_vnd": 5838750,
+      "house_money_after_vnd": 4838750
     },
     {
       "draw_date": "2026-10-07",
@@ -14225,8 +14225,8 @@
         "68"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3216750,
-      "house_money_before_vnd": 2216750,
+      "bankroll_before_vnd": 5838750,
+      "house_money_before_vnd": 4838750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "96",
@@ -14252,8 +14252,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3216750,
-      "house_money_after_vnd": 2216750
+      "bankroll_after_vnd": 5838750,
+      "house_money_after_vnd": 4838750
     },
     {
       "draw_date": "2026-10-08",
@@ -14271,8 +14271,8 @@
         "63"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3216750,
-      "house_money_before_vnd": 2216750,
+      "bankroll_before_vnd": 5838750,
+      "house_money_before_vnd": 4838750,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "01",
@@ -14309,8 +14309,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3216750,
-      "house_money_after_vnd": 2216750
+      "bankroll_after_vnd": 5838750,
+      "house_money_after_vnd": 4838750
     },
     {
       "draw_date": "2026-10-09",
@@ -14328,8 +14328,8 @@
         "97"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3216750,
-      "house_money_before_vnd": 2216750,
+      "bankroll_before_vnd": 5838750,
+      "house_money_before_vnd": 4838750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "28",
@@ -14355,8 +14355,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 3108750,
-      "house_money_after_vnd": 2108750
+      "bankroll_after_vnd": 5730750,
+      "house_money_after_vnd": 4730750
     },
     {
       "draw_date": "2026-10-10",
@@ -14374,8 +14374,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3108750,
-      "house_money_before_vnd": 2108750,
+      "bankroll_before_vnd": 5730750,
+      "house_money_before_vnd": 4730750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "88",
@@ -14405,10 +14405,10 @@
           "number": "58"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 3132000,
-      "house_money_after_vnd": 2132000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5772000,
+      "house_money_after_vnd": 4772000
     },
     {
       "draw_date": "2026-10-11",
@@ -14426,8 +14426,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3132000,
-      "house_money_before_vnd": 2132000,
+      "bankroll_before_vnd": 5772000,
+      "house_money_before_vnd": 4772000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "05",
@@ -14459,8 +14459,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3132000,
-      "house_money_after_vnd": 2132000
+      "bankroll_after_vnd": 5772000,
+      "house_money_after_vnd": 4772000
     },
     {
       "draw_date": "2026-10-12",
@@ -14478,8 +14478,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3132000,
-      "house_money_before_vnd": 2132000,
+      "bankroll_before_vnd": 5772000,
+      "house_money_before_vnd": 4772000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "10",
@@ -14505,8 +14505,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 3024000,
-      "house_money_after_vnd": 2024000
+      "bankroll_after_vnd": 5664000,
+      "house_money_after_vnd": 4664000
     },
     {
       "draw_date": "2026-10-13",
@@ -14524,8 +14524,8 @@
         "78"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3024000,
-      "house_money_before_vnd": 2024000,
+      "bankroll_before_vnd": 5664000,
+      "house_money_before_vnd": 4664000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "78",
@@ -14557,8 +14557,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3024000,
-      "house_money_after_vnd": 2024000
+      "bankroll_after_vnd": 5664000,
+      "house_money_after_vnd": 4664000
     },
     {
       "draw_date": "2026-10-14",
@@ -14576,8 +14576,8 @@
         "75"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3024000,
-      "house_money_before_vnd": 2024000,
+      "bankroll_before_vnd": 5664000,
+      "house_money_before_vnd": 4664000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "13",
@@ -14603,8 +14603,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3024000,
-      "house_money_after_vnd": 2024000
+      "bankroll_after_vnd": 5664000,
+      "house_money_after_vnd": 4664000
     },
     {
       "draw_date": "2026-10-15",
@@ -14622,8 +14622,8 @@
         "63"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3024000,
-      "house_money_before_vnd": 2024000,
+      "bankroll_before_vnd": 5664000,
+      "house_money_before_vnd": 4664000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "03",
@@ -14660,8 +14660,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3024000,
-      "house_money_after_vnd": 2024000
+      "bankroll_after_vnd": 5664000,
+      "house_money_after_vnd": 4664000
     },
     {
       "draw_date": "2026-10-16",
@@ -14679,8 +14679,8 @@
         "97"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3024000,
-      "house_money_before_vnd": 2024000,
+      "bankroll_before_vnd": 5664000,
+      "house_money_before_vnd": 4664000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "34",
@@ -14706,8 +14706,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2916000,
-      "house_money_after_vnd": 1916000
+      "bankroll_after_vnd": 5556000,
+      "house_money_after_vnd": 4556000
     },
     {
       "draw_date": "2026-10-17",
@@ -14725,8 +14725,8 @@
         "68"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2916000,
-      "house_money_before_vnd": 1916000,
+      "bankroll_before_vnd": 5556000,
+      "house_money_before_vnd": 4556000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "88",
@@ -14752,8 +14752,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": -108000,
-      "bankroll_after_vnd": 2808000,
-      "house_money_after_vnd": 1808000
+      "bankroll_after_vnd": 5448000,
+      "house_money_after_vnd": 4448000
     },
     {
       "draw_date": "2026-10-18",
@@ -14771,8 +14771,8 @@
         "19"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2808000,
-      "house_money_before_vnd": 1808000,
+      "bankroll_before_vnd": 5448000,
+      "house_money_before_vnd": 4448000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "40",
@@ -14798,8 +14798,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2808000,
-      "house_money_after_vnd": 1808000
+      "bankroll_after_vnd": 5448000,
+      "house_money_after_vnd": 4448000
     },
     {
       "draw_date": "2026-10-19",
@@ -14817,8 +14817,8 @@
         "99"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2808000,
-      "house_money_before_vnd": 1808000,
+      "bankroll_before_vnd": 5448000,
+      "house_money_before_vnd": 4448000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "47",
@@ -14853,10 +14853,10 @@
           "number": "99"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 2962500,
-      "house_money_after_vnd": 1962500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5638500,
+      "house_money_after_vnd": 4638500
     },
     {
       "draw_date": "2026-10-20",
@@ -14874,8 +14874,8 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2962500,
-      "house_money_before_vnd": 1962500,
+      "bankroll_before_vnd": 5638500,
+      "house_money_before_vnd": 4638500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "66",
@@ -14912,8 +14912,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2962500,
-      "house_money_after_vnd": 1962500
+      "bankroll_after_vnd": 5638500,
+      "house_money_after_vnd": 4638500
     },
     {
       "draw_date": "2026-10-21",
@@ -14931,8 +14931,8 @@
         "65"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2962500,
-      "house_money_before_vnd": 1962500,
+      "bankroll_before_vnd": 5638500,
+      "house_money_before_vnd": 4638500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "96",
@@ -14964,8 +14964,8 @@
       ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2962500,
-      "house_money_after_vnd": 1962500
+      "bankroll_after_vnd": 5638500,
+      "house_money_after_vnd": 4638500
     },
     {
       "draw_date": "2026-10-22",
@@ -14983,8 +14983,8 @@
         "83"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 2962500,
-      "house_money_before_vnd": 1962500,
+      "bankroll_before_vnd": 5638500,
+      "house_money_before_vnd": 4638500,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "67",
@@ -15010,8 +15010,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 2962500,
-      "house_money_after_vnd": 1962500
+      "bankroll_after_vnd": 5638500,
+      "house_money_after_vnd": 4638500
     },
     {
       "draw_date": "2026-10-23",
@@ -15029,8 +15029,8 @@
         "94"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2962500,
-      "house_money_before_vnd": 1962500,
+      "bankroll_before_vnd": 5638500,
+      "house_money_before_vnd": 4638500,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "58",
@@ -15060,10 +15060,10 @@
           "number": "51"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 2985750,
-      "house_money_after_vnd": 1985750
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5679750,
+      "house_money_after_vnd": 4679750
     },
     {
       "draw_date": "2026-10-24",
@@ -15081,8 +15081,8 @@
         "69"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 2985750,
-      "house_money_before_vnd": 1985750,
+      "bankroll_before_vnd": 5679750,
+      "house_money_before_vnd": 4679750,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "16",
@@ -15112,10 +15112,10 @@
           "number": "69"
         }
       ],
-      "revenue_vnd": 131250,
-      "net_profit_vnd": 23250,
-      "bankroll_after_vnd": 3009000,
-      "house_money_after_vnd": 2009000
+      "revenue_vnd": 149250,
+      "net_profit_vnd": 41250,
+      "bankroll_after_vnd": 5721000,
+      "house_money_after_vnd": 4721000
     },
     {
       "draw_date": "2026-10-25",
@@ -15133,8 +15133,8 @@
         "27"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3009000,
-      "house_money_before_vnd": 2009000,
+      "bankroll_before_vnd": 5721000,
+      "house_money_before_vnd": 4721000,
       "cost_vnd": 0,
       "actual_prizes_last2": [
         "45",
@@ -15160,8 +15160,8 @@
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3009000,
-      "house_money_after_vnd": 2009000
+      "bankroll_after_vnd": 5721000,
+      "house_money_after_vnd": 4721000
     },
     {
       "draw_date": "2026-10-26",
@@ -15179,8 +15179,8 @@
         "19"
       ],
       "recommended_multiplier": 1.5,
-      "bankroll_before_vnd": 3009000,
-      "house_money_before_vnd": 2009000,
+      "bankroll_before_vnd": 5721000,
+      "house_money_before_vnd": 4721000,
       "cost_vnd": 108000,
       "actual_prizes_last2": [
         "37",
@@ -15215,10 +15215,10 @@
           "number": "14"
         }
       ],
-      "revenue_vnd": 262500,
-      "net_profit_vnd": 154500,
-      "bankroll_after_vnd": 3163500,
-      "house_money_after_vnd": 2163500
+      "revenue_vnd": 298500,
+      "net_profit_vnd": 190500,
+      "bankroll_after_vnd": 5911500,
+      "house_money_after_vnd": 4911500
     },
     {
       "draw_date": "2026-10-27",
@@ -15236,16 +15236,16 @@
         "99"
       ],
       "recommended_multiplier": 0.0,
-      "bankroll_before_vnd": 3163500,
-      "house_money_before_vnd": 2163500,
+      "bankroll_before_vnd": 5911500,
+      "house_money_before_vnd": 4911500,
       "cost_vnd": 0,
       "actual_prizes_last2": [],
       "hit_count_k": 0,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 3163500,
-      "house_money_after_vnd": 2163500
+      "bankroll_after_vnd": 5911500,
+      "house_money_after_vnd": 4911500
     }
   ]
 }

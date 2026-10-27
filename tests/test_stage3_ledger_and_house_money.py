@@ -188,15 +188,15 @@ class TestHouseMoneyMultiplierAndCapitalGuidance:
 
         assert by_tier_1x[500_000].stake_per_number_vnd == 9_000
         assert by_tier_1x[500_000].total_daily_cost_vnd == 36_000
-        assert by_tier_1x[500_000].payout_per_hit_vnd == 43_750
-        assert by_tier_1x[500_000].net_profit_1hit_vnd == 7_750
-        assert by_tier_1x[500_000].net_profit_2hits_vnd == 51_500
+        assert by_tier_1x[500_000].payout_per_hit_vnd == 49_750
+        assert by_tier_1x[500_000].net_profit_1hit_vnd == 13_750
+        assert by_tier_1x[500_000].net_profit_2hits_vnd == 63_500
 
         assert by_tier_1x[1_000_000].stake_per_number_vnd == BENCHMARK_STAKE_PER_NUMBER_VND
         assert by_tier_1x[1_000_000].total_daily_cost_vnd == BENCHMARK_BASE_DAILY_COST_4NUM_VND
         assert by_tier_1x[1_000_000].payout_per_hit_vnd == BENCHMARK_PAYOUT_PER_HIT_VND
-        assert by_tier_1x[1_000_000].net_profit_1hit_vnd == 15_500
-        assert by_tier_1x[1_000_000].net_profit_2hits_vnd == 103_000
+        assert by_tier_1x[1_000_000].net_profit_1hit_vnd == 27_500
+        assert by_tier_1x[1_000_000].net_profit_2hits_vnd == 127_000
 
         assert by_tier_1x[2_000_000].total_daily_cost_vnd == 144_000
         assert by_tier_1x[5_000_000].total_daily_cost_vnd == 360_000
@@ -210,7 +210,7 @@ class TestHouseMoneyMultiplierAndCapitalGuidance:
         assert guidance_peak.recommended_multiplier == pytest.approx(1.5)
         assert guidance_peak.benchmark_bet_vnd == 108_000
         assert guidance_peak.stake_per_number_vnd == 27_000
-        assert guidance_peak.payout_per_hit_vnd == 131_250
+        assert guidance_peak.payout_per_hit_vnd == 149_250
         assert guidance_peak.house_money_surplus_vnd == 500_000
         assert len(guidance_peak.sizing_rationale_vi) > 10
 
@@ -361,7 +361,7 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
         assert state1_pending.entries[0].cost_vnd == 72_000
         assert state1_pending.entries[0].recommended_multiplier == 1.0
 
-        # 3. Settle Day 1 with 2 hits -> revenue 175,000 VND, net +103,000 VND (Task 4 manual check)
+        # 3. Settle Day 1 with 2 hits -> revenue 199,000 VND, net +127,000 VND (Task 4 manual check)
         prizes_day1 = _sample_18_prizes_with_2_hits()
         state1_settled = settle_ledger_for_date(
             ledger_file,
@@ -373,21 +373,21 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
         assert e1.settlement_status == "SETTLED"
         assert e1.hit_count_k == 2
         assert e1.cost_vnd == 72_000
-        assert e1.revenue_vnd == 175_000
-        assert e1.net_profit_vnd == 103_000
-        assert e1.bankroll_after_vnd == 1_103_000
-        assert e1.house_money_after_vnd == 103_000
+        assert e1.revenue_vnd == 199_000
+        assert e1.net_profit_vnd == 127_000
+        assert e1.bankroll_after_vnd == 1_127_000
+        assert e1.house_money_after_vnd == 127_000
 
-        assert state1_settled.current_bankroll_vnd == 1_103_000
-        assert state1_settled.house_money_surplus_vnd == 103_000
-        assert state1_settled.peak_bankroll_vnd == 1_103_000
+        assert state1_settled.current_bankroll_vnd == 1_127_000
+        assert state1_settled.house_money_surplus_vnd == 127_000
+        assert state1_settled.peak_bankroll_vnd == 1_127_000
         assert state1_settled.min_bankroll_vnd == 1_000_000
         assert state1_settled.max_drawdown_vnd == 0
         assert state1_settled.win_days == 1
         assert state1_settled.loss_days == 0
         assert state1_settled.total_cost_vnd == 72_000
-        assert state1_settled.total_revenue_vnd == 175_000
-        assert state1_settled.net_profit_vnd == 103_000
+        assert state1_settled.total_revenue_vnd == 199_000
+        assert state1_settled.net_profit_vnd == 127_000
 
         # 4. IDEMPOTENCY: Calling settle_ledger_for_date a second time for 2026-10-24
         # with the same 18 prizes must not double-count revenue or cost!
@@ -397,10 +397,10 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             actual_prizes_last2=prizes_day1,
             updated_at="2026-10-24T18:00:00+07:00",
         )
-        assert state1_repeat.current_bankroll_vnd == 1_103_000
+        assert state1_repeat.current_bankroll_vnd == 1_127_000
         assert state1_repeat.total_cost_vnd == 72_000
-        assert state1_repeat.total_revenue_vnd == 175_000
-        assert state1_repeat.net_profit_vnd == 103_000
+        assert state1_repeat.total_revenue_vnd == 199_000
+        assert state1_repeat.net_profit_vnd == 127_000
         assert state1_repeat.sha256 == state1_settled.sha256
 
         # 5. Record Day 2 (2026-10-25): SKIP_NO_EDGE -> immediate SETTLED with cost_vnd = 0
@@ -419,12 +419,12 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
         assert state2.total_tracked_days == 2
         assert state2.played_days == 1
         assert state2.rest_days == 1
-        assert state2.current_bankroll_vnd == 1_103_000
+        assert state2.current_bankroll_vnd == 1_127_000
         assert state2.entries[1].settlement_status == "SETTLED"
         assert state2.entries[1].recommended_multiplier == 0.0
         assert state2.entries[1].cost_vnd == 0
 
-        # 6. Record Day 3 (2026-10-26): PLAY_STANDARD (1.0x since surplus=103k < 144k)
+        # 6. Record Day 3 (2026-10-26): PLAY_STANDARD (1.0x since surplus=127k < 144k)
         # Settle via raw_dir cache lookup with 0 hits -> loss -72,000 VND, drawdown 72,000 VND
         raw_dir = tmp_path / "raw_all"
         save_station_raw_cache(
@@ -457,9 +457,9 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             ledger_path=ledger_file,
             updated_at="2026-10-26T16:40:00+07:00",
         )
-        assert state3_settled.current_bankroll_vnd == 1_031_000
-        assert state3_settled.house_money_surplus_vnd == 31_000
-        assert state3_settled.peak_bankroll_vnd == 1_103_000
+        assert state3_settled.current_bankroll_vnd == 1_055_000
+        assert state3_settled.house_money_surplus_vnd == 55_000
+        assert state3_settled.peak_bankroll_vnd == 1_127_000
         assert state3_settled.min_bankroll_vnd == 1_000_000
         assert state3_settled.max_drawdown_vnd == 72_000
         assert state3_settled.played_days == 2
@@ -525,7 +525,7 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             ledger_path=ledger_file,
             updated_at="2026-10-24T16:40:00+07:00",
         )
-        assert verify_ledger_integrity(state).current_bankroll_vnd == 1_103_000
+        assert verify_ledger_integrity(state).current_bankroll_vnd == 1_127_000
 
         # Negative Mutation 3: Tampering with sha256 in benchmark_ledger.json -> DataIntegrityError
         raw_payload = json.loads(ledger_file.read_text(encoding="utf-8"))
@@ -592,7 +592,7 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             ledger_path=ledger_file,
         )
         assert preserved.entries[0].settlement_status == "SETTLED"
-        assert preserved.current_bankroll_vnd == 1_103_000
+        assert preserved.current_bankroll_vnd == 1_127_000
 
         # Recording SKIP_NO_EDGE and calling settle_ledger_for_date without prizes is idempotent
         state_with_skip = record_pending_recommendation(
@@ -605,7 +605,7 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             ledger_path=ledger_file,
         )
         settled_skip = settle_ledger_for_date(state_with_skip, draw_date="2026-10-25")
-        assert settled_skip.current_bankroll_vnd == 1_103_000
+        assert settled_skip.current_bankroll_vnd == 1_127_000
         settled_skip_with_prizes = settle_entry_with_prizes(
             state_with_skip.entries[1], _sample_18_prizes_zero_hits()
         )
@@ -736,7 +736,7 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             )
 
     def test_adversarial_b04_hybrid_core_satellite_settlement_and_custom_bankroll(self) -> None:
-        # 1. Hybrid core_2x2_sat_3x3: 4 core numbers (1.0x = 87,500) + 5 sat numbers (0.5x = 43,750)
+        # 1. Hybrid core_2x2_sat_3x3: 4 core numbers (1.0x = 99,500) + 5 sat numbers (0.5x = 49,750)
         state = initialize_empty_ledger()
         hybrid_nums = ["11", "12", "21", "22", "13", "23", "31", "32", "33"]
         state = record_pending_recommendation(
@@ -749,23 +749,23 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
         )
         assert state.entries[0].cost_vnd == 117_000
 
-        # 1 satellite hit ('33') -> revenue = 43,750 VND, net = -73,250 VND
+        # 1 satellite hit ('33') -> revenue = 49,750 VND, net = -67,250 VND
         settled_sat = settle_entry_with_prizes(
             state.entries[0],
             ["33"] + ["99"] * 17,
         )
         assert settled_sat.hit_count_k == 1
-        assert settled_sat.revenue_vnd == 43_750
-        assert settled_sat.net_profit_vnd == 43_750 - 117_000
+        assert settled_sat.revenue_vnd == 49_750
+        assert settled_sat.net_profit_vnd == 49_750 - 117_000
 
-        # 1 core hit ('11') + 1 satellite hit ('33') -> revenue = 131,250 VND, net = +14,250 VND
+        # 1 core hit ('11') + 1 satellite hit ('33') -> revenue = 149,250 VND, net = +32,250 VND
         settled_both = settle_entry_with_prizes(
             state.entries[0],
             ["11", "33"] + ["99"] * 16,
         )
         assert settled_both.hit_count_k == 2
-        assert settled_both.revenue_vnd == 131_250
-        assert settled_both.net_profit_vnd == 14_250
+        assert settled_both.revenue_vnd == 149_250
+        assert settled_both.net_profit_vnd == 32_250
 
         # 2. Custom starting_bankroll_vnd=2_000_000 works without crashing
         state_2m = initialize_empty_ledger(starting_bankroll_vnd=2_000_000)
@@ -783,10 +783,10 @@ class TestBenchmarkLedgerLifecycleAndIdempotency:
             draw_date="2026-10-24",
             actual_prizes_last2=["11", "22"] + ["99"] * 16,
         )
-        assert state_2m.entries[0].revenue_vnd == 175_000
-        assert state_2m.entries[0].net_profit_vnd == 13_000
-        assert state_2m.current_bankroll_vnd == 2_013_000
-        assert state_2m.house_money_surplus_vnd == 13_000
+        assert state_2m.entries[0].revenue_vnd == 199_000
+        assert state_2m.entries[0].net_profit_vnd == 37_000
+        assert state_2m.current_bankroll_vnd == 2_037_000
+        assert state_2m.house_money_surplus_vnd == 37_000
 
     def test_adversarial_b05_skip_no_edge_prize_backfill_and_pre_draw_update(
         self, tmp_path: Path

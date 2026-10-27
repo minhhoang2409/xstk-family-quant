@@ -29,8 +29,8 @@
       "27"
     ],
     "recommended_multiplier": 0.0,
-    "bankroll_before_vnd": 3009000,
-    "house_money_before_vnd": 2009000,
+    "bankroll_before_vnd": 5721000,
+    "house_money_before_vnd": 4721000,
     "cost_vnd": 0,
     "actual_prizes_last2": [
       "45",
@@ -56,10 +56,10 @@
     "hit_details": [],
     "revenue_vnd": 0,
     "net_profit_vnd": 0,
-    "bankroll_after_vnd": 3009000,
-    "house_money_after_vnd": 2009000
+    "bankroll_after_vnd": 5721000,
+    "house_money_after_vnd": 4721000
   },
-  "yesterday_summary_vi": "Đối soát kỳ hôm qua (2026-10-25 - Chủ Nhật): Hệ thống kích hoạt kỷ luật BÁO NGHỈ (0.00x - Đứng ngoài bảo toàn vốn), Chi phí = 0 VNĐ, Lãi/Lỗ ròng = +0 VNĐ, Số dư Quỹ Chuẩn giữ nguyên 3,009,000 VNĐ (Lãi tích lũy House-Money = 2,009,000 VNĐ).",
+  "yesterday_summary_vi": "Đối soát kỳ hôm qua (2026-10-25 - Chủ Nhật): Hệ thống kích hoạt kỷ luật BÁO NGHỈ (0.00x - Đứng ngoài bảo toàn vốn), Chi phí = 0 VNĐ, Lãi/Lỗ ròng = +0 VNĐ, Số dư Quỹ Chuẩn giữ nguyên 5,721,000 VNĐ (Lãi tích lũy House-Money = 4,721,000 VNĐ).",
   "verdict_tier": "PLAY_PEAK",
   "should_play_today": true,
   "primary_station": {
@@ -4292,12 +4292,12 @@
     "should_play_today": true,
     "recommended_multiplier": 1.5,
     "initial_bankroll_vnd": 1000000,
-    "benchmark_bankroll_vnd": 3009000,
-    "house_money_surplus_vnd": 2009000,
+    "benchmark_bankroll_vnd": 5721000,
+    "house_money_surplus_vnd": 4721000,
     "base_daily_cost_vnd": 72000,
     "benchmark_bet_vnd": 108000,
     "stake_per_number_vnd": 27000,
-    "payout_per_hit_vnd": 131250,
+    "payout_per_hit_vnd": 149250,
     "sample_allocations": [
       {
         "capital_tier_vnd": 500000,
@@ -4307,10 +4307,10 @@
         "stake_per_number_vnd": 13500,
         "num_numbers": 4,
         "total_daily_cost_vnd": 54000,
-        "payout_per_hit_vnd": 65625,
-        "net_profit_1hit_vnd": 11625,
-        "net_profit_2hits_vnd": 77250,
-        "net_profit_3hits_vnd": 142875
+        "payout_per_hit_vnd": 74625,
+        "net_profit_1hit_vnd": 20625,
+        "net_profit_2hits_vnd": 95250,
+        "net_profit_3hits_vnd": 169875
       },
       {
         "capital_tier_vnd": 1000000,
@@ -4320,10 +4320,10 @@
         "stake_per_number_vnd": 27000,
         "num_numbers": 4,
         "total_daily_cost_vnd": 108000,
-        "payout_per_hit_vnd": 131250,
-        "net_profit_1hit_vnd": 23250,
-        "net_profit_2hits_vnd": 154500,
-        "net_profit_3hits_vnd": 285750
+        "payout_per_hit_vnd": 149250,
+        "net_profit_1hit_vnd": 41250,
+        "net_profit_2hits_vnd": 190500,
+        "net_profit_3hits_vnd": 339750
       },
       {
         "capital_tier_vnd": 2000000,
@@ -4333,10 +4333,10 @@
         "stake_per_number_vnd": 54000,
         "num_numbers": 4,
         "total_daily_cost_vnd": 216000,
-        "payout_per_hit_vnd": 262500,
-        "net_profit_1hit_vnd": 46500,
-        "net_profit_2hits_vnd": 309000,
-        "net_profit_3hits_vnd": 571500
+        "payout_per_hit_vnd": 298500,
+        "net_profit_1hit_vnd": 82500,
+        "net_profit_2hits_vnd": 381000,
+        "net_profit_3hits_vnd": 679500
       },
       {
         "capital_tier_vnd": 5000000,
@@ -4346,20 +4346,20 @@
         "stake_per_number_vnd": 135000,
         "num_numbers": 4,
         "total_daily_cost_vnd": 540000,
-        "payout_per_hit_vnd": 656250,
-        "net_profit_1hit_vnd": 116250,
-        "net_profit_2hits_vnd": 772500,
-        "net_profit_3hits_vnd": 1428750
+        "payout_per_hit_vnd": 746250,
+        "net_profit_1hit_vnd": 206250,
+        "net_profit_2hits_vnd": 952500,
+        "net_profit_3hits_vnd": 1698750
       }
     ],
-    "sizing_rationale_vi": "Quỹ Lãi Ròng hiện đạt 2,009,000 VNĐ (>= ngưỡng đệm 2 ngày 144,000 VNĐ). Kích hoạt hệ số House-Money 1.50x (108,000 VNĐ/ngày; phần tăng thêm 36,000 VNĐ trích hoàn toàn từ lãi, bảo toàn 100% vốn gốc 1,000,000 VNĐ)."
+    "sizing_rationale_vi": "Quỹ Lãi Ròng hiện đạt 4,721,000 VNĐ (>= ngưỡng đệm 2 ngày 144,000 VNĐ). Kích hoạt hệ số House-Money 1.50x (108,000 VNĐ/ngày; phần tăng thêm 36,000 VNĐ trích hoàn toàn từ lãi, bảo toàn 100% vốn gốc 1,000,000 VNĐ)."
   },
   "executive_nlg_vi": {
-    "yesterday_settlement_summary_vi": "Đối soát kỳ hôm qua (2026-10-25 - Chủ Nhật): Hệ thống kích hoạt kỷ luật BÁO NGHỈ (0.00x - Đứng ngoài bảo toàn vốn), Chi phí = 0 VNĐ, Lãi/Lỗ ròng = +0 VNĐ, Số dư Quỹ Chuẩn giữ nguyên 3,009,000 VNĐ (Lãi tích lũy House-Money = 2,009,000 VNĐ).",
+    "yesterday_settlement_summary_vi": "Đối soát kỳ hôm qua (2026-10-25 - Chủ Nhật): Hệ thống kích hoạt kỷ luật BÁO NGHỈ (0.00x - Đứng ngoài bảo toàn vốn), Chi phí = 0 VNĐ, Lãi/Lỗ ròng = +0 VNĐ, Số dư Quỹ Chuẩn giữ nguyên 5,721,000 VNĐ (Lãi tích lũy House-Money = 4,721,000 VNĐ).",
     "q1_should_play_and_why": "🟢 NÊN ĐÁNH — TÍN HIỆU HỘI TỤ ĐỈNH (PLAY_PEAK) ngày 2026-10-26 (Thứ 2). Đài dẫn đầu Phú Yên (XSPY - Miền Trung) vượt qua bộ lọc Selective Alpha nghiêm ngặt (< 2026-10-26) với xác suất trúng đồng thời Hạng-1 hai lồng cầu JointR1 = 1.212% (>= ngưỡng lọc 1.105%, nền đồng đều 1.000%; trong đó Lồng Hàng Chục đạt 10.76% và Lồng Hàng Đơn Vị đạt 11.26% so với ngưỡng hòa vốn đơn lồng 10.69%) cùng hiệu suất thực nghiệm Walk-Forward OOS 3 năm (111 kỳ) đạt ROI = +1.82% (> 0%). Kiểm định thống kê đa cửa sổ W thuộc {15, 30, 60} đạt Chi2_max = 13.85 (so với phân vị nhiễu trắng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 1.41, Entropy chuẩn hóa Chục/Đơn vị = 0.9969/0.9960. Độ dài chuỗi chế độ BOCD ổn định ở r_t = 40 kỳ (> 4 kỳ).",
     "q2_which_station_and_region": "Ưu tiên số 1 (Đài Chủ Lực - Hạng 1/5): Đài Phú Yên (XSPY) thuộc khu vực Miền Trung, mở thưởng lúc 17:15 ICT, dẫn đầu bảng xếp hạng với Station Alpha Score = +21.65 (JointR1 = 1.212%, ROI OOS 3 năm = +1.82% trên mẫu 156 kỳ, kỳ gần nhất trước giờ quay là 2026-10-19). Không có đài dự phòng thứ 2 đạt chuẩn trong ngày hôm nay. Các đài loại bỏ / đứng ngoài hôm nay (4 đài): Đồng Tháp (XSDT - Miền Nam, AlphaScore=+6.93, JointR1=1.073%, ROI_OOS=-1.46%); TP. Hồ Chí Minh (XSHCM - Miền Nam, AlphaScore=+2.46, JointR1=1.055%, ROI_OOS=-12.15%); Thừa Thiên Huế (XSTTH - Miền Trung, AlphaScore=-0.75, JointR1=1.024%, ROI_OOS=-12.61%); Cà Mau (XSCM - Miền Nam, AlphaScore=-11.15, JointR1=0.914%, ROI_OOS=-10.22%).",
     "q3_which_numbers_and_config": "Trên Đài Chủ Lực Phú Yên (XSPY), hệ thống khuyến nghị đánh cấu hình 1x4 gồm 4 số hai chữ số (Bao Lô 2 Số - 18 giải): [11, 14, 18, 19]. Phân tích xác suất bộ hợp chuẩn Brier: Top 3 bóng Lồng Hàng Chục dẫn đầu là bóng 1 (10.04%), bóng 8 (10.02%), bóng 9 (10.02%); Top 4 bóng Lồng Hàng Đơn Vị dẫn đầu là bóng 1 (10.38%), bóng 4 (10.19%), bóng 9 (10.15%), bóng 8 (10.08%). Gói 1x4 (11, 14, 18, 19) đạt xác suất trúng đơn giải 4.10%, xác suất nổ ít nhất 1 nháy trong 18 giải đạt 52.91%, tần suất trúng trung bình 25.14 nháy/30 kỳ và ROI thực nghiệm 3 năm đạt +1.82% (tỷ lệ ngày có lãi 62.16%). Đối chiếu toàn diện các cấu hình: gói 2x2 (11, 14, 81, 84: ROI_3Y=-6.94%, P(>=1 nháy/18 giải)=53.17%); gói 1x4 (11, 14, 18, 19: ROI_3Y=+1.82%, P(>=1 nháy/18 giải)=52.91%); gói 4x1 (01, 11, 81, 91: ROI_3Y=-0.37%, P(>=1 nháy/18 giải)=53.49%); gói 3x3 (11, 14, 19, 81, 84, 89, 91, 94, 99: ROI_3Y=-10.47%, P(>=1 nháy/18 giải)=82.55%).",
-    "q4_how_to_allocate_capital": "Quy tắc Quản trị Vốn CPPI / House-Money (Bảo vệ đáy vốn gốc 1,000,000 VNĐ, đơn vị chuẩn 4 số = 72,000 VNĐ/ngày): Số dư Quỹ Chuẩn hiện tại = 3,009,000 VNĐ (Lãi ròng tích lũy từ tiền nhà cái / House-Money Surplus = 2,009,000 VNĐ). Hệ số đi vốn hôm nay: 1.50x (Quỹ Lãi Ròng hiện đạt 2,009,000 VNĐ (>= ngưỡng đệm 2 ngày 144,000 VNĐ). Kích hoạt hệ số House-Money 1.50x (108,000 VNĐ/ngày; phần tăng thêm 36,000 VNĐ trích hoàn toàn từ lãi, bảo toàn 100% vốn gốc 1,000,000 VNĐ).) -> Mức giải ngân chuẩn hôm nay = 108,000 VNĐ. Bảng quy đổi tiền mẫu theo quy mô vốn gia đình: Vốn 500k (500,000 VNĐ): 13,500 VNĐ/số -> Tổng chi = 54,000 VNĐ/ngày (trúng 1 nháy thu 65,625 VNĐ, lãi ròng +11,625 VNĐ) | Vốn 1 Triệu (1,000,000 VNĐ): 27,000 VNĐ/số -> Tổng chi = 108,000 VNĐ/ngày (trúng 1 nháy thu 131,250 VNĐ, lãi ròng +23,250 VNĐ) | Vốn 2 Triệu (2,000,000 VNĐ): 54,000 VNĐ/số -> Tổng chi = 216,000 VNĐ/ngày (trúng 1 nháy thu 262,500 VNĐ, lãi ròng +46,500 VNĐ) | Vốn 5 Triệu (5,000,000 VNĐ): 135,000 VNĐ/số -> Tổng chi = 540,000 VNĐ/ngày (trúng 1 nháy thu 656,250 VNĐ, lãi ròng +116,250 VNĐ)."
+    "q4_how_to_allocate_capital": "Quy tắc Quản trị Vốn CPPI / House-Money (Bảo vệ đáy vốn gốc 1,000,000 VNĐ, đơn vị chuẩn 4 số = 72,000 VNĐ/ngày): Số dư Quỹ Chuẩn hiện tại = 5,721,000 VNĐ (Lãi ròng tích lũy từ tiền nhà cái / House-Money Surplus = 4,721,000 VNĐ). Hệ số đi vốn hôm nay: 1.50x (Quỹ Lãi Ròng hiện đạt 4,721,000 VNĐ (>= ngưỡng đệm 2 ngày 144,000 VNĐ). Kích hoạt hệ số House-Money 1.50x (108,000 VNĐ/ngày; phần tăng thêm 36,000 VNĐ trích hoàn toàn từ lãi, bảo toàn 100% vốn gốc 1,000,000 VNĐ).) -> Mức giải ngân chuẩn hôm nay = 108,000 VNĐ. Bảng quy đổi tiền mẫu theo quy mô vốn gia đình: Vốn 500k (500,000 VNĐ): 13,500 VNĐ/số -> Tổng chi = 54,000 VNĐ/ngày (trúng 1 nháy thu 74,625 VNĐ, lãi ròng +20,625 VNĐ) | Vốn 1 Triệu (1,000,000 VNĐ): 27,000 VNĐ/số -> Tổng chi = 108,000 VNĐ/ngày (trúng 1 nháy thu 149,250 VNĐ, lãi ròng +41,250 VNĐ) | Vốn 2 Triệu (2,000,000 VNĐ): 54,000 VNĐ/số -> Tổng chi = 216,000 VNĐ/ngày (trúng 1 nháy thu 298,500 VNĐ, lãi ròng +82,500 VNĐ) | Vốn 5 Triệu (5,000,000 VNĐ): 135,000 VNĐ/số -> Tổng chi = 540,000 VNĐ/ngày (trúng 1 nháy thu 746,250 VNĐ, lãi ròng +206,250 VNĐ)."
   },
-  "telegram_message_html": "<b>📡 BẢN TIN 05:00 SÁNG — THỨ 2 (26/10/2026)</b>\n────────────\n\n<b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>\n👉 🟢 <b>CÓ — HÔM NAY NÊN ĐÁNH (Tín hiệu rất đẹp / PLAY_PEAK)</b>\n<i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>\n\n<b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>\n🏆 <b>Nên Đánh:</b> <b>Phú Yên - Miền Trung</b> (XSPY — Quay 17:15) với:\n+ <b>Bộ số nên đánh nhất (1x4 - 4 số, ROI +1.82%):</b> <b>11, 14, 18, 19</b>\n+ <b>Các bộ số tham khảo:</b>\n  • Bộ <code>2x2</code> (4 số, ROI -6.94%): <code>11, 14, 81, 84</code>\n  • Bộ <code>4x1</code> (4 số, ROI -0.37%): <code>01, 11, 81, 91</code>\n  • Bộ <code>3x3</code> (9 số, ROI -10.47%): <code>11, 14, 19, 81, 84, 89, 91, 94, 99</code>\n  • Bộ <code>core_2x2_sat_3x3</code> (9 số, ROI -9.38%): <code>11, 14, 81, 84, 19, 89, 91, 94, 99</code>\n\n• <b>Đài thứ nhì:</b> Không có đài thứ 2 đạt chuẩn hôm nay.\n• <i>Các đài còn lại không đánh: Đồng Tháp (XSDT), TP. Hồ Chí Minh (XSHCM), Thừa Thiên Huế (XSTTH), Cà Mau (XSCM).</i>\n\n────────────\n💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>\n🔗 <a href=\"https://xstk-family.pages.dev/daily/2026-10-26.html\">Xem Trang Web Giải Trình Chi Tiết Ngày 26/10/2026 (2026-10-26)</a>"
+  "telegram_message_html": "<b>📡 BẢN TIN 05:00 SÁNG — THỨ 2 (26/10/2026)</b>\n────────────\n\n<b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>\n👉 🟢 <b>CÓ — HÔM NAY NÊN ĐÁNH (Tín hiệu rất đẹp / PLAY_PEAK)</b>\n<i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>\n\n<b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>\n🏆 <b>Nên Đánh:</b> <b>Phú Yên - Miền Trung</b> (XSPY — Quay 17:15) với:\n+ <b>Bộ số nên đánh nhất (1x4 - 4 số, ROI +1.82%):</b> <b>11, 14, 18, 19</b>\n+ <b>Các bộ số tham khảo:</b>\n  • Bộ <code>2x2</code> (4 số, ROI -6.94%): <code>11, 14, 81, 84</code>\n  • Bộ <code>4x1</code> (4 số, ROI -0.37%): <code>01, 11, 81, 91</code>\n  • Bộ <code>3x3</code> (9 số, ROI -10.47%): <code>11, 14, 19, 81, 84, 89, 91, 94, 99</code>\n  • Bộ <code>core_2x2_sat_3x3</code> (9 số, ROI -9.38%): <code>11, 14, 81, 84, 19, 89, 91, 94, 99</code>\n\n• <b>Đài thứ nhì:</b> Không có đài thứ 2 đạt chuẩn hôm nay.\n• <i>Các đài còn lại không đánh: Đồng Tháp (XSDT), TP. Hồ Chí Minh (XSHCM), Thừa Thiên Huế (XSTTH), Cà Mau (XSCM).</i>\n\n────────────\n💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>\n🔗 <a href=\"https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-26.html\">Xem Trang Web Giải Trình Chi Tiết Ngày 26/10/2026 (2026-10-26)</a>"
 }

@@ -260,9 +260,9 @@
         Trước khi nói đến thuật toán AI/Thống kê, chúng ta phải nhìn thẳng vào cấu trúc trả thưởng thực tế của Xổ số kiến thiết Miền Nam &amp; Miền Trung (<strong>18 giải/đài</strong>, từ Giải Tám đến Giải Đặc Biệt):
       </p>
       <ul>
-        <li><strong>Chi phí mua 1 con số (2 chữ số cuối <code>00..99</code>) bao 18 lô:</strong> Chuẩn đại lý thu <strong><code>21.750đ / 1 số</code></strong> (tương đương đánh 4 số hết <code>4 × 21.750đ = 87.000đ</code>).</li>
-        <li><strong>Tiền thưởng khi trúng 1 nháy:</strong> <strong><code>95.000đ / nháy</code></strong> (hoặc tối thiểu <code>90.000đ</code> tùy nơi; trong mô hình kiểm định gốc 3 năm ta ép mức khắt khe <code>29/99</code>, còn sổ cái thực chiến tính theo chuẩn <code>21.750đ</code> thu về <code>95.000đ/nháy</code>).</li>
-        <li><strong>Nếu lồng cầu quay hoàn toàn ngẫu nhiên (không lệch):</strong> Mỗi quả bóng <code>0..9</code> có xác suất rơi ra đúng bằng <strong><code>10.00%</code></strong>, và mỗi cặp 2 số <code>ab</code> có xác suất rơi ra ở mỗi giải đúng bằng <strong><code>1.00%</code></strong> (<code>10% × 10% = 1%</code>). Khi đó nếu ngày nào cũng đánh đều tay, người chơi sẽ lỗ trung bình khoảng <strong><code>-15% đến -18%</code></strong> tổng tiền cược cho nhà cái!</li>
+        <li><strong>Chi phí mua 1 con số (2 chữ số cuối <code>00..99</code>) bao 18 lô (Online):</strong> <strong><code>18.000đ / 1 số</code></strong> (tương đương đánh bộ 4 số hết <code>4 × 18.000đ = 72.000đ</code>).</li>
+        <li><strong>Tiền thưởng khi trúng 1 nháy (Online):</strong> <strong><code>99.500đ / nháy</code></strong> (nếu đánh bộ 4 số tốn <code>72.000đ</code>: chỉ cần <strong>trúng 1 nháy là đã LÃI RÒNG <code>+27.500đ</code></strong>; trúng 2 nháy thu <code>199.000đ</code> → <strong>LÃI RÒNG <code>+127.000đ</code></strong>!).</li>
+        <li><strong>Tách bạch 2 cơ chế để bảo vệ người chơi:</strong> Dù tỉ lệ trả thưởng Online (<code>18.000đ</code> ăn <code>99.500đ</code>) có lợi thế vượt trội (điểm hòa vốn thực tế chỉ <code>10.025%</code>/lồng), <strong>Bộ lọc chọn đài và chọn số vẫn giữ nguyên thước đo chuẩn khắt khe <code>10.69%</code>/lồng và <code>JointR1 &ge; 1.105%</code></strong> để tuyệt đối không hạ thấp tiêu chuẩn chọn số, trong khi toàn bộ Sổ cái và Bảng đi vốn được tính theo đúng mức thực thu <strong><code>18.000đ → 99.500đ</code></strong> của bạn!</li>
       </ul>
 
       <div class="callout callout-amber">
@@ -405,35 +405,35 @@
               <td><strong><code>2x2</code></strong></td>
               <td>Lấy <strong>Top 2 bóng Chục</strong> ghép chéo với <strong>Top 2 bóng Đơn Vị</strong></td>
               <td><strong>4 số</strong></td>
-              <td><code>87.000đ</code></td>
+              <td><code>72.000đ</code></td>
               <td>Khi <strong>CẢ HAI</strong> lồng cầu đều vượt chuẩn hòa vốn (<code>TensR1 &ge; 10.69%</code>) <strong>VÀ</strong> <code>ROI_2x2 &gt; 0%</code>.</td>
             </tr>
             <tr>
               <td><strong><code>1x4</code></strong></td>
               <td>Lấy <strong>Top 1 bóng Chục mạnh nhất</strong> ghép với <strong>Top 4 bóng Đơn Vị</strong></td>
               <td><strong>4 số</strong></td>
-              <td><code>87.000đ</code></td>
+              <td><code>72.000đ</code></td>
               <td>Khi Lồng Đơn Vị hội tụ mạnh (<code>&ge; 10.50%</code>) và lịch sử đài đó ăn theo Hàng Đơn Vị tốt hơn (<code>ROI_1x4</code> cao nhất).</td>
             </tr>
             <tr>
               <td><strong><code>4x1</code></strong></td>
               <td>Lấy <strong>Top 4 bóng Chục</strong> ghép với <strong>Top 1 bóng Đơn Vị mạnh nhất</strong></td>
               <td><strong>4 số</strong></td>
-              <td><code>87.000đ</code></td>
+              <td><code>72.000đ</code></td>
               <td>Khi Lồng Chục phân tán nhưng 1 bóng Đơn Vị cực nhạy và <code>ROI_4x1</code> vượt trội <code>&gt; +1.5%</code> (hoặc là bộ 4 số duy nhất có lãi dương).</td>
             </tr>
             <tr>
               <td><strong><code>3x3</code></strong></td>
               <td>Lấy <strong>Top 3 bóng Chục</strong> × <strong>Top 3 bóng Đơn Vị</strong></td>
               <td>9 số (Tham khảo)</td>
-              <td><code>195.750đ</code></td>
+              <td><code>162.000đ</code></td>
               <td>Chỉ hiển thị để tham khảo độ phủ rộng (vì đánh 9 số đều tiền dễ bị loãng biên lợi nhuận).</td>
             </tr>
             <tr>
               <td><strong><code>core_2x2_sat_3x3</code></strong></td>
               <td><strong>4 số Lõi (2x2)</strong> đánh 100% tiền + <strong>5 số Vệ tinh</strong> đánh 50% tiền</td>
               <td>9 số (4 Lõi + 5 Vệ tinh)</td>
-              <td><code>141.375đ</code></td>
+              <td><code>117.000đ</code></td>
               <td>Hiển thị tham khảo cho người muốn lót nhẹ 5 số vệ tinh quanh 4 số chủ lực.</td>
             </tr>
           </tbody>
@@ -465,17 +465,17 @@
             <tr>
               <td><span class="pill-amber">🟡 PLAY_CAUTIOUS (Đánh Thăm Dò)</span></td>
               <td><code>1.105% &le; JointR1 &lt; 1.125%</code> và <code>0% &lt; Best_OOS_ROI &lt; 3.0%</code></td>
-              <td>Đánh nhẹ thăm dò <strong><code>0.75x</code></strong> (<code>65.250đ</code> cho bộ 4 số) hoặc <code>1.00x</code>.</td>
+              <td>Đánh nhẹ thăm dò <strong><code>0.75x</code></strong> (<code>54.000đ</code> cho bộ 4 số) hoặc <code>1.00x</code> (<code>72.000đ</code>).</td>
             </tr>
             <tr>
               <td><span class="pill-green">🟢 PLAY_STANDARD (Đánh Chuẩn)</span></td>
               <td>Đạt chuẩn lọc và (<code>JointR1 &ge; 1.125%</code> hoặc <code>Best_OOS_ROI &ge; 3.0%</code>)</td>
-              <td>Đánh mức chuẩn <strong><code>1.00x</code></strong> (<code>87.000đ</code> cho bộ 4 số — mỗi số <code>21.750đ</code>).</td>
+              <td>Đánh mức chuẩn <strong><code>1.00x</code></strong> (<code>72.000đ</code> cho bộ 4 số — mỗi số <code>18.000đ</code>, trúng 1 nháy thu <code>99.500đ</code>).</td>
             </tr>
             <tr>
               <td><span class="pill-green">🟢 PLAY_PEAK (Tín Hiệu Cực Đẹp)</span></td>
               <td>Đạt chuẩn lọc và (<code>JointR1 &ge; 1.150%</code> hoặc <code>Best_OOS_ROI &ge; 8.0%</code>)</td>
-              <td>Đánh chuẩn <code>1.00x</code> (nếu chưa có lãi tích lũy) hoặc nâng lên <strong><code>1.25x – 1.50x</code> bằng tiền lời của nhà cái</strong>.</td>
+              <td>Đánh chuẩn <code>1.00x</code> (nếu chưa có lãi tích lũy) hoặc nâng lên <strong><code>1.25x (90.000đ) – 1.50x (108.000đ)</code> bằng tiền lời của nhà cái</strong>.</td>
             </tr>
           </tbody>
         </table>
@@ -515,7 +515,7 @@
             <li><strong>Đối chiếu kết quả quay thực tế lúc 17:15 chiều 26/10:</strong>
               <ul>
                 <li>Đài Phú Yên nổ giải <strong><code>18</code></strong> và giải <strong><code>14</code></strong> → <strong>Trúng 2 nháy (<code>K = 2</code>)</strong>!</li>
-                <li>Thu về <strong>lãi ròng <code>+103.000đ</code></strong> (ở mức <code>1.0x</code>) / <strong><code>+154.500đ</code></strong> (ở mức <code>1.5x</code> tiền lời nhà cái)!</li>
+                <li>Với tỉ lệ Online (<code>18.000đ</code> ăn <code>99.500đ</code>): Thu về <strong>lãi ròng <code>+127.000đ</code></strong> (ở mức <code>1.0x</code>: chi <code>72.000đ</code>, thu <code>199.000đ</code>) / <strong><code>+190.500đ</code></strong> (ở mức <code>1.5x</code> tiền lời nhà cái: chi <code>108.000đ</code>, thu <code>298.500đ</code>)!</li>
               </ul>
             </li>
           </ol>
@@ -560,11 +560,11 @@
       <h3>A. Quy Tắc Đi Vốn Bất Đối Xứng (Asymmetric House-Money Ratchet)</h3>
       <ul>
         <li><strong>Vốn gốc chuẩn ban đầu (<code>W₀ = 1.000.000đ</code>):</strong> Được coi là "vốn gốc bất khả xâm phạm".</li>
-        <li><strong>Khi chưa có lãi tích lũy (<code>W &le; 1.000.000đ</code>):</strong> Tuyệt đối <strong>CẤM</strong> nhân hệ số cược lên <code>1.25x</code> hay <code>1.50x</code> dù hôm đó tín hiệu đẹp cỡ nào (<code>PLAY_PEAK</code> cũng bị khóa ở mức tối đa <code>1.00x = 87.000đ</code>).</li>
-        <li><strong>Khi đã có "Tiền Lời Nhà Cái" (<code>C = W - 1.000.000đ &gt; 0</code>):</strong> Chỉ khi quỹ đang lời và có đệm lãi đủ lớn, hệ thống mới trích một phần nhỏ tiền lời của nhà cái để nâng mức đánh lên <code>1.25x</code> (<code>108.750đ</code>) hoặc <code>1.50x</code> (<code>130.500đ</code>) vào đúng ngày hội tụ đỉnh (<code>PLAY_PEAK</code>), nhưng có khóa chặn toán học đảm bảo: <em>"Dù hôm đó có trượt trắng 0 nháy thì tổng quỹ sau khi trừ tiền vé vẫn luôn <code>&ge; 1.000.000đ</code> (không bao giờ lẹm vào vốn gốc)!"</em></li>
+        <li><strong>Khi chưa có lãi tích lũy (<code>W &le; 1.000.000đ</code>):</strong> Tuyệt đối <strong>CẤM</strong> nhân hệ số cược lên <code>1.25x</code> hay <code>1.50x</code> dù hôm đó tín hiệu đẹp cỡ nào (<code>PLAY_PEAK</code> cũng bị khóa ở mức tối đa <code>1.00x = 72.000đ</code>).</li>
+        <li><strong>Khi đã có "Tiền Lời Nhà Cái" (<code>C = W - 1.000.000đ &gt; 0</code>):</strong> Chỉ khi quỹ đang lời và có đệm lãi đủ lớn, hệ thống mới trích một phần nhỏ tiền lời của nhà cái để nâng mức đánh lên <code>1.25x</code> (<code>90.000đ</code>) hoặc <code>1.50x</code> (<code>108.000đ</code>) vào đúng ngày hội tụ đỉnh (<code>PLAY_PEAK</code>), nhưng có khóa chặn toán học đảm bảo: <em>"Dù hôm đó có trượt trắng 0 nháy thì tổng quỹ sau khi trừ tiền vé vẫn luôn <code>&ge; 1.000.000đ</code> (không bao giờ lẹm vào vốn gốc)!"</em></li>
         <li><strong>Phanh giảm chấn &amp; Cầu chì dừng cuộc chơi (Gate 5):</strong>
           <ul>
-            <li>Nếu vốn giảm về vùng <code>700.000đ &le; W &lt; 850.000đ</code> (sụt 15%): Tự động bóp mức cược xuống một nửa (<strong><code>0.50x = 43.500đ</code></strong>).</li>
+            <li>Nếu vốn giảm về vùng <code>700.000đ &le; W &lt; 850.000đ</code> (sụt 15%): Tự động bóp mức cược xuống một nửa (<strong><code>0.50x = 36.000đ</code></strong>).</li>
             <li>Nếu vốn chạm ngưỡng cầu chì <code>W &lt; 700.000đ</code> (sụt 30%): Kích hoạt <strong><code>CapitalDisciplineError</code> — Khóa sổ dừng chơi ngay lập tức (<code>0.00x</code>)</strong>, cấm tuyệt đối tâm lý "gỡ gạc / gấp thếp"!</li>
           </ul>
         </li>
@@ -584,7 +584,7 @@
             <tr>
               <td>Hằng số giá vé, trả thưởng &amp; ngưỡng lọc</td>
               <td><code>src/xsmn_alpha/constants.py</code></td>
-              <td>Khóa cứng giá <code>21.750đ/số</code>, thưởng <code>95.000đ/nháy</code>, ngưỡng <code>JointR1 &ge; 1.105%</code>.</td>
+              <td>Khóa cứng giá Online <code>18.000đ/số</code>, thưởng <code>99.500đ/nháy</code>, ngưỡng lọc khắt khe <code>JointR1 &ge; 1.105%</code>.</td>
             </tr>
             <tr>
               <td>Lịch mở thưởng 35 đài Miền Nam &amp; Miền Trung</td>

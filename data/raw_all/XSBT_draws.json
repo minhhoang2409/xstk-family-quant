@@ -2,10 +2,10 @@
   "station_code": "XSBT",
   "station_name": "Bến Tre",
   "region": "Miền Nam",
-  "updated_at": "2026-10-26T11:03:30.593422+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-20",
-  "sha256": "f8d1504016c6375e8e02a56b3a86003eb9210d1c28bf294d6b8d872ba5824484",
+  "updated_at": "2026-10-27T15:59:35.050537+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-10-27",
+  "sha256": "c76ada35ad70f32d986c28691ddf85101df898fe41183a2ccf5dcf05a2afe2e6",
   "draws": [
     {
       "station_code": "XSBT",
@@ -5069,6 +5069,30 @@
         "29",
         "72",
         "84"
+      ]
+    },
+    {
+      "station_code": "XSBT",
+      "draw_date": "2026-10-27",
+      "prizes_last2": [
+        "15",
+        "08",
+        "97",
+        "98",
+        "27",
+        "95",
+        "65",
+        "02",
+        "25",
+        "77",
+        "01",
+        "09",
+        "38",
+        "98",
+        "68",
+        "37",
+        "67",
+        "76"
       ]
     }
   ]

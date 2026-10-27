@@ -2,10 +2,10 @@
   "station_code": "XSVT",
   "station_name": "Vũng Tàu",
   "region": "Miền Nam",
-  "updated_at": "2026-10-26T11:03:30.652987+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-20",
-  "sha256": "a87e9e9b836d2c465a11c27608822b52892c0d7084050d12ef267e1b2093389a",
+  "updated_at": "2026-10-27T15:59:36.477626+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-10-27",
+  "sha256": "0a1915e7b26f9fd6ff21421987e071c1dcb282857f98af8aac757a3cffe2fa36",
   "draws": [
     {
       "station_code": "XSVT",
@@ -5069,6 +5069,30 @@
         "73",
         "44",
         "42"
+      ]
+    },
+    {
+      "station_code": "XSVT",
+      "draw_date": "2026-10-27",
+      "prizes_last2": [
+        "37",
+        "04",
+        "95",
+        "65",
+        "90",
+        "61",
+        "47",
+        "22",
+        "08",
+        "92",
+        "32",
+        "18",
+        "25",
+        "30",
+        "59",
+        "54",
+        "17",
+        "14"
       ]
     }
   ]

@@ -16,8 +16,8 @@
   "total_cost_vnd": 17874000,
   "total_revenue_vnd": 22785500,
   "net_profit_vnd": 4911500,
-  "updated_at": "2026-10-27T05:00:00+07:00",
-  "sha256": "daf44536da04ea5ff01a1273954d33a86a083feb3f66b799a9b3ca5534f73006",
+  "updated_at": "2026-10-27T22:59:42+07:00",
+  "sha256": "ecff9dd2da04fb832e333d80e2552e90dc8ba408b15f410a614c1aad63f0d4d8",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -15239,9 +15239,39 @@
       "bankroll_before_vnd": 5911500,
       "house_money_before_vnd": 4911500,
       "cost_vnd": 0,
-      "actual_prizes_last2": [],
-      "hit_count_k": 0,
-      "hit_details": [],
+      "actual_prizes_last2": [
+        "11",
+        "90",
+        "16",
+        "89",
+        "99",
+        "48",
+        "60",
+        "32",
+        "74",
+        "09",
+        "75",
+        "49",
+        "26",
+        "50",
+        "84",
+        "89",
+        "92",
+        "22"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 4,
+          "prize_label": "Giải Sáu (3)",
+          "number": "99"
+        },
+        {
+          "prize_index": 9,
+          "prize_label": "Giải Tư (4)",
+          "number": "09"
+        }
+      ],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
       "bankroll_after_vnd": 5911500,

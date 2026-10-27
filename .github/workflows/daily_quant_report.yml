@@ -2,8 +2,8 @@ name: "Stage 3: 05:00 AM Daily Quantitative Reporter & Web Audit Publisher"
 
 on:
   schedule:
-    # 03:47 ICT (20:47 UTC previous day — off-peak minute to avoid GitHub's :00 cron queue delay so message arrives before 05:00 ICT)
-    - cron: "47 20 * * *"
+    # 00:07 ICT (17:07 UTC previous day — 7 mins past midnight ICT at off-peak :07 minute to guarantee delivery well before 05:00-06:00 ICT)
+    - cron: "7 17 * * *"
     # 17:35 ICT (10:35 UTC): Post-draw incremental 18-prize sync & ledger settlement after XSMN (16:15) & XSMT (17:15)
     - cron: "35 10 * * *"
   workflow_dispatch:

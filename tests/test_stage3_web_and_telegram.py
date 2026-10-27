@@ -860,7 +860,7 @@ class TestTask9Stage3CliAndGitOpsWorkflow:
         )
         assert workflow_path.exists()
         content = workflow_path.read_text(encoding="utf-8")
-        assert "0 22 * * *" in content
+        assert "47 20 * * *" in content
         assert "TELEGRAM_BOT_TOKEN" in content
         assert "TELEGRAM_CHAT_ID" in content
         assert "sync-35" in content

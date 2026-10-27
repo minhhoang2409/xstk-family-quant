@@ -1051,6 +1051,9 @@ def render_index_dashboard_html(
         "Không dùng AI API • Không dùng Database ngoài • "
         f"Base URL: <code>{_esc(resolved_base_url)}</code>\n"
         "    </p>\n"
+        '    <div style="margin-top: 12px;">\n'
+        '      <a href="logic_explainer.html" style="display: inline-block; background: rgba(56, 189, 248, 0.14); color: #38bdf8; border: 1px solid #38bdf8; padding: 6px 14px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">📘 Mở Sổ Tay Kiểm Toán &amp; Giải Thích Logic Chọn Số Từ A Đến Z</a>\n'
+        "    </div>\n"
         "  </header>\n"
         '  <section class="card">\n'
         "    <h2>1. Tổng Quan Hiệu Suất Quỹ Chuẩn Tham Chiếu (1.000.000 VNĐ)</h2>\n"

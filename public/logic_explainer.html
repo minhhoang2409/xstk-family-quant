@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sổ Tay Kiểm Toán &amp; Giải Thích Logic Chọn Số Từ A Đến Z — XSTK Family Quant</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #111827;
+      --card-alt: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --green: #22c55e;
+      --green-bg: rgba(34, 197, 94, 0.12);
+      --amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.12);
+      --blue: #38bdf8;
+      --blue-bg: rgba(56, 189, 248, 0.12);
+      --purple: #c084fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.68;
+      font-size: 16px;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+    .nav-bar a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .nav-bar a:hover { text-decoration: underline; }
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      border: 1px solid #4338ca;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border: 1px solid #6366f1;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.85rem;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.35rem;
+      color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    h3 {
+      margin: 20px 0 10px;
+      font-size: 1.12rem;
+      color: var(--blue);
+    }
+    p { margin: 0 0 14px; }
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .step-badge {
+      display: inline-block;
+      background: var(--blue-bg);
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      padding: 2px 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-right: 8px;
+    }
+    .callout {
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      border-left: 4px solid;
+    }
+    .callout-green { background: var(--green-bg); border-color: var(--green); }
+    .callout-amber { background: var(--amber-bg); border-color: var(--amber); }
+    .callout-red { background: var(--red-bg); border-color: var(--red); }
+    .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+    .formula-box {
+      background: #090d16;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: "JetBrains Mono", Consolas, Monaco, monospace;
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+    code {
+      font-family: "JetBrains Mono", Consolas, Monaco, monospace;
+      background: rgba(148, 163, 184, 0.15);
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.9em;
+      color: #fde68a;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--card-alt);
+      color: #e2e8f0;
+      font-weight: 700;
+    }
+    tr:nth-child(even) td {
+      background: rgba(30, 41, 59, 0.4);
+    }
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .flow-box {
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .flow-box strong {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .pill-green {
+      display: inline-block;
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    .pill-red {
+      display: inline-block;
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    .pill-amber {
+      display: inline-block;
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin: 10px 0 14px;
+    }
+    li { margin-bottom: 8px; }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-bar">
+      <div><strong>📘 XSTK Family Quant</strong> — Sổ Tay Kiểm Toán Thuật Toán (Bản Minh Bạch 100%)</div>
+      <div>
+        <a href="index.html">⬅ Về Trang Chủ Bảng Điều Khiển Gia Đình</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-badge">Tài Liệu Kiểm Toán Nội Bộ Gia Đình — Không Hộp Đen (Zero Black-Box)</div>
+      <h1>Giải Thích Logic Chọn Số &amp; Quản Trị Vốn Từ Đầu Đến Cuối (A → Z)</h1>
+      <p style="color: #cbd5e1; margin-bottom: 0;">
+        Tài liệu này được viết để trả lời câu hỏi quan trọng nhất khi vận hành một phần mềm liên quan đến tiền thật:
+        <strong>"Liệu máy tính có tính sai, nhìn trộm kết quả, hay chọn bừa một bộ số đang lỗ mà bảo mình đánh hay không?"</strong>
+        Mọi bước tính dưới đây đều chỉ rõ <strong>công thức toán học</strong>, <strong>con số thực tế</strong> và <strong>tên file + dòng code</strong> đang chạy trên GitHub của bạn.
+      </p>
+    </div>
+
+    <!-- MỤC 0: BÀI TOÁN GỐC & ĐIỂM HÒA VỐN -->
+    <div class="section-card">
+      <h2>0. Sự Thật Toán Học Về Xổ Số 18 Lô &amp; Điểm Hòa Vốn (Tại Sao Đánh Ngày Nào Cũng Đánh Là Chắc Chắn Thua?)</h2>
+      <p>
+        Trước khi nói đến thuật toán AI/Thống kê, chúng ta phải nhìn thẳng vào cấu trúc trả thưởng thực tế của Xổ số kiến thiết Miền Nam &amp; Miền Trung (<strong>18 giải/đài</strong>, từ Giải Tám đến Giải Đặc Biệt):
+      </p>
+      <ul>
+        <li><strong>Chi phí mua 1 con số (2 chữ số cuối <code>00..99</code>) bao 18 lô:</strong> Chuẩn đại lý thu <strong><code>21.750đ / 1 số</code></strong> (tương đương đánh 4 số hết <code>4 × 21.750đ = 87.000đ</code>).</li>
+        <li><strong>Tiền thưởng khi trúng 1 nháy:</strong> <strong><code>95.000đ / nháy</code></strong> (hoặc tối thiểu <code>90.000đ</code> tùy nơi; trong mô hình kiểm định gốc 3 năm ta ép mức khắt khe <code>29/99</code>, còn sổ cái thực chiến tính theo chuẩn <code>21.750đ</code> thu về <code>95.000đ/nháy</code>).</li>
+        <li><strong>Nếu lồng cầu quay hoàn toàn ngẫu nhiên (không lệch):</strong> Mỗi quả bóng <code>0..9</code> có xác suất rơi ra đúng bằng <strong><code>10.00%</code></strong>, và mỗi cặp 2 số <code>ab</code> có xác suất rơi ra ở mỗi giải đúng bằng <strong><code>1.00%</code></strong> (<code>10% × 10% = 1%</code>). Khi đó nếu ngày nào cũng đánh đều tay, người chơi sẽ lỗ trung bình khoảng <strong><code>-15% đến -18%</code></strong> tổng tiền cược cho nhà cái!</li>
+      </ul>
+
+      <div class="callout callout-amber">
+        <strong>🎯 Điểm Hòa Vốn &amp; Ngưỡng An Toàn Của Hệ Thống (Lưu tại <code>src/xsmn_alpha/constants.py</code> dòng 25–72):</strong>
+        <ul style="margin-bottom: 0;">
+          <li>Để không bị lỗ dài hạn trên một quả bóng đơn lẻ, quả bóng được chọn <strong>bắt buộc phải có tần suất trúng thực tế vượt mốc <code>10.69%</code></strong> (thay vì <code>10.00%</code> ngẫu nhiên).</li>
+          <li>Và khi ghép 2 lồng cầu (Hàng Chục × Hàng Đơn Vị), xác suất trúng đồng thời quả bóng Hạng 1 của cả 2 lồng (gọi là <strong><code>JointR1</code></strong>) phải đạt tối thiểu <strong><code>&ge; 1.105%</code></strong> (tức cao hơn mức ngẫu nhiên <code>1.000%</code> ít nhất <code>+10.5%</code> tương đối) <strong>ĐỒNG THỜI</strong> kiểm định đặt cược 3 năm quá khứ phải có <strong>lãi ròng dương (<code>OOS ROI &gt; 0%</code>)</strong> thì phần mềm mới cho phép đánh!</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MỤC 1: SƠ ĐỒ TỔNG QUAN 7 KHÂU -->
+    <div class="section-card">
+      <h2>1. Sơ Đồ Dây Chuyền 7 Khâu Xử Lý Mỗi Đêm (Lúc 00:07 Sáng)</h2>
+      <p>
+        Mỗi đêm vào lúc <strong>00:07 sáng giờ Việt Nam</strong>, máy chủ GitHub Actions tự động thức dậy và chạy đúng <strong>7 khâu tuần tự</strong> sau đây (nếu bất kỳ khâu nào phát hiện dữ liệu thiếu hoặc sai lệch, chương trình lập tức dừng khẩn cấp <em>Fail-Closed</em> chứ tuyệt đối không đoán mò):
+      </p>
+      <div class="flow-grid">
+        <div class="flow-box">
+          <strong>Khâu 1: Thu Thập &amp; Kiểm Tra 18 Giải</strong>
+          Tải kết quả 35 đài từ nguồn chính/dự phòng. Kiểm tra đủ đúng 18 giải, đúng 2 chữ số <code>00..99</code>, khớp chữ ký chống sửa đổi <code>SHA-256</code>.
+        </div>
+        <div class="flow-box">
+          <strong>Khâu 2: Khóa Thời Gian <code>&lt; Ngày D</code></strong>
+          Cắt bỏ tuyệt đối mọi dữ liệu từ ngày <code>D</code> trở đi (<code>PreDrawCutoffGate</code>). Chỉ dùng lịch sử các kỳ quay trước hôm nay để chấm điểm.
+        </div>
+        <div class="flow-box">
+          <strong>Khâu 3: Tách 2 Lồng Cầu Độc Lập</strong>
+          Tách 18 giải thành <strong>Lồng Hàng Chục</strong> (18 bóng <code>0..9</code>) và <strong>Lồng Hàng Đơn Vị</strong> (18 bóng <code>0..9</code>). Thay vì đoán mò 100 số, bài toán giảm xuống chỉ còn 10 quả bóng mỗi lồng!
+        </div>
+        <div class="flow-box">
+          <strong>Khâu 4: Chấm Xác Suất Bằng 2 Mô Hình</strong>
+          Kết hợp <strong>Nhánh 1 (BOCD phát hiện lệch lồng cầu + Phạt bóng vừa nổ nhiều)</strong> và <strong>Nhánh 2 (Chuỗi chuyển trạng thái Markov + Độ gan bóng)</strong>.
+        </div>
+        <div class="flow-box">
+          <strong>Khâu 5: Khử Nhiễu &amp; Chạy Thử 3 Năm</strong>
+          Nếu độ lệch nhỏ hơn sai số ngẫu nhiên $\sigma_{\text{nhiễu}}$, ép xác suất về <code>10.00%</code>. Chạy giả lập Walk-Forward qua 3 năm (111 kỳ) cho cả 5 cách ghép số.
+        </div>
+        <div class="flow-box">
+          <strong>Khâu 6: Ra Phán Quyết ĐÁNH / NGHỈ</strong>
+          So sánh tất cả 5–7 đài mở thưởng hôm nay. Nếu đài tốt nhất vẫn có <code>JointR1 &lt; 1.105%</code> hoặc <code>ROI &le; 0%</code> → Báo <strong>NGHỈ HÔM NAY</strong>.
+        </div>
+        <div class="flow-box">
+          <strong>Khâu 7: Đi Vốn Bảo Toàn Gốc 1 Triệu</strong>
+          Đối soát thắng/thua hôm qua. Chỉ tăng cược (<code>1.25x–1.50x</code>) khi đang có tiền lời nhà cái; tự động giảm nửa cược (<code>0.50x</code>) nếu lẹm vốn gốc.
+        </div>
+      </div>
+    </div>
+
+    <!-- MỤC 2: CHI TIẾT TỪNG KHÂU TOÁN HỌC -->
+    <div class="section-card">
+      <h2>2. Giải Phẫu Chi Tiết Từng Khâu: Máy Tính Thực Sự Tính Như Thế Nào?</h2>
+
+      <h3><span class="step-badge">Khâu 1 &amp; 2</span> Tải Dữ Liệu 35 Đài, Khóa Chặn Nhìn Trộm Tương Lai &amp; Tách 2 Lồng Cầu</h3>
+      <p>
+        <em>Mã nguồn kiểm chứng: <code>src/xsmn_alpha/ingest/canonicalizer.py</code> (dòng 30–98) &amp; <code>src/xsmn_alpha/live/daily_analyst.py</code> (dòng 98–168).</em>
+      </p>
+      <ul>
+        <li>Trong phòng quay số thực tế của các công ty XSKT Miền Nam &amp; Miền Trung, 2 chữ số cuối của mỗi giải được tạo thành từ <strong>2 lồng cầu vật lý quay hoàn toàn độc lập</strong>: 1 lồng thổi bóng Hàng Chục (gồm 10 quả bóng từ <code>0</code> đến <code>9</code>) và 1 lồng thổi bóng Hàng Đơn Vị (gồm 10 quả bóng từ <code>0</code> đến <code>9</code>).</li>
+        <li>Vì mỗi kỳ có <strong>18 giải</strong>, nên tổng số lần bóng rơi ra ở Lồng Chục luôn bằng đúng <code>18</code>, và tổng số lần bóng rơi ra ở Lồng Đơn Vị cũng luôn bằng đúng <code>18</code>.</li>
+        <li><strong>Lợi thế cốt lõi của việc tách 2 lồng cầu:</strong> Nếu bạn nhìn trực tiếp vào 100 con số (<code>00..99</code>), mỗi kỳ 18 giải chỉ phủ được chưa tới 18% mặt số — dữ liệu quá thưa, toàn là nhiễu! Nhưng khi tách thành 2 lồng 10 quả bóng (<code>0..9</code>), trung bình mỗi quả bóng xuất hiện <code>1.8 lần/kỳ</code> (<code>54 lần/30 kỳ</code>), giúp phát hiện ngay quả bóng nào đang nặng/nhẹ hoặc lồng cầu nào đang lệch chuẩn vật lý!</li>
+      </ul>
+
+      <h3><span class="step-badge">Khâu 3</span> Hai Nhánh Thuật Toán Dự Báo Từng Lồng Cầu (<code>0..9</code>)</h3>
+      <p>
+        Với mỗi lồng cầu (Chục riêng, Đơn vị riêng), hệ thống chạy song song <strong>2 nhánh toán học độc lập</strong> dựa hoàn toàn trên các kỳ quay trước ngày hôm nay (<code>&lt; D</code>):
+      </p>
+
+      <div class="two-col">
+        <div class="flow-box">
+          <strong>Nhánh 1: Mô Hình Bayes Đổi Chế Độ (BOCD) + Bộ Lọc Bóng Nổ Quá Đà (Lag-1 Exhaustion)</strong>
+          <p style="font-size: 0.92rem; margin-bottom: 8px;">
+            <em>File: <code>src/xsmn_alpha/engine/bocd_dirichlet.py</code></em>
+          </p>
+          <ul style="font-size: 0.92rem; margin-bottom: 0;">
+            <li><strong>Tự động tìm độ dài cửa sổ quá khứ tối ưu $W^*_{t-1}$:</strong> Thay vì áp cứng 30 kỳ cho mọi đài, máy tính thử nghiệm các khung <code>{15, 20, 25, 30, 40, 50, 60}</code> kỳ trên lịch sử vừa qua của chính đài đó để xem khung nào dự đoán chính xác nhất.</li>
+            <li><strong>Phát hiện nhà đài thay bóng / chỉnh lồng (BOCD):</strong> Tính độ dài chế độ hiện tại $r_t$. Nếu $r_t \le 4$ kỳ (lồng cầu vừa đột ngột đổi tính chất), hệ thống bật <strong>Cảnh báo BOCD</strong> và co xác suất về mức an toàn.</li>
+            <li><strong>Trừ điểm bóng vừa nổ dồn dập kỳ trước (Lag-1 Penalty):</strong> Nếu kỳ vừa rồi một quả bóng nổ quá nhiều nháy liên tiếp, thuật toán trừ đi một lượng $\gamma_{\text{lag1}} = 0.35$ để không bị "đu đỉnh" vào quả bóng vừa cạn xung lực.</li>
+          </ul>
+        </div>
+
+        <div class="flow-box">
+          <strong>Nhánh 2: Mô Hình Chuyển Trạng Thái Markov + Nhịp Gan Bóng (L2 Ridge Softmax)</strong>
+          <p style="font-size: 0.92rem; margin-bottom: 8px;">
+            <em>File: <code>src/xsmn_alpha/engine/markov_gap_model.py</code></em>
+          </p>
+          <ul style="font-size: 0.92rem; margin-bottom: 0;">
+            <li>Đo <strong>4 đặc trưng tuần tự</strong> của từng quả bóng <code>0..9</code>:
+              <ol>
+                <li><strong>Xác suất chuyển tiếp Markov ($x_{\text{markov}}$):</strong> Khi kỳ trước quả bóng $i$ xuất hiện $\ge 2$ lần, kỳ kế tiếp quả bóng $j$ nào thường đi kèm nhất?</li>
+                <li><strong>Độ gan chuẩn hóa ($x_{\text{gap}}$):</strong> Quả bóng đã vắng mặt liên tiếp bao nhiêu kỳ?</li>
+                <li><strong>Độ thiếu hụt 10 kỳ ($x_{\text{def10}}$):</strong> Trong 10 kỳ gần nhất, quả bóng đang thiếu bao nhiêu nháy so với kỳ vọng 18 nháy?</li>
+                <li><strong>Xung lực sau kỳ bùng nổ ($x_{\text{burst}}$):</strong> Phản ứng của quả bóng ngay sau kỳ nổ $\ge 3$ nháy.</li>
+              </ol>
+            </li>
+            <li>Huấn luyện hàm phạt bậc hai L2 ($\lambda = 25.0$) để chống học vẹt (overfitting).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3><span class="step-badge">Khâu 4</span> Bộ Gộp Xác Suất Brier &amp; Cổng Chặn Nhiễu Lý Thuyết (Tại Sao Máy Không Bị Ảo Tưởng?)</h3>
+      <p>
+        <em>Mã nguồn kiểm chứng: <code>src/xsmn_alpha/engine/calibration_pooler.py</code> (dòng 240–390).</em>
+      </p>
+      <p>
+        Đây là bước <strong>quan trọng nhất</strong> giúp phần mềm của chúng ta không bị "đoán mò" như các phần mềm soi cầu thông thường:
+      </p>
+      <div class="formula-box">
+        1. Gộp tổ hợp lồi (Convex Brier Pooler):<br/>
+        P_raw(bóng i) = w₁ · P_BOCD(i) + w₂ · P_Markov(i) + (1 - w₁ - w₂) · 0.10<br/><br/>
+        2. Cổng khử nhiễu theo sai số chuẩn lý thuyết σ_nhiễu(W*) = 1 / √(200 · W*):<br/>
+        • Nếu độ lệch mạnh nhất của lồng cầu ≤ 1.35 × σ_nhiễu(W*)  ⇒  Lồng cầu đang là NHIỄU TRẮNG!<br/>
+        • Khi đó hệ thống ÉP CỨNG xác suất của cả 10 quả bóng về đúng 10.00% (0.10) để tuyệt đối không phát tín hiệu giả!
+      </div>
+      <p>
+        Sau khi có xác suất đã khử nhiễu của 10 bóng Hàng Chục $P_{\text{chục}}(a)$ và 10 bóng Hàng Đơn Vị $P_{\text{đơn vị}}(b)$, ma trận xác suất 100 số <code>00..99</code> được tính bằng tích độc lập hai lồng cầu:
+        <code>P(ab) = P_chục(a) × P_đơn_vị(b)</code> (luôn được kiểm định tổng bằng đúng <code>1.000000</code> qua <code>SimplexCalibrationGate</code>).
+      </p>
+
+      <h3><span class="step-badge">Khâu 5</span> Chạy Thử Nghiệm Trượt 3 Năm Quá Khứ (Walk-Forward OOS) &amp; Chọn Ra Bộ Số Tối Ưu</h3>
+      <p>
+        <em>Mã nguồn kiểm chứng: <code>src/xsmn_alpha/backtest/sweet_spot_sim.py</code> &amp; <code>src/xsmn_alpha/live/daily_analyst.py</code> (dòng 203–239).</em>
+      </p>
+      <p>
+        Xếp hạng được các quả bóng mạnh nhất hôm nay rồi, <strong>nhưng nên ghép chúng theo đội hình nào?</strong> Hệ thống tự động giả lập đặt cược cuốn chiếu qua <strong>3 năm lịch sử của chính đài đó (khoảng 111 kỳ mở thưởng ngoài mẫu)</strong> cho 5 cách ghép số:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã Cấu Hình</th>
+              <th>Cách Ghép Bóng Từ 2 Lồng Cầu</th>
+              <th>Số Lượng Số</th>
+              <th>Chi Phí Chuẩn (1.0x)</th>
+              <th>Khi Nào Được Hệ Thống Chọn Làm Bộ Số Chính?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><code>2x2</code></strong></td>
+              <td>Lấy <strong>Top 2 bóng Chục</strong> ghép chéo với <strong>Top 2 bóng Đơn Vị</strong></td>
+              <td><strong>4 số</strong></td>
+              <td><code>87.000đ</code></td>
+              <td>Khi <strong>CẢ HAI</strong> lồng cầu đều vượt chuẩn hòa vốn (<code>TensR1 &ge; 10.69%</code>) <strong>VÀ</strong> <code>ROI_2x2 &gt; 0%</code>.</td>
+            </tr>
+            <tr>
+              <td><strong><code>1x4</code></strong></td>
+              <td>Lấy <strong>Top 1 bóng Chục mạnh nhất</strong> ghép với <strong>Top 4 bóng Đơn Vị</strong></td>
+              <td><strong>4 số</strong></td>
+              <td><code>87.000đ</code></td>
+              <td>Khi Lồng Đơn Vị hội tụ mạnh (<code>&ge; 10.50%</code>) và lịch sử đài đó ăn theo Hàng Đơn Vị tốt hơn (<code>ROI_1x4</code> cao nhất).</td>
+            </tr>
+            <tr>
+              <td><strong><code>4x1</code></strong></td>
+              <td>Lấy <strong>Top 4 bóng Chục</strong> ghép với <strong>Top 1 bóng Đơn Vị mạnh nhất</strong></td>
+              <td><strong>4 số</strong></td>
+              <td><code>87.000đ</code></td>
+              <td>Khi Lồng Chục phân tán nhưng 1 bóng Đơn Vị cực nhạy và <code>ROI_4x1</code> vượt trội <code>&gt; +1.5%</code> (hoặc là bộ 4 số duy nhất có lãi dương).</td>
+            </tr>
+            <tr>
+              <td><strong><code>3x3</code></strong></td>
+              <td>Lấy <strong>Top 3 bóng Chục</strong> × <strong>Top 3 bóng Đơn Vị</strong></td>
+              <td>9 số (Tham khảo)</td>
+              <td><code>195.750đ</code></td>
+              <td>Chỉ hiển thị để tham khảo độ phủ rộng (vì đánh 9 số đều tiền dễ bị loãng biên lợi nhuận).</td>
+            </tr>
+            <tr>
+              <td><strong><code>core_2x2_sat_3x3</code></strong></td>
+              <td><strong>4 số Lõi (2x2)</strong> đánh 100% tiền + <strong>5 số Vệ tinh</strong> đánh 50% tiền</td>
+              <td>9 số (4 Lõi + 5 Vệ tinh)</td>
+              <td><code>141.375đ</code></td>
+              <td>Hiển thị tham khảo cho người muốn lót nhẹ 5 số vệ tinh quanh 4 số chủ lực.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3><span class="step-badge">Khâu 6</span> Bốn Tầng Phán Quyết Mỗi Ngày: Khi Nào ĐÁNH, Khi Nào NGHỈ?</h3>
+      <p>
+        <em>Mã nguồn kiểm chứng: <code>classify_daily_verdict_tier()</code> tại <code>src/xsmn_alpha/live/daily_analyst.py</code> (dòng 241–260).</em>
+      </p>
+      <p>
+        Sau khi chấm điểm toàn bộ 5–7 đài mở thưởng trong ngày hôm đó, hệ thống xếp hạng theo <code>AlphaScore = (JointR1 - 1.0) × 100 + 0.25 × Best_OOS_ROI</code>. Đài đứng số 1 trong ngày sẽ được đưa qua phễu 4 tầng phán quyết:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Phán Quyết Ngày</th>
+              <th>Điều Kiện Toán Học Bắt Buộc</th>
+              <th>Hành Động &amp; Mức Đi Vốn Cơ Sở</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pill-red">🔴 SKIP_NO_EDGE (NGHỈ)</span></td>
+              <td><code>JointR1 &lt; 1.105%</code> <strong>HOẶC</strong> <code>Best_OOS_ROI &le; 0.0%</code></td>
+              <td><strong>ĐỨNG NGOÀI HOÀN TOÀN (Cược <code>0đ</code>).</strong> Chiếm khoảng <strong>~65% số ngày trong năm</strong> để tránh những ngày cầu nhiễu.</td>
+            </tr>
+            <tr>
+              <td><span class="pill-amber">🟡 PLAY_CAUTIOUS (Đánh Thăm Dò)</span></td>
+              <td><code>1.105% &le; JointR1 &lt; 1.125%</code> và <code>0% &lt; Best_OOS_ROI &lt; 3.0%</code></td>
+              <td>Đánh nhẹ thăm dò <strong><code>0.75x</code></strong> (<code>65.250đ</code> cho bộ 4 số) hoặc <code>1.00x</code>.</td>
+            </tr>
+            <tr>
+              <td><span class="pill-green">🟢 PLAY_STANDARD (Đánh Chuẩn)</span></td>
+              <td>Đạt chuẩn lọc và (<code>JointR1 &ge; 1.125%</code> hoặc <code>Best_OOS_ROI &ge; 3.0%</code>)</td>
+              <td>Đánh mức chuẩn <strong><code>1.00x</code></strong> (<code>87.000đ</code> cho bộ 4 số — mỗi số <code>21.750đ</code>).</td>
+            </tr>
+            <tr>
+              <td><span class="pill-green">🟢 PLAY_PEAK (Tín Hiệu Cực Đẹp)</span></td>
+              <td>Đạt chuẩn lọc và (<code>JointR1 &ge; 1.150%</code> hoặc <code>Best_OOS_ROI &ge; 8.0%</code>)</td>
+              <td>Đánh chuẩn <code>1.00x</code> (nếu chưa có lãi tích lũy) hoặc nâng lên <strong><code>1.25x – 1.50x</code> bằng tiền lời của nhà cái</strong>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MỤC 3: ĐỐI CHỨNG THỰC TẾ 2 NGÀY LIÊN TIẾP -->
+    <div class="section-card">
+      <h2>3. Kiểm Chứng Bằng Con Số Thực Tế: Vì Sao Hôm Qua (26/10) Báo ĐÁNH Trúng 2 Nháy, Còn Hôm Nay (27/10) Báo NGHỈ?</h2>
+      <p>
+        Để bạn hoàn toàn yên tâm rằng máy tính không hề chọn cảm tính, hãy nhìn vào bảng truy vết từng con số của <strong>2 ngày thực tế liên tiếp</strong> vừa diễn ra trên hệ thống của bạn:
+      </p>
+
+      <div class="two-col">
+        <div class="callout callout-green" style="margin: 0;">
+          <h3 style="color: var(--green); margin-top: 0;">✅ Thứ 2 (26/10/2026) — Đài Phú Yên (XSPY)</h3>
+          <ol style="font-size: 0.93rem;">
+            <li><strong>Kiểm tra độ hội tụ 2 lồng cầu (<code>&lt; 26/10</code>):</strong>
+              <ul>
+                <li>Lồng Chục trúng Top 1: <strong><code>10.76%</code></strong> (<code>&ge; 10.69%</code> ✅)</li>
+                <li>Lồng Đơn Vị trúng Top 1: <strong><code>11.26%</code></strong> (<code>&ge; 10.69%</code> ✅)</li>
+                <li>Xác suất hội tụ kép: <code>JointR1 = (10.76 × 11.26)/100 = <strong>1.212%</strong></code> (vượt xa mốc <code>1.150%</code> của <code>PLAY_PEAK</code> ✅).</li>
+              </ul>
+            </li>
+            <li><strong>Xếp hạng quả bóng mạnh nhất trước giờ quay:</strong>
+              <ul>
+                <li>Lồng Chục: Top 1 là bóng <strong><code>1</code></strong> (<code>10.04%</code>), tiếp theo là <code>8, 9, 0</code>.</li>
+                <li>Lồng Đơn Vị: Top 4 là bóng <strong><code>1</code></strong> (<code>10.38%</code>), <strong><code>4</code></strong> (<code>10.19%</code>), <strong><code>9</code></strong> (<code>10.15%</code>), <strong><code>8</code></strong> (<code>10.08%</code>).</li>
+              </ul>
+            </li>
+            <li><strong>Tại sao chọn bộ <code>1x4</code> (<code>11, 14, 18, 19</code>) mà bỏ qua <code>2x2</code> (<code>11, 14, 81, 84</code>)?</strong>
+              <ul>
+                <li>Trên 111 kỳ quá khứ của Phú Yên, bộ <code>2x2</code> bị âm vốn (<code>ROI = -6.94%</code>), trong khi bộ <strong><code>1x4</code> đạt lãi dương <code>ROI = +1.82%</code></strong> (tỷ lệ thắng ngày <code>62.16%</code>)!</li>
+                <li>Thuật toán lập tức loại bỏ <code>2x2</code> và chọn <strong><code>1x4: 11, 14, 18, 19</code></strong>.</li>
+              </ul>
+            </li>
+            <li><strong>Đối chiếu kết quả quay thực tế lúc 17:15 chiều 26/10:</strong>
+              <ul>
+                <li>Đài Phú Yên nổ giải <strong><code>18</code></strong> và giải <strong><code>14</code></strong> → <strong>Trúng 2 nháy (<code>K = 2</code>)</strong>!</li>
+                <li>Thu về <strong>lãi ròng <code>+103.000đ</code></strong> (ở mức <code>1.0x</code>) / <strong><code>+154.500đ</code></strong> (ở mức <code>1.5x</code> tiền lời nhà cái)!</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div class="callout callout-red" style="margin: 0;">
+          <h3 style="color: var(--red); margin-top: 0;">🛑 Thứ 3 (27/10/2026) — Đài Đắk Lắk (XSDLK)</h3>
+          <ol style="font-size: 0.93rem;">
+            <li><strong>Kiểm tra độ hội tụ 2 lồng cầu (<code>&lt; 27/10</code>):</strong>
+              <ul>
+                <li>Trong 5 đài Thứ 3 (<code>XSDLK, XSBT, XSQNM, XSVT, XSBL</code>), đài cao nhất là Đắk Lắk (<code>XSDLK</code>).</li>
+                <li>Lồng Chục đạt <code>10.91%</code>, <strong>NHƯNG Lồng Đơn Vị tụt xuống chỉ còn <code>9.41%</code></strong> (thấp hơn cả mức ngẫu nhiên <code>10.00%</code> ❌)!</li>
+                <li>Nhân 2 lồng lại: <code>JointR1 = (10.91 × 9.41)/100 = <strong>1.027%</strong></code> — <strong>thấp hơn ngưỡng an toàn tối thiểu <code>1.105%</code> ❌</strong>!</li>
+              </ul>
+            </li>
+            <li><strong>Cổng khử nhiễu hoạt động như thế nào?</strong>
+              <ul>
+                <li>Bộ lọc <code>CalibratedProbabilityPooler</code> phát hiện độ lệch lồng cầu của Đắk Lắk nằm lọt thỏm trong vùng nhiễu trắng $\sigma_{\text{nhiễu}}$, nên tự động kéo xác suất dự báo của cả 10 bóng về đúng <strong><code>10.00%</code></strong>.</li>
+              </ul>
+            </li>
+            <li><strong>Phán quyết cuối cùng:</strong>
+              <ul>
+                <li>Vì <code>JointR1 = 1.027% &lt; 1.105%</code>, hàm <code>classify_daily_verdict_tier()</code> khóa cứng phán quyết: <strong><code>🔴 KHÔNG NÊN ĐÁNH — HÔM NAY NGHỈ (SKIP_NO_EDGE)</code></strong>.</li>
+                <li>Số tiền xuất quỹ hôm nay = <strong><code>0đ</code></strong> (Giữ nguyên 100% vốn và tiền lãi hôm qua!).</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- MỤC 4: KỶ LUẬT ĐI VỐN & 12 CHỐT CHẶN AN TOÀN -->
+    <div class="section-card">
+      <h2>4. Cơ Chế Bảo Vệ Tiền Thật: Quy Tắc "Tiền Nhà Cái" &amp; 12 Chốt Chặn Chống Lỗi</h2>
+      <p>
+        <em>Mã nguồn kiểm chứng: <code>src/xsmn_alpha/live/ledger.py</code> (dòng 56–180).</em>
+      </p>
+      <p>
+        Vì phần mềm phục vụ quyết định tiền bạc của gia đình, hệ thống được trang bị <strong>2 lớp giáp bảo vệ vốn</strong> và đã trải qua đợt <strong>Kiểm Toán Đối Kháng (Doubt-Driven Adversarial Audit)</strong> gồm 138 bài kiểm thử tự động:
+      </p>
+
+      <h3>A. Quy Tắc Đi Vốn Bất Đối Xứng (Asymmetric House-Money Ratchet)</h3>
+      <ul>
+        <li><strong>Vốn gốc chuẩn ban đầu (<code>W₀ = 1.000.000đ</code>):</strong> Được coi là "vốn gốc bất khả xâm phạm".</li>
+        <li><strong>Khi chưa có lãi tích lũy (<code>W &le; 1.000.000đ</code>):</strong> Tuyệt đối <strong>CẤM</strong> nhân hệ số cược lên <code>1.25x</code> hay <code>1.50x</code> dù hôm đó tín hiệu đẹp cỡ nào (<code>PLAY_PEAK</code> cũng bị khóa ở mức tối đa <code>1.00x = 87.000đ</code>).</li>
+        <li><strong>Khi đã có "Tiền Lời Nhà Cái" (<code>C = W - 1.000.000đ &gt; 0</code>):</strong> Chỉ khi quỹ đang lời và có đệm lãi đủ lớn, hệ thống mới trích một phần nhỏ tiền lời của nhà cái để nâng mức đánh lên <code>1.25x</code> (<code>108.750đ</code>) hoặc <code>1.50x</code> (<code>130.500đ</code>) vào đúng ngày hội tụ đỉnh (<code>PLAY_PEAK</code>), nhưng có khóa chặn toán học đảm bảo: <em>"Dù hôm đó có trượt trắng 0 nháy thì tổng quỹ sau khi trừ tiền vé vẫn luôn <code>&ge; 1.000.000đ</code> (không bao giờ lẹm vào vốn gốc)!"</em></li>
+        <li><strong>Phanh giảm chấn &amp; Cầu chì dừng cuộc chơi (Gate 5):</strong>
+          <ul>
+            <li>Nếu vốn giảm về vùng <code>700.000đ &le; W &lt; 850.000đ</code> (sụt 15%): Tự động bóp mức cược xuống một nửa (<strong><code>0.50x = 43.500đ</code></strong>).</li>
+            <li>Nếu vốn chạm ngưỡng cầu chì <code>W &lt; 700.000đ</code> (sụt 30%): Kích hoạt <strong><code>CapitalDisciplineError</code> — Khóa sổ dừng chơi ngay lập tức (<code>0.00x</code>)</strong>, cấm tuyệt đối tâm lý "gỡ gạc / gấp thếp"!</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>B. Bảng Chỉ Đường Mã Nguồn (Để Bạn Có Thể Kiểm Tra Bất Kỳ File Nào)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Thành Phần Logic</th>
+              <th>Đường Dẫn File Trong Kho Code</th>
+              <th>Chốt Chặn An Toàn Đang Bảo Vệ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hằng số giá vé, trả thưởng &amp; ngưỡng lọc</td>
+              <td><code>src/xsmn_alpha/constants.py</code></td>
+              <td>Khóa cứng giá <code>21.750đ/số</code>, thưởng <code>95.000đ/nháy</code>, ngưỡng <code>JointR1 &ge; 1.105%</code>.</td>
+            </tr>
+            <tr>
+              <td>Lịch mở thưởng 35 đài Miền Nam &amp; Miền Trung</td>
+              <td><code>src/xsmn_alpha/live/registry.py</code></td>
+              <td>Kiểm tra đúng thứ trong tuần và đúng mã đài hợp lệ.</td>
+            </tr>
+            <tr>
+              <td>Đồng bộ 18 giải &amp; chữ ký chống hỏng dữ liệu</td>
+              <td><code>src/xsmn_alpha/live/multi_fetcher.py</code></td>
+              <td><strong>Gate 1 (DataSchemaGate):</strong> Đúng 18 giải <code>00..99</code> + kiểm tra mã băm <code>SHA-256</code>.</td>
+            </tr>
+            <tr>
+              <td>Mô hình Bayes BOCD &amp; Chuỗi Markov</td>
+              <td><code>src/xsmn_alpha/engine/bocd_dirichlet.py</code><br/><code>src/xsmn_alpha/engine/markov_gap_model.py</code></td>
+              <td><strong>Gate 2 (PreDrawCutoffGate):</strong> Cấm tuyệt đối dùng dữ liệu ngày <code>&ge; D</code>.</td>
+            </tr>
+            <tr>
+              <td>Bộ gộp xác suất &amp; Cổng khử nhiễu trắng</td>
+              <td><code>src/xsmn_alpha/engine/calibration_pooler.py</code></td>
+              <td><strong>Gate 3 (SimplexCalibrationGate):</strong> Tổng xác suất 10 bóng = <code>1.0</code>; tự ép về <code>10%</code> khi nhiễu.</td>
+            </tr>
+            <tr>
+              <td>Chấm điểm đài hàng ngày &amp; chọn bộ số</td>
+              <td><code>src/xsmn_alpha/live/daily_analyst.py</code></td>
+              <td><strong>Model B1 ROI Gate:</strong> Không bao giờ chọn cấu hình đang có ROI lịch sử âm.</td>
+            </tr>
+            <tr>
+              <td>Sổ cái 1 Triệu &amp; Đi vốn tiền nhà cái</td>
+              <td><code>src/xsmn_alpha/live/ledger.py</code></td>
+              <td><strong>Gate 5 (CapitalPreservationGate):</strong> Giảm nửa vốn ở <code>850k</code>, dừng khẩn cấp ở <code>700k</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-blue" style="margin-bottom: 0;">
+        <strong>💡 Lời Nhắc Chân Thành Cho Cả Gia Đình:</strong>
+        <p style="margin-bottom: 0;">
+          Thuật toán định lượng không phải là "cây đũa thần" biết trước 100% chiều nay lồng cầu nổ số mấy — vì mỗi kỳ quay vẫn luôn có xác suất trượt. Sức mạnh thực sự giúp phương pháp này tạo ra lợi nhuận dương (<strong>+807.500đ / +80.75%</strong> qua 299 ngày kiểm định thực nghiệm đầu năm 2026) nằm ở <strong>KỶ LUẬT SẮT ĐÁ</strong>:
+          <strong>Nghỉ hoàn toàn vào những ngày cầu nhiễu (~2/3 số ngày trong năm)</strong>, chỉ đánh nhỏ đúng 4 con số khi cả 2 lồng cầu cùng lệch chuẩn rõ rệt, và <strong>tuyệt đối không bao giờ gấp thếp khi thua</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      Tài liệu Kiểm toán Thuật toán Nội bộ Gia đình — <strong>XSTK Family Quant Platform</strong> • Tự động cập nhật trên GitHub Pages
+    </div>
+  </div>
+</body>
+</html>

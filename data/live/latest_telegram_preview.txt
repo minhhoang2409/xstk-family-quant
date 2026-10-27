@@ -1,4 +1,4 @@
-<b>📡 BẢN TIN 05:00 SÁNG — THỨ 3 (27/10/2026)</b>
+<b>📡 BẢN TIN 05:00 SÁNG — THỨ 4 (28/10/2026)</b>
 ────────────
 
 <b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>
@@ -7,9 +7,9 @@
 
 <b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>
 • <b>Không đánh đài nào hôm nay (CHỈ QUAN SÁT).</b>
-• <i>Đài quan sát tham khảo (Đắk Lắk - Miền Trung, XSDLK):</i> Bộ <code>2x2</code>: <b>03, 09, 93, 99</b>
-• <i>Các đài nghỉ hôm nay: Đắk Lắk (XSDLK), Bến Tre (XSBT), Quảng Nam (XSQNM), Vũng Tàu (XSVT), Bạc Liêu (XSBL).</i>
+• <i>Đài quan sát tham khảo (Cần Thơ - Miền Nam, XSCT):</i> Bộ <code>1x4</code>: <b>44, 45, 46, 47</b>
+• <i>Các đài nghỉ hôm nay: Cần Thơ (XSCT), Đà Nẵng (XSDNG), Sóc Trăng (XSST), Khánh Hòa (XSKH), Đồng Nai (XSDN).</i>
 
 ────────────
 💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>
-🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-27.html">Xem Trang Web Giải Trình Chi Tiết Ngày 27/10/2026 (2026-10-27)</a>
+🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-28.html">Xem Trang Web Giải Trình Chi Tiết Ngày 28/10/2026 (2026-10-28)</a>

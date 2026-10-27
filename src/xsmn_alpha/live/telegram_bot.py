@@ -481,39 +481,43 @@ def dispatch_telegram_briefing(
     resolved_chat_id = (
         chat_id if chat_id is not None else os.environ.get("TELEGRAM_CHAT_ID", "")
     ).strip()
+    chat_ids = [cid.strip() for cid in resolved_chat_id.split(",") if cid.strip()]
 
-    if not resolved_token or not resolved_chat_id:
+    if not resolved_token or not chat_ids:
         raise DataIntegrityError(
             "Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID when dry_run=False. "
             "Configure environment variables or pass --dry-run."
         )
 
     api_url = f"{TELEGRAM_API_BASE_URL}/bot{resolved_token}/sendMessage"
-    payload = {
-        "chat_id": resolved_chat_id,
-        "text": message_html,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": False,
-    }
 
     def _post_with_client(http_client: httpx.Client) -> dict[str, Any]:
-        try:
-            response = http_client.post(api_url, json=payload)
-        except httpx.HTTPError as exc:
-            raise DataIntegrityError(f"Telegram API network error: {exc}") from exc
+        last_body: dict[str, Any] = {}
+        for target_cid in chat_ids:
+            payload = {
+                "chat_id": target_cid,
+                "text": message_html,
+                "parse_mode": "HTML",
+                "disable_web_page_preview": False,
+            }
+            try:
+                response = http_client.post(api_url, json=payload)
+            except httpx.HTTPError as exc:
+                raise DataIntegrityError(f"Telegram API network error: {exc}") from exc
 
-        if response.status_code != 200:
-            raise DataIntegrityError(
-                f"Telegram API returned non-200 status ({response.status_code}): {response.text}"
-            )
-        try:
-            body = response.json()
-        except Exception as exc:
-            raise DataIntegrityError(f"Telegram API returned invalid JSON: {exc}") from exc
+            if response.status_code != 200:
+                raise DataIntegrityError(
+                    f"Telegram API returned non-200 status ({response.status_code}): {response.text}"
+                )
+            try:
+                body = response.json()
+            except Exception as exc:
+                raise DataIntegrityError(f"Telegram API returned invalid JSON: {exc}") from exc
 
-        if not isinstance(body, dict) or not body.get("ok", False):
-            raise DataIntegrityError(f"Telegram API rejected message: {body!r}")
-        return body
+            if not isinstance(body, dict) or not body.get("ok", False):
+                raise DataIntegrityError(f"Telegram API rejected message: {body!r}")
+            last_body = body
+        return last_body
 
     if client is not None:
         tg_resp = _post_with_client(client)

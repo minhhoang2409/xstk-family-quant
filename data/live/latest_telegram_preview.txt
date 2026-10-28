@@ -1,15 +1,15 @@
-<b>📡 BẢN TIN 05:00 SÁNG — THỨ 4 (28/10/2026)</b>
+<b>📡 BẢN TIN 05:00 SÁNG — THỨ 5 (29/10/2026)</b>
 ────────────
 
 <b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>
 👉 🔴 <b>KHÔNG NÊN ĐÁNH — HÔM NAY NGHỈ (SKIP_NO_EDGE)</b>
-• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> 🛑 <b>NGHỈ ĐỊNH KỲ (0.0x)</b> — Thứ 4 (Hạng #2/7, Max Chi2=<code>14.19</code>) thuộc <b>2 ngày lồng cầu cân bằng nhất tuần (Thứ 2, Thứ 4)</b>, nghỉ định kỳ để bảo toàn vốn.
+• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> 🛑 <b>NGHỈ ĐỊNH KỲ (0.0x)</b> — Thứ 5 (Hạng #2/7, Max Chi2=<code>16.52</code>) thuộc <b>2 ngày lồng cầu cân bằng nhất tuần (Thứ 2, Thứ 5)</b>, nghỉ định kỳ để bảo toàn vốn.
 <i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>
 
 <b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>
 • <b>Không đánh đài nào hôm nay (CHỈ QUAN SÁT — 0.0x).</b>
-• <i>Đài quan sát tham khảo (Đồng Nai - Miền Nam, XSDN):</i> Bộ <code>4x1</code>: <b>03, 13, 43, 83</b> | Bộ <code>sweet_5</code> (5 số): <b>10, 13, 14, 83, 84</b>
-• <i>Các đài nghỉ hôm nay: Đồng Nai (XSDN), Sóc Trăng (XSST), Đà Nẵng (XSDNG), Khánh Hòa (XSKH), Cần Thơ (XSCT).</i>
+• <i>Đài quan sát tham khảo (Tây Ninh - Miền Nam, XSTN):</i> Bộ <code>1x4</code>: <b>80, 85, 87, 88</b> | Bộ <code>sweet_5</code> (5 số): <b>17, 18, 38, 87, 88</b>
+• <i>Các đài nghỉ hôm nay: Tây Ninh (XSTN), Quảng Trị (XSQT), An Giang (XSAG), Bình Định (XSBDI), Bình Thuận (XSBTH), Quảng Bình (XSQB).</i>
 
 <b>🛡️ Kỷ Luật Tiền Chợ Đều Tay 1.0x (Tuyệt đối không gấp thếp)</b>
 • Hệ số vốn: <b>0.0x</b> (5 ngày chơi đều tay <code>1.0x</code>, 2 ngày cân bằng nhất tuần nghỉ <code>0.0x</code>; <b>tuyệt đối không gấp thếp</b>).
@@ -17,4 +17,4 @@
 
 ────────────
 💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>
-🔗 <a href="https://xstk-family.pages.dev/daily/2026-10-28.html">Xem Trang Web Giải Trình Chi Tiết Ngày 28/10/2026 (2026-10-28)</a>
+🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-29.html">Xem Trang Web Giải Trình Chi Tiết Ngày 29/10/2026 (2026-10-29)</a>

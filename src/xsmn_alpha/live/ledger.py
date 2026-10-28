@@ -16,11 +16,11 @@ from xsmn_alpha.constants import (
     BENCHMARK_INITIAL_BANKROLL_VND,
     BENCHMARK_PAYOUT_PER_HIT_VND,
     BENCHMARK_STAKE_PER_NUMBER_VND,
-    EXTENDED_SWEET_SPOT_CONFIGS,
     HOUSE_MONEY_MAX_SURPLUS_FRACTION,
     HOUSE_MONEY_MIN_BUFFER_DAYS,
     PRIZES_PER_DRAW,
     SAMPLE_CAPITAL_TIERS_VND,
+    STAGE4_SWEET_SPOT_CONFIGS,
 )
 from xsmn_alpha.exceptions import CapitalDisciplineError, DataIntegrityError
 from xsmn_alpha.live.multi_fetcher import DEFAULT_RAW_ALL_DIR, load_station_raw_cache
@@ -37,6 +37,7 @@ from xsmn_alpha.schemas import (
     HitDetailRecord,
     RegionName,
     SampleCapitalAllocationRow,
+    Weekly52AndFlatStakeGate,
     validate_iso_date,
     validate_station_code_35,
     validate_two_digit_ascii,
@@ -127,6 +128,7 @@ def compute_house_money_multiplier(
     initial_bankroll_vnd: int = BENCHMARK_INITIAL_BANKROLL_VND,
     base_daily_cost_vnd: int = BENCHMARK_BASE_DAILY_COST_4NUM_VND,
     verdict_tier: DailyVerdictTier | None = None,
+    lock_flat_1x: bool = False,
 ) -> tuple[float, int]:
     """Compute fail-closed CPPI / House-Money capital multiplier and daily bet in VND (Gate 5)."""
     _validate_positive_int_param(current_bankroll_vnd, "current_bankroll_vnd")
@@ -139,6 +141,7 @@ def compute_house_money_multiplier(
             current_bankroll_vnd=current_bankroll_vnd,
             initial_bankroll_vnd=initial_bankroll_vnd,
             base_daily_cost_vnd=base_daily_cost_vnd,
+            lock_flat_1x=lock_flat_1x,
         )
 
     if not passes_selective_alpha:
@@ -154,6 +157,9 @@ def compute_house_money_multiplier(
             f"Gate 5 Capital Discipline violation: base_daily_cost_vnd ({base_daily_cost_vnd}) "
             f"> current_bankroll_vnd ({current_bankroll_vnd})."
         )
+
+    if lock_flat_1x:
+        return (1.0, base_daily_cost_vnd)
 
     house_money_vnd = max(0, current_bankroll_vnd - initial_bankroll_vnd)
     min_buffer_vnd = HOUSE_MONEY_MIN_BUFFER_DAYS * base_daily_cost_vnd
@@ -181,6 +187,7 @@ def compute_multiplier_for_verdict_tier(
     current_bankroll_vnd: int,
     initial_bankroll_vnd: int = BENCHMARK_INITIAL_BANKROLL_VND,
     base_daily_cost_vnd: int = BENCHMARK_BASE_DAILY_COST_4NUM_VND,
+    lock_flat_1x: bool = False,
 ) -> tuple[float, int]:
     """Compute CPPI / House-Money multiplier and daily bet for a specific DailyVerdictTier."""
     _validate_positive_int_param(current_bankroll_vnd, "current_bankroll_vnd")
@@ -207,7 +214,7 @@ def compute_multiplier_for_verdict_tier(
             f"> current_bankroll_vnd ({current_bankroll_vnd})."
         )
 
-    if verdict_tier == "PLAY_CAUTIOUS":
+    if lock_flat_1x or verdict_tier == "PLAY_CAUTIOUS":
         return (1.0, base_daily_cost_vnd)
 
     strong_conv = verdict_tier == "PLAY_PEAK"
@@ -217,6 +224,7 @@ def compute_multiplier_for_verdict_tier(
         current_bankroll_vnd=current_bankroll_vnd,
         initial_bankroll_vnd=initial_bankroll_vnd,
         base_daily_cost_vnd=base_daily_cost_vnd,
+        lock_flat_1x=lock_flat_1x,
     )
 
 
@@ -297,16 +305,44 @@ def build_capital_guidance(
     recommended_multiplier: float | None = None,
     num_numbers: int = 4,
     sizing_rationale_vi: str = "",
+    lock_flat_1x: bool = False,
 ) -> CapitalGuidanceContract:
-    """Build a fail-closed CapitalGuidanceContract enforcing Gate 4 and Gate 5."""
+    """Build a fail-closed CapitalGuidanceContract enforcing Gate 4, Gate 5, and Gate 6."""
+    _validate_positive_int_param(num_numbers, "num_numbers")
+    _validate_positive_int_param(base_stake_per_number_vnd, "base_stake_per_number_vnd")
+    if num_numbers != 4 and base_daily_cost_vnd == BENCHMARK_BASE_DAILY_COST_4NUM_VND:
+        base_daily_cost_vnd = num_numbers * base_stake_per_number_vnd
+    elif num_numbers == 4 and base_daily_cost_vnd != BENCHMARK_BASE_DAILY_COST_4NUM_VND:
+        if base_daily_cost_vnd > 0 and base_daily_cost_vnd % base_stake_per_number_vnd == 0:
+            num_numbers = base_daily_cost_vnd // base_stake_per_number_vnd
+    if base_daily_cost_vnd != num_numbers * base_stake_per_number_vnd:
+        raise CapitalDisciplineError(
+            f"base_daily_cost_vnd ({base_daily_cost_vnd}) != "
+            f"num_numbers * base_stake_per_number_vnd ({num_numbers * base_stake_per_number_vnd})."
+        )
+
     computed_mult, computed_bet = compute_multiplier_for_verdict_tier(
         verdict_tier,
         current_bankroll_vnd=current_bankroll_vnd,
         initial_bankroll_vnd=initial_bankroll_vnd,
         base_daily_cost_vnd=base_daily_cost_vnd,
+        lock_flat_1x=lock_flat_1x,
     )
     mult = float(computed_mult if recommended_multiplier is None else recommended_multiplier)
     should_play = verdict_tier != "SKIP_NO_EDGE"
+
+    if lock_flat_1x:
+        if not should_play and abs(mult) > 1e-9:
+            raise CapitalDisciplineError(
+                f"Gate 6 (Weekly52AndFlatStakeGate) violation: SKIP_NO_EDGE with "
+                f"lock_flat_1x=True requires recommended_multiplier == 0.0, got {mult}."
+            )
+        Weekly52AndFlatStakeGate.enforce_flat_stake(
+            mult,
+            should_play_today=should_play,
+            lock_flat_1x=True,
+        )
+
     house_money_vnd = max(0, current_bankroll_vnd - initial_bankroll_vnd)
     min_buffer_vnd = HOUSE_MONEY_MIN_BUFFER_DAYS * base_daily_cost_vnd
 
@@ -333,10 +369,24 @@ def build_capital_guidance(
 
     if not sizing_rationale_vi:
         if verdict_tier == "SKIP_NO_EDGE":
+            if lock_flat_1x:
+                sizing_rationale_vi = (
+                    f"Thực thi kỷ luật BÁO NGHỈ (0.00x — Nghỉ định kỳ Lịch Chơi 5/2 "
+                    f"theo độ cân bằng lồng cầu hoặc đứng ngoài bảo toàn vốn). "
+                    f"Khóa phanh tiền mặt 0.0x (cược 0 VNĐ) "
+                    f"để bảo toàn 100% số dư {current_bankroll_vnd:,} VNĐ."
+                )
+            else:
+                sizing_rationale_vi = (
+                    f"Toàn bộ các đài mở thưởng hôm nay đều nằm trong vùng nhiễu trắng "
+                    f"(chưa đạt ngưỡng lọc lợi thế chọn lọc). Khóa phanh tiền mặt 0.0x "
+                    f"(cược 0 VNĐ) để bảo toàn 100% số dư {current_bankroll_vnd:,} VNĐ."
+                )
+        elif lock_flat_1x:
             sizing_rationale_vi = (
-                f"Toàn bộ các đài mở thưởng hôm nay đều nằm trong vùng nhiễu trắng "
-                f"(chưa đạt ngưỡng lọc lợi thế chọn lọc). Khóa phanh tiền mặt 0.0x "
-                f"(cược 0 VNĐ) để bảo toàn 100% số dư {current_bankroll_vnd:,} VNĐ."
+                f"Thực thi Kỷ Luật Tiền Chợ Đều Tay 1.00x ({bet_vnd:,} VNĐ/ngày cho "
+                f"{num_numbers} số, tuyệt đối không gấp thếp). Quỹ Lãi Ròng hiện đạt "
+                f"{house_money_vnd:,} VNĐ trên vốn gốc {initial_bankroll_vnd:,} VNĐ."
             )
         elif mult > 1.0:
             extra_vnd = bet_vnd - base_daily_cost_vnd
@@ -716,6 +766,7 @@ def record_pending_recommendation(
     weekday_vn: str | None = None,
     updated_at: str | None = None,
     ledger_path: str | Path | None = None,
+    lock_flat_1x: bool = False,
 ) -> BenchmarkLedgerState:
     """Record a pre-draw recommendation in the ledger (PENDING, or SETTLED if SKIP_NO_EDGE)."""
     validate_iso_date(draw_date)
@@ -744,6 +795,58 @@ def record_pending_recommendation(
             existing_idx = idx
             break
 
+    # Determine bankroll_before_vnd from preceding entries
+    entries_before = (
+        state.entries[:existing_idx]
+        if existing_idx is not None
+        else [e for e in state.entries if e.draw_date < draw_date]
+    )
+    bankroll_before = (
+        entries_before[-1].bankroll_after_vnd if entries_before else state.starting_bankroll_vnd
+    )
+    hm_before = max(0, bankroll_before - state.starting_bankroll_vnd)
+
+    cfg_meta = STAGE4_SWEET_SPOT_CONFIGS.get(chosen_config_id)
+    if cfg_meta is None:
+        raise DataIntegrityError(f"Unknown chosen_config_id {chosen_config_id!r}.")
+    if not isinstance(selected_numbers, Sequence) or isinstance(selected_numbers, (str, bytes)):
+        raise DataIntegrityError("selected_numbers must be a sequence of 2-digit ASCII strings.")
+    cleaned_selected = [validate_two_digit_ascii(num) for num in selected_numbers]
+    if len(set(cleaned_selected)) != len(cleaned_selected):
+        raise DataIntegrityError("selected_numbers must not contain duplicates.")
+    expected_num_numbers = int(cfg_meta["num_numbers"])
+    if cleaned_selected and len(cleaned_selected) != expected_num_numbers:
+        raise DataIntegrityError(
+            f"len(selected_numbers) ({len(cleaned_selected)}) != "
+            f"expected num_numbers ({expected_num_numbers}) for {chosen_config_id!r}."
+        )
+    if chosen_config_id == "sweet_5" and cleaned_selected:
+        Weekly52AndFlatStakeGate.enforce_sweet_5(cleaned_selected)
+
+    base_cost_for_cfg = int(
+        round(float(cfg_meta["cost_per_draw"]) * state.base_stake_per_number_vnd)
+    )
+
+    auto_mult, auto_cost = compute_multiplier_for_verdict_tier(
+        verdict_tier,
+        current_bankroll_vnd=bankroll_before,
+        initial_bankroll_vnd=state.starting_bankroll_vnd,
+        base_daily_cost_vnd=base_cost_for_cfg,
+        lock_flat_1x=lock_flat_1x,
+    )
+    eff_mult = float(auto_mult if recommended_multiplier is None else recommended_multiplier)
+    if lock_flat_1x:
+        if verdict_tier == "SKIP_NO_EDGE" and abs(eff_mult) > 1e-9:
+            raise CapitalDisciplineError(
+                f"Gate 6 (Weekly52AndFlatStakeGate) violation: SKIP_NO_EDGE with "
+                f"lock_flat_1x=True requires recommended_multiplier == 0.0, got {eff_mult}."
+            )
+        Weekly52AndFlatStakeGate.enforce_flat_stake(
+            eff_mult,
+            should_play_today=(verdict_tier != "SKIP_NO_EDGE"),
+            lock_flat_1x=True,
+        )
+
     if (
         existing_idx is not None
         and state.entries[existing_idx].settlement_status == "SETTLED"
@@ -756,32 +859,6 @@ def record_pending_recommendation(
         if ledger_path is not None:
             save_benchmark_ledger(state, ledger_path)
         return state
-
-    # Determine bankroll_before_vnd from preceding entries
-    entries_before = (
-        state.entries[:existing_idx]
-        if existing_idx is not None
-        else [e for e in state.entries if e.draw_date < draw_date]
-    )
-    bankroll_before = (
-        entries_before[-1].bankroll_after_vnd if entries_before else state.starting_bankroll_vnd
-    )
-    hm_before = max(0, bankroll_before - state.starting_bankroll_vnd)
-
-    cfg_meta = EXTENDED_SWEET_SPOT_CONFIGS.get(chosen_config_id)
-    if cfg_meta is None:
-        raise DataIntegrityError(f"Unknown chosen_config_id {chosen_config_id!r}.")
-    base_cost_for_cfg = int(
-        round(float(cfg_meta["cost_per_draw"]) * state.base_stake_per_number_vnd)
-    )
-
-    auto_mult, auto_cost = compute_multiplier_for_verdict_tier(
-        verdict_tier,
-        current_bankroll_vnd=bankroll_before,
-        initial_bankroll_vnd=state.starting_bankroll_vnd,
-        base_daily_cost_vnd=base_cost_for_cfg,
-    )
-    eff_mult = float(auto_mult if recommended_multiplier is None else recommended_multiplier)
     if cost_vnd is not None:
         eff_cost = int(cost_vnd)
     elif eff_mult == 0.0:

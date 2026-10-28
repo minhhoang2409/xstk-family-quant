@@ -1,6 +1,12 @@
-name: "Stage 3: 05:00 AM Daily Quantitative Reporter & Web Audit Publisher"
+name: "Stage 4: 05:00 AM Daily Quantitative Reporter & Web Audit Publisher"
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/xsmn_alpha/**"
+      - ".github/workflows/daily_quant_report.yml"
   schedule:
     # 00:07 ICT (17:07 UTC previous day — 7 mins past midnight ICT at off-peak :07 minute to guarantee delivery well before 05:00-06:00 ICT)
     - cron: "7 17 * * *"
@@ -55,7 +61,7 @@ jobs:
       - name: Sync dependencies
         run: uv sync --all-extras
 
-      - name: Resolve target ICT dates (D and D-1)
+      - name: Resolve target ICT dates (D, D-1, and D+1)
         id: dates
         run: |
           if [ -n "${INPUT_REPORT_DATE}" ]; then
@@ -68,8 +74,12 @@ jobs:
             REPORT_DATE="$(date +%Y-%m-%d)"
           fi
           YESTERDAY_DATE="$(date -d "${REPORT_DATE} - 1 day" +%Y-%m-%d)"
+          TOMORROW_DATE="$(date -d "${REPORT_DATE} + 1 day" +%Y-%m-%d)"
+          CURRENT_HOUR="$(date +%H)"
           echo "report_date=${REPORT_DATE}" >> "$GITHUB_OUTPUT"
           echo "yesterday_date=${YESTERDAY_DATE}" >> "$GITHUB_OUTPUT"
+          echo "tomorrow_date=${TOMORROW_DATE}" >> "$GITHUB_OUTPUT"
+          echo "current_hour=${CURRENT_HOUR}" >> "$GITHUB_OUTPUT"
 
       - name: Incremental 35-Station Sync (XSMN 16:15 + XSMT 17:15)
         run: |
@@ -81,6 +91,11 @@ jobs:
           uv run python -m xsmn_alpha.cli sync-35 \
             --date "${SYNC_TARGET_DATE}" \
             --raw-dir data/raw_all/
+          if [ "${EVENT_NAME}" = "push" ] && [ "${{ steps.dates.outputs.current_hour }}" -ge 18 ]; then
+            uv run python -m xsmn_alpha.cli sync-35 \
+              --date "${{ steps.dates.outputs.report_date }}" \
+              --raw-dir data/raw_all/
+          fi
 
       - name: Settle Yesterday's Benchmark Ledger (1,000,000 VND Reference Fund)
         run: |
@@ -94,6 +109,12 @@ jobs:
               --date "${SETTLE_TARGET_DATE}" \
               --ledger data/live/benchmark_ledger.json \
               --raw-dir data/raw_all/
+            if [ "${EVENT_NAME}" = "push" ] && [ "${{ steps.dates.outputs.current_hour }}" -ge 18 ]; then
+              uv run python -m xsmn_alpha.cli settle-ledger \
+                --date "${{ steps.dates.outputs.report_date }}" \
+                --ledger data/live/benchmark_ledger.json \
+                --raw-dir data/raw_all/
+            fi
           fi
 
       - name: Generate 05:00 AM Daily Quantitative Report, 5-Section Web Audit & Telegram Briefing
@@ -109,6 +130,14 @@ jobs:
             --ledger data/live/benchmark_ledger.json \
             --public-dir public/ \
             --send-telegram ${DRY_RUN_FLAG}
+          if [ "${EVENT_NAME}" = "push" ] && [ "${{ steps.dates.outputs.current_hour }}" -ge 18 ]; then
+            uv run python -m xsmn_alpha.cli daily-report \
+              --date "${{ steps.dates.outputs.tomorrow_date }}" \
+              --raw-dir data/raw_all/ \
+              --ledger data/live/benchmark_ledger.json \
+              --public-dir public/ \
+              --send-telegram ${DRY_RUN_FLAG}
+          fi
 
       - name: Refresh Post-Draw Static Web Audit (17:35 ICT — No Morning Telegram Re-Send)
         if: github.event.schedule == '35 10 * * *'

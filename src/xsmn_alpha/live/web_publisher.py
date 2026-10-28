@@ -12,11 +12,20 @@ from typing import Any, Final
 from xsmn_alpha.constants import (
     BE_PROB_SINGLE_BALL,
     BENCHMARK_BASE_DAILY_COST_4NUM_VND,
+    BENCHMARK_BASE_DAILY_COST_5NUM_VND,
     BENCHMARK_INITIAL_BANKROLL_VND,
     HOUSE_MONEY_MAX_SURPLUS_FRACTION,
     HOUSE_MONEY_MIN_BUFFER_DAYS,
     SELECTIVE_ALPHA_JOINT_R1_MIN_PCT,
     STAGE3_TICKET_CONFIGS,
+    SWEET_4_NET_PROFIT_1HIT_VND,
+    SWEET_4_NET_PROFIT_2HITS_VND,
+    SWEET_5_NET_PROFIT_1HIT_VND,
+    SWEET_5_NET_PROFIT_2HITS_VND,
+    THEORETICAL_MULTI_HIT_4NUM_PCT,
+    THEORETICAL_MULTI_HIT_5NUM_PCT,
+    THEORETICAL_WIN_RATE_4NUM_PCT,
+    THEORETICAL_WIN_RATE_5NUM_PCT,
 )
 from xsmn_alpha.exceptions import DataIntegrityError
 from xsmn_alpha.live.ledger import (
@@ -29,6 +38,7 @@ from xsmn_alpha.live.telegram_bot import (
     resolve_public_report_base_url,
 )
 from xsmn_alpha.schemas import (
+    BenchmarkLedgerEntry,
     BenchmarkLedgerState,
     DailyQuantReportContract,
     DailyVerdictTier,
@@ -209,6 +219,12 @@ _SHARED_DARK_MODE_CSS: Final[str] = """
       color: #ffffff;
       font-weight: 700;
     }
+    .heatmap-sweet5-satellite {
+      background: rgba(245, 158, 11, 0.28) !important;
+      border: 2px solid #f59e0b !important;
+      color: #ffffff;
+      font-weight: 700;
+    }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
     code {
@@ -381,6 +397,136 @@ def render_daily_report_html(
         kpi3_label = f"Bộ số quan sát (Không cược - {_esc(p.recommended_config_id)}):"
         kpi3_val_style = "color:var(--muted);"
 
+    # Cage Anomaly Sentinel alert box (Stage 4)
+    if p.cage_anomaly_detected or p.cage_anomaly_summary_vi.strip():
+        cold_t_str = (
+            ", ".join(str(b) for b in p.cold_balls_tens) if p.cold_balls_tens else "Không có"
+        )
+        cold_u_str = (
+            ", ".join(str(b) for b in p.cold_balls_units) if p.cold_balls_units else "Không có"
+        )
+        top2_t_str = ", ".join(str(b) for b in p.ranked_balls_tens[:2])
+        top2_u_str = ", ".join(str(b) for b in p.ranked_balls_units[:2])
+        raw_anom_summary = p.cage_anomaly_summary_vi.strip()
+        for dup_prefix in (
+            "⚠️ PHÁT HIỆN LỒNG CẦU LỆCH MẠNH (Cage Anomaly Sentinel):",
+            "⚠️ PHÁT HIỆN LỒNG CẦU LỆCH MẠNH:",
+            "⚠️ PHÁT HIỆN LỒNG CẦU LỆCH MẠNH",
+            "PHÁT HIỆN LỒNG CẦU LỆCH MẠNH (Cage Anomaly Sentinel):",
+            "PHÁT HIỆN LỒNG CẦU LỆCH MẠNH:",
+            "PHÁT HIỆN LỒNG CẦU LỆCH MẠNH",
+        ):
+            if raw_anom_summary.startswith(dup_prefix):
+                raw_anom_summary = raw_anom_summary[len(dup_prefix) :].lstrip(" :—-")
+                break
+        if raw_anom_summary.startswith("tại "):
+            raw_anom_summary = "Tại " + raw_anom_summary[4:]
+        anomaly_summary_esc = (
+            _esc(raw_anom_summary)
+            if raw_anom_summary
+            else (
+                f"Đài {_esc(p.station_name)} ({_esc(p.station_code)}) vượt ngưỡng kiểm định đa bội "
+                f"(Chi2_max = {p.chi2_max_overall:.2f} &gt; Null P95 = {p.null_chi2_p95:.2f}, "
+                f"BF10 = {p.bf10_max_overall:.2f} &gt;= 10.0)."
+            )
+        )
+        anomaly_alert_html = (
+            '    <div id="cage-anomaly-sentinel-alert" class="callout bad">\n'
+            "      <strong>⚠️ PHÁT HIỆN LỒNG CẦU LỆCH MẠNH (Cage Anomaly Sentinel):</strong> "
+            f"{anomaly_summary_esc}<br/>\n"
+            f"      <small>Lồng Chục né bóng lạnh: <code>[{_esc(cold_t_str)}]</code> "
+            f"(Ưu tiên Top-2: <code>{_esc(top2_t_str)}</code>) • "
+            f"Lồng Đơn Vị né bóng lạnh: <code>[{_esc(cold_u_str)}]</code> "
+            f"(Ưu tiên Top-2: <code>{_esc(top2_u_str)}</code>)</small>\n"
+            "    </div>\n"
+        )
+    else:
+        anomaly_alert_html = ""
+
+    # Weekly 5/2 Cage-Balance Ranking Table (Stage 4)
+    sched = report.weekly_5_2_schedule
+    if sched is not None:
+        rest_days_esc = ", ".join(_esc(d) for d in sched.rest_weekdays_vn)
+        play_days_esc = ", ".join(_esc(d) for d in sched.play_weekdays_vn)
+        sched_summary_extra = (
+            f"<br/><span>{_esc(sched.schedule_summary_vi)}</span>"
+            if sched.schedule_summary_vi.strip()
+            else ""
+        )
+        if sched.is_today_scheduled_rest_day:
+            sched_status_html = (
+                f"🛑 <strong>HÔM NAY ({_esc(sched.target_weekday_vn)}, Hạng cân bằng "
+                f"#{sched.today_balance_rank}/7): NGHỈ ĐỊNH KỲ 5/2 (0.0x)</strong> — "
+                f"Thuộc <strong>2 ngày lồng cầu cân bằng nhất tuần ({rest_days_esc})</strong>, "
+                "nghỉ định kỳ bảo toàn vốn (tiết kiệm 28,6% chi phí tuần)."
+            )
+            sched_callout_cls = "bad"
+        else:
+            sched_status_html = (
+                f"✅ <strong>HÔM NAY ({_esc(sched.target_weekday_vn)}, Hạng cân bằng "
+                f"#{sched.today_balance_rank}/7): CHƠI ĐIỂM NGỌT 5/2 ĐỀU TAY (1.0x)</strong> — "
+                f"Thuộc <strong>5 ngày chơi Điểm Ngọt ({play_days_esc})</strong>; "
+                f"2 ngày nghỉ định kỳ cân bằng nhất tuần: <strong>{rest_days_esc}</strong> (0.0x)."
+            )
+            sched_callout_cls = "good"
+
+        wd_rows_html: list[str] = []
+        for w in sched.weekday_rankings:
+            is_today_wd = w.weekday == sched.target_weekday
+            today_tag = ' <span class="badge badge-blue">📍 Hôm nay</span>' if is_today_wd else ""
+            wd_codes_esc = ", ".join(f"<code>{_esc(c)}</code>" for c in w.station_codes)
+            if w.is_rest_day:
+                role_badge_w = (
+                    f'<span class="badge badge-red">🛑 NGHỈ ĐỊNH KỲ 5/2 '
+                    f"(0.0x — Cân bằng #{w.balance_rank})</span>"
+                )
+            else:
+                role_badge_w = (
+                    '<span class="badge badge-green">🟢 CHƠI ĐIỂM NGỌT 5/2 (1.0x — Đều tay)</span>'
+                )
+            wd_rows_html.append(
+                f"<tr>"
+                f"<td><strong>#{w.balance_rank}</strong></td>"
+                f'<td class="left"><strong>{_esc(w.weekday_vn)}</strong>{today_tag}</td>'
+                f'<td class="left">{w.num_stations} đài: {wd_codes_esc}</td>'
+                f'<td class="left"><strong>{_esc(w.lead_station_name)}</strong> '
+                f"(<code>{_esc(w.lead_station_code)}</code>)</td>"
+                f"<td><strong>{w.max_chi2_overall:.2f}</strong></td>"
+                f"<td>{w.mean_chi2_overall:.2f}</td>"
+                f"<td>{w.max_bf10_overall:.3f}</td>"
+                f"<td>{w.min_entropy_overall:.4f}</td>"
+                f"<td>{role_badge_w}</td>"
+                f"</tr>"
+            )
+
+        weekly_52_block_html = (
+            "    <h3>Bảng Xếp Hạng Độ Cân Bằng 7 Thứ Trong Tuần "
+            f"(Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu &lt; {_esc(sched.as_of_date)})</h3>\n"
+            f'    <div class="callout {sched_callout_cls}">\n'
+            f"      {sched_status_html}{sched_summary_extra}\n"
+            "    </div>\n"
+            '    <div class="table-wrap">\n'
+            '      <table id="weekly-5-2-schedule-table">\n'
+            "        <thead>\n"
+            "          <tr>\n"
+            "            <th>Hạng Cân Bằng</th>\n"
+            '            <th class="left">Thứ Trong Tuần</th>\n'
+            '            <th class="left">Các Đài Mở Thưởng</th>\n'
+            '            <th class="left">Đài Lệch Mạnh Nhất Ngày</th>\n'
+            "            <th>Max χ²</th>\n"
+            "            <th>Mean χ²</th>\n"
+            "            <th>Max BF10</th>\n"
+            "            <th>Min Entropy (30 kỳ)</th>\n"
+            "            <th>Phán Quyết Lịch 5/2</th>\n"
+            "          </tr>\n"
+            "        </thead>\n"
+            f"        <tbody>{''.join(wd_rows_html)}</tbody>\n"
+            "      </table>\n"
+            "    </div>\n"
+        )
+    else:
+        weekly_52_block_html = ""
+
     section1_html = (
         '  <section id="section-1-executive-verdict" class="card">\n'
         "    <h2>Khu vực 1 — Tóm tắt Quyết định Chiến thuật 05:00 Sáng "
@@ -411,6 +557,7 @@ def render_daily_report_html(
         f"Lãi C = {cg.house_money_surplus_vnd:,}đ</div>\n"
         "      </div>\n"
         "    </div>\n"
+        f"{anomaly_alert_html}"
         '    <div class="callout warn">\n'
         "      <strong>📌 Đối soát kết quả ngày hôm qua (D - 1):</strong> "
         f"{_esc(report.yesterday_summary_vi)}\n"
@@ -434,6 +581,7 @@ def render_daily_report_html(
         f"        <p>{_esc(nlg.q4_how_to_allocate_capital)}</p>\n"
         "      </div>\n"
         "    </div>\n"
+        f"{weekly_52_block_html}"
         "  </section>\n"
     )
 
@@ -447,7 +595,11 @@ def render_daily_report_html(
             if st.bocd_changepoint_warning
             else f'<span class="badge badge-blue">r*={st.bocd_map_run_length} kỳ</span>'
         )
-        verdict_cls = "badge-green" if st.passes_selective_alpha else "badge-red"
+        is_active_station = report.should_play_today and (
+            (st.rank_in_day == 1 and (st.passes_selective_alpha or st.passes_weekly_5_2_play))
+            or (st.rank_in_day > 1 and st.passes_selective_alpha)
+        )
+        verdict_cls = "badge-green" if is_active_station else "badge-red"
         st_rec_roi = st.ticket_configs[st.recommended_config_id].oos_roi_3y_pct
         st_rec_cls = "pos" if st_rec_roi > 0 else "neg"
         if abs(st.best_oos_roi_pct - st_rec_roi) > 1e-6:
@@ -581,6 +733,12 @@ def render_daily_report_html(
     )
 
     rec_num_set = set(p.recommended_numbers)
+    sweet5_nums_list = (
+        list(p.sweet_5_numbers)
+        if p.sweet_5_numbers
+        else (list(p.sweet_5_config.selected_numbers) if p.sweet_5_config is not None else [])
+    )
+    sweet5_set = set(sweet5_nums_list)
     heatmap_header_cols = "".join(f"<th>ĐV {b}</th>" for b in range(10))
     heatmap_rows_list: list[str] = []
     for a in range(10):
@@ -588,31 +746,72 @@ def render_daily_report_html(
         for b in range(10):
             num_str = f"{a}{b}"
             cell_prob_pct = p.joint_100_matrix[a][b] * 100.0
-            cls_str = (
-                "heatmap-cell heatmap-recommended" if num_str in rec_num_set else "heatmap-cell"
-            )
+            if num_str in rec_num_set and num_str in sweet5_set:
+                cls_str = "heatmap-cell heatmap-recommended heatmap-sweet5"
+            elif num_str in rec_num_set:
+                cls_str = "heatmap-cell heatmap-recommended"
+            elif num_str in sweet5_set:
+                cls_str = "heatmap-cell heatmap-recommended heatmap-sweet5 heatmap-sweet5-satellite"
+            else:
+                cls_str = "heatmap-cell"
             cells.append(
                 f'<td class="{cls_str}"><div><strong>{num_str}</strong></div>'
                 f"<small>{cell_prob_pct:.2f}%</small></td>"
             )
         heatmap_rows_list.append(f"<tr>{''.join(cells)}</tr>")
 
-    config_rows_html: list[str] = []
+    ordered_ticket_configs = []
+    if "2x2" in p.ticket_configs:
+        ordered_ticket_configs.append(p.ticket_configs["2x2"])
+    if p.sweet_5_config is not None:
+        ordered_ticket_configs.append(p.sweet_5_config)
+    elif "sweet_5" in p.ticket_configs:
+        ordered_ticket_configs.append(p.ticket_configs["sweet_5"])
     for cfg_id in STAGE3_TICKET_CONFIGS:
-        tc = p.ticket_configs[cfg_id]
+        if cfg_id != "2x2" and cfg_id in p.ticket_configs:
+            ordered_ticket_configs.append(p.ticket_configs[cfg_id])
+
+    config_rows_html: list[str] = []
+    for tc in ordered_ticket_configs:
+        cfg_id = tc.config_id
         if cfg_id == "core_2x2_sat_3x3":
             nums_detail = (
                 f"<strong>Lõi (1.0x):</strong> {_esc(', '.join(tc.core_numbers))}<br/>"
                 f"<small><strong>Vệ tinh (0.5x):</strong> "
                 f"{_esc(', '.join(tc.satellite_numbers))}</small>"
             )
+        elif cfg_id == "sweet_5":
+            sat_part = (
+                f"<br/><small>Lõi 2x2: {_esc(', '.join(tc.core_numbers))} "
+                f"+ Vệ tinh: <code>{_esc(', '.join(tc.satellite_numbers))}</code></small>"
+                if tc.core_numbers or tc.satellite_numbers
+                else ""
+            )
+            nums_detail = f"<strong>{_esc(', '.join(tc.selected_numbers))}</strong>{sat_part}"
         else:
             nums_detail = f"<strong>{_esc(', '.join(tc.selected_numbers))}</strong>"
-        rec_badge = (
-            '<span class="badge badge-green">⭐ Khuyến Nghị Chính</span>'
-            if tc.is_recommended_primary
-            else '<span class="badge badge-blue">Tham Khảo</span>'
-        )
+
+        if tc.is_recommended_primary:
+            rec_badge = '<span class="badge badge-green">⭐ Khuyến Nghị Chính</span>'
+        elif cfg_id == "sweet_5":
+            rec_badge = '<span class="badge badge-green">🎯 Điểm Ngọt Bà Cô (5 Số)</span>'
+        else:
+            rec_badge = '<span class="badge badge-blue">Tham Khảo</span>'
+
+        dot_cost = f"{tc.benchmark_1x_cost_vnd:,}".replace(",", ".")
+        if cfg_id == "sweet_5":
+            hit_18_cell = (
+                f"<strong>{tc.hit_at_least_1_in_18_prob * 100.0:.2f}%</strong><br/>"
+                f"<small>(Lý thuyết: {THEORETICAL_WIN_RATE_5NUM_PCT:.2f}%)</small>"
+            )
+        elif cfg_id == "2x2":
+            hit_18_cell = (
+                f"<strong>{tc.hit_at_least_1_in_18_prob * 100.0:.2f}%</strong><br/>"
+                f"<small>(Lý thuyết: {THEORETICAL_WIN_RATE_4NUM_PCT:.2f}%)</small>"
+            )
+        else:
+            hit_18_cell = f"<strong>{tc.hit_at_least_1_in_18_prob * 100.0:.2f}%</strong>"
+
         roi_cls = "pos" if tc.oos_roi_3y_pct > 0 else "neg"
         config_rows_html.append(
             f"<tr>"
@@ -621,9 +820,9 @@ def render_daily_report_html(
             f"<td>{tc.num_numbers} số</td>"
             f'<td class="left">{nums_detail}</td>'
             f"<td>{tc.unit_cost_per_draw:.1f}đ<br/>"
-            f"<small>({tc.benchmark_1x_cost_vnd:,} VNĐ)</small></td>"
+            f"<small>({tc.benchmark_1x_cost_vnd:,} VNĐ / {dot_cost}đ/ngày)</small></td>"
             f"<td>{tc.single_prize_hit_prob * 100.0:.2f}%</td>"
-            f"<td><strong>{tc.hit_at_least_1_in_18_prob * 100.0:.2f}%</strong></td>"
+            f"<td>{hit_18_cell}</td>"
             f"<td>{tc.oos_hits_per_30_draws:.2f} / {tc.be_hits_30_draws:.2f} lô</td>"
             f"<td>{tc.oos_win_rate_3y_pct:.2f}%</td>"
             f'<td class="{roi_cls}">{tc.oos_roi_3y_pct:+.2f}%</td>'
@@ -631,10 +830,16 @@ def render_daily_report_html(
             f"</tr>"
         )
 
+    sweet5_title_note = (
+        f" &amp; Điểm Ngọt 5 số sweet_5 ({_esc(', '.join(sweet5_nums_list))})"
+        if sweet5_nums_list
+        else ""
+    )
+
     section3_html = (
         '  <section id="section-3-probabilities-and-configs" class="card">\n'
         "    <h2>Khu vực 3 — Bảng Phân Phối Xác Suất 10 Quả Bóng (0–9), "
-        "Ma Trận Nhiệt 100 Số (00–99) &amp; Toàn Bộ 5 Phương Án Ghép Số "
+        "Ma Trận Nhiệt 100 Số (00–99) &amp; Toàn Bộ Phương Án Ghép Số Ngọt "
         f"({_esc(p.station_name)} - {_esc(p.station_code)})</h2>\n"
         '    <div class="grid-2">\n'
         "      <div>\n"
@@ -677,7 +882,7 @@ def render_daily_report_html(
         "      </div>\n"
         "    </div>\n"
         "    <h3>Ma Trận Nhiệt 10 × 10 Của 100 Con Số (00–99) — "
-        f"Đánh dấu nổi bật bộ số khuyến nghị ({rec_nums_joined})</h3>\n"
+        f"Đánh dấu nổi bật bộ số khuyến nghị ({rec_nums_joined}){sweet5_title_note}</h3>\n"
         '    <div class="table-wrap">\n'
         "      <table>\n"
         "        <thead>\n"
@@ -686,8 +891,8 @@ def render_daily_report_html(
         f"        <tbody>{''.join(heatmap_rows_list)}</tbody>\n"
         "      </table>\n"
         "    </div>\n"
-        "    <h3>Bảng So Sánh Trực Diện Toàn Bộ 5 Phương Án Ghép Số Ngọt "
-        "(Sweet-Spot Ticket Configs)</h3>\n"
+        "    <h3>Bảng So Sánh Trực Diện Toàn Bộ Phương Án Ghép Số Ngọt "
+        "(Sweet-Spot Ticket Configs: 2x2, sweet_5, 1x4, 4x1, 3x3, Hybrid)</h3>\n"
         '    <div class="table-wrap">\n'
         "      <table>\n"
         "        <thead>\n"
@@ -735,20 +940,111 @@ def render_daily_report_html(
     min_buffer_vnd = HOUSE_MONEY_MIN_BUFFER_DAYS * BENCHMARK_BASE_DAILY_COST_4NUM_VND
     max_surplus_pct = int(HOUSE_MONEY_MAX_SURPLUS_FRACTION * 100)
 
+    c2x2_nums_esc = _esc(
+        ", ".join(
+            p.ticket_configs["2x2"].selected_numbers
+            if "2x2" in p.ticket_configs
+            else p.recommended_numbers
+        )
+    )
+    s5_nums_esc = _esc(", ".join(sweet5_nums_list)) if sweet5_nums_list else c2x2_nums_esc
+    cost_4_2x = 2 * BENCHMARK_BASE_DAILY_COST_4NUM_VND  # 144,000
+    cost_5_2x = 2 * BENCHMARK_BASE_DAILY_COST_5NUM_VND  # 180,000
+    net1_4_2x = 2 * SWEET_4_NET_PROFIT_1HIT_VND  # +55,000
+    net2_4_2x = 2 * SWEET_4_NET_PROFIT_2HITS_VND  # +254,000
+    net1_5_2x = 2 * SWEET_5_NET_PROFIT_1HIT_VND  # +19,000
+    net2_5_2x = 2 * SWEET_5_NET_PROFIT_2HITS_VND  # +218,000
+
+    if report.weekly_5_2_schedule is not None:
+        cppi_rule_clause_html = (
+            "Áp dụng <strong>Lịch Chơi 5/2 &amp; Điểm Ngọt Đều Tay 1.0x</strong>: "
+            "Khóa cứng hệ số đi vốn tối đa <code>1.00x</code> vào 5 ngày chơi và "
+            "<code>0.00x</code> vào 2 ngày nghỉ định kỳ; tuyệt đối không nâng hệ số "
+            "hay gấp thếp dù Quỹ Lãi Ròng đang dương lớn."
+        )
+    else:
+        cppi_rule_clause_html = (
+            "Chỉ cho phép nâng hệ số lên <code>1.25x – 1.50x</code> khi Quỹ Lãi Ròng tích lũy "
+            f"đạt tối thiểu 2 ngày cược cơ sở (<code>C ≥ {min_buffer_vnd:,} VNĐ</code>) "
+            f"và phần tiền cược tăng thêm không vượt quá <code>{max_surplus_pct}%</code> "
+            "Quỹ Lãi Ròng."
+        )
+
     section4_html = (
         '  <section id="section-4-capital-guidance" class="card">\n'
         "    <h2>Khu vực 4 — Bảng Tư Vấn Đi Vốn CPPI / House-Money "
-        "&amp; Quy Đổi Tiền VNĐ Mẫu</h2>\n"
+        "&amp; Kỷ Luật Tiền Chợ Đều Tay 1.0x</h2>\n"
         '    <div class="callout good">\n'
-        "      <strong>🛡️ Kỷ luật Bảo toàn 100% Vốn gốc (CPPI / House-Money Gate 5):</strong> "
+        "      <strong>🛡️ Kỷ luật Bảo toàn 100% Vốn gốc "
+        "(CPPI / House-Money Gate 5 &amp; Gate 6):</strong> "
         f"Vốn gốc Quỹ Chuẩn bất khả xâm phạm "
         f"<code>W0 = {BENCHMARK_INITIAL_BANKROLL_VND:,} VNĐ (1.000.000đ)</code>. "
-        "Chỉ cho phép nâng hệ số lên <code>1.25x – 1.50x</code> khi Quỹ Lãi Ròng tích lũy "
-        f"đạt tối thiểu 2 ngày cược cơ sở (<code>C ≥ {min_buffer_vnd:,} VNĐ</code>) "
-        f"và phần tiền cược tăng thêm không vượt quá <code>{max_surplus_pct}%</code> "
-        "Quỹ Lãi Ròng.<br/>\n"
+        f"{cppi_rule_clause_html}<br/>\n"
         f"      <strong>Giải trình đi vốn hôm nay:</strong> {_esc(cg.sizing_rationale_vi)}\n"
         "    </div>\n"
+        "    <h3>🛡️ Kỷ Luật Tiền Chợ Đều Tay 1.0x (So sánh Bộ 4 số 2x2 &amp; Bộ 5 số sweet_5 "
+        "ở mức 1.0x và 2.0x — Tuyệt đối không gấp thếp)</h3>\n"
+        '    <div class="callout warn">\n'
+        "      <strong>Quy tắc Tiền Chợ Xác Suất (Lịch 5/2 — Tuyệt đối không gấp thếp):</strong> "
+        "Đánh đều tay 5 ngày/tuần ở hệ số cố định <code>1.0x</code> (hoặc quy mô gia đình "
+        "cố định <code>2.0x</code>), nghỉ định kỳ <code>0.0x</code> vào 2 ngày lồng cầu cân bằng "
+        "nhất tuần. Hoàn vốn + cà phê ở ngày nổ 1 nháy; thu tiền chợ ở ngày nổ 2–3 nháy; "
+        "<strong>tuyệt đối không gấp thếp sau ngày trượt</strong>.\n"
+        "    </div>\n"
+        '    <div class="table-wrap">\n'
+        '      <table id="flat-1x-grocery-comparison-table">\n'
+        "        <thead>\n"
+        "          <tr>\n"
+        '            <th class="left">Cấu Hình Điểm Ngọt &amp; Bộ Số</th>\n'
+        "            <th>Số Lượng</th>\n"
+        "            <th>Tỷ Lệ Ngày Có Lời (K ≥ 1)</th>\n"
+        "            <th>Xác Suất Nổ ≥ 2 Nháy (Thu Tiền Chợ)</th>\n"
+        "            <th>Vốn Ngày 1.0x (18.000đ/số)</th>\n"
+        "            <th>Lãi Ròng 1 Nháy (1.0x)</th>\n"
+        "            <th>Lãi Ròng 2 Nháy (1.0x)</th>\n"
+        "            <th>Quy Mô Gia Đình 2.0x (36.000đ/số — Đều Tay)</th>\n"
+        "          </tr>\n"
+        "        </thead>\n"
+        "        <tbody>\n"
+        "          <tr>\n"
+        f'            <td class="left"><strong>Bộ 4 số Chuẩn (<code>2x2</code>)</strong><br/>'
+        f"<small>Số: <code>{c2x2_nums_esc}</code></small></td>\n"
+        "            <td>4 số</td>\n"
+        f"            <td><strong>{THEORETICAL_WIN_RATE_4NUM_PCT:.2f}%</strong></td>\n"
+        f"            <td>{THEORETICAL_MULTI_HIT_4NUM_PCT:.2f}%</td>\n"
+        f"            <td><strong>72.000đ</strong><br/>"
+        f"<small>({BENCHMARK_BASE_DAILY_COST_4NUM_VND:,} VNĐ)</small></td>\n"
+        f'            <td class="pos"><strong>+27.500đ</strong><br/>'
+        f"<small>({SWEET_4_NET_PROFIT_1HIT_VND:+,} VNĐ)</small></td>\n"
+        f'            <td class="pos"><strong>+127.000đ</strong><br/>'
+        f"<small>({SWEET_4_NET_PROFIT_2HITS_VND:+,} VNĐ)</small></td>\n"
+        f"            <td>Vốn <strong>144.000đ/ngày</strong> ({cost_4_2x:,} VNĐ)<br/>"
+        f'<small>1 nháy: <span class="pos">+55.000đ</span> ({net1_4_2x:+,}đ) • '
+        f'2 nháy: <span class="pos"><strong>+254.000đ</strong></span> '
+        f"({net2_4_2x:+,}đ)</small></td>\n"
+        "          </tr>\n"
+        "          <tr>\n"
+        f'            <td class="left"><strong>Bộ 5 số Điểm Ngọt Bà Cô '
+        f"(<code>sweet_5</code>)</strong><br/>"
+        f"<small>Số: <code>{s5_nums_esc}</code></small></td>\n"
+        "            <td>5 số</td>\n"
+        f"            <td><strong>{THEORETICAL_WIN_RATE_5NUM_PCT:.2f}%</strong></td>\n"
+        f"            <td>{THEORETICAL_MULTI_HIT_5NUM_PCT:.2f}%</td>\n"
+        f"            <td><strong>90.000đ</strong><br/>"
+        f"<small>({BENCHMARK_BASE_DAILY_COST_5NUM_VND:,} VNĐ)</small></td>\n"
+        f'            <td class="pos"><strong>+9.500đ</strong><br/>'
+        f"<small>({SWEET_5_NET_PROFIT_1HIT_VND:+,} VNĐ)</small></td>\n"
+        f'            <td class="pos"><strong>+109.000đ</strong><br/>'
+        f"<small>({SWEET_5_NET_PROFIT_2HITS_VND:+,} VNĐ)</small></td>\n"
+        f"            <td>Vốn <strong>180.000đ/ngày</strong> ({cost_5_2x:,} VNĐ)<br/>"
+        f'<small>1 nháy: <span class="pos">+19.000đ</span> ({net1_5_2x:+,}đ) • '
+        f'2 nháy: <span class="pos"><strong>+218.000đ</strong></span> '
+        f"({net2_5_2x:+,}đ)</small></td>\n"
+        "          </tr>\n"
+        "        </tbody>\n"
+        "      </table>\n"
+        "    </div>\n"
+        "    <h3>Bảng Quy Đổi Tiền Cược Mẫu Theo 4 Mức Vốn Tham Chiếu</h3>\n"
         '    <div class="table-wrap">\n'
         "      <table>\n"
         "        <thead>\n"
@@ -773,9 +1069,70 @@ def render_daily_report_html(
     # -------------------------------------------------------------------------
     # Khu vực 5: Data Pipeline Audit, SVG Equity Curve & Benchmark Ledger
     # -------------------------------------------------------------------------
-    svg_chart = render_equity_curve_svg(state)
+    has_future_or_same_day = any(e.draw_date >= report.report_date for e in state.entries)
+    has_normalized_yesterday = y_entry is not None and any(
+        e.draw_date == y_entry.draw_date and e.verdict_tier != y_entry.verdict_tier
+        for e in state.entries
+    )
+    if has_future_or_same_day or has_normalized_yesterday:
+        past_entries = [
+            (y_entry if (y_entry is not None and e.draw_date == y_entry.draw_date) else e)
+            for e in state.entries
+            if e.draw_date < report.report_date
+        ]
+        today_pending_entry = BenchmarkLedgerEntry(
+            draw_date=report.report_date,
+            weekday_vn=report.weekday_vn,
+            verdict_tier=report.verdict_tier,
+            chosen_station_code=p.station_code,
+            chosen_station_name=p.station_name,
+            chosen_region=p.region,
+            chosen_config_id=p.recommended_config_id,
+            selected_numbers=list(p.recommended_numbers),
+            recommended_multiplier=cg.recommended_multiplier,
+            bankroll_before_vnd=cg.benchmark_bankroll_vnd,
+            house_money_before_vnd=cg.house_money_surplus_vnd,
+            cost_vnd=cg.benchmark_bet_vnd,
+            settlement_status="PENDING",
+            hit_count_k=None,
+            hit_details=[],
+            revenue_vnd=0,
+            net_profit_vnd=0,
+            bankroll_after_vnd=cg.benchmark_bankroll_vnd,
+            house_money_after_vnd=cg.house_money_surplus_vnd,
+        )
+        view_entries = [*past_entries, today_pending_entry]
+        view_state = state.model_copy(
+            update={
+                "current_bankroll_vnd": cg.benchmark_bankroll_vnd,
+                "house_money_surplus_vnd": cg.house_money_surplus_vnd,
+                "net_profit_vnd": cg.benchmark_bankroll_vnd - state.starting_bankroll_vnd,
+                "total_tracked_days": len(view_entries),
+                "played_days": sum(1 for e in view_entries if e.verdict_tier != "SKIP_NO_EDGE"),
+                "rest_days": sum(1 for e in view_entries if e.verdict_tier == "SKIP_NO_EDGE"),
+                "win_days": sum(
+                    1
+                    for e in past_entries
+                    if e.verdict_tier != "SKIP_NO_EDGE"
+                    and e.settlement_status == "SETTLED"
+                    and e.net_profit_vnd > 0
+                ),
+                "loss_days": sum(
+                    1
+                    for e in past_entries
+                    if e.verdict_tier != "SKIP_NO_EDGE"
+                    and e.settlement_status == "SETTLED"
+                    and e.net_profit_vnd <= 0
+                ),
+                "entries": view_entries,
+            }
+        )
+    else:
+        view_state = state
+
+    svg_chart = render_equity_curve_svg(view_state)
     ledger_rows_html: list[str] = []
-    for entry in reversed(state.entries[-30:]):
+    for entry in reversed(view_state.entries[-30:]):
         hit_labels = (
             ", ".join(f"{_esc(h.number)} ({_esc(h.prize_label)})" for h in entry.hit_details)
             if entry.hit_details
@@ -837,22 +1194,22 @@ def render_daily_report_html(
         "      </div>\n"
         '      <div class="kpi-box">\n'
         '        <div class="kpi-label">Số Dư Quỹ Chuẩn Hiện Tại (W_t)</div>\n'
-        f'        <div class="kpi-value">{state.current_bankroll_vnd:,} VNĐ</div>\n'
+        f'        <div class="kpi-value">{view_state.current_bankroll_vnd:,} VNĐ</div>\n'
         f'        <div style="font-size: 0.84rem; color: var(--muted);">'
-        f"Vốn gốc W0 = {state.starting_bankroll_vnd:,} VNĐ</div>\n"
+        f"Vốn gốc W0 = {view_state.starting_bankroll_vnd:,} VNĐ</div>\n"
         "      </div>\n"
         '      <div class="kpi-box">\n'
         '        <div class="kpi-label">Quỹ Lãi Ròng House-Money (C_t)</div>\n'
         f'        <div class="kpi-value" style="color: var(--green);">'
-        f"{state.house_money_surplus_vnd:,} VNĐ</div>\n"
+        f"{view_state.house_money_surplus_vnd:,} VNĐ</div>\n"
         f'        <div style="font-size: 0.84rem; color: var(--muted);">'
-        f"Lãi/Lỗ lũy kế: {state.net_profit_vnd:+,} VNĐ</div>\n"
+        f"Lãi/Lỗ lũy kế: {view_state.net_profit_vnd:+,} VNĐ</div>\n"
         "      </div>\n"
         '      <div class="kpi-box">\n'
         '        <div class="kpi-label">Sụt Giảm Tối Đa (Max Drawdown)</div>\n'
-        f'        <div class="kpi-value">{state.max_drawdown_vnd:,} VNĐ</div>\n'
+        f'        <div class="kpi-value">{view_state.max_drawdown_vnd:,} VNĐ</div>\n'
         f'        <div style="font-size: 0.84rem; color: var(--muted);">'
-        f"Đánh {state.played_days} ngày • Nghỉ {state.rest_days} ngày</div>\n"
+        f"Đánh {view_state.played_days} ngày • Nghỉ {view_state.rest_days} ngày</div>\n"
         "      </div>\n"
         "    </div>\n"
         '    <div class="callout">\n'
@@ -860,7 +1217,7 @@ def render_daily_report_html(
         f"({_esc(audit.audit_timestamp_ict)}):</strong> "
         f"{_esc(audit.notes_vi)} | Kỳ mở thưởng đã chốt gần nhất: "
         f"<code>{_esc(audit.latest_settled_date)}</code> | "
-        f"Chữ ký SHA-256 Sổ cái: <code>{_esc(state.sha256[:24])}...</code>\n"
+        f"Chữ ký SHA-256 Sổ cái: <code>{_esc(view_state.sha256[:24])}...</code>\n"
         "    </div>\n"
         "    <h3>Biểu Đồ Đường Cong Vốn Lũy Kế Của Quỹ Chuẩn Tham Chiếu (1.000.000 VNĐ)</h3>\n"
         f"    {svg_chart}\n"
@@ -1052,7 +1409,11 @@ def render_index_dashboard_html(
         f"Base URL: <code>{_esc(resolved_base_url)}</code>\n"
         "    </p>\n"
         '    <div style="margin-top: 12px;">\n'
-        '      <a href="logic_explainer.html" style="display: inline-block; background: rgba(56, 189, 248, 0.14); color: #38bdf8; border: 1px solid #38bdf8; padding: 6px 14px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">📘 Mở Sổ Tay Kiểm Toán &amp; Giải Thích Logic Chọn Số Từ A Đến Z</a>\n'
+        '      <a href="logic_explainer.html" style="display: inline-block; '
+        "background: rgba(56, 189, 248, 0.14); color: #38bdf8; "
+        "border: 1px solid #38bdf8; padding: 6px 14px; border-radius: 8px; "
+        'text-decoration: none; font-weight: 700; font-size: 0.9rem;">'
+        "📘 Mở Sổ Tay Kiểm Toán &amp; Giải Thích Logic Chọn Số Từ A Đến Z</a>\n"
         "    </div>\n"
         "  </header>\n"
         '  <section class="card">\n'

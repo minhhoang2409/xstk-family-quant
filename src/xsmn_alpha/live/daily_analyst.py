@@ -12,28 +12,40 @@ questions without any external LLM/AI API dependency.
 from __future__ import annotations
 
 import datetime
+import math
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, NamedTuple
 
 import numpy as np
 
 from xsmn_alpha.backtest.alpha_decay import compute_rank_ordered_alpha_decay
 from xsmn_alpha.backtest.sweet_spot_sim import (
     evaluate_stage3_ticket_portfolios,
+    evaluate_sweet_spot_portfolio,
+    select_sweet_5_numbers,
     select_sweet_spot_numbers,
 )
 from xsmn_alpha.constants import (
     BE_PROB_SINGLE_BALL,
     BENCHMARK_BASE_DAILY_COST_4NUM_VND,
+    BENCHMARK_BASE_DAILY_COST_5NUM_VND,
     BENCHMARK_INITIAL_BANKROLL_VND,
     BENCHMARK_STAKE_PER_NUMBER_VND,
+    CAGE_ANOMALY_BF10_THRESHOLD,
+    CAGE_COLD_BALL_FREQ_MAX_PCT,
+    CAGE_HOT_BALL_FREQ_MIN_PCT,
+    CAGE_NUM_BALLS,
     EXTENDED_SWEET_SPOT_CONFIGS,
     FALSIFICATION_WINDOWS,
     MIN_SAMPLE_SIZE_DRAWS,
     PEAK_CONVICTION_JOINT_R1_PCT,
     SELECTIVE_ALPHA_JOINT_R1_MIN_PCT,
     STAGE3_TICKET_CONFIGS,
+    STAGE4_SWEET_SPOT_CONFIGS,
+    THEORETICAL_WIN_RATE_4NUM_PCT,
+    THEORETICAL_WIN_RATE_5NUM_PCT,
+    WEEKLY_SCHEDULE_REST_DAYS,
 )
 from xsmn_alpha.engine.calibration_pooler import CalibratedProbabilityPooler
 from xsmn_alpha.exceptions import (
@@ -74,12 +86,26 @@ from xsmn_alpha.schemas import (
     Stage3CanonicalDrawRecord,
     StationDailyScorecard,
     TicketConfigRecommendation,
+    WeekdayCageBalanceSummary,
+    Weekly52AndFlatStakeGate,
+    WeeklySchedule52Analysis,
     validate_iso_date,
     validate_joint_100_matrix,
     validate_station_code_35,
 )
 
 Stage3TicketConfigId = Literal["2x2", "1x4", "4x1", "3x3", "core_2x2_sat_3x3"]
+Weekly52Mode = Literal["auto", "enforce", "off"]
+
+
+class CageAnomalyResult(NamedTuple):
+    """Result of physical cage anomaly detection (Cage Anomaly Sentinel)."""
+
+    cage_anomaly_detected: bool
+    cold_balls_tens: list[int]
+    cold_balls_units: list[int]
+    cage_anomaly_summary_vi: str
+
 
 # In-memory deterministic cache for Monte Carlo null thresholds
 # keyed by (sample_draws, null_sims, seed)
@@ -260,6 +286,180 @@ def classify_daily_verdict_tier(
     return "PLAY_CAUTIOUS"
 
 
+def detect_cage_anomaly(
+    *,
+    chi2_max_overall: float,
+    null_chi2_p95: float,
+    bf10_max_overall: float,
+    tens_counts_window: Sequence[Sequence[int]] | np.ndarray | None = None,
+    units_counts_window: Sequence[Sequence[int]] | np.ndarray | None = None,
+    tens_counts: Sequence[Sequence[int]] | np.ndarray | None = None,
+    units_counts: Sequence[Sequence[int]] | np.ndarray | None = None,
+    station_code: str = "",
+    station_name: str = "",
+    ranked_balls_tens: Sequence[int] | None = None,
+    ranked_balls_units: Sequence[int] | None = None,
+    cold_freq_max_pct: float = CAGE_COLD_BALL_FREQ_MAX_PCT,
+    bf10_threshold: float = CAGE_ANOMALY_BF10_THRESHOLD,
+    window_draws: int = 30,
+) -> CageAnomalyResult:
+    """Detect physical cage anomalies and 30-draw cold balls strictly from < D window counts.
+
+    Boundary BC-05:
+      - Requires strict inequality chi2_max_overall > null_chi2_p95 AND
+        bf10_max_overall >= bf10_threshold (default 10.0).
+      - Identifies cold balls whose empirical 30-draw frequency is <= cold_freq_max_pct (6.5%).
+    """
+    raw_t = tens_counts_window if tens_counts_window is not None else tens_counts
+    raw_u = units_counts_window if units_counts_window is not None else units_counts
+    if raw_t is None or raw_u is None:
+        raise DataIntegrityError(
+            "detect_cage_anomaly requires tens_counts_window/tens_counts and "
+            "units_counts_window/units_counts."
+        )
+
+    chi2_val = float(chi2_max_overall)
+    p95_val = float(null_chi2_p95)
+    bf10_val = float(bf10_max_overall)
+    cold_max_val = float(cold_freq_max_pct)
+    bf10_min_val = float(bf10_threshold)
+    if not all(
+        math.isfinite(val) for val in (chi2_val, p95_val, bf10_val, cold_max_val, bf10_min_val)
+    ):
+        raise DataIntegrityError(
+            "detect_cage_anomaly requires finite chi2_max_overall, null_chi2_p95, "
+            "and bf10_max_overall."
+        )
+
+    try:
+        t_full = np.asarray(raw_t, dtype=np.float64)
+        u_full = np.asarray(raw_u, dtype=np.float64)
+    except Exception as exc:
+        raise DataIntegrityError(
+            f"Invalid cage counts array in detect_cage_anomaly: {exc}"
+        ) from exc
+
+    if (
+        t_full.ndim != 2
+        or u_full.ndim != 2
+        or t_full.shape[0] < 1
+        or t_full.shape != u_full.shape
+        or t_full.shape[1] != CAGE_NUM_BALLS
+    ):
+        raise DataIntegrityError(
+            f"detect_cage_anomaly requires 2D (N, {CAGE_NUM_BALLS}) counts arrays with N >= 1, "
+            f"got tens shape {t_full.shape} and units shape {u_full.shape}."
+        )
+    if not (np.all(np.isfinite(t_full)) and np.all(np.isfinite(u_full))):
+        raise DataIntegrityError("detect_cage_anomaly counts must be finite.")
+    if not (np.all(t_full >= 0) and np.all(u_full >= 0)):
+        raise DataIntegrityError("detect_cage_anomaly counts must be non-negative.")
+    if not (np.all(np.sum(t_full, axis=1) > 0) and np.all(np.sum(u_full, axis=1) > 0)):
+        raise DataIntegrityError("detect_cage_anomaly requires every draw row to have sum > 0.")
+
+    t_arr = t_full[-window_draws:] if t_full.shape[0] > window_draws else t_full
+    u_arr = u_full[-window_draws:] if u_full.shape[0] > window_draws else u_full
+    w_len = int(t_arr.shape[0])
+    total_t = float(np.sum(t_arr))
+    total_u = float(np.sum(u_arr))
+
+    t_freqs_pct = (np.sum(t_arr, axis=0) / total_t) * 100.0
+    cold_balls_tens = [
+        int(b) for b in range(CAGE_NUM_BALLS) if float(t_freqs_pct[b]) <= cold_max_val
+    ]
+    u_freqs_pct = (np.sum(u_arr, axis=0) / total_u) * 100.0
+    cold_balls_units = [
+        int(b) for b in range(CAGE_NUM_BALLS) if float(u_freqs_pct[b]) <= cold_max_val
+    ]
+
+    is_anomaly = bool(chi2_val > p95_val and bf10_val >= bf10_min_val)
+    if not is_anomaly:
+        return CageAnomalyResult(
+            cage_anomaly_detected=False,
+            cold_balls_tens=[],
+            cold_balls_units=[],
+            cage_anomaly_summary_vi="",
+        )
+
+    # Fallback to 60-draw window or lowest-ranked balls (< 10.0%) when 30-draw window has no <= 6.5%
+    if not cold_balls_tens and not cold_balls_units:
+        t_60 = t_full[-60:]
+        u_60 = u_full[-60:]
+        t_freqs_60 = (np.sum(t_60, axis=0) / float(np.sum(t_60))) * 100.0
+        u_freqs_60 = (np.sum(u_60, axis=0) / float(np.sum(u_60))) * 100.0
+        cold_balls_tens = [
+            int(b) for b in range(CAGE_NUM_BALLS) if float(t_freqs_60[b]) <= cold_max_val
+        ]
+        cold_balls_units = [
+            int(b) for b in range(CAGE_NUM_BALLS) if float(u_freqs_60[b]) <= cold_max_val
+        ]
+        if not cold_balls_tens and ranked_balls_tens and len(ranked_balls_tens) >= 2:
+            cold_balls_tens = sorted(
+                int(b) for b in ranked_balls_tens[-2:] if float(t_freqs_pct[int(b)]) < 10.0
+            )
+        if not cold_balls_units and ranked_balls_units and len(ranked_balls_units) >= 2:
+            cold_balls_units = sorted(
+                int(b) for b in ranked_balls_units[-2:] if float(u_freqs_pct[int(b)]) < 10.0
+            )
+
+    station_label = (
+        f"{station_name} ({station_code})"
+        if station_name and station_code
+        else (station_code or station_name or "Đài")
+    )
+    tens_cold_detail = (
+        ", ".join(f"bóng {b} ({float(t_freqs_pct[b]):.2f}%)" for b in cold_balls_tens)
+        if cold_balls_tens
+        else "không có"
+    )
+    units_cold_detail = (
+        ", ".join(f"bóng {b} ({float(u_freqs_pct[b]):.2f}%)" for b in cold_balls_units)
+        if cold_balls_units
+        else "không có"
+    )
+    hot_t = [
+        int(b) for b in range(CAGE_NUM_BALLS) if float(t_freqs_pct[b]) >= CAGE_HOT_BALL_FREQ_MIN_PCT
+    ]
+    hot_u = [
+        int(b) for b in range(CAGE_NUM_BALLS) if float(u_freqs_pct[b]) >= CAGE_HOT_BALL_FREQ_MIN_PCT
+    ]
+    if (
+        ranked_balls_tens
+        and len(ranked_balls_tens) >= 2
+        and ranked_balls_units
+        and len(ranked_balls_units) >= 2
+    ):
+        top_balls_clause = (
+            f" Ưu tiên bóng nóng dẫn đầu: "
+            f"Hàng Chục [{ranked_balls_tens[0]}, {ranked_balls_tens[1]}], "
+            f"Hàng Đơn Vị [{ranked_balls_units[0]}, {ranked_balls_units[1]}]."
+        )
+    elif hot_t or hot_u:
+        top_balls_clause = (
+            f" Bóng nóng (>= {CAGE_HOT_BALL_FREQ_MIN_PCT:.1f}%): Chục {hot_t}, Đơn Vị {hot_u}."
+        )
+    else:
+        top_balls_clause = ""
+
+    summary_vi = (
+        f"⚠️ PHÁT HIỆN LỒNG CẦU LỆCH MẠNH tại đài {station_label} (Cage Anomaly Sentinel): "
+        f"Chi2_max = {chi2_val:.2f} vượt ngưỡng nhiễu trắng Monte Carlo "
+        f"P95 = {p95_val:.2f} và hệ số Bayes BF10_max = {bf10_val:.2f} "
+        f"(>= {bf10_min_val:.1f}). "
+        f"Bóng lạnh bị triệt tiêu (<= {cold_max_val:.1f}% trong {w_len} kỳ): "
+        f"Hàng Chục {cold_balls_tens} ({tens_cold_detail}); "
+        f"Hàng Đơn Vị {cold_balls_units} ({units_cold_detail})."
+        f"{top_balls_clause}"
+    )
+
+    return CageAnomalyResult(
+        cage_anomaly_detected=True,
+        cold_balls_tens=cold_balls_tens,
+        cold_balls_units=cold_balls_units,
+        cage_anomaly_summary_vi=summary_vi,
+    )
+
+
 def build_station_rationale_vi(
     *,
     station_code: str,
@@ -279,10 +479,45 @@ def build_station_rationale_vi(
     recommended_numbers: Sequence[str],
     passes_selective_alpha: bool,
     strong_convergence: bool,
+    cage_anomaly_detected: bool = False,
+    cage_anomaly_summary_vi: str = "",
+    passes_weekly_5_2_play: bool = False,
+    is_weekly_rest_day: bool | None = None,
+    sweet_5_numbers: Sequence[str] | None = None,
 ) -> str:
     """Build deterministic Vietnamese quantitative rationale for a single station scorecard."""
     nums_str = ", ".join(recommended_numbers)
-    if passes_selective_alpha:
+    if is_weekly_rest_day is True:
+        if passes_selective_alpha:
+            verdict_phrase = (
+                f"Đài {station_name} ({station_code} - {region}) [NGHỈ ĐỊNH KỲ LỊCH 5/2 (0.0x)]: "
+                f"Mặc dù chỉ số đơn lẻ đạt ngưỡng Selective Alpha với "
+                f"JointR1 = {joint_r1_pct:.3f}% "
+                f"(>= ngưỡng {SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%; Lồng Hàng Chục = "
+                f"{oos_rank1_freq_tens_pct:.2f}%, "
+                f"Lồng Hàng Đơn Vị = {oos_rank1_freq_units_pct:.2f}% "
+                f"so với điểm hòa vốn 10.69%) và ROI OOS 3 năm = {best_oos_roi_pct:+.2f}% (> 0%), "
+                f"hệ thống thực thi kỷ luật NGHỈ ĐỊNH KỲ LỊCH CHƠI 5/2 "
+                f"(0.0x - thuộc 2 thứ có lồng cầu cân bằng nhất tuần) để bảo toàn 100% vốn."
+            )
+        else:
+            reasons_rest: list[str] = []
+            if joint_r1_pct < SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:
+                reasons_rest.append(
+                    f"JointR1 = {joint_r1_pct:.3f}% chưa đạt ngưỡng lọc "
+                    f"{SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%"
+                )
+            if best_oos_roi_pct <= 0.0:
+                reasons_rest.append(f"ROI thực nghiệm OOS 3 năm = {best_oos_roi_pct:+.2f}% <= 0%")
+            reason_rest_txt = (
+                " và ".join(reasons_rest) if reasons_rest else "thuộc ngày nghỉ định kỳ Lịch 5/2"
+            )
+            verdict_phrase = (
+                f"Đài {station_name} ({station_code} - {region}) [NGHỈ ĐỊNH KỲ LỊCH 5/2 (0.0x)]: "
+                f"{reason_rest_txt} (Lồng Chục = {oos_rank1_freq_tens_pct:.2f}%, "
+                f"Lồng Đơn Vị = {oos_rank1_freq_units_pct:.2f}%)."
+            )
+    elif passes_selective_alpha:
         tier_label = (
             "ĐẠT HỘI TỤ MẠNH (PEAK ALPHA)"
             if strong_convergence
@@ -295,6 +530,20 @@ def build_station_rationale_vi(
             f"{oos_rank1_freq_tens_pct:.2f}%, Lồng Hàng Đơn Vị = {oos_rank1_freq_units_pct:.2f}% "
             f"so với điểm hòa vốn 10.69%) và hiệu suất kiểm định thực nghiệm OOS 3 năm đạt "
             f"ROI = {best_oos_roi_pct:+.2f}% (> 0%)."
+        )
+    elif passes_weekly_5_2_play:
+        verdict_phrase = (
+            f"Đài {station_name} ({station_code} - {region}) ĐÀI CHỦ LỰC HẠNG 1 "
+            f"(LỊCH CHƠI 5/2 — ƯU TIÊN ĐỘ LỆCH LỒNG CẦU): "
+            f"dẫn đầu độ lệch vật lý lồng cầu trong ngày "
+            f"với Chi2_max = {chi2_max_overall:.2f} (so với ngưỡng Monte Carlo "
+            f"P90 = {null_chi2_p90:.2f}, P95 = {null_chi2_p95:.2f}) "
+            f"và BF10_max = {bf10_max_overall:.2f}; "
+            f"xác suất trúng đồng thời Hạng-1 hai lồng cầu đạt JointR1 = {joint_r1_pct:.3f}% "
+            f"(so với ngưỡng Selective Alpha {SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%; "
+            f"Lồng Chục = {oos_rank1_freq_tens_pct:.2f}%, "
+            f"Lồng Đơn Vị = {oos_rank1_freq_units_pct:.2f}% "
+            f"so với điểm hòa vốn 10.69%) và ROI thực nghiệm OOS 3 năm = {best_oos_roi_pct:+.2f}%."
         )
     else:
         reasons: list[str] = []
@@ -312,12 +561,15 @@ def build_station_rationale_vi(
             f"Lồng Đơn Vị = {oos_rank1_freq_units_pct:.2f}%)."
         )
 
+    sweet5_suffix = (
+        f" | Điểm Ngọt 5 số sweet_5: ({', '.join(sweet_5_numbers)})" if sweet_5_numbers else ""
+    )
     stats_phrase = (
         f"Kiểm định đa khung W thuộc {{15, 30, 60}} ghi nhận Chi2_max = {chi2_max_overall:.2f} "
         f"(ngưỡng Monte Carlo P90 = {null_chi2_p90:.2f}, P95 = {null_chi2_p95:.2f}), "
         f"hệ số Bayes BF10_max = {bf10_max_overall:.2f}, "
         f"độ dài chế độ BOCD r_t = {bocd_map_run_length} kỳ. "
-        f"Cấu hình tối ưu < D: {recommended_config_id} ({nums_str})."
+        f"Cấu hình tối ưu < D: {recommended_config_id} ({nums_str}){sweet5_suffix}."
     )
 
     if bocd_changepoint_warning:
@@ -329,7 +581,11 @@ def build_station_rationale_vi(
     else:
         bocd_phrase = ""
 
-    return f"{verdict_phrase} {stats_phrase}{bocd_phrase}"
+    anomaly_phrase = (
+        f" {cage_anomaly_summary_vi}" if cage_anomaly_detected and cage_anomaly_summary_vi else ""
+    )
+
+    return f"{verdict_phrase} {stats_phrase}{bocd_phrase}{anomaly_phrase}"
 
 
 def _get_cached_monte_carlo_null(
@@ -346,6 +602,39 @@ def _get_cached_monte_carlo_null(
             seed=seed,
         )
     return _NULL_THRESHOLD_CACHE[key]
+
+
+def _load_and_validate_raw_draws_before_date(
+    code: str,
+    *,
+    target_iso: str,
+    raw_dir: str | Path,
+) -> list[Stage3CanonicalDrawRecord]:
+    """Load station raw cache, validate schema & date order, and enforce < D cutoff."""
+    raw_cached = load_station_raw_cache(
+        code,
+        raw_dir=raw_dir,
+        verify_sha256=True,
+        allow_unhashed_legacy=True,
+    )
+    prev_dt = ""
+    raw_before_d: list[Mapping[str, Any]] = []
+    for idx, d in enumerate(raw_cached):
+        if not isinstance(d, Mapping):
+            raise DataIntegrityError(f"Invalid draw entry in {code} cache at index {idx}.")
+        dt_iso = validate_iso_date(str(d.get("draw_date", "")))
+        if prev_dt and dt_iso <= prev_dt:
+            raise TemporalLeakageError(
+                f"Non-increasing draw_date in {code} cache at index {idx}: {dt_iso} <= {prev_dt}."
+            )
+        prev_dt = dt_iso
+        if dt_iso < target_iso:
+            raw_before_d.append(d)
+    return enforce_pre_draw_date_cutoff(
+        raw_before_d,
+        target_date=target_iso,
+        station_code=code,
+    )
 
 
 def score_station_for_date(
@@ -365,19 +654,10 @@ def score_station_for_date(
     target_iso = _coerce_iso_date(target_date)
 
     if history_draws is None:
-        raw_cached = load_station_raw_cache(
+        records = _load_and_validate_raw_draws_before_date(
             code,
+            target_iso=target_iso,
             raw_dir=raw_dir,
-            verify_sha256=True,
-            allow_unhashed_legacy=True,
-        )
-        raw_before_d = [
-            d for d in raw_cached if validate_iso_date(str(d.get("draw_date", ""))) < target_iso
-        ]
-        records = enforce_pre_draw_date_cutoff(
-            raw_before_d,
-            target_date=target_iso,
-            station_code=code,
         )
     else:
         records = enforce_pre_draw_date_cutoff(
@@ -551,6 +831,64 @@ def score_station_for_date(
             is_recommended_primary=(cfg_id == rec_cfg_id),
         )
 
+    # 4. Evaluate Stage 4 Sweet-5 ("Điểm Ngọt Bà Cô 5 Số": 4 Core 2x2 + 1 Top Satellite)
+    sweet_5_nums, core_2x2_nums, sat_sweet5_nums = select_sweet_5_numbers(
+        tens_today.p_ai,
+        units_today.p_ai,
+    )
+    sweet_5_oos = evaluate_sweet_spot_portfolio(
+        tens_wf_preds,
+        units_wf_preds,
+        eval_draws,
+        "sweet_5",
+    )
+    sweet_5_spec = STAGE4_SWEET_SPOT_CONFIGS["sweet_5"]
+    sweet_5_single_prob = round(
+        min(
+            max(float(sum(joint_matrix[int(num[0])][int(num[1])] for num in sweet_5_nums)), 0.0),
+            1.0,
+        ),
+        6,
+    )
+    sweet_5_hit18_prob = round(1.0 - (1.0 - sweet_5_single_prob) ** 18, 6)
+    sweet_5_unit_cost = float(sweet_5_spec["cost_per_draw"])
+    sweet_5_bench_cost = int(round(sweet_5_unit_cost * BENCHMARK_STAKE_PER_NUMBER_VND))
+    sweet_5_rec = TicketConfigRecommendation(
+        config_id="sweet_5",
+        label=str(sweet_5_spec["label"]),
+        num_numbers=len(sweet_5_nums),
+        selected_numbers=sweet_5_nums,
+        core_numbers=core_2x2_nums,
+        satellite_numbers=sat_sweet5_nums,
+        unit_cost_per_draw=sweet_5_unit_cost,
+        benchmark_1x_cost_vnd=sweet_5_bench_cost,
+        single_prize_hit_prob=sweet_5_single_prob,
+        hit_at_least_1_in_18_prob=sweet_5_hit18_prob,
+        oos_roi_3y_pct=round(float(sweet_5_oos.roi_pct), 2),
+        oos_win_rate_3y_pct=round(float(sweet_5_oos.daily_win_rate) * 100.0, 2),
+        oos_hits_per_30_draws=round(float(sweet_5_oos.hits_per_30_draws), 2),
+        be_hits_30_draws=round(float(sweet_5_spec["be_hits_30_draws"]), 2),
+        is_recommended_primary=False,
+    )
+
+    # 5. Detect physical cage anomaly & 30-draw cold balls (Cage Anomaly Sentinel)
+    chi2_max_round = round(chi2_max_overall, 2)
+    null_p90_round = round(float(null_res.p90), 2)
+    null_p95_round = round(float(null_res.p95), 2)
+    bf10_max_round = round(bf10_max_overall, 3)
+
+    anomaly_res = detect_cage_anomaly(
+        station_code=code,
+        station_name=str(meta["name"]),
+        chi2_max_overall=chi2_max_round,
+        null_chi2_p95=null_p95_round,
+        bf10_max_overall=bf10_max_round,
+        tens_counts_window=tens_mat[-60:],
+        units_counts_window=units_mat[-60:],
+        ranked_balls_tens=tens_today.ranked_balls,
+        ranked_balls_units=units_today.ranked_balls,
+    )
+
     rec_numbers = list(ticket_configs_map[rec_cfg_id].selected_numbers)
     best_oos_roi_pct = max(
         ticket_configs_map[cid].oos_roi_3y_pct for cid in ("2x2", "1x4", "4x1", "3x3")
@@ -577,10 +915,10 @@ def score_station_for_date(
         joint_r1_pct=joint_r1_round,
         oos_rank1_freq_tens_pct=t_r1_round,
         oos_rank1_freq_units_pct=u_r1_round,
-        chi2_max_overall=round(chi2_max_overall, 2),
-        null_chi2_p90=round(float(null_res.p90), 2),
-        null_chi2_p95=round(float(null_res.p95), 2),
-        bf10_max_overall=round(bf10_max_overall, 3),
+        chi2_max_overall=chi2_max_round,
+        null_chi2_p90=null_p90_round,
+        null_chi2_p95=null_p95_round,
+        bf10_max_overall=bf10_max_round,
         bocd_map_run_length=bocd_r_min,
         bocd_changepoint_warning=bocd_cp_warn,
         best_oos_roi_pct=best_roi_round,
@@ -588,6 +926,9 @@ def score_station_for_date(
         recommended_numbers=rec_numbers,
         passes_selective_alpha=passes_selective,
         strong_convergence=strong_conv,
+        cage_anomaly_detected=anomaly_res.cage_anomaly_detected,
+        cage_anomaly_summary_vi=anomaly_res.cage_anomaly_summary_vi,
+        sweet_5_numbers=sweet_5_nums,
     )
 
     role_label = "Đài Chủ Lực Tiềm Năng" if passes_selective else "Đứng Ngoài / Nhiễu Trắng (0x)"
@@ -608,12 +949,12 @@ def score_station_for_date(
         chi2_60_units=round(chi2_60_u, 2),
         chi2_max_tens=round(chi2_max_t, 2),
         chi2_max_units=round(chi2_max_u, 2),
-        chi2_max_overall=round(chi2_max_overall, 2),
-        null_chi2_p90=round(float(null_res.p90), 2),
-        null_chi2_p95=round(float(null_res.p95), 2),
+        chi2_max_overall=chi2_max_round,
+        null_chi2_p90=null_p90_round,
+        null_chi2_p95=null_p95_round,
         bf10_max_tens=round(bf10_max_t, 3),
         bf10_max_units=round(bf10_max_u, 3),
-        bf10_max_overall=round(bf10_max_overall, 3),
+        bf10_max_overall=bf10_max_round,
         normalized_entropy_tens=round(norm_entropy_t, 4),
         normalized_entropy_units=round(norm_entropy_u, 4),
         bocd_map_run_length_tens=bocd_r_t,
@@ -642,11 +983,203 @@ def score_station_for_date(
         rank_in_day=1,
         role_label_vi=role_label,
         rationale_vi=rationale_vi,
+        sweet_5_numbers=sweet_5_nums,
+        sweet_5_config=sweet_5_rec,
+        cage_anomaly_detected=anomaly_res.cage_anomaly_detected,
+        cage_anomaly_summary_vi=anomaly_res.cage_anomaly_summary_vi,
+        cold_balls_tens=anomaly_res.cold_balls_tens,
+        cold_balls_units=anomaly_res.cold_balls_units,
+        passes_weekly_5_2_play=False,
     )
+
+
+def compute_weekly_balance_rest_days(
+    target_date: str | datetime.date,
+    *,
+    raw_dir: str | Path = DEFAULT_RAW_ALL_DIR,
+    station_histories: Mapping[str, Sequence[Stage3CanonicalDrawRecord | Mapping[str, Any]]]
+    | None = None,
+    trim_to_3y: bool = True,
+) -> WeeklySchedule52Analysis:
+    """Compute the adaptive Weekly 5/2 Cage-Balance Schedule strictly before target_date (< D).
+
+    Evaluates all 35 stations across the 7 weekdays (0=Mon .. 6=Sun) using multi-window
+    hypothesis tests W in {15, 30, 60} strictly before target_date (< D).
+    In-memory per-station caching (BC-04) ensures the 4 dual-weekday stations
+    (XSHCM, XSTTH, XSDNG, XSKH) are computed once per call.
+    Ranks all 7 weekdays ascending by:
+      (round(max_chi2_overall, 2), round(max_bf10_overall, 3), round(mean_chi2_overall, 2), weekday)
+    and assigns the 2 lowest-Chi2 weekdays (balance_rank in {1, 2}) as scheduled rest days.
+    """
+    target_iso = _coerce_iso_date(target_date)
+    target_dt = datetime.date.fromisoformat(target_iso)
+    target_wd = target_dt.weekday()
+    target_wd_vn = WEEKDAY_VN_LABELS[target_wd]
+
+    # Per-call cache keyed by station_code -> (station_name, chi2_max, bf10_max, min_entropy)
+    station_stats_cache: dict[str, tuple[str, float, float, float]] = {}
+
+    def _get_station_cage_stats(code: str) -> tuple[str, float, float, float]:
+        if code in station_stats_cache:
+            return station_stats_cache[code]
+
+        meta = get_station_meta(code)
+        if station_histories is not None and code in station_histories:
+            records = PreDrawCutoffGate.enforce(
+                station_histories[code],
+                target_date=target_iso,
+                station_code=code,
+            )
+        else:
+            records = _load_and_validate_raw_draws_before_date(
+                code,
+                target_iso=target_iso,
+                raw_dir=raw_dir,
+            )
+
+        if len(records) < MIN_SAMPLE_SIZE_DRAWS:
+            raise InsufficientSampleSizeError(
+                f"Station {code} has only {len(records)} pre-draw records (< {target_iso}), "
+                f"which is below MIN_SAMPLE_SIZE_DRAWS={MIN_SAMPLE_SIZE_DRAWS}."
+            )
+
+        target_3y = int(meta["target_3y"])
+        if trim_to_3y and len(records) > target_3y:
+            records = records[-target_3y:]
+
+        tens_mat = np.array([rec.tens_counts for rec in records], dtype=np.int64)
+        units_mat = np.array([rec.units_counts for rec in records], dtype=np.int64)
+
+        t_win = {
+            res.window_draws: res
+            for res in run_multi_window_tests(tens_mat, windows=FALSIFICATION_WINDOWS)
+        }
+        u_win = {
+            res.window_draws: res
+            for res in run_multi_window_tests(units_mat, windows=FALSIFICATION_WINDOWS)
+        }
+
+        chi2_max_s = round(
+            max(
+                max(float(r.chi2_stat) for r in t_win.values()),
+                max(float(r.chi2_stat) for r in u_win.values()),
+            ),
+            2,
+        )
+        bf10_max_s = round(
+            max(
+                max(float(r.bf10_dirichlet) for r in t_win.values()),
+                max(float(r.bf10_dirichlet) for r in u_win.values()),
+            ),
+            3,
+        )
+        min_ent_s = round(
+            min(float(t_win[30].normalized_entropy), float(u_win[30].normalized_entropy)),
+            4,
+        )
+        res_tuple = (str(meta["name"]), chi2_max_s, bf10_max_s, min_ent_s)
+        station_stats_cache[code] = res_tuple
+        return res_tuple
+
+    raw_weekday_items: list[dict[str, Any]] = []
+    for wd in range(7):
+        wd_codes = list(get_station_codes_for_weekday(wd))
+        if not wd_codes:
+            raise DataIntegrityError(f"No stations scheduled for weekday {wd}.")
+
+        wd_stats = [(code, *_get_station_cage_stats(code)) for code in wd_codes]
+        # Lead station on weekday wd: highest chi2_max, tie-broken by bf10_max, then station_code
+        lead_tuple = min(
+            wd_stats,
+            key=lambda item: (-round(item[2], 2), -round(item[3], 3), item[0]),
+        )
+        max_chi2_w = round(max(item[2] for item in wd_stats), 2)
+        mean_chi2_w = round(float(np.mean([item[2] for item in wd_stats])), 2)
+        max_bf10_w = round(max(item[3] for item in wd_stats), 3)
+        min_ent_w = round(min(item[4] for item in wd_stats), 4)
+
+        raw_weekday_items.append(
+            {
+                "weekday": wd,
+                "weekday_vn": WEEKDAY_VN_LABELS[wd],
+                "num_stations": len(wd_codes),
+                "station_codes": wd_codes,
+                "lead_station_code": lead_tuple[0],
+                "lead_station_name": lead_tuple[1],
+                "max_chi2_overall": max_chi2_w,
+                "mean_chi2_overall": mean_chi2_w,
+                "max_bf10_overall": max_bf10_w,
+                "min_entropy_overall": min_ent_w,
+            }
+        )
+
+    sorted_weekdays = sorted(
+        raw_weekday_items,
+        key=lambda w: (
+            round(float(w["max_chi2_overall"]), 2),
+            round(float(w["max_bf10_overall"]), 3),
+            round(float(w["mean_chi2_overall"]), 2),
+            int(w["weekday"]),
+        ),
+    )
+
+    weekday_rankings: list[WeekdayCageBalanceSummary] = []
+    for rank_idx, item in enumerate(sorted_weekdays, start=1):
+        is_rest = rank_idx <= WEEKLY_SCHEDULE_REST_DAYS
+        weekday_rankings.append(
+            WeekdayCageBalanceSummary(
+                weekday=item["weekday"],
+                weekday_vn=item["weekday_vn"],
+                balance_rank=rank_idx,
+                num_stations=item["num_stations"],
+                station_codes=item["station_codes"],
+                lead_station_code=item["lead_station_code"],
+                lead_station_name=item["lead_station_name"],
+                max_chi2_overall=item["max_chi2_overall"],
+                mean_chi2_overall=item["mean_chi2_overall"],
+                max_bf10_overall=item["max_bf10_overall"],
+                min_entropy_overall=item["min_entropy_overall"],
+                is_rest_day=is_rest,
+            )
+        )
+
+    rest_wds = (weekday_rankings[0].weekday, weekday_rankings[1].weekday)
+    rest_vns = (weekday_rankings[0].weekday_vn, weekday_rankings[1].weekday_vn)
+    play_wds = (
+        weekday_rankings[2].weekday,
+        weekday_rankings[3].weekday,
+        weekday_rankings[4].weekday,
+        weekday_rankings[5].weekday,
+        weekday_rankings[6].weekday,
+    )
+    play_vns = (
+        weekday_rankings[2].weekday_vn,
+        weekday_rankings[3].weekday_vn,
+        weekday_rankings[4].weekday_vn,
+        weekday_rankings[5].weekday_vn,
+        weekday_rankings[6].weekday_vn,
+    )
+    today_summary = next(r for r in weekday_rankings if r.weekday == target_wd)
+
+    schedule = WeeklySchedule52Analysis(
+        as_of_date=target_iso,
+        target_weekday=target_wd,
+        target_weekday_vn=target_wd_vn,
+        today_balance_rank=today_summary.balance_rank,
+        is_today_scheduled_rest_day=(target_wd in rest_wds),
+        rest_weekdays=rest_wds,
+        rest_weekdays_vn=rest_vns,
+        play_weekdays=play_wds,
+        play_weekdays_vn=play_vns,
+        weekday_rankings=weekday_rankings,
+    )
+    return Weekly52AndFlatStakeGate.enforce_schedule(schedule)
 
 
 def rank_stations_for_day(
     scorecards: Sequence[StationDailyScorecard],
+    *,
+    is_weekly_rest_day: bool | None = None,
 ) -> tuple[
     list[StationDailyScorecard],
     StationDailyScorecard,
@@ -654,7 +1187,23 @@ def rank_stations_for_day(
     list[StationDailyScorecard],
     DailyVerdictTier,
 ]:
-    """Rank all stations opening on day D by (-station_alpha_score, station_code).
+    """Rank all stations opening on day D and determine the daily verdict tier.
+
+    When `is_weekly_rest_day is None` (Stage 3 single-day mode), sort priority:
+      1. -int(sc.passes_selective_alpha)
+      2. -int(sc.cage_anomaly_detected)
+      3. -round(sc.chi2_max_overall, 2)
+      4. -round(sc.bf10_max_overall, 3)
+      5. -round(sc.station_alpha_score, 2)
+      6. sc.station_code
+
+    When `is_weekly_rest_day is not None` (Stage 4 Weekly 5/2 Cage-Balance mode), sort priority:
+      1. -int(sc.cage_anomaly_detected)
+      2. -round(sc.chi2_max_overall, 2)
+      3. -round(sc.bf10_max_overall, 3)
+      4. -int(sc.passes_selective_alpha)
+      5. -round(sc.station_alpha_score, 2)
+      6. sc.station_code
 
     Returns:
       (ranked_scorecards, primary_station, secondary_station, skipped_stations, verdict_tier)
@@ -662,39 +1211,109 @@ def rank_stations_for_day(
     if not scorecards:
         raise DataIntegrityError("scorecards cannot be empty when ranking stations for a day.")
 
-    sorted_cards = sorted(
-        scorecards,
-        key=lambda sc: (-float(sc.station_alpha_score), sc.station_code),
-    )
+    if is_weekly_rest_day is None:
+        sorted_cards = sorted(
+            scorecards,
+            key=lambda sc: (
+                -int(sc.passes_selective_alpha),
+                -int(sc.cage_anomaly_detected),
+                -round(float(sc.chi2_max_overall), 2),
+                -round(float(sc.bf10_max_overall), 3),
+                -round(float(sc.station_alpha_score), 2),
+                sc.station_code,
+            ),
+        )
+    else:
+        sorted_cards = sorted(
+            scorecards,
+            key=lambda sc: (
+                -int(sc.cage_anomaly_detected),
+                -round(float(sc.chi2_max_overall), 2),
+                -round(float(sc.bf10_max_overall), 3),
+                -int(sc.passes_selective_alpha),
+                -round(float(sc.station_alpha_score), 2),
+                sc.station_code,
+            ),
+        )
 
     first = sorted_cards[0]
-    if not first.passes_selective_alpha:
+    if is_weekly_rest_day is True:
         verdict_tier: DailyVerdictTier = "SKIP_NO_EDGE"
+    elif is_weekly_rest_day is False:
+        verdict_tier = "PLAY_STANDARD"
     else:
-        verdict_tier = classify_daily_verdict_tier(
-            first.joint_r1_pct,
-            first.best_oos_roi_pct,
-        )
+        if not first.passes_selective_alpha:
+            verdict_tier = "SKIP_NO_EDGE"
+        else:
+            verdict_tier = classify_daily_verdict_tier(
+                first.joint_r1_pct,
+                first.best_oos_roi_pct,
+            )
 
     ranked: list[StationDailyScorecard] = []
     passing_idx = 0
     for idx, sc in enumerate(sorted_cards, start=1):
-        if sc.passes_selective_alpha and verdict_tier != "SKIP_NO_EDGE":
+        passes_52_play = bool(is_weekly_rest_day is False and idx == 1)
+        if verdict_tier == "SKIP_NO_EDGE":
+            role = (
+                "Nghỉ Định Kỳ 5/2 (0x)"
+                if is_weekly_rest_day is True
+                else "Đứng Ngoài / Nhiễu Trắng (0x)"
+            )
+        elif idx == 1 and (sc.passes_selective_alpha or passes_52_play):
             passing_idx += 1
-            if passing_idx == 1:
-                role = "Đài Chủ Lực (Hạng 1)"
-            elif passing_idx == 2:
+            role = "Đài Chủ Lực (Hạng 1)"
+        elif sc.passes_selective_alpha:
+            passing_idx += 1
+            if passing_idx == 2:
                 role = "Đài Dự Phòng (Hạng 2)"
             else:
                 role = f"Đài Đạt Chuẩn (Hạng {idx})"
         else:
             role = "Đứng Ngoài / Nhiễu Trắng (0x)"
-        ranked.append(sc.model_copy(update={"rank_in_day": idx, "role_label_vi": role}))
+
+        updates: dict[str, Any] = {
+            "rank_in_day": idx,
+            "role_label_vi": role,
+            "passes_weekly_5_2_play": passes_52_play,
+        }
+        if is_weekly_rest_day is not None or passes_52_play:
+            updates["rationale_vi"] = build_station_rationale_vi(
+                station_code=sc.station_code,
+                station_name=sc.station_name,
+                region=sc.region,
+                joint_r1_pct=sc.joint_r1_pct,
+                oos_rank1_freq_tens_pct=sc.oos_rank1_freq_tens_pct,
+                oos_rank1_freq_units_pct=sc.oos_rank1_freq_units_pct,
+                chi2_max_overall=sc.chi2_max_overall,
+                null_chi2_p90=sc.null_chi2_p90,
+                null_chi2_p95=sc.null_chi2_p95,
+                bf10_max_overall=sc.bf10_max_overall,
+                bocd_map_run_length=sc.bocd_map_run_length,
+                bocd_changepoint_warning=sc.bocd_changepoint_warning,
+                best_oos_roi_pct=sc.best_oos_roi_pct,
+                recommended_config_id=sc.recommended_config_id,
+                recommended_numbers=sc.recommended_numbers,
+                passes_selective_alpha=sc.passes_selective_alpha,
+                strong_convergence=sc.strong_convergence,
+                cage_anomaly_detected=sc.cage_anomaly_detected,
+                cage_anomaly_summary_vi=sc.cage_anomaly_summary_vi,
+                passes_weekly_5_2_play=passes_52_play,
+                is_weekly_rest_day=is_weekly_rest_day,
+                sweet_5_numbers=sc.sweet_5_numbers,
+            )
+        ranked.append(sc.model_copy(update=updates))
 
     primary = ranked[0]
-    passing_stations = [sc for sc in ranked if sc.passes_selective_alpha]
-    secondary = passing_stations[1] if len(passing_stations) >= 2 else None
-    skipped = [sc for sc in ranked if not sc.passes_selective_alpha]
+    if verdict_tier == "SKIP_NO_EDGE":
+        secondary = None
+        skipped = list(ranked)
+    else:
+        passing_after_primary = [sc for sc in ranked[1:] if sc.passes_selective_alpha]
+        secondary = passing_after_primary[0] if passing_after_primary else None
+        skipped = [
+            sc for sc in ranked if not (sc.passes_selective_alpha or sc.passes_weekly_5_2_play)
+        ]
 
     return (ranked, primary, secondary, skipped, verdict_tier)
 
@@ -767,6 +1386,7 @@ def build_executive_nlg_vi(
     all_today_stations: Sequence[StationDailyScorecard],
     capital_guidance: CapitalGuidanceContract,
     yesterday_settlement: BenchmarkLedgerEntry | None = None,
+    weekly_5_2_schedule: WeeklySchedule52Analysis | None = None,
 ) -> ExecutiveNLGContract:
     """Build 100% deterministic Vietnamese answers to the 4 core daily family questions.
 
@@ -781,6 +1401,31 @@ def build_executive_nlg_vi(
         if p.bocd_changepoint_warning
         else f" Độ dài chuỗi chế độ BOCD ổn định ở r_t = {p.bocd_map_run_length} kỳ (> 4 kỳ)."
     )
+
+    anomaly_note = (
+        f" {p.cage_anomaly_summary_vi}"
+        if p.cage_anomaly_detected and p.cage_anomaly_summary_vi
+        else ""
+    )
+
+    if weekly_5_2_schedule is not None:
+        rest_vns_str = ", ".join(weekly_5_2_schedule.rest_weekdays_vn)
+        if weekly_5_2_schedule.is_today_scheduled_rest_day:
+            schedule_52_note = (
+                f" Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu: Hôm nay ({weekday_vn}) xếp hạng "
+                f"cân bằng #{weekly_5_2_schedule.today_balance_rank}/7 trong tuần "
+                f"(thuộc 2 ngày nghỉ định kỳ: {rest_vns_str}), lồng cầu các đài cân bằng sát "
+                f"nhiễu trắng nên hệ thống kích hoạt lệnh NGHỈ ĐỊNH KỲ 5/2 (0.00x) "
+                f"tiết kiệm 28,6% chi phí tuần."
+            )
+        else:
+            schedule_52_note = (
+                f" Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu: Hôm nay ({weekday_vn}) xếp hạng "
+                f"độ lệch lồng cầu #{weekly_5_2_schedule.today_balance_rank}/7 "
+                f"(thuộc 5 ngày chơi định kỳ trong tuần; 2 ngày nghỉ định kỳ là {rest_vns_str})."
+            )
+    else:
+        schedule_52_note = ""
 
     yesterday_summary = build_yesterday_settlement_summary_vi(
         yesterday_settlement,
@@ -798,27 +1443,71 @@ def build_executive_nlg_vi(
         else ""
     )
     if verdict_tier == "SKIP_NO_EDGE":
-        q1_should_play = (
-            f"🔴 KHUYẾN NGHỊ HÔM NAY ({report_date} - {weekday_vn}): BÁO NGHỈ — KHÔNG ĐÁNH "
-            f"(ĐỨNG NGOÀI BẢO TOÀN VỐN 0.00x). "
-            f"Qua tầm soát định lượng toàn bộ {len(all_today_stations)} đài mở thưởng hôm nay "
-            f"bằng dữ liệu lịch sử trước giờ quay (< {report_date}), kể cả đài đứng đầu bảng là "
-            f"{p.station_name} ({p.station_code}) cũng chỉ đạt xác suất trúng đồng thời "
-            f"Hạng-1 hai lồng cầu JointR1 = {p.joint_r1_pct:.3f}% (so với ngưỡng lọc tối thiểu "
-            f"{SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%; "
-            f"Lồng Hàng Chục = {p.oos_rank1_freq_tens_pct:.2f}%, "
-            f"Lồng Hàng Đơn Vị = {p.oos_rank1_freq_units_pct:.2f}% "
-            f"so với điểm hòa vốn {be_pct:.2f}%) "
-            f"và hiệu suất kiểm định OOS 3 năm đạt ROI = {p.best_oos_roi_pct:+.2f}%"
-            f"{roi_diff_clause}. "
-            f"Kiểm định đa khung W thuộc {{15, 30, 60}} ghi nhận "
-            f"Chi2_max = {p.chi2_max_overall:.2f} "
-            f"(ngưỡng Monte Carlo P90 = {p.null_chi2_p90:.2f}, P95 = {p.null_chi2_p95:.2f}), "
-            f"Bayes Factor BF10_max = {p.bf10_max_overall:.2f}. "
-            f"Toàn bộ các đài mở thưởng hôm nay đều đang nằm trong vùng nhiễu trắng "
-            f"hoặc chưa đạt kỳ vọng dương sau phế, do đó hệ thống ra lệnh NGHỈ hoàn toàn "
-            f"để bảo toàn 100% vốn.{bocd_note}"
-        )
+        if weekly_5_2_schedule is not None and weekly_5_2_schedule.is_today_scheduled_rest_day:
+            rest_vns_str = ", ".join(weekly_5_2_schedule.rest_weekdays_vn)
+            alpha_stations = [st for st in all_today_stations if st.passes_selective_alpha]
+            if alpha_stations:
+                alpha_list_str = ", ".join(
+                    f"{st.station_name} ({st.station_code}: JointR1={st.joint_r1_pct:.3f}%, "
+                    f"ROI={st.best_oos_roi_pct:+.2f}%)"
+                    for st in alpha_stations
+                )
+                rest_context = (
+                    f"Mặc dù có đài đạt ngưỡng Selective Alpha đơn lẻ ({alpha_list_str}), "
+                    f"xét trên toàn cục 7 thứ trong tuần (< {report_date}), hôm nay ({weekday_vn}) "
+                    f"xếp hạng cân bằng #{weekly_5_2_schedule.today_balance_rank}/7 "
+                    f"(thuộc 2 thứ có lồng cầu cân bằng nhất tuần: {rest_vns_str}). "
+                )
+            else:
+                rest_context = (
+                    f"Xét trên toàn cục 7 thứ trong tuần (< {report_date}), hôm nay ({weekday_vn}) "
+                    f"xếp hạng cân bằng #{weekly_5_2_schedule.today_balance_rank}/7 "
+                    f"(thuộc 2 thứ có lồng cầu cân bằng nhất tuần: {rest_vns_str}). "
+                )
+            q1_should_play = (
+                f"🔴 KHUYẾN NGHỊ HÔM NAY ({report_date} - {weekday_vn}): "
+                f"BÁO NGHỈ ĐỊNH KỲ LỊCH 5/2 — "
+                f"KHÔNG ĐÁNH (ĐỨNG NGOÀI BẢO TOÀN VỐN 0.00x). "
+                f"{rest_context}"
+                f"Đài dẫn đầu bảng hôm nay là {p.station_name} ({p.station_code}) "
+                f"với xác suất trúng đồng thời Hạng-1 hai lồng cầu JointR1 = {p.joint_r1_pct:.3f}% "
+                f"(so với ngưỡng Selective Alpha {SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%; "
+                f"Lồng Hàng Chục = {p.oos_rank1_freq_tens_pct:.2f}%, "
+                f"Lồng Hàng Đơn Vị = {p.oos_rank1_freq_units_pct:.2f}% "
+                f"so với điểm hòa vốn {be_pct:.2f}%) "
+                f"và hiệu suất kiểm định OOS 3 năm đạt ROI = {p.best_oos_roi_pct:+.2f}%"
+                f"{roi_diff_clause}. "
+                f"Kiểm định đa khung W thuộc {{15, 30, 60}} ghi nhận "
+                f"Chi2_max = {p.chi2_max_overall:.2f} "
+                f"(ngưỡng Monte Carlo P90 = {p.null_chi2_p90:.2f}, P95 = {p.null_chi2_p95:.2f}), "
+                f"Bayes Factor BF10_max = {p.bf10_max_overall:.2f}. "
+                f"Theo Kỷ Luật Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu, hệ thống kích hoạt lệnh "
+                f"NGHỈ ĐỊNH KỲ (0.00x) vào 2 thứ cân bằng nhất tuần để bảo toàn 100% vốn."
+                f"{bocd_note}{schedule_52_note}"
+            )
+        else:
+            q1_should_play = (
+                f"🔴 KHUYẾN NGHỊ HÔM NAY ({report_date} - {weekday_vn}): BÁO NGHỈ — KHÔNG ĐÁNH "
+                f"(ĐỨNG NGOÀI BẢO TOÀN VỐN 0.00x). "
+                f"Qua tầm soát định lượng toàn bộ {len(all_today_stations)} đài mở thưởng hôm nay "
+                f"bằng dữ liệu lịch sử trước giờ quay (< {report_date}), "
+                f"kể cả đài đứng đầu bảng là "
+                f"{p.station_name} ({p.station_code}) cũng chỉ đạt xác suất trúng đồng thời "
+                f"Hạng-1 hai lồng cầu JointR1 = {p.joint_r1_pct:.3f}% (so với ngưỡng lọc tối thiểu "
+                f"{SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%; "
+                f"Lồng Hàng Chục = {p.oos_rank1_freq_tens_pct:.2f}%, "
+                f"Lồng Hàng Đơn Vị = {p.oos_rank1_freq_units_pct:.2f}% "
+                f"so với điểm hòa vốn {be_pct:.2f}%) "
+                f"và hiệu suất kiểm định OOS 3 năm đạt ROI = {p.best_oos_roi_pct:+.2f}%"
+                f"{roi_diff_clause}. "
+                f"Kiểm định đa khung W thuộc {{15, 30, 60}} ghi nhận "
+                f"Chi2_max = {p.chi2_max_overall:.2f} "
+                f"(ngưỡng Monte Carlo P90 = {p.null_chi2_p90:.2f}, P95 = {p.null_chi2_p95:.2f}), "
+                f"Bayes Factor BF10_max = {p.bf10_max_overall:.2f}. "
+                f"Toàn bộ các đài mở thưởng hôm nay đều đang nằm trong vùng nhiễu trắng "
+                f"hoặc chưa đạt kỳ vọng dương sau phế, do đó hệ thống ra lệnh NGHỈ hoàn toàn "
+                f"để bảo toàn 100% vốn.{bocd_note}{schedule_52_note}"
+            )
     else:
         tier_vn_map: dict[DailyVerdictTier, str] = {
             "PLAY_PEAK": "🟢 NÊN ĐÁNH — TÍN HIỆU HỘI TỤ ĐỈNH (PLAY_PEAK)",
@@ -826,23 +1515,46 @@ def build_executive_nlg_vi(
             "PLAY_CAUTIOUS": "🟡 NÊN ĐÁNH THĂM DÒ — TÍN HIỆU THẬN TRỌNG (PLAY_CAUTIOUS)",
             "SKIP_NO_EDGE": "🔴 BÁO NGHỈ",
         }
-        q1_should_play = (
-            f"{tier_vn_map[verdict_tier]} ngày {report_date} ({weekday_vn}). "
-            f"Đài dẫn đầu {p.station_name} ({p.station_code} - {p.region}) vượt qua bộ lọc "
-            f"Selective Alpha nghiêm ngặt (< {report_date}) với xác suất trúng đồng thời Hạng-1 "
-            f"hai lồng cầu JointR1 = {p.joint_r1_pct:.3f}% (>= ngưỡng lọc "
-            f"{SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%, nền đồng đều 1.000%; trong đó "
-            f"Lồng Hàng Chục đạt {p.oos_rank1_freq_tens_pct:.2f}% và Lồng Hàng Đơn Vị đạt "
-            f"{p.oos_rank1_freq_units_pct:.2f}% so với ngưỡng hòa vốn đơn lồng {be_pct:.2f}%) "
-            f"cùng hiệu suất thực nghiệm Walk-Forward OOS 3 năm ({p.evaluated_oos_draws} kỳ) đạt "
-            f"ROI = {p.best_oos_roi_pct:+.2f}% (> 0%{roi_diff_clause}). "
-            f"Kiểm định thống kê đa cửa sổ W thuộc {{15, 30, 60}} đạt "
-            f"Chi2_max = {p.chi2_max_overall:.2f} "
-            f"(so với phân vị nhiễu trắng Monte Carlo P90 = {p.null_chi2_p90:.2f}, "
-            f"P95 = {p.null_chi2_p95:.2f}), hệ số Bayes BF10_max = {p.bf10_max_overall:.2f}, "
-            f"Entropy chuẩn hóa Chục/Đơn vị = "
-            f"{p.normalized_entropy_tens:.4f}/{p.normalized_entropy_units:.4f}.{bocd_note}"
-        )
+        if p.passes_selective_alpha:
+            q1_should_play = (
+                f"{tier_vn_map[verdict_tier]} ngày {report_date} ({weekday_vn}). "
+                f"Đài dẫn đầu {p.station_name} ({p.station_code} - {p.region}) vượt qua bộ lọc "
+                f"Selective Alpha nghiêm ngặt (< {report_date}) với xác suất trúng đồng thời "
+                f"Hạng-1 hai lồng cầu JointR1 = {p.joint_r1_pct:.3f}% (>= ngưỡng lọc "
+                f"{SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%, nền đồng đều 1.000%; trong đó "
+                f"Lồng Hàng Chục đạt {p.oos_rank1_freq_tens_pct:.2f}% và Lồng Hàng Đơn Vị đạt "
+                f"{p.oos_rank1_freq_units_pct:.2f}% so với ngưỡng hòa vốn đơn lồng {be_pct:.2f}%) "
+                f"cùng hiệu suất thực nghiệm Walk-Forward OOS 3 năm "
+                f"({p.evaluated_oos_draws} kỳ) đạt "
+                f"ROI = {p.best_oos_roi_pct:+.2f}% (> 0%{roi_diff_clause}). "
+                f"Kiểm định thống kê đa cửa sổ W thuộc {{15, 30, 60}} đạt "
+                f"Chi2_max = {p.chi2_max_overall:.2f} "
+                f"(so với phân vị nhiễu trắng Monte Carlo P90 = {p.null_chi2_p90:.2f}, "
+                f"P95 = {p.null_chi2_p95:.2f}), hệ số Bayes BF10_max = {p.bf10_max_overall:.2f}, "
+                f"Entropy chuẩn hóa Chục/Đơn vị = "
+                f"{p.normalized_entropy_tens:.4f}/{p.normalized_entropy_units:.4f}."
+                f"{bocd_note}{schedule_52_note}{anomaly_note}"
+            )
+        else:
+            q1_should_play = (
+                f"{tier_vn_map[verdict_tier]} ngày {report_date} ({weekday_vn}). "
+                f"Đài dẫn đầu {p.station_name} ({p.station_code} - {p.region}) được chọn làm "
+                f"Đài Chủ Lực Hạng 1 theo Lịch Chơi 5/2 & Độ Lệch Lồng Cầu Thực Tế "
+                f"(< {report_date}) với Chi2_max = {p.chi2_max_overall:.2f} "
+                f"(so với phân vị nhiễu trắng Monte Carlo P90 = {p.null_chi2_p90:.2f}, "
+                f"P95 = {p.null_chi2_p95:.2f}), hệ số Bayes BF10_max = {p.bf10_max_overall:.2f}, "
+                f"Entropy chuẩn hóa Chục/Đơn vị = "
+                f"{p.normalized_entropy_tens:.4f}/{p.normalized_entropy_units:.4f}; "
+                f"xác suất trúng đồng thời Hạng-1 hai lồng cầu đạt JointR1 = {p.joint_r1_pct:.3f}% "
+                f"(so với ngưỡng Selective Alpha {SELECTIVE_ALPHA_JOINT_R1_MIN_PCT:.3f}%, "
+                f"nền đồng đều 1.000%; Lồng Hàng Chục đạt {p.oos_rank1_freq_tens_pct:.2f}% "
+                f"và Lồng Hàng Đơn Vị đạt {p.oos_rank1_freq_units_pct:.2f}% "
+                f"so với ngưỡng hòa vốn đơn lồng {be_pct:.2f}%) "
+                f"và hiệu suất thực nghiệm Walk-Forward OOS 3 năm "
+                f"({p.evaluated_oos_draws} kỳ) ghi nhận "
+                f"ROI = {p.best_oos_roi_pct:+.2f}%{roi_diff_clause}."
+                f"{bocd_note}{schedule_52_note}{anomaly_note}"
+            )
 
     # -------------------------------------------------------------------------
     # Q2: Nên đánh đài gì, ở khu vực nào?
@@ -864,12 +1576,12 @@ def build_executive_nlg_vi(
     if verdict_tier == "SKIP_NO_EDGE":
         q2_station = (
             f"Trong tổng số {len(all_today_stations)} đài mở thưởng ngày "
-            f"{report_date} ({weekday_vn}), KHÔNG có đài nào đủ tiêu chuẩn giải ngân. "
+            f"{report_date} ({weekday_vn}), KHÔNG có đài nào giải ngân hôm nay. "
             f"Đài có điểm xếp hạng cao nhất trong ngày là {p.station_name} ({p.station_code}) "
             f"thuộc khu vực {p.region} (quay lúc {p.draw_time_ict} ICT) "
             f"với Station Alpha Score = {p.station_alpha_score:+.2f} "
             f"(JointR1 = {p.joint_r1_pct:.3f}%, ROI OOS 3 năm = {p.best_oos_roi_pct:+.2f}%), "
-            f"nhưng vẫn phải đứng ngoài theo kỷ luật phanh tiền mặt."
+            f"đứng ngoài theo kỷ luật bảo toàn vốn."
             f"{skipped_clause}"
         )
     else:
@@ -892,13 +1604,14 @@ def build_executive_nlg_vi(
             f"{p.station_alpha_score:+.2f} (JointR1 = {p.joint_r1_pct:.3f}%, "
             f"ROI OOS 3 năm = {p.best_oos_roi_pct:+.2f}% trên mẫu {p.sample_draws_3y} kỳ, "
             f"kỳ gần nhất trước giờ quay là {p.last_draw_date_before_d})."
-            f"{sec_clause}{skipped_clause}"
+            f"{anomaly_note}{sec_clause}{skipped_clause}"
         )
 
     # -------------------------------------------------------------------------
     # Q3: Với đài nên đánh nhất thì đánh bộ số nào?
     # -------------------------------------------------------------------------
     rec_cfg = p.ticket_configs[p.recommended_config_id]
+    c2x2_cfg = p.ticket_configs.get("2x2", rec_cfg)
     top3_tens = [f"bóng {b} ({p.p_ai_tens[b] * 100.0:.2f}%)" for b in p.ranked_balls_tens[:3]]
     top4_units = [f"bóng {b} ({p.p_ai_units[b] * 100.0:.2f}%)" for b in p.ranked_balls_units[:4]]
     alt_cfgs_summary = "; ".join(
@@ -906,6 +1619,21 @@ def build_executive_nlg_vi(
         f"ROI_3Y={p.ticket_configs[cid].oos_roi_3y_pct:+.2f}%, "
         f"P(>=1 nháy/18 giải)={p.ticket_configs[cid].hit_at_least_1_in_18_prob * 100.0:.2f}%)"
         for cid in ("2x2", "1x4", "4x1", "3x3")
+    )
+    sweet5_clause = (
+        f" Cấu hình Vé Điểm Ngọt Kép Giai đoạn 4 (18.000đ/số, trúng 99.500đ/nháy): "
+        f"(1) Bộ 5 số Điểm Ngọt Bà Cô (sweet_5 - 4 số 2x2 + 1 số vệ tinh dẫn đầu, "
+        f"{BENCHMARK_BASE_DAILY_COST_5NUM_VND:,} VNĐ/ngày): [{', '.join(p.sweet_5_numbers)}] "
+        f"(P(>=1 nháy/18 giải)={p.sweet_5_config.hit_at_least_1_in_18_prob * 100.0:.2f}%, "
+        f"tỷ lệ ngày thắng thực nghiệm 3Y={p.sweet_5_config.oos_win_rate_3y_pct:.2f}%, "
+        f"lý thuyết {THEORETICAL_WIN_RATE_5NUM_PCT:.2f}%, "
+        f"ROI_3Y={p.sweet_5_config.oos_roi_3y_pct:+.2f}%); "
+        f"(2) Bộ 4 số Chuẩn (2x2, {BENCHMARK_BASE_DAILY_COST_4NUM_VND:,} VNĐ/ngày): "
+        f"[{', '.join(c2x2_cfg.selected_numbers)}] "
+        f"(tỷ lệ ngày thắng 3Y={c2x2_cfg.oos_win_rate_3y_pct:.2f}%, "
+        f"lý thuyết {THEORETICAL_WIN_RATE_4NUM_PCT:.2f}%, ROI_3Y={c2x2_cfg.oos_roi_3y_pct:+.2f}%)."
+        if p.sweet_5_numbers and p.sweet_5_config is not None
+        else ""
     )
 
     if verdict_tier == "SKIP_NO_EDGE":
@@ -918,7 +1646,7 @@ def build_executive_nlg_vi(
             f"{rec_cfg.hit_at_least_1_in_18_prob * 100.0:.2f}%, ROI OOS 3 năm = "
             f"{rec_cfg.oos_roi_3y_pct:+.2f}%). Top 3 bóng Lồng Hàng Chục: {', '.join(top3_tens)}; "
             f"Top 4 bóng Lồng Hàng Đơn Vị: {', '.join(top4_units)}. "
-            f"So sánh 4 cấu hình chuẩn: {alt_cfgs_summary}."
+            f"So sánh 4 cấu hình chuẩn: {alt_cfgs_summary}.{sweet5_clause}"
         )
     else:
         q3_numbers = (
@@ -935,7 +1663,7 @@ def build_executive_nlg_vi(
             f"{rec_cfg.oos_hits_per_30_draws:.2f} nháy/30 kỳ và ROI thực nghiệm 3 năm đạt "
             f"{rec_cfg.oos_roi_3y_pct:+.2f}% "
             f"(tỷ lệ ngày có lãi {rec_cfg.oos_win_rate_3y_pct:.2f}%). "
-            f"Đối chiếu toàn diện các cấu hình: {alt_cfgs_summary}."
+            f"Đối chiếu toàn diện các cấu hình: {alt_cfgs_summary}.{sweet5_clause}"
         )
 
     # -------------------------------------------------------------------------
@@ -971,6 +1699,21 @@ def build_executive_nlg_vi(
     )
 
 
+def _has_full_35_station_coverage(
+    raw_dir: str | Path,
+    station_histories: Mapping[str, Sequence[Stage3CanonicalDrawRecord | Mapping[str, Any]]] | None,
+) -> bool:
+    """Return True if all 35 stations are available via station_histories or raw_dir on disk."""
+    if station_histories is not None:
+        return all(st_code in station_histories for st_code in VALID_35_STATION_CODES)
+    raw_dir_path = Path(raw_dir)
+    if not raw_dir_path.is_dir():
+        return False
+    return all(
+        (raw_dir_path / f"{st_code}_draws.json").is_file() for st_code in VALID_35_STATION_CODES
+    )
+
+
 def generate_daily_quant_report(
     report_date: str | datetime.date,
     *,
@@ -984,12 +1727,18 @@ def generate_daily_quant_report(
     null_sims: int = 1000,
     seed: int = 42,
     trim_to_3y: bool = True,
+    weekly_5_2_mode: Weekly52Mode = "auto",
 ) -> DailyQuantReportContract:
-    """Generate the complete Stage 3 DailyQuantReportContract for report_date (< D)."""
+    """Generate the complete Stage 3/4 DailyQuantReportContract for report_date (< D)."""
     report_iso = _coerce_iso_date(report_date)
     report_dt = datetime.date.fromisoformat(report_iso)
     weekday_py = report_dt.weekday()
     weekday_vn = WEEKDAY_VN_LABELS[weekday_py]
+
+    if weekly_5_2_mode not in ("auto", "enforce", "off"):
+        raise DataIntegrityError(
+            f"Invalid weekly_5_2_mode {weekly_5_2_mode!r}; must be 'auto', 'enforce', or 'off'."
+        )
 
     if generated_at_ict is None:
         resolved_generated_at = f"{report_iso}T05:00:00+07:00"
@@ -1010,15 +1759,7 @@ def generate_daily_quant_report(
                 station_histories[code]
             )
         else:
-            raw_cached = load_station_raw_cache(
-                code,
-                raw_dir=raw_dir,
-                verify_sha256=True,
-                allow_unhashed_legacy=True,
-            )
-            explicit_hist = [
-                d for d in raw_cached if validate_iso_date(str(d.get("draw_date", ""))) < report_iso
-            ]
+            explicit_hist = None
         sc = score_station_for_date(
             code,
             target_date=report_iso,
@@ -1033,11 +1774,36 @@ def generate_daily_quant_report(
         if sc.last_draw_date_before_d > latest_date_seen:
             latest_date_seen = sc.last_draw_date_before_d
 
-    # 3. Rank stations and determine daily verdict tier
-    ranked, primary, secondary, skipped, verdict_tier = rank_stations_for_day(scorecards)
+    # 3. Resolve Weekly 5/2 Cage-Balance Schedule (BC-03: auto-enable when all 35 stations exist)
+    if weekly_5_2_mode == "enforce":
+        use_weekly_52 = True
+    elif weekly_5_2_mode == "off":
+        use_weekly_52 = False
+    else:
+        use_weekly_52 = _has_full_35_station_coverage(raw_dir, station_histories)
+
+    if use_weekly_52:
+        weekly_5_2_schedule: WeeklySchedule52Analysis | None = compute_weekly_balance_rest_days(
+            report_iso,
+            raw_dir=raw_dir,
+            station_histories=station_histories,
+            trim_to_3y=trim_to_3y,
+        )
+        is_weekly_rest_day: bool | None = weekly_5_2_schedule.is_today_scheduled_rest_day
+        lock_flat_1x = True
+    else:
+        weekly_5_2_schedule = None
+        is_weekly_rest_day = None
+        lock_flat_1x = False
+
+    # 4. Rank stations and determine daily verdict tier
+    ranked, primary, secondary, skipped, verdict_tier = rank_stations_for_day(
+        scorecards,
+        is_weekly_rest_day=is_weekly_rest_day,
+    )
     should_play = verdict_tier != "SKIP_NO_EDGE"
 
-    # 4. Load or resolve BenchmarkLedgerState (Strictly < report_iso for capital sizing)
+    # 5. Load or resolve BenchmarkLedgerState (Strictly < report_iso for capital sizing)
     if isinstance(ledger_state_or_path, BenchmarkLedgerState):
         ledger_state = ledger_state_or_path
     elif isinstance(ledger_state_or_path, (str, Path)):
@@ -1076,9 +1842,10 @@ def generate_daily_quant_report(
         base_stake_per_number_vnd=ledger_state.base_stake_per_number_vnd,
         base_payout_per_hit_vnd=ledger_state.payout_per_hit_vnd,
         num_numbers=rec_num_count,
+        lock_flat_1x=lock_flat_1x,
     )
 
-    # 5. Yesterday (D - 1) settlement lookup & Vietnamese summary
+    # 6. Yesterday (D - 1) settlement lookup & Vietnamese summary
     yesterday_iso = (report_dt - datetime.timedelta(days=1)).isoformat()
     yesterday_entry: BenchmarkLedgerEntry | None = None
     for entry in reversed(ledger_state.entries):
@@ -1088,12 +1855,31 @@ def generate_daily_quant_report(
     if yesterday_entry is None and settled_before_d:
         yesterday_entry = settled_before_d[-1]
 
+    if (
+        weekly_5_2_schedule is not None
+        and yesterday_entry is not None
+        and datetime.date.fromisoformat(yesterday_entry.draw_date).weekday()
+        in set(weekly_5_2_schedule.rest_weekdays)
+        and yesterday_entry.verdict_tier != "SKIP_NO_EDGE"
+    ):
+        yesterday_entry = yesterday_entry.model_copy(
+            update={
+                "verdict_tier": "SKIP_NO_EDGE",
+                "recommended_multiplier": 0.0,
+                "bankroll_before_vnd": yesterday_entry.bankroll_after_vnd,
+                "house_money_before_vnd": yesterday_entry.house_money_after_vnd,
+                "cost_vnd": 0,
+                "revenue_vnd": 0,
+                "net_profit_vnd": 0,
+            }
+        )
+
     yesterday_summary_vi = build_yesterday_settlement_summary_vi(
         yesterday_entry,
         report_date=report_iso,
     )
 
-    # 6. Build deterministic Vietnamese Executive NLG (4 Core Questions)
+    # 7. Build deterministic Vietnamese Executive NLG (4 Core Questions)
     executive_nlg = build_executive_nlg_vi(
         report_date=report_iso,
         weekday_vn=weekday_vn,
@@ -1104,9 +1890,10 @@ def generate_daily_quant_report(
         all_today_stations=ranked,
         capital_guidance=capital_guidance,
         yesterday_settlement=yesterday_entry,
+        weekly_5_2_schedule=weekly_5_2_schedule,
     )
 
-    # 7. Resolve DataPipelineAuditRecord
+    # 8. Resolve DataPipelineAuditRecord
     if pipeline_audit is None:
         raw_dir_path = Path(raw_dir)
         disk_synced = (
@@ -1162,6 +1949,7 @@ def generate_daily_quant_report(
         all_today_stations=list(ranked),
         capital_guidance=capital_guidance,
         executive_nlg_vi=executive_nlg,
+        weekly_5_2_schedule=weekly_5_2_schedule,
     )
     from xsmn_alpha.live.telegram_bot import format_telegram_executive_briefing
 

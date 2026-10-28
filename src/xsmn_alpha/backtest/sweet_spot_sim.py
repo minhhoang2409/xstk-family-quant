@@ -13,11 +13,13 @@ from xsmn_alpha.backtest.alpha_decay import rank_balls_from_probabilities
 from xsmn_alpha.constants import (
     BAO_LO_PAYOUT_PER_HIT,
     CAGE_NUM_BALLS,
-    EXTENDED_SWEET_SPOT_CONFIGS,
     KELLY_NUM_STATES,
     PRIZES_PER_DRAW,
     REAL_PAYOUT_1D,
     ROLLING_WINDOW_DRAWS,
+    STAGE3_TICKET_CONFIGS,
+    STAGE4_SWEET_SPOT_CONFIGS,
+    STAGE4_TICKET_CONFIGS,
     SWEET_SPOT_CONFIGS,
 )
 from xsmn_alpha.exceptions import CalibrationIntegrityError, DataIntegrityError
@@ -75,22 +77,73 @@ _extract_prob_array = _extract_probs
 rank_balls_by_probability = rank_balls_from_probabilities
 
 
+def select_sweet_5_numbers(
+    probs_tens: Sequence[float] | np.ndarray | CalibratedCagePrediction,
+    probs_units: Sequence[float] | np.ndarray | CalibratedCagePrediction,
+) -> tuple[list[str], list[str], list[str]]:
+    """Select the 5-number 'sweet_5' portfolio (4 core '2x2' numbers + 1 top satellite number).
+
+    Returns:
+        (selected_5_sorted, core_4_sorted, satellite_1_list)
+    """
+    pt = _extract_probs(probs_tens)
+    pu = _extract_probs(probs_units)
+    ranks_t = rank_balls_from_probabilities(pt)
+    ranks_u = rank_balls_from_probabilities(pu)
+
+    core_set = {f"{a}{b}" for a in ranks_t[:2] for b in ranks_u[:2]}
+    top3_box = {f"{a}{b}" for a in ranks_t[:3] for b in ranks_u[:3]} - core_set
+
+    # Rank all remaining 96 two-digit numbers by:
+    # 1) Joint probability P_tens(a) * P_units(b) descending (within 1e-12 tolerance)
+    # 2) Membership in Top-3x3 box outside 2x2 (1 if in top3_box else 0) descending
+    # 3) Lexicographical ASCII token "00".."99" ascending
+    raw_candidates: list[tuple[float, int, str]] = []
+    for a in range(CAGE_NUM_BALLS):
+        for b in range(CAGE_NUM_BALLS):
+            tok = f"{a}{b}"
+            if tok in core_set:
+                continue
+            joint_p = float(pt[a]) * float(pu[b])
+            in_top3 = 1 if tok in top3_box else 0
+            raw_candidates.append((joint_p, in_top3, tok))
+
+    max_p = max(c[0] for c in raw_candidates)
+    top_tier = [c for c in raw_candidates if max_p - c[0] <= 1e-12]
+    best_sat = min(top_tier, key=lambda c: (-c[1], c[2]))[2]
+    core_sorted = sorted(core_set)
+    selected_sorted = sorted([*core_sorted, best_sat])
+    return (selected_sorted, core_sorted, [best_sat])
+
+
 def select_sweet_spot_numbers(
     p_tens: Sequence[float] | np.ndarray | CalibratedCagePrediction,
     p_units: Sequence[float] | np.ndarray | CalibratedCagePrediction,
     config_id: str,
 ) -> list[str]:
     """Select the sorted 2-digit number set S_{A x B} for a given Sweet-Spot configuration."""
-    if config_id not in EXTENDED_SWEET_SPOT_CONFIGS:
+    if config_id not in STAGE4_SWEET_SPOT_CONFIGS:
         raise DataIntegrityError(
-            f"Unknown config_id {config_id!r}; must be in {sorted(EXTENDED_SWEET_SPOT_CONFIGS)}."
+            f"Unknown config_id {config_id!r}; must be in {sorted(STAGE4_SWEET_SPOT_CONFIGS)}."
         )
     probs_t = _extract_probs(p_tens)
     probs_u = _extract_probs(p_units)
+    if config_id == "sweet_5":
+        selected_5, _, _ = select_sweet_5_numbers(probs_t, probs_u)
+        return selected_5
+
     ranks_t = rank_balls_from_probabilities(probs_t)
     ranks_u = rank_balls_from_probabilities(probs_u)
 
-    cfg = EXTENDED_SWEET_SPOT_CONFIGS[config_id]
+    if config_id == "core_2x2_sat_3x3":
+        core_nums = sorted(f"{a}{b}" for a in ranks_t[:2] for b in ranks_u[:2])
+        core_set = set(core_nums)
+        sat_nums = sorted(
+            f"{a}{b}" for a in ranks_t[:3] for b in ranks_u[:3] if f"{a}{b}" not in core_set
+        )
+        return core_nums + sat_nums
+
+    cfg = STAGE4_SWEET_SPOT_CONFIGS[config_id]
     if config_id == "negative_filter_87":
         # Rank all 100 2-digit numbers by joint probability P_tens(a) * P_units(b) descending
         scored_pairs: list[tuple[float, str]] = []
@@ -132,7 +185,7 @@ def compute_portfolio_set_probability(
     For 'core_2x2_sat_3x3', returns the stake-weighted effective single-prize probability
     p_eff = 1.0 * p_core_2x2 + 0.5 * p_sat_only_5 so expected effective hits = 18 * p_eff.
     """
-    if config_id not in EXTENDED_SWEET_SPOT_CONFIGS:
+    if config_id not in STAGE4_SWEET_SPOT_CONFIGS:
         raise DataIntegrityError(f"Unknown config_id {config_id!r}.")
     probs_t = _extract_probs(p_tens)
     probs_u = _extract_probs(p_units)
@@ -234,7 +287,7 @@ def score_single_draw_portfolio(
     config_id: str,
 ) -> dict[str, Any]:
     """Score a single draw for config_id per Stage 1 cash-flow rules (spec.md Section 5.3.D)."""
-    if config_id not in EXTENDED_SWEET_SPOT_CONFIGS:
+    if config_id not in STAGE4_SWEET_SPOT_CONFIGS:
         raise DataIntegrityError(f"Unknown config_id {config_id!r}.")
 
     if isinstance(actual_prizes_or_draw, (CanonicalDrawRecord, Stage3CanonicalDrawRecord)):
@@ -266,7 +319,7 @@ def score_single_draw_portfolio(
     else:
         raise DataIntegrityError("Invalid actual_prizes_or_draw input.")
 
-    cfg = EXTENDED_SWEET_SPOT_CONFIGS[config_id]
+    cfg = STAGE4_SWEET_SPOT_CONFIGS[config_id]
     game_type = str(cfg["game_type"])
     cost = float(cfg["cost_per_draw"])
 
@@ -330,7 +383,7 @@ def evaluate_sweet_spot_portfolio(
     config_id: str,
 ) -> SweetSpotPortfolioMetrics:
     """Evaluate a Sweet-Spot configuration across an out-of-sample walk-forward sequence."""
-    if config_id not in EXTENDED_SWEET_SPOT_CONFIGS:
+    if config_id not in STAGE4_SWEET_SPOT_CONFIGS:
         raise DataIntegrityError(f"Unknown config_id {config_id!r}.")
     n_eval = len(evaluated_draws)
     if n_eval == 0 or len(tens_predictions) != n_eval or len(units_predictions) != n_eval:
@@ -339,7 +392,7 @@ def evaluate_sweet_spot_portfolio(
             "sequences of identical length."
         )
 
-    cfg = EXTENDED_SWEET_SPOT_CONFIGS[config_id]
+    cfg = STAGE4_SWEET_SPOT_CONFIGS[config_id]
     cost_per_draw = float(cfg["cost_per_draw"])
     be_hits_30 = float(cfg["be_hits_30_draws"])
 
@@ -370,7 +423,12 @@ def evaluate_sweet_spot_portfolio(
         total_revenue += r_t
         total_effective_hits += eff_k
 
-        if net_t > 1e-9:
+        is_win_day = (
+            raw_k >= int(cfg["min_hits_for_profit"])
+            if (config_id == "sweet_5" and "min_hits_for_profit" in cfg)
+            else net_t > 1e-9
+        )
+        if is_win_day:
             win_days += 1
             current_losing_streak = 0
         else:
@@ -434,11 +492,23 @@ def evaluate_stage3_ticket_portfolios(
     evaluated_draws: Sequence[CanonicalDrawRecord | Stage3CanonicalDrawRecord | Sequence[str]],
 ) -> dict[str, SweetSpotPortfolioMetrics]:
     """Evaluate all 5 Stage 3 ticket configurations (2x2, 1x4, 4x1, 3x3, core_2x2_sat_3x3)."""
-    from xsmn_alpha.constants import STAGE3_TICKET_CONFIGS
-
     return {
         cfg_id: evaluate_sweet_spot_portfolio(
             tens_predictions, units_predictions, evaluated_draws, cfg_id
         )
         for cfg_id in STAGE3_TICKET_CONFIGS
+    }
+
+
+def evaluate_stage4_ticket_portfolios(
+    tens_predictions: Sequence[Sequence[float] | np.ndarray | CalibratedCagePrediction],
+    units_predictions: Sequence[Sequence[float] | np.ndarray | CalibratedCagePrediction],
+    evaluated_draws: Sequence[CanonicalDrawRecord | Stage3CanonicalDrawRecord | Sequence[str]],
+) -> dict[str, SweetSpotPortfolioMetrics]:
+    """Evaluate all 6 Stage 4 ticket configurations (including 'sweet_5')."""
+    return {
+        cfg_id: evaluate_sweet_spot_portfolio(
+            tens_predictions, units_predictions, evaluated_draws, cfg_id
+        )
+        for cfg_id in STAGE4_TICKET_CONFIGS
     }

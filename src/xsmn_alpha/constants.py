@@ -310,6 +310,62 @@ EXTENDED_SWEET_SPOT_CONFIGS: Final[Mapping[str, Mapping[str, SweetSpotConfigValu
     )
 )
 
+# ---------------------------------------------------------------------------
+# 6. Stage 4 Family Sweet-Spot (sweet_5), Weekly 5/2 Schedule & Anomaly Sentinel
+# ---------------------------------------------------------------------------
+BENCHMARK_BASE_DAILY_COST_5NUM_VND: Final[int] = 90_000
+SWEET_5_NET_PROFIT_1HIT_VND: Final[int] = 9_500
+SWEET_5_NET_PROFIT_2HITS_VND: Final[int] = 109_000
+SWEET_4_NET_PROFIT_1HIT_VND: Final[int] = 27_500
+SWEET_4_NET_PROFIT_2HITS_VND: Final[int] = 127_000
+
+THEORETICAL_WIN_RATE_4NUM_PCT: Final[float] = 52.04
+THEORETICAL_WIN_RATE_5NUM_PCT: Final[float] = 60.28
+THEORETICAL_MULTI_HIT_4NUM_PCT: Final[float] = 16.13
+THEORETICAL_MULTI_HIT_5NUM_PCT: Final[float] = 22.65
+
+STAGE4_MAX_STAKE_MULTIPLIER: Final[float] = 1.0
+WEEKLY_SCHEDULE_PLAY_DAYS: Final[int] = 5
+WEEKLY_SCHEDULE_REST_DAYS: Final[int] = 2
+
+CAGE_ANOMALY_BF10_THRESHOLD: Final[float] = 10.0
+CAGE_COLD_BALL_FREQ_MAX_PCT: Final[float] = 6.5
+CAGE_HOT_BALL_FREQ_MIN_PCT: Final[float] = 14.0
+
+STAGE4_TICKET_CONFIGS: Final[tuple[str, ...]] = (
+    "2x2",
+    "sweet_5",
+    "1x4",
+    "4x1",
+    "3x3",
+    "core_2x2_sat_3x3",
+)
+
+STAGE4_SWEET_SPOT_CONFIGS: Final[Mapping[str, Mapping[str, SweetSpotConfigValue]]] = (
+    MappingProxyType(
+        {
+            **EXTENDED_SWEET_SPOT_CONFIGS,
+            "sweet_5": MappingProxyType(
+                {
+                    "config_id": "sweet_5",
+                    "label": (
+                        "Bộ 5 số Điểm Ngọt Bà Cô (4 số 2x2 + 1 số Vệ tinh đỉnh = 5 số, 1.0đ/số)"
+                    ),
+                    "game_type": "bao_lo",
+                    "tens_top_k": 2,
+                    "units_top_k": 2,
+                    "num_numbers": 5,
+                    "cost_per_draw": 5.0,
+                    "payout_per_hit": BAO_LO_PAYOUT_PER_HIT,
+                    "min_hits_for_profit": 1,
+                    "be_hits_30_draws": (30.0 * 5.0) / BAO_LO_PAYOUT_PER_HIT,
+                    "target_hits_30_draws": 31,
+                }
+            ),
+        }
+    )
+)
+
 
 def compute_theoretical_noise_std(window_draws: int | float) -> float:
     """Compute exact theoretical binomial standard error for 1 ball over W draws (18*W prizes).

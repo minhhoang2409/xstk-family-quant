@@ -350,6 +350,22 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Chạy chế độ an toàn không cần Token (lưu bản xem trước Telegram ra file).",
     )
+    p_daily.add_argument(
+        "--weekly-5-2-mode",
+        type=str,
+        choices=["auto", "enforce", "off"],
+        default="auto",
+        help="Chế độ Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu (mặc định: auto).",
+    )
+    p_daily.add_argument(
+        "--ticket-config",
+        "--ledger-config",
+        dest="ticket_config",
+        type=str,
+        choices=["auto", "2x2", "sweet_5"],
+        default="auto",
+        help="Cấu hình bộ số ghi sổ cái Quỹ Chuẩn (auto, 2x2 4 số, hoặc sweet_5 5 số).",
+    )
 
     return parser
 
@@ -618,6 +634,8 @@ def run_daily_report_cmd(args: argparse.Namespace) -> int:
 
     # 3. Verify 35-station cache directory and generate Daily Quantitative Report (< D)
     pipeline_audit = _build_verified_pipeline_audit(raw_dir, target_iso, ledger_state)
+    weekly_52_mode = str(getattr(args, "weekly_5_2_mode", "auto"))
+    ticket_cfg_choice = str(getattr(args, "ticket_config", "auto"))
     report = generate_daily_quant_report(
         target_iso,
         raw_dir=raw_dir,
@@ -625,6 +643,7 @@ def run_daily_report_cmd(args: argparse.Namespace) -> int:
         pipeline_audit=pipeline_audit,
         null_sims=int(getattr(args, "null_sims", DEFAULT_MONTE_CARLO_SIMS)),
         seed=int(getattr(args, "seed", DEFAULT_RANDOM_SEED)),
+        weekly_5_2_mode=weekly_52_mode,  # type: ignore[arg-type]
     )
     if base_url:
         report.telegram_message_html = format_telegram_executive_briefing(
@@ -636,6 +655,16 @@ def run_daily_report_cmd(args: argparse.Namespace) -> int:
     already_settled_today = any(
         e.draw_date == target_iso and e.settlement_status == "SETTLED" for e in ledger_state.entries
     )
+    if ticket_cfg_choice == "sweet_5" and report.primary_station.sweet_5_numbers:
+        chosen_cfg_id = "sweet_5"
+        chosen_nums = list(report.primary_station.sweet_5_numbers)
+    elif ticket_cfg_choice == "2x2" and "2x2" in report.primary_station.ticket_configs:
+        chosen_cfg_id = "2x2"
+        chosen_nums = list(report.primary_station.ticket_configs["2x2"].selected_numbers)
+    else:
+        chosen_cfg_id = report.primary_station.recommended_config_id
+        chosen_nums = list(report.primary_station.recommended_numbers)
+
     if already_settled_today:
         save_benchmark_ledger(ledger_state, ledger_path)
     else:
@@ -644,8 +673,10 @@ def run_daily_report_cmd(args: argparse.Namespace) -> int:
             draw_date=target_iso,
             verdict_tier=report.verdict_tier,
             chosen_station_code=report.primary_station.station_code,
-            chosen_config_id=report.primary_station.recommended_config_id,
-            selected_numbers=report.primary_station.recommended_numbers,
+            chosen_config_id=chosen_cfg_id,
+            selected_numbers=chosen_nums,
+            recommended_multiplier=report.capital_guidance.recommended_multiplier,
+            lock_flat_1x=(report.weekly_5_2_schedule is not None),
             ledger_path=ledger_path,
             updated_at=report.generated_at_ict,
         )

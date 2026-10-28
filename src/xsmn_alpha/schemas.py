@@ -19,8 +19,8 @@ from xsmn_alpha.constants import (
     BENCHMARK_PAYOUT_PER_HIT_VND,
     BENCHMARK_STAKE_PER_NUMBER_VND,
     BF10_ALPHA_THRESHOLD,
+    CAGE_ANOMALY_BF10_THRESHOLD,
     CAGE_NUM_BALLS,
-    EXTENDED_SWEET_SPOT_CONFIGS,
     HOUSE_MONEY_MAX_SURPLUS_FRACTION,
     HOUSE_MONEY_MIN_BUFFER_DAYS,
     KELLY_NUM_STATES,
@@ -30,11 +30,15 @@ from xsmn_alpha.constants import (
     REAL_PAYOUT_1D,
     SELECTIVE_ALPHA_JOINT_R1_MIN_PCT,
     SIMPLEX_TOLERANCE,
-    STAGE3_TICKET_CONFIGS,
+    STAGE4_MAX_STAKE_MULTIPLIER,
+    STAGE4_SWEET_SPOT_CONFIGS,
+    STAGE4_TICKET_CONFIGS,
     SWEET_SPOT_CONFIGS,
     UNIFORM_BALL_PROB,
     VALID_HORIZONS,
     VALID_STATIONS,
+    WEEKLY_SCHEDULE_PLAY_DAYS,
+    WEEKLY_SCHEDULE_REST_DAYS,
 )
 from xsmn_alpha.exceptions import (
     CalibrationIntegrityError,
@@ -85,6 +89,30 @@ def validate_iso_date(date_str: Any) -> str:
     except ValueError as exc:
         raise DataIntegrityError(f"Invalid calendar date {date_str!r}: {exc}") from exc
     return date_str
+
+
+def _is_valid_2x2_cartesian_core(nums: Sequence[str]) -> bool:
+    """Return True iff nums is 4 unique 2-digit strings forming {a1, a2} x {b1, b2}."""
+    if len(nums) != 4 or len(set(nums)) != 4:
+        return False
+    tens_digits = {n[0] for n in nums}
+    units_digits = {n[1] for n in nums}
+    if len(tens_digits) != 2 or len(units_digits) != 2:
+        return False
+    expected = {f"{a}{b}" for a in tens_digits for b in units_digits}
+    return set(nums) == expected
+
+
+def _contains_2x2_cartesian_subset(nums_5: Sequence[str]) -> bool:
+    """Return True iff 5 unique 2-digit numbers contain at least one 2x2 Cartesian rectangle."""
+    if len(nums_5) != 5 or len(set(nums_5)) != 5:
+        return False
+    items = list(nums_5)
+    for skip_idx in range(5):
+        subset_4 = [items[i] for i in range(5) if i != skip_idx]
+        if _is_valid_2x2_cartesian_core(subset_4):
+            return True
+    return False
 
 
 def validate_probability_simplex(
@@ -773,10 +801,10 @@ class SweetSpotPortfolioMetrics(StrictBaseModel):
     @field_validator("config_id")
     @classmethod
     def _validate_config_id(cls, v: str) -> str:
-        if v not in EXTENDED_SWEET_SPOT_CONFIGS:
+        if v not in STAGE4_SWEET_SPOT_CONFIGS:
             raise DataIntegrityError(
                 f"Unknown portfolio config_id {v!r}; "
-                f"must be in {sorted(EXTENDED_SWEET_SPOT_CONFIGS)}."
+                f"must be in {sorted(STAGE4_SWEET_SPOT_CONFIGS)}."
             )
         return v
 
@@ -1289,7 +1317,7 @@ class BenchmarkLedgerEntry(StrictBaseModel):
     @field_validator("chosen_config_id")
     @classmethod
     def _check_config_id(cls, v: str) -> str:
-        if v not in EXTENDED_SWEET_SPOT_CONFIGS:
+        if v not in STAGE4_SWEET_SPOT_CONFIGS:
             raise DataIntegrityError(f"Unknown chosen_config_id {v!r}.")
         return v
 
@@ -1306,14 +1334,20 @@ class BenchmarkLedgerEntry(StrictBaseModel):
         if len(set(self.selected_numbers)) != len(self.selected_numbers):
             raise DataIntegrityError("selected_numbers must not contain duplicates.")
 
-        expected_num_numbers = int(
-            EXTENDED_SWEET_SPOT_CONFIGS[self.chosen_config_id]["num_numbers"]
-        )
+        expected_num_numbers = int(STAGE4_SWEET_SPOT_CONFIGS[self.chosen_config_id]["num_numbers"])
         if self.selected_numbers and len(self.selected_numbers) != expected_num_numbers:
             raise DataIntegrityError(
                 f"len(selected_numbers) ({len(self.selected_numbers)}) != "
                 f"expected num_numbers ({expected_num_numbers}) for {self.chosen_config_id!r}."
             )
+        if self.chosen_config_id == "sweet_5" and self.selected_numbers:
+            Weekly52AndFlatStakeGate.enforce_sweet_5(self.selected_numbers)
+        if self.chosen_config_id == "core_2x2_sat_3x3" and self.selected_numbers:
+            if not _is_valid_2x2_cartesian_core(self.selected_numbers[:4]):
+                raise DataIntegrityError(
+                    f"core_2x2_sat_3x3 requires selected_numbers[:4] ({self.selected_numbers[:4]}) "
+                    "to form a valid 2x2 Cartesian core rectangle."
+                )
 
         draw_dt = datetime.date.fromisoformat(self.draw_date)
         expected_weekday_vn = get_weekday_vn_label(draw_dt)
@@ -1396,7 +1430,7 @@ class BenchmarkLedgerEntry(StrictBaseModel):
                 f"max(0, bankroll_after_vnd - {initial_principal}) ({expected_hm_after})."
             )
 
-        unit_cost = float(EXTENDED_SWEET_SPOT_CONFIGS[self.chosen_config_id]["cost_per_draw"])
+        unit_cost = float(STAGE4_SWEET_SPOT_CONFIGS[self.chosen_config_id]["cost_per_draw"])
         base_config_cost_vnd = int(round(unit_cost * BENCHMARK_STAKE_PER_NUMBER_VND))
 
         if self.verdict_tier != "SKIP_NO_EDGE":
@@ -1477,7 +1511,46 @@ class BenchmarkLedgerEntry(StrictBaseModel):
                     "bankroll_after == bankroll_before."
                 )
         else:
-            if self.verdict_tier != "SKIP_NO_EDGE":
+            if self.verdict_tier == "SKIP_NO_EDGE":
+                if not self.actual_prizes_last2:
+                    if self.hit_count_k not in (0, None) or self.hit_details:
+                        raise DataIntegrityError(
+                            "SETTLED SKIP_NO_EDGE entry without actual_prizes_last2 must have "
+                            "hit_count_k in (0, None) and empty hit_details, "
+                            f"got hit_count_k={self.hit_count_k!r}, "
+                            f"hit_details={self.hit_details!r}."
+                        )
+                else:
+                    if len(self.actual_prizes_last2) != PRIZES_PER_DRAW:
+                        raise DataIntegrityError(
+                            f"SETTLED SKIP_NO_EDGE entry with actual_prizes_last2 requires "
+                            f"{PRIZES_PER_DRAW} prizes, got {len(self.actual_prizes_last2)}."
+                        )
+                    for p in self.actual_prizes_last2:
+                        validate_two_digit_ascii(p)
+                    selected_set = set(self.selected_numbers)
+                    expected_hit_indices = [
+                        idx
+                        for idx, prize in enumerate(self.actual_prizes_last2)
+                        if prize in selected_set
+                    ]
+                    expected_k = len(expected_hit_indices)
+                    if self.hit_count_k != expected_k or len(self.hit_details) != expected_k:
+                        raise DataIntegrityError(
+                            f"SETTLED SKIP_NO_EDGE entry hit_count_k ({self.hit_count_k}) / "
+                            f"len(hit_details) ({len(self.hit_details)}) != "
+                            f"expected ({expected_k})."
+                        )
+                    for detail, exp_idx in zip(self.hit_details, expected_hit_indices, strict=True):
+                        if (
+                            detail.prize_index != exp_idx
+                            or detail.number != self.actual_prizes_last2[exp_idx]
+                        ):
+                            raise DataIntegrityError(
+                                f"hit_details mismatch at prize_index {detail.prize_index}: "
+                                f"expected index {exp_idx} ({self.actual_prizes_last2[exp_idx]!r})."
+                            )
+            else:
                 if len(self.actual_prizes_last2) != PRIZES_PER_DRAW:
                     raise DataIntegrityError(
                         f"SETTLED entry requires {PRIZES_PER_DRAW} actual_prizes_last2, "
@@ -1801,21 +1874,27 @@ class CapitalGuidanceContract(StrictBaseModel):
                 self.should_play_today
                 or self.recommended_multiplier != 0.0
                 or self.benchmark_bet_vnd != 0
+                or self.stake_per_number_vnd != 0
+                or self.payout_per_hit_vnd != 0
                 or any(r.total_daily_cost_vnd != 0 for r in self.sample_allocations)
             ):
                 raise DataIntegrityError(
                     "SKIP_NO_EDGE requires should_play_today=False, recommended_multiplier=0.0, "
-                    "benchmark_bet_vnd=0, and all sample_allocations total_daily_cost_vnd=0."
+                    "benchmark_bet_vnd=0, stake_per_number_vnd=0, payout_per_hit_vnd=0, "
+                    "and all sample_allocations total_daily_cost_vnd=0."
                 )
         else:
             if (
                 not self.should_play_today
                 or self.recommended_multiplier <= 0.0
                 or self.benchmark_bet_vnd <= 0
+                or self.stake_per_number_vnd <= 0
+                or self.payout_per_hit_vnd <= self.stake_per_number_vnd
             ):
                 raise DataIntegrityError(
                     f"{self.verdict_tier} requires should_play_today=True, "
-                    "recommended_multiplier > 0.0, and benchmark_bet_vnd > 0."
+                    "recommended_multiplier > 0.0, benchmark_bet_vnd > 0, "
+                    "stake_per_number_vnd > 0, and payout_per_hit_vnd > stake_per_number_vnd."
                 )
 
         if not self.sample_allocations:
@@ -1826,6 +1905,22 @@ class CapitalGuidanceContract(StrictBaseModel):
                     f"Sample allocation row multiplier ({row.recommended_multiplier}) != "
                     f"guidance recommended_multiplier ({self.recommended_multiplier})."
                 )
+            if (
+                self.verdict_tier != "SKIP_NO_EDGE"
+                and row.capital_tier_vnd == self.initial_bankroll_vnd
+            ):
+                if (
+                    row.total_daily_cost_vnd != self.benchmark_bet_vnd
+                    or row.stake_per_number_vnd != self.stake_per_number_vnd
+                    or row.payout_per_hit_vnd != self.payout_per_hit_vnd
+                ):
+                    raise CapitalDisciplineError(
+                        f"Reference tier ({row.capital_tier_vnd:,} VND) allocation "
+                        f"(cost={row.total_daily_cost_vnd}, stake={row.stake_per_number_vnd}, "
+                        f"payout={row.payout_per_hit_vnd}) does not match guidance "
+                        f"(bet={self.benchmark_bet_vnd}, stake={self.stake_per_number_vnd}, "
+                        f"payout={self.payout_per_hit_vnd})."
+                    )
 
         # Gate 5: HouseMoneyAndLedgerIntegrityGate
         allowed_multipliers = (0.0, 1.0, 1.25, 1.5)
@@ -1906,7 +2001,7 @@ class CapitalGuidanceContract(StrictBaseModel):
 
 
 class TicketConfigRecommendation(StrictBaseModel):
-    """Evaluation and concrete 2-digit numbers for 1 of the 5 Stage 3 ticket configs."""
+    """Evaluation and concrete 2-digit numbers for 1 of the Stage 3/4 ticket configs."""
 
     config_id: str
     label: str = Field(min_length=1)
@@ -1932,17 +2027,41 @@ class TicketConfigRecommendation(StrictBaseModel):
     @field_validator("config_id")
     @classmethod
     def _check_config_id(cls, v: str) -> str:
-        if v not in EXTENDED_SWEET_SPOT_CONFIGS:
+        if v not in STAGE4_SWEET_SPOT_CONFIGS:
             raise DataIntegrityError(f"Unknown ticket config_id {v!r}.")
         return v
 
     @model_validator(mode="after")
     def _validate_numbers(self) -> TicketConfigRecommendation:
-        expected_num = int(EXTENDED_SWEET_SPOT_CONFIGS[self.config_id]["num_numbers"])
+        cfg_meta = STAGE4_SWEET_SPOT_CONFIGS[self.config_id]
+        expected_num = int(cfg_meta["num_numbers"])
         if self.num_numbers != expected_num:
             raise DataIntegrityError(
                 f"num_numbers ({self.num_numbers}) != expected {expected_num} "
                 f"for config_id {self.config_id!r}."
+            )
+        expected_unit_cost = float(cfg_meta["cost_per_draw"])
+        if abs(self.unit_cost_per_draw - expected_unit_cost) > 1e-6:
+            raise DataIntegrityError(
+                f"unit_cost_per_draw ({self.unit_cost_per_draw}) != expected "
+                f"{expected_unit_cost} for config_id {self.config_id!r}."
+            )
+        expected_1x_cost = int(round(expected_unit_cost * BENCHMARK_STAKE_PER_NUMBER_VND))
+        if self.benchmark_1x_cost_vnd != expected_1x_cost:
+            raise DataIntegrityError(
+                f"benchmark_1x_cost_vnd ({self.benchmark_1x_cost_vnd}) != expected "
+                f"{expected_1x_cost} for config_id {self.config_id!r}."
+            )
+        expected_be_30 = float(cfg_meta["be_hits_30_draws"])
+        if abs(self.be_hits_30_draws - expected_be_30) > 0.05:
+            raise DataIntegrityError(
+                f"be_hits_30_draws ({self.be_hits_30_draws}) != expected "
+                f"{expected_be_30:.2f} for config_id {self.config_id!r}."
+            )
+        if self.hit_at_least_1_in_18_prob + 1e-6 < self.single_prize_hit_prob:
+            raise DataIntegrityError(
+                f"hit_at_least_1_in_18_prob ({self.hit_at_least_1_in_18_prob}) cannot be "
+                f"less than single_prize_hit_prob ({self.single_prize_hit_prob})."
             )
         for num in self.selected_numbers:
             validate_two_digit_ascii(num)
@@ -1963,7 +2082,20 @@ class TicketConfigRecommendation(StrictBaseModel):
             raise DataIntegrityError("satellite_numbers must be unique.")
         if not set(self.core_numbers).isdisjoint(set(self.satellite_numbers)):
             raise DataIntegrityError("core_numbers and satellite_numbers must be disjoint.")
-        if self.core_numbers or self.satellite_numbers:
+        if self.config_id == "sweet_5":
+            if len(self.core_numbers) != 4 or len(self.satellite_numbers) != 1:
+                raise DataIntegrityError("sweet_5 requires 4 core_numbers and 1 satellite_numbers.")
+            if not _is_valid_2x2_cartesian_core(self.core_numbers):
+                raise DataIntegrityError(
+                    f"sweet_5 core_numbers ({self.core_numbers}) must form a valid "
+                    "2x2 Cartesian rectangle."
+                )
+            if set(self.core_numbers) | set(self.satellite_numbers) != set(self.selected_numbers):
+                raise DataIntegrityError(
+                    "Union of core_numbers and satellite_numbers must equal selected_numbers."
+                )
+            Weekly52AndFlatStakeGate.enforce_sweet_5(self.selected_numbers, self.core_numbers)
+        elif self.core_numbers or self.satellite_numbers:
             if set(self.core_numbers) | set(self.satellite_numbers) != set(self.selected_numbers):
                 raise DataIntegrityError(
                     "Union of core_numbers and satellite_numbers must equal selected_numbers."
@@ -1973,6 +2105,11 @@ class TicketConfigRecommendation(StrictBaseModel):
                     raise DataIntegrityError(
                         "core_2x2_sat_3x3 requires 4 core_numbers and 5 satellite_numbers."
                     )
+                if not _is_valid_2x2_cartesian_core(self.core_numbers):
+                    raise DataIntegrityError(
+                        f"core_2x2_sat_3x3 core_numbers ({self.core_numbers}) must form a valid "
+                        "2x2 rectangle."
+                    )
             else:
                 if len(self.core_numbers) != self.num_numbers or self.satellite_numbers:
                     raise DataIntegrityError(
@@ -1980,6 +2117,381 @@ class TicketConfigRecommendation(StrictBaseModel):
                         "and empty satellite_numbers."
                     )
         return self
+
+
+class WeekdayCageBalanceSummary(StrictBaseModel):
+    """Cage balance & deviation summary for 1 of the 7 weekdays (0=Mon .. 6=Sun) strictly < D."""
+
+    weekday: int = Field(ge=0, le=6)
+    weekday_vn: str = Field(min_length=1)
+    balance_rank: int = Field(ge=1, le=7)
+    num_stations: int = Field(ge=5, le=7)
+    station_codes: list[str]
+    lead_station_code: str
+    lead_station_name: str = Field(min_length=1)
+    max_chi2_overall: float = Field(ge=0.0)
+    mean_chi2_overall: float = Field(ge=0.0)
+    max_bf10_overall: float = Field(gt=0.0)
+    min_entropy_overall: float = Field(ge=0.0, le=1.000001)
+    is_rest_day: bool
+
+    @model_validator(mode="before")
+    @classmethod
+    def _precheck_weekday_summary(cls, data: Any) -> Any:
+        if not isinstance(data, Mapping):
+            return data
+        copied = dict(data)
+        wd = copied.get("weekday")
+        if isinstance(wd, bool) or not isinstance(wd, int) or wd < 0 or wd > 6:
+            raise DataIntegrityError(f"weekday must be an int in 0..6, got {wd!r}.")
+        br = copied.get("balance_rank")
+        if isinstance(br, bool) or not isinstance(br, int) or br < 1 or br > 7:
+            raise DataIntegrityError(f"balance_rank must be an int in 1..7, got {br!r}.")
+        ns = copied.get("num_stations")
+        if isinstance(ns, bool) or not isinstance(ns, int) or ns < 5 or ns > 7:
+            raise DataIntegrityError(f"num_stations must be an int in 5..7, got {ns!r}.")
+        return copied
+
+    @model_validator(mode="after")
+    def _validate_weekday_summary_invariants(self) -> WeekdayCageBalanceSummary:
+        from xsmn_alpha.live.registry import (
+            STATION_REGISTRY_35,
+            WEEKDAY_VN_LABELS,
+            get_station_codes_for_weekday,
+        )
+
+        expected_wd_vn = WEEKDAY_VN_LABELS[self.weekday]
+        if self.weekday_vn != expected_wd_vn:
+            raise DataIntegrityError(
+                f"weekday_vn ({self.weekday_vn!r}) != expected {expected_wd_vn!r} "
+                f"for weekday {self.weekday}."
+            )
+        expected_rest = self.balance_rank in (1, 2)
+        if self.is_rest_day != expected_rest:
+            raise DataIntegrityError(
+                f"WeekdayCageBalanceSummary balance_rank={self.balance_rank} requires "
+                f"is_rest_day={expected_rest}, got {self.is_rest_day}."
+            )
+        if self.mean_chi2_overall > self.max_chi2_overall + 1e-9:
+            raise DataIntegrityError(
+                f"mean_chi2_overall ({self.mean_chi2_overall}) cannot exceed "
+                f"max_chi2_overall ({self.max_chi2_overall})."
+            )
+        if len(self.station_codes) != self.num_stations:
+            raise DataIntegrityError(
+                f"len(station_codes) ({len(self.station_codes)}) != "
+                f"num_stations ({self.num_stations})."
+            )
+        for code in self.station_codes:
+            validate_station_code_35(code)
+        if len(set(self.station_codes)) != len(self.station_codes):
+            raise DataIntegrityError("station_codes must not contain duplicates.")
+        expected_codes = set(get_station_codes_for_weekday(self.weekday))
+        if set(self.station_codes) != expected_codes:
+            raise DataIntegrityError(
+                f"station_codes ({self.station_codes}) do not match scheduled stations "
+                f"for weekday {self.weekday} ({sorted(expected_codes)})."
+            )
+        validate_station_code_35(self.lead_station_code)
+        if self.lead_station_code not in self.station_codes:
+            raise DataIntegrityError(
+                f"lead_station_code ({self.lead_station_code!r}) must be in "
+                f"station_codes ({self.station_codes})."
+            )
+        expected_lead_name = str(STATION_REGISTRY_35[self.lead_station_code]["name"])
+        if self.lead_station_name != expected_lead_name:
+            raise DataIntegrityError(
+                f"lead_station_name ({self.lead_station_name!r}) != registry name "
+                f"({expected_lead_name!r}) for {self.lead_station_code}."
+            )
+        return self
+
+
+class WeeklySchedule52Analysis(StrictBaseModel):
+    """Weekly 5/2 Cage-Balance Schedule ranking all 7 weekdays strictly before target_date (< D)."""
+
+    as_of_date: str
+    target_weekday: int = Field(ge=0, le=6)
+    target_weekday_vn: str = Field(min_length=1)
+    today_balance_rank: int = Field(ge=1, le=7)
+    is_today_scheduled_rest_day: bool
+    rest_weekdays: tuple[int, int]
+    rest_weekdays_vn: tuple[str, str]
+    play_weekdays: tuple[int, int, int, int, int]
+    play_weekdays_vn: tuple[str, str, str, str, str]
+    weekday_rankings: list[WeekdayCageBalanceSummary]
+    schedule_summary_vi: str = Field(default="")
+
+    @model_validator(mode="before")
+    @classmethod
+    def _gate6_precheck_weekly_schedule(cls, data: Any) -> Any:
+        if not isinstance(data, Mapping):
+            return data
+        copied = dict(data)
+        validate_iso_date(copied.get("as_of_date"))
+
+        twd = copied.get("target_weekday")
+        if isinstance(twd, bool) or not isinstance(twd, int) or twd < 0 or twd > 6:
+            raise DataIntegrityError(f"target_weekday must be an int in 0..6, got {twd!r}.")
+        tbr = copied.get("today_balance_rank")
+        if isinstance(tbr, bool) or not isinstance(tbr, int) or tbr < 1 or tbr > 7:
+            raise DataIntegrityError(f"today_balance_rank must be an int in 1..7, got {tbr!r}.")
+
+        for key, exp_len in (
+            ("rest_weekdays", WEEKLY_SCHEDULE_REST_DAYS),
+            ("rest_weekdays_vn", WEEKLY_SCHEDULE_REST_DAYS),
+            ("play_weekdays", WEEKLY_SCHEDULE_PLAY_DAYS),
+            ("play_weekdays_vn", WEEKLY_SCHEDULE_PLAY_DAYS),
+            ("weekday_rankings", 7),
+        ):
+            seq = copied.get(key)
+            if (
+                not isinstance(seq, Sequence)
+                or isinstance(seq, (str, bytes))
+                or len(seq) != exp_len
+            ):
+                got_len = len(seq) if isinstance(seq, Sequence) else "non-sequence"
+                raise DataIntegrityError(
+                    f"Gate 6 violation: {key} must have exactly {exp_len} elements, got {got_len}."
+                )
+        return copied
+
+    @model_validator(mode="after")
+    def _gate6_validate_weekly_52_invariants(self) -> WeeklySchedule52Analysis:
+        from xsmn_alpha.live.registry import WEEKDAY_VN_LABELS
+
+        validate_iso_date(self.as_of_date)
+        expected_target_wd = datetime.date.fromisoformat(self.as_of_date).weekday()
+        if self.target_weekday != expected_target_wd:
+            raise DataIntegrityError(
+                f"Gate 6 violation: target_weekday ({self.target_weekday}) does not match "
+                f"as_of_date {self.as_of_date!r} (weekday={expected_target_wd})."
+            )
+        expected_target_vn = WEEKDAY_VN_LABELS[self.target_weekday]
+        if self.target_weekday_vn != expected_target_vn:
+            raise DataIntegrityError(
+                f"Gate 6 violation: target_weekday_vn ({self.target_weekday_vn!r}) != "
+                f"expected ({expected_target_vn!r})."
+            )
+        if len(self.weekday_rankings) != 7:
+            raise DataIntegrityError(
+                f"Gate 6 violation: weekday_rankings must have 7 items, "
+                f"got {len(self.weekday_rankings)}."
+            )
+
+        weekdays = [r.weekday for r in self.weekday_rankings]
+        if len(set(weekdays)) != 7 or set(weekdays) != set(range(7)):
+            raise DataIntegrityError(
+                f"Gate 6 violation: weekday_rankings must contain all 7 unique weekdays 0..6, "
+                f"got {weekdays}."
+            )
+
+        ranks = [r.balance_rank for r in self.weekday_rankings]
+        if ranks != [1, 2, 3, 4, 5, 6, 7]:
+            raise DataIntegrityError(
+                f"Gate 6 violation: weekday_rankings must be ordered by balance_rank 1..7, "
+                f"got {ranks}."
+            )
+
+        for idx in range(len(self.weekday_rankings) - 1):
+            curr = self.weekday_rankings[idx]
+            nxt = self.weekday_rankings[idx + 1]
+            curr_key = (
+                round(curr.max_chi2_overall, 2),
+                round(curr.max_bf10_overall, 3),
+                round(curr.mean_chi2_overall, 2),
+                curr.weekday,
+            )
+            nxt_key = (
+                round(nxt.max_chi2_overall, 2),
+                round(nxt.max_bf10_overall, 3),
+                round(nxt.mean_chi2_overall, 2),
+                nxt.weekday,
+            )
+            if curr_key >= nxt_key:
+                raise DataIntegrityError(
+                    f"Gate 6 violation: weekday_rankings must be strictly ordered by "
+                    f"BC-02 key (round(max_chi2_overall, 2), round(max_bf10_overall, 3), "
+                    f"round(mean_chi2_overall, 2), weekday), but rank {curr.balance_rank} "
+                    f"{curr_key} >= rank {nxt.balance_rank} {nxt_key}."
+                )
+
+        rest_items = [r for r in self.weekday_rankings if r.is_rest_day]
+        play_items = [r for r in self.weekday_rankings if not r.is_rest_day]
+        if (
+            len(rest_items) != WEEKLY_SCHEDULE_REST_DAYS
+            or len(play_items) != WEEKLY_SCHEDULE_PLAY_DAYS
+        ):
+            raise DataIntegrityError(
+                f"Gate 6 violation: Weekly 5/2 schedule requires {WEEKLY_SCHEDULE_REST_DAYS} "
+                f"rest days and {WEEKLY_SCHEDULE_PLAY_DAYS} play days, got "
+                f"{len(rest_items)} rest and {len(play_items)} play."
+            )
+
+        if [r.balance_rank for r in rest_items] != [1, 2] or [
+            r.balance_rank for r in play_items
+        ] != [3, 4, 5, 6, 7]:
+            raise DataIntegrityError(
+                "Gate 6 violation: balance_rank 1..2 must have is_rest_day=True and "
+                "balance_rank 3..7 must have is_rest_day=False."
+            )
+
+        expected_rest_wds = (self.weekday_rankings[0].weekday, self.weekday_rankings[1].weekday)
+        expected_rest_vns = (
+            self.weekday_rankings[0].weekday_vn,
+            self.weekday_rankings[1].weekday_vn,
+        )
+        expected_play_wds = tuple(r.weekday for r in self.weekday_rankings[2:])
+        expected_play_vns = tuple(r.weekday_vn for r in self.weekday_rankings[2:])
+
+        if self.rest_weekdays != expected_rest_wds:
+            raise DataIntegrityError(
+                f"Gate 6 violation: rest_weekdays ({self.rest_weekdays}) != "
+                f"top-2 balanced weekdays ({expected_rest_wds})."
+            )
+        if self.rest_weekdays_vn != expected_rest_vns:
+            raise DataIntegrityError(
+                f"Gate 6 violation: rest_weekdays_vn ({self.rest_weekdays_vn}) != "
+                f"expected ({expected_rest_vns})."
+            )
+        if self.play_weekdays != expected_play_wds:
+            raise DataIntegrityError(
+                f"Gate 6 violation: play_weekdays ({self.play_weekdays}) != "
+                f"rank 3..7 weekdays ({expected_play_wds})."
+            )
+        if self.play_weekdays_vn != expected_play_vns:
+            raise DataIntegrityError(
+                f"Gate 6 violation: play_weekdays_vn ({self.play_weekdays_vn}) != "
+                f"expected ({expected_play_vns})."
+            )
+
+        today_item = next(
+            (r for r in self.weekday_rankings if r.weekday == self.target_weekday),
+            None,
+        )
+        if today_item is None:
+            raise DataIntegrityError(
+                f"Gate 6 violation: target_weekday {self.target_weekday} missing in rankings."
+            )
+        if self.today_balance_rank != today_item.balance_rank:
+            raise DataIntegrityError(
+                f"Gate 6 violation: today_balance_rank ({self.today_balance_rank}) != "
+                f"ranking for target_weekday ({today_item.balance_rank})."
+            )
+        if self.target_weekday_vn != today_item.weekday_vn:
+            raise DataIntegrityError(
+                f"Gate 6 violation: target_weekday_vn ({self.target_weekday_vn!r}) != "
+                f"expected ({today_item.weekday_vn!r})."
+            )
+        expected_today_rest = self.target_weekday in self.rest_weekdays
+        if self.is_today_scheduled_rest_day != expected_today_rest:
+            raise DataIntegrityError(
+                f"Gate 6 violation: is_today_scheduled_rest_day "
+                f"({self.is_today_scheduled_rest_day}) != "
+                f"(target_weekday in rest_weekdays) ({expected_today_rest})."
+            )
+        return self
+
+
+class Weekly52AndFlatStakeGate:
+    """Gate 6: Enforces Weekly 5/2 Cage-Balance Schedule invariants, sweet_5 subset rules,
+    and Flat 1.0x Stake Discipline (no 1.25x or 1.50x escalation when lock_flat_1x=True).
+    """
+
+    @staticmethod
+    def enforce_schedule(schedule: WeeklySchedule52Analysis) -> WeeklySchedule52Analysis:
+        """Validate a WeeklySchedule52Analysis instance against all Gate 6 invariants."""
+        if not isinstance(schedule, WeeklySchedule52Analysis):
+            raise DataIntegrityError(
+                f"Expected WeeklySchedule52Analysis, got {type(schedule).__name__}."
+            )
+        return schedule._gate6_validate_weekly_52_invariants()
+
+    @staticmethod
+    def enforce_sweet_5(
+        sweet_5_numbers: Sequence[str],
+        core_2x2_numbers: Sequence[str] | None = None,
+    ) -> list[str]:
+        """Validate that sweet_5_numbers has 5 unique 2-digit numbers including all 4 of 2x2."""
+        if (
+            not isinstance(sweet_5_numbers, Sequence)
+            or isinstance(sweet_5_numbers, (str, bytes))
+            or len(sweet_5_numbers) != 5
+        ):
+            count = len(sweet_5_numbers) if isinstance(sweet_5_numbers, Sequence) else "invalid"
+            raise DataIntegrityError(
+                f"Gate 6 violation: sweet_5_numbers must contain exactly 5 numbers, got {count}."
+            )
+        cleaned = [validate_two_digit_ascii(num) for num in sweet_5_numbers]
+        if len(set(cleaned)) != 5:
+            raise DataIntegrityError(
+                f"Gate 6 violation: sweet_5_numbers must contain 5 unique numbers, got {cleaned}."
+            )
+        if not _contains_2x2_cartesian_subset(cleaned):
+            raise DataIntegrityError(
+                f"Gate 6 violation: sweet_5_numbers ({cleaned}) must contain at least one "
+                "valid 2x2 Cartesian product subset."
+            )
+        if core_2x2_numbers is not None:
+            if (
+                not isinstance(core_2x2_numbers, Sequence)
+                or isinstance(core_2x2_numbers, (str, bytes))
+                or len(core_2x2_numbers) != 4
+            ):
+                raise DataIntegrityError(
+                    f"Gate 6 violation: core_2x2_numbers must have exactly 4 elements, "
+                    f"got {core_2x2_numbers!r}."
+                )
+            core_cleaned = [validate_two_digit_ascii(c) for c in core_2x2_numbers]
+            core_set = set(core_cleaned)
+            if (
+                len(core_set) != 4
+                or not _is_valid_2x2_cartesian_core(core_cleaned)
+                or not core_set.issubset(set(cleaned))
+            ):
+                raise DataIntegrityError(
+                    f"Gate 6 violation: sweet_5_numbers ({cleaned}) must contain all 4 "
+                    f"core 2x2 numbers ({sorted(core_set)})."
+                )
+        return cleaned
+
+    @staticmethod
+    def enforce_flat_stake(
+        recommended_multiplier: float,
+        *,
+        should_play_today: bool = True,
+        lock_flat_1x: bool = True,
+    ) -> float:
+        """Enforce flat 1.0x stake ceiling on play days and 0.0x on rest days under Stage 4."""
+        if isinstance(recommended_multiplier, bool) or not isinstance(
+            recommended_multiplier, (int, float)
+        ):
+            raise CapitalDisciplineError(
+                f"Invalid recommended_multiplier {recommended_multiplier!r}; must be float."
+            )
+        mult = float(recommended_multiplier)
+        if not math.isfinite(mult) or mult < 0.0:
+            raise CapitalDisciplineError(
+                f"Invalid recommended_multiplier {mult}; must be finite >= 0.0."
+            )
+        if not should_play_today:
+            if abs(mult) > 1e-9:
+                raise DataIntegrityError(
+                    f"Gate 6 violation: rest day requires multiplier == 0.0, got {mult}."
+                )
+            return 0.0
+        if lock_flat_1x:
+            if mult > STAGE4_MAX_STAKE_MULTIPLIER + 1e-9:
+                raise CapitalDisciplineError(
+                    f"Gate 6 (Weekly52AndFlatStakeGate) violation: multiplier ({mult}x) "
+                    f"exceeds Stage 4 flat stake ceiling ({STAGE4_MAX_STAKE_MULTIPLIER}x)."
+                )
+            if abs(mult - STAGE4_MAX_STAKE_MULTIPLIER) > 1e-9:
+                raise CapitalDisciplineError(
+                    f"Gate 6 violation: Stage 4 play day requires flat "
+                    f"recommended_multiplier == {STAGE4_MAX_STAKE_MULTIPLIER}x, got {mult}x."
+                )
+        return mult
 
 
 class StationDailyScorecard(StrictBaseModel):
@@ -2040,6 +2552,13 @@ class StationDailyScorecard(StrictBaseModel):
     rank_in_day: int = Field(default=1, ge=1)
     role_label_vi: str = Field(default="")
     rationale_vi: str = Field(min_length=1)
+    sweet_5_numbers: list[str] = Field(default_factory=list)
+    sweet_5_config: TicketConfigRecommendation | None = Field(default=None)
+    cage_anomaly_detected: bool = Field(default=False)
+    cage_anomaly_summary_vi: str = Field(default="")
+    cold_balls_tens: list[int] = Field(default_factory=list)
+    cold_balls_units: list[int] = Field(default_factory=list)
+    passes_weekly_5_2_play: bool = Field(default=False)
 
     @field_validator("ticket_configs", mode="before")
     @classmethod
@@ -2124,10 +2643,10 @@ class StationDailyScorecard(StrictBaseModel):
                         f"!= p_ai_tens[{a}] * p_ai_units[{b}] ({expected_cell:.6f})."
                     )
 
-        if self.recommended_config_id not in STAGE3_TICKET_CONFIGS:
+        if self.recommended_config_id not in STAGE4_TICKET_CONFIGS:
             raise DataIntegrityError(
                 f"recommended_config_id {self.recommended_config_id!r} must be in "
-                f"{STAGE3_TICKET_CONFIGS}."
+                f"{STAGE4_TICKET_CONFIGS}."
             )
         for num in self.recommended_numbers:
             validate_two_digit_ascii(num)
@@ -2142,6 +2661,99 @@ class StationDailyScorecard(StrictBaseModel):
                 f"ticket_configs[{self.recommended_config_id!r}].selected_numbers "
                 f"({expected_rec_nums})."
             )
+
+        # Gate 6: Validate sweet_5_numbers & sweet_5_config when present
+        expected_2x2_from_ranks = sorted(
+            f"{a}{b}" for a in self.ranked_balls_tens[:2] for b in self.ranked_balls_units[:2]
+        )
+        core_2x2_nums = (
+            self.ticket_configs["2x2"].selected_numbers
+            if "2x2" in self.ticket_configs
+            else expected_2x2_from_ranks
+        )
+        if self.sweet_5_numbers:
+            Weekly52AndFlatStakeGate.enforce_sweet_5(self.sweet_5_numbers, core_2x2_nums)
+
+        if self.sweet_5_config is not None:
+            if self.sweet_5_config.config_id != "sweet_5":
+                raise DataIntegrityError(
+                    f"sweet_5_config must have config_id == 'sweet_5', "
+                    f"got {self.sweet_5_config.config_id!r}."
+                )
+            Weekly52AndFlatStakeGate.enforce_sweet_5(
+                self.sweet_5_config.selected_numbers, core_2x2_nums
+            )
+            if self.sweet_5_numbers and list(self.sweet_5_config.selected_numbers) != list(
+                self.sweet_5_numbers
+            ):
+                raise DataIntegrityError(
+                    f"sweet_5_config.selected_numbers ({self.sweet_5_config.selected_numbers}) "
+                    f"!= sweet_5_numbers ({self.sweet_5_numbers})."
+                )
+            if set(self.sweet_5_config.core_numbers) != set(core_2x2_nums):
+                raise DataIntegrityError(
+                    f"sweet_5_config.core_numbers ({self.sweet_5_config.core_numbers}) "
+                    f"must match core 2x2 numbers ({core_2x2_nums})."
+                )
+
+        if "sweet_5" in self.ticket_configs:
+            tc_s5 = self.ticket_configs["sweet_5"]
+            Weekly52AndFlatStakeGate.enforce_sweet_5(tc_s5.selected_numbers, core_2x2_nums)
+            if self.sweet_5_numbers and list(tc_s5.selected_numbers) != list(self.sweet_5_numbers):
+                raise DataIntegrityError(
+                    f"ticket_configs['sweet_5'].selected_numbers ({tc_s5.selected_numbers}) "
+                    f"!= sweet_5_numbers ({self.sweet_5_numbers})."
+                )
+            if self.sweet_5_config is not None and list(tc_s5.selected_numbers) != list(
+                self.sweet_5_config.selected_numbers
+            ):
+                raise DataIntegrityError(
+                    f"ticket_configs['sweet_5'].selected_numbers ({tc_s5.selected_numbers}) "
+                    f"!= sweet_5_config.selected_numbers ({self.sweet_5_config.selected_numbers})."
+                )
+
+        for cold_field in ("cold_balls_tens", "cold_balls_units"):
+            cold_vec = getattr(self, cold_field)
+            for b in cold_vec:
+                if isinstance(b, bool) or not isinstance(b, int) or b < 0 or b >= CAGE_NUM_BALLS:
+                    raise DataIntegrityError(
+                        f"Invalid ball index {b!r} in {cold_field}; must be int in 0..9."
+                    )
+            if len(set(cold_vec)) != len(cold_vec):
+                raise DataIntegrityError(f"{cold_field} must not contain duplicate ball indices.")
+
+        expected_anomaly = bool(
+            self.chi2_max_overall > self.null_chi2_p95
+            and self.bf10_max_overall >= CAGE_ANOMALY_BF10_THRESHOLD - 1e-9
+        )
+        if self.cage_anomaly_detected:
+            if not expected_anomaly:
+                raise DataIntegrityError(
+                    f"cage_anomaly_detected=True requires chi2_max_overall "
+                    f"({self.chi2_max_overall}) > null_chi2_p95 ({self.null_chi2_p95}) "
+                    f"and bf10_max_overall ({self.bf10_max_overall}) >= "
+                    f"{CAGE_ANOMALY_BF10_THRESHOLD}."
+                )
+            if not self.cage_anomaly_summary_vi.strip():
+                raise DataIntegrityError(
+                    "cage_anomaly_detected=True requires non-empty cage_anomaly_summary_vi."
+                )
+        else:
+            if (
+                self.cage_anomaly_summary_vi.strip()
+                or self.cold_balls_tens
+                or self.cold_balls_units
+            ):
+                raise DataIntegrityError(
+                    "cage_anomaly_detected=False requires empty cage_anomaly_summary_vi, "
+                    "cold_balls_tens, and cold_balls_units."
+                )
+            if self.sweet_5_config is not None and expected_anomaly:
+                raise DataIntegrityError(
+                    f"cage_anomaly_detected=False conflicts with Stage 4 anomaly metrics "
+                    f"(chi2_max_overall={self.chi2_max_overall} > {self.null_chi2_p95}, "
+                    f"bf10_max_overall={self.bf10_max_overall} >= {CAGE_ANOMALY_BF10_THRESHOLD})."
+                )
 
         expected_passes_alpha = bool(
             self.joint_r1_pct >= SELECTIVE_ALPHA_JOINT_R1_MIN_PCT - 1e-9
@@ -2220,6 +2832,7 @@ class DailyQuantReportContract(StrictBaseModel):
     capital_guidance: CapitalGuidanceContract
     executive_nlg_vi: ExecutiveNLGContract
     telegram_message_html: str = Field(default="")
+    weekly_5_2_schedule: WeeklySchedule52Analysis | None = Field(default=None)
 
     @field_validator("report_date")
     @classmethod
@@ -2228,6 +2841,14 @@ class DailyQuantReportContract(StrictBaseModel):
 
     @model_validator(mode="after")
     def _validate_daily_report_invariants(self) -> DailyQuantReportContract:
+        from xsmn_alpha.live.registry import get_weekday_vn_label
+
+        expected_wd_vn = get_weekday_vn_label(self.report_date)
+        if self.weekday_vn != expected_wd_vn:
+            raise DataIntegrityError(
+                f"DailyQuantReportContract weekday_vn ({self.weekday_vn!r}) != "
+                f"expected ({expected_wd_vn!r}) for report_date {self.report_date!r}."
+            )
         if not self.all_today_stations:
             raise DataIntegrityError("all_today_stations cannot be empty.")
         if not self.data_pipeline_audit.schema_gate_passed:
@@ -2291,14 +2912,70 @@ class DailyQuantReportContract(StrictBaseModel):
         else:
             if not self.should_play_today:
                 raise DataIntegrityError(f"{self.verdict_tier} requires should_play_today=True.")
-            if not self.primary_station.passes_selective_alpha:
+            if not (
+                self.primary_station.passes_selective_alpha
+                or self.primary_station.passes_weekly_5_2_play
+            ):
                 raise DataIntegrityError(
                     f"{self.verdict_tier} requires primary_station.passes_selective_alpha=True "
-                    f"(got False for {self.primary_station.station_code})."
+                    f"or primary_station.passes_weekly_5_2_play=True "
+                    f"(got both False for {self.primary_station.station_code})."
                 )
         if self.secondary_station is not None and not self.secondary_station.passes_selective_alpha:
             raise DataIntegrityError(
                 f"secondary_station ({self.secondary_station.station_code}) must have "
                 "passes_selective_alpha=True."
             )
+
+        # Gate 6: Weekly52AndFlatStakeGate consistency when weekly_5_2_schedule is present
+        if self.weekly_5_2_schedule is None:
+            if any(sc.passes_weekly_5_2_play for sc in all_referenced_stations):
+                raise DataIntegrityError(
+                    "Gate 6 violation: passes_weekly_5_2_play cannot be True when "
+                    "weekly_5_2_schedule is None."
+                )
+        else:
+            Weekly52AndFlatStakeGate.enforce_schedule(self.weekly_5_2_schedule)
+            if self.weekly_5_2_schedule.as_of_date != self.report_date:
+                raise DataIntegrityError(
+                    f"Gate 6 violation: weekly_5_2_schedule.as_of_date "
+                    f"({self.weekly_5_2_schedule.as_of_date!r}) != report_date "
+                    f"({self.report_date!r})."
+                )
+            Weekly52AndFlatStakeGate.enforce_flat_stake(
+                self.capital_guidance.recommended_multiplier,
+                should_play_today=self.should_play_today,
+                lock_flat_1x=True,
+            )
+            if self.weekly_5_2_schedule.is_today_scheduled_rest_day:
+                if (
+                    self.should_play_today
+                    or self.verdict_tier != "SKIP_NO_EDGE"
+                    or abs(self.capital_guidance.recommended_multiplier) > 1e-9
+                    or any(sc.passes_weekly_5_2_play for sc in all_referenced_stations)
+                ):
+                    raise DataIntegrityError(
+                        "Gate 6 (EARS-S01) violation: scheduled 5/2 rest day requires "
+                        "should_play_today=False, verdict_tier='SKIP_NO_EDGE', "
+                        "recommended_multiplier=0.0, and passes_weekly_5_2_play=False "
+                        "on all stations."
+                    )
+            else:
+                if (
+                    not self.should_play_today
+                    or self.verdict_tier != "PLAY_STANDARD"
+                    or abs(self.capital_guidance.recommended_multiplier - 1.0) > 1e-9
+                    or not self.primary_station.passes_weekly_5_2_play
+                    or any(
+                        sc.passes_weekly_5_2_play
+                        for sc in self.all_today_stations
+                        if sc.station_code != self.primary_station.station_code
+                    )
+                ):
+                    raise DataIntegrityError(
+                        "Gate 6 (EARS-S02) violation: scheduled 5/2 play day requires "
+                        "should_play_today=True, verdict_tier='PLAY_STANDARD', "
+                        "recommended_multiplier=1.0, and "
+                        "primary_station.passes_weekly_5_2_play=True."
+                    )
         return self

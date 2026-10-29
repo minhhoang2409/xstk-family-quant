@@ -1,20 +1,26 @@
-<b>📡 BẢN TIN 05:00 SÁNG — THỨ 5 (29/10/2026)</b>
+<b>📡 BẢN TIN 05:00 SÁNG — THỨ 6 (30/10/2026)</b>
 ────────────
 
 <b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>
-👉 🔴 <b>KHÔNG NÊN ĐÁNH — HÔM NAY NGHỈ (SKIP_NO_EDGE)</b>
-• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> 🛑 <b>NGHỈ ĐỊNH KỲ (0.0x)</b> — Thứ 5 (Hạng #2/7, Max Chi2=<code>16.52</code>) thuộc <b>2 ngày lồng cầu cân bằng nhất tuần (Thứ 2, Thứ 5)</b>, nghỉ định kỳ để bảo toàn vốn.
+👉 🟢 <b>CÓ — HÔM NAY NÊN ĐÁNH (Đạt chuẩn / PLAY_STANDARD)</b>
+• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> ✅ <b>CHƠI ĐỀU TAY (1.0x)</b> — Thứ 6 (Hạng #5/7, Max Chi2=<code>18.65</code>) thuộc <b>5 ngày chơi (Thứ 4, Thứ 7, Thứ 6, Chủ Nhật, Thứ 3)</b>; 2 ngày nghỉ cân bằng nhất tuần: <b>Thứ 2, Thứ 5</b> (0.0x).
 <i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>
 
 <b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>
-• <b>Không đánh đài nào hôm nay (CHỈ QUAN SÁT — 0.0x).</b>
-• <i>Đài quan sát tham khảo (Tây Ninh - Miền Nam, XSTN):</i> Bộ <code>1x4</code>: <b>80, 85, 87, 88</b> | Bộ <code>sweet_5</code> (5 số): <b>17, 18, 38, 87, 88</b>
-• <i>Các đài nghỉ hôm nay: Tây Ninh (XSTN), Quảng Trị (XSQT), An Giang (XSAG), Bình Định (XSBDI), Bình Thuận (XSBTH), Quảng Bình (XSQB).</i>
+🏆 <b>Nên Đánh:</b> <b>Vĩnh Long - Miền Nam</b> (XSVL — Quay 16:15) với:
++ <b>Bộ số nên đánh nhất (1x4 - 4 số, ROI +14.96%):</b> <b>51, 54, 56, 58</b>
++ 🎯 <b>Cấu hình Vé Điểm Ngọt Kép (18 giải - 18k/số, Trả 99.5k/nháy):</b>
+  • <b>Bộ 5 số Điểm Ngọt Bà Cô (<code>sweet_5</code> — 5 số, 60.28% ngày lời, vốn 1.0x = 90k: 1 nháy +9.5k, 2 nháy +109k):</b> <b>51, 54, 58, 91, 94</b> <i>(4 số 2x2 + vệ tinh <code>58</code>)</i>
+  • <b>Bộ 4 số Chuẩn (<code>2x2</code> — 4 số, 52.04% ngày lời, vốn 1.0x = 72k: 1 nháy +27.5k, 2 nháy +127k):</b> <b>51, 54, 91, 94</b>
++ <b>Các bộ số tham khảo:</b> <code>2x2</code> (ROI -1.5%): 51, 54, 91, 94 | <code>4x1</code> (ROI -9.1%): 04, 14, 54, 94 | <code>3x3</code> (ROI -0.7%): 11, 14, 18, 51, 54, 58, 91, 94, 98 | <code>core_2x2_sat_3x3</code> (ROI -1.0%): 51, 54, 91, 94, 11, 14, 18, 58, 98
+
+• <b>Đài thứ nhì:</b> Không có đài thứ 2 đạt chuẩn hôm nay.
+• <i>Các đài còn lại không đánh: Gia Lai (XSGL), Ninh Thuận (XSNT), Bình Dương (XSBD), Trà Vinh (XSTV).</i>
 
 <b>🛡️ Kỷ Luật Tiền Chợ Đều Tay 1.0x (Tuyệt đối không gấp thếp)</b>
-• Hệ số vốn: <b>0.0x</b> (5 ngày chơi đều tay <code>1.0x</code>, 2 ngày cân bằng nhất tuần nghỉ <code>0.0x</code>; <b>tuyệt đối không gấp thếp</b>).
+• Hệ số vốn: <b>1.0x</b> (5 ngày chơi đều tay <code>1.0x</code>, 2 ngày cân bằng nhất tuần nghỉ <code>0.0x</code>; <b>tuyệt đối không gấp thếp</b>).
 • <code>sweet_5</code> (5 số, 90k): 1 nháy <b>+9.5k</b> (hoàn vốn + cà phê), 2 nháy <b>+109k</b> (<code>2.0x</code>: <b>+218k</b>) | <code>2x2</code> (4 số, 72k): 1 nháy <b>+27.5k</b>, 2 nháy <b>+127k</b> (<code>2.0x</code>: <b>+254k</b>).
 
 ────────────
 💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>
-🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-29.html">Xem Trang Web Giải Trình Chi Tiết Ngày 29/10/2026 (2026-10-29)</a>
+🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-30.html">Xem Trang Web Giải Trình Chi Tiết Ngày 30/10/2026 (2026-10-30)</a>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Báo Cáo Định Lượng 05:00 Sáng — Thứ 7 (31/10/2026 / 2026-10-31)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-alt: #131c2e;
+      --border: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --purple: #c084fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px 16px 72px;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15.5px;
+    }
+    .container { max-width: 1240px; margin: 0 auto; }
+    .hero {
+      background: linear-gradient(135deg, #1e293b 0%, #0b1324 100%);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    h1 { font-size: 1.65rem; margin: 8px 0 10px; color: #ffffff; line-height: 1.3; }
+    h2 {
+      font-size: 1.32rem;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      color: var(--accent);
+    }
+    h3 { font-size: 1.08rem; margin-top: 16px; margin-bottom: 8px; color: #ffffff; }
+    .subtitle { color: #cbd5e1; font-size: 0.98rem; margin: 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    @media (max-width: 960px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      body { padding: 14px 10px 48px; font-size: 14.5px; }
+      .grid-4 { grid-template-columns: 1fr; }
+      h1 { font-size: 1.35rem; }
+    }
+    .kpi-box {
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .kpi-label { font-size: 0.82rem; color: var(--muted); text-transform: uppercase; }
+    .kpi-value { font-size: 1.28rem; font-weight: 700; color: #ffffff; margin-top: 4px; }
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--card-alt);
+      padding: 13px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+    }
+    .callout.good { border-left-color: var(--green); background: rgba(34, 197, 94, 0.09); }
+    .callout.warn { border-left-color: var(--amber); background: rgba(245, 158, 11, 0.09); }
+    .callout.bad  { border-left-color: var(--red); background: rgba(239, 68, 68, 0.09); }
+    .table-wrap { width: 100%; overflow-x: auto; margin: 12px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.91rem;
+      background: var(--card);
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 9px 11px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    th { background: #0b1324; color: #e2e8f0; font-weight: 700; }
+    td.left, th.left { text-align: left; }
+    .badge {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .badge-green {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      border: 1px solid #22c55e;
+    }
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid #f59e0b;
+    }
+    .badge-red {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid #ef4444;
+    }
+    .badge-blue {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid #0284c7;
+    }
+    .pos { color: #4ade80; font-weight: 700; }
+    .neg { color: #f87171; font-weight: 700; }
+    .prob-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #0b1324;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .prob-bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+    .heatmap-cell {
+      padding: 6px 4px;
+      font-size: 0.82rem;
+      border: 1px solid #263349;
+      background: #131c2e;
+    }
+    .heatmap-recommended {
+      background: rgba(34, 197, 94, 0.28) !important;
+      border: 2px solid #22c55e !important;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .heatmap-sweet5-satellite {
+      background: rgba(245, 158, 11, 0.28) !important;
+      border: 2px solid #f59e0b !important;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      background: #0b1324;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, Monaco, monospace;
+      color: #38bdf8;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <span class="badge badge-blue">📡 CHUYÊN VIÊN BÁO CÁO ĐỊNH LƯỢNG 05:00 SÁNG (100% TOÁN HỌC THUẦN TÚY)</span>
+      <a href="../index.html">⬅️ Về Trang Chủ Dashboard Quỹ Chuẩn</a>
+    </div>
+    <h1>Báo Cáo Giải Trình Toán Học Ngày 31/10/2026 (Thứ 7 — 2026-10-31)</h1>
+    <p class="subtitle">
+      Thời điểm kết xuất: <code>2026-10-31T05:00:00+07:00</code> •
+      Tài liệu JSON Kiểm toán: <a href="2026-10-31.json"><code>2026-10-31.json</code></a> •
+      Canonical URL: <code>https://minhhoang2409.github.io/xstk-family-quant/daily/2026-10-31.html</code>
+    </p>
+  </header>
+  <section id="section-1-executive-verdict" class="card">
+    <h2>Khu vực 1 — Tóm tắt Quyết định Chiến thuật 05:00 Sáng &amp; Giải trình Toán học</h2>
+    <div class="grid-4" style="margin-bottom: 16px;">
+      <div class="kpi-box">
+        <div class="kpi-label">Phán Quyết Ngày 2026-10-31</div>
+        <div class="kpi-value" style="font-size: 1.02rem;"><span class="badge badge-green">🟢 NÊN ĐÁNH — ĐẠT CHUẨN LỢI THẾ ALPHA (PLAY_STANDARD)</span></div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Đài Ưu Tiên Số 1</div>
+        <div class="kpi-value">Quảng Ngãi (XSQNG)</div>
+        <div style="font-size: 0.85rem; color: var(--muted);">Miền Trung • Quay 17:15 ICT</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Bộ Số Tối Ưu (4x1)</div>
+        <div class="kpi-value" style="color: var(--green);">11, 31, 61, 91</div>
+        <div style="font-size: 0.85rem; color: var(--muted);">JointR1 = 1.038% • ROI (4x1): -2.56%</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Hệ Số Vốn CPPI / House-Money</div>
+        <div class="kpi-value">1.00x (72,000 VNĐ)</div>
+        <div style="font-size: 0.85rem; color: var(--muted);">Số dư W = 5,839,500đ • Lãi C = 4,839,500đ</div>
+      </div>
+    </div>
+    <div class="callout warn">
+      <strong>📌 Đối soát kết quả ngày hôm qua (D - 1):</strong> Đối soát kỳ hôm qua (2026-10-30 - Thứ 6): Đài Vĩnh Long (XSVL), gói 1x4 (51, 54, 56, 58), hệ số 1.00x -&gt; Trượt (0 nháy) | Chi = 72,000 VNĐ, Thu = 0 VNĐ, Lãi/Lỗ ròng = -72,000 VNĐ | Số dư Quỹ Chuẩn sau đối soát = 5,839,500 VNĐ (Lãi tích lũy House-Money = 4,839,500 VNĐ).
+      <p><strong>Chi tiết đối soát ngày 2026-10-30 (Thứ 6):</strong> Đài <code>Vĩnh Long (XSVL)</code> | Cấu hình <code>1x4</code> (Số: <code>51, 54, 56, 58</code>) | Hệ số <code>1.00x</code> | Kết quả: <strong>0 nháy</strong> (Không trúng giải nào) | Chi: <code>72,000 VNĐ</code> | Thu: <code>0 VNĐ</code> | Lãi/Lỗ ròng: <strong class="neg">-72,000 VNĐ</strong> | Số dư Quỹ Chuẩn W: <strong>5,839,500 VNĐ</strong> (Quỹ Lãi Ròng C: <strong>4,839,500 VNĐ</strong>).</p>
+    </div>
+    <div class="grid-2">
+      <div class="callout good">
+        <h3>Câu hỏi 1 — Hôm nay có nên đánh không? Vì sao?</h3>
+        <p>🟢 NÊN ĐÁNH — TÍN HIỆU CHUẨN (PLAY_STANDARD) ngày 2026-10-31 (Thứ 7). Đài dẫn đầu Quảng Ngãi (XSQNG - Miền Trung) được chọn làm Đài Chủ Lực Hạng 1 theo Lịch Chơi 5/2 &amp; Độ Lệch Lồng Cầu Thực Tế (&lt; 2026-10-31) với Chi2_max = 18.52 (so với phân vị nhiễu trắng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 4.83, Entropy chuẩn hóa Chục/Đơn vị = 0.9964/0.9968; xác suất trúng đồng thời Hạng-1 hai lồng cầu đạt JointR1 = 1.038% (so với ngưỡng Selective Alpha 1.105%, nền đồng đều 1.000%; Lồng Hàng Chục đạt 9.56% và Lồng Hàng Đơn Vị đạt 10.86% so với ngưỡng hòa vốn đơn lồng 10.69%) và hiệu suất thực nghiệm Walk-Forward OOS 3 năm (111 kỳ) ghi nhận ROI = -2.56%. Độ dài chuỗi chế độ BOCD ổn định ở r_t = 50 kỳ (&gt; 4 kỳ). Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu: Hôm nay (Thứ 7) xếp hạng độ lệch lồng cầu #5/7 (thuộc 5 ngày chơi định kỳ trong tuần; 2 ngày nghỉ định kỳ là Thứ 2, Thứ 5).</p>
+      </div>
+      <div class="callout">
+        <h3>Câu hỏi 2 — Nên đánh đài gì? Khu vực nào?</h3>
+        <p>Ưu tiên số 1 (Đài Chủ Lực - Hạng 1/7): Đài Quảng Ngãi (XSQNG) thuộc khu vực Miền Trung, mở thưởng lúc 17:15 ICT, dẫn đầu bảng xếp hạng với Station Alpha Score = +3.16 (JointR1 = 1.038%, ROI OOS 3 năm = -2.56% trên mẫu 156 kỳ, kỳ gần nhất trước giờ quay là 2026-10-24). Đài dự phòng / theo dõi phụ (Hạng 2): Bình Phước (XSBP - Miền Nam, quay lúc 16:15 ICT, AlphaScore = +37.25, JointR1 = 1.346%, ROI OOS = +10.58%, cấu hình 2x2: 53, 58, 63, 68). Các đài loại bỏ / đứng ngoài hôm nay (5 đài): Long An (XSLA - Miền Nam, AlphaScore=+0.26, JointR1=1.050%, ROI_OOS=-18.98%); Hậu Giang (XSHG - Miền Nam, AlphaScore=+9.66, JointR1=1.092%, ROI_OOS=+1.82%); TP. Hồ Chí Minh (XSHCM - Miền Nam, AlphaScore=+2.72, JointR1=1.053%, ROI_OOS=-10.33%); Đà Nẵng (XSDNG - Miền Trung, AlphaScore=-4.56, JointR1=0.995%, ROI_OOS=-16.25%); Đắk Nông (XSDNO - Miền Trung, AlphaScore=-10.55, JointR1=0.917%, ROI_OOS=-9.01%).</p>
+      </div>
+      <div class="callout good">
+        <h3>Câu hỏi 3 — Với đài nên đánh nhất thì đánh bộ số nào?</h3>
+        <p>Trên Đài Chủ Lực Quảng Ngãi (XSQNG), hệ thống khuyến nghị đánh cấu hình 4x1 gồm 4 số hai chữ số (Bao Lô 2 Số - 18 giải): [11, 31, 61, 91]. Phân tích xác suất bộ hợp chuẩn Brier: Top 3 bóng Lồng Hàng Chục dẫn đầu là bóng 6 (10.13%), bóng 3 (10.08%), bóng 1 (10.06%); Top 4 bóng Lồng Hàng Đơn Vị dẫn đầu là bóng 1 (10.00%), bóng 4 (10.00%), bóng 9 (10.00%), bóng 7 (10.00%). Gói 4x1 (11, 31, 61, 91) đạt xác suất trúng đơn giải 4.03%, xác suất nổ ít nhất 1 nháy trong 18 giải đạt 52.32%, tần suất trúng trung bình 24.05 nháy/30 kỳ và ROI thực nghiệm 3 năm đạt -2.56% (tỷ lệ ngày có lãi 53.15%). Đối chiếu toàn diện các cấu hình: gói 2x2 (31, 34, 61, 64: ROI_3Y=-11.32%, P(&gt;=1 nháy/18 giải)=52.40%); gói 1x4 (61, 64, 67, 69: ROI_3Y=-22.27%, P(&gt;=1 nháy/18 giải)=52.49%); gói 4x1 (11, 31, 61, 91: ROI_3Y=-2.56%, P(&gt;=1 nháy/18 giải)=52.32%); gói 3x3 (11, 14, 19, 31, 34, 39, 61, 64, 69: ROI_3Y=-11.93%, P(&gt;=1 nháy/18 giải)=81.97%). Cấu hình Vé Điểm Ngọt Kép Giai đoạn 4 (18.000đ/số, trúng 99.500đ/nháy): (1) Bộ 5 số Điểm Ngọt Bà Cô (sweet_5 - 4 số 2x2 + 1 số vệ tinh dẫn đầu, 90,000 VNĐ/ngày): [31, 34, 61, 64, 69] (P(&gt;=1 nháy/18 giải)=60.68%, tỷ lệ ngày thắng thực nghiệm 3Y=63.06%, lý thuyết 60.28%, ROI_3Y=-2.78%); (2) Bộ 4 số Chuẩn (2x2, 72,000 VNĐ/ngày): [31, 34, 61, 64] (tỷ lệ ngày thắng 3Y=51.35%, lý thuyết 52.04%, ROI_3Y=-11.32%).</p>
+      </div>
+      <div class="callout warn">
+        <h3>Câu hỏi 4 — Đi vốn như thế nào?</h3>
+        <p>Quy tắc Quản trị Vốn CPPI / House-Money (Bảo vệ đáy vốn gốc 1,000,000 VNĐ, đơn vị chuẩn 4 số = 72,000 VNĐ/ngày): Số dư Quỹ Chuẩn hiện tại = 5,839,500 VNĐ (Lãi ròng tích lũy từ tiền nhà cái / House-Money Surplus = 4,839,500 VNĐ). Hệ số đi vốn hôm nay: 1.00x (Thực thi Kỷ Luật Tiền Chợ Đều Tay 1.00x (72,000 VNĐ/ngày cho 4 số, tuyệt đối không gấp thếp). Quỹ Lãi Ròng hiện đạt 4,839,500 VNĐ trên vốn gốc 1,000,000 VNĐ.) -&gt; Mức giải ngân chuẩn hôm nay = 72,000 VNĐ. Bảng quy đổi tiền mẫu theo quy mô vốn gia đình: Vốn 500k (500,000 VNĐ): 9,000 VNĐ/số -&gt; Tổng chi = 36,000 VNĐ/ngày (trúng 1 nháy thu 49,750 VNĐ, lãi ròng +13,750 VNĐ) | Vốn 1 Triệu (1,000,000 VNĐ): 18,000 VNĐ/số -&gt; Tổng chi = 72,000 VNĐ/ngày (trúng 1 nháy thu 99,500 VNĐ, lãi ròng +27,500 VNĐ) | Vốn 2 Triệu (2,000,000 VNĐ): 36,000 VNĐ/số -&gt; Tổng chi = 144,000 VNĐ/ngày (trúng 1 nháy thu 199,000 VNĐ, lãi ròng +55,000 VNĐ) | Vốn 5 Triệu (5,000,000 VNĐ): 90,000 VNĐ/số -&gt; Tổng chi = 360,000 VNĐ/ngày (trúng 1 nháy thu 497,500 VNĐ, lãi ròng +137,500 VNĐ).</p>
+      </div>
+    </div>
+    <h3>Bảng Xếp Hạng Độ Cân Bằng 7 Thứ Trong Tuần (Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu &lt; 2026-10-31)</h3>
+    <div class="callout good">
+      ✅ <strong>HÔM NAY (Thứ 7, Hạng cân bằng #5/7): CHƠI ĐIỂM NGỌT 5/2 ĐỀU TAY (1.0x)</strong> — Thuộc <strong>5 ngày chơi Điểm Ngọt (Thứ 6, Thứ 4, Thứ 7, Chủ Nhật, Thứ 3)</strong>; 2 ngày nghỉ định kỳ cân bằng nhất tuần: <strong>Thứ 2, Thứ 5</strong> (0.0x).
+    </div>
+    <div class="table-wrap">
+      <table id="weekly-5-2-schedule-table">
+        <thead>
+          <tr>
+            <th>Hạng Cân Bằng</th>
+            <th class="left">Thứ Trong Tuần</th>
+            <th class="left">Các Đài Mở Thưởng</th>
+            <th class="left">Đài Lệch Mạnh Nhất Ngày</th>
+            <th>Max χ²</th>
+            <th>Mean χ²</th>
+            <th>Max BF10</th>
+            <th>Min Entropy (30 kỳ)</th>
+            <th>Phán Quyết Lịch 5/2</th>
+          </tr>
+        </thead>
+        <tbody><tr><td><strong>#1</strong></td><td class="left"><strong>Thứ 2</strong></td><td class="left">5 đài: <code>XSHCM</code>, <code>XSDT</code>, <code>XSCM</code>, <code>XSTTH</code>, <code>XSPY</code></td><td class="left"><strong>Thừa Thiên Huế</strong> (<code>XSTTH</code>)</td><td><strong>12.37</strong></td><td>11.16</td><td>0.659</td><td>0.9950</td><td><span class="badge badge-red">🛑 NGHỈ ĐỊNH KỲ 5/2 (0.0x — Cân bằng #1)</span></td></tr><tr><td><strong>#2</strong></td><td class="left"><strong>Thứ 5</strong></td><td class="left">6 đài: <code>XSTN</code>, <code>XSAG</code>, <code>XSBTH</code>, <code>XSBDI</code>, <code>XSQT</code>, <code>XSQB</code></td><td class="left"><strong>Bình Định</strong> (<code>XSBDI</code>)</td><td><strong>14.81</strong></td><td>11.72</td><td>1.256</td><td>0.9948</td><td><span class="badge badge-red">🛑 NGHỈ ĐỊNH KỲ 5/2 (0.0x — Cân bằng #2)</span></td></tr><tr><td><strong>#3</strong></td><td class="left"><strong>Thứ 6</strong></td><td class="left">5 đài: <code>XSVL</code>, <code>XSBD</code>, <code>XSTV</code>, <code>XSGL</code>, <code>XSNT</code></td><td class="left"><strong>Vĩnh Long</strong> (<code>XSVL</code>)</td><td><strong>17.02</strong></td><td>12.95</td><td>0.367</td><td>0.9951</td><td><span class="badge badge-green">🟢 CHƠI ĐIỂM NGỌT 5/2 (1.0x — Đều tay)</span></td></tr><tr><td><strong>#4</strong></td><td class="left"><strong>Thứ 4</strong></td><td class="left">5 đài: <code>XSDN</code>, <code>XSCT</code>, <code>XSST</code>, <code>XSDNG</code>, <code>XSKH</code></td><td class="left"><strong>Đồng Nai</strong> (<code>XSDN</code>)</td><td><strong>17.15</strong></td><td>12.33</td><td>1.002</td><td>0.9934</td><td><span class="badge badge-green">🟢 CHƠI ĐIỂM NGỌT 5/2 (1.0x — Đều tay)</span></td></tr><tr><td><strong>#5</strong></td><td class="left"><strong>Thứ 7</strong> <span class="badge badge-blue">📍 Hôm nay</span></td><td class="left">7 đài: <code>XSHCM</code>, <code>XSLA</code>, <code>XSBP</code>, <code>XSHG</code>, <code>XSDNG</code>, <code>XSQNG</code>, <code>XSDNO</code></td><td class="left"><strong>Quảng Ngãi</strong> (<code>XSQNG</code>)</td><td><strong>18.52</strong></td><td>13.93</td><td>4.835</td><td>0.9937</td><td><span class="badge badge-green">🟢 CHƠI ĐIỂM NGỌT 5/2 (1.0x — Đều tay)</span></td></tr><tr><td><strong>#6</strong></td><td class="left"><strong>Chủ Nhật</strong></td><td class="left">6 đài: <code>XSTG</code>, <code>XSKG</code>, <code>XSDL</code>, <code>XSTTH</code>, <code>XSKH</code>, <code>XSKT</code></td><td class="left"><strong>Đà Lạt (Lâm Đồng)</strong> (<code>XSDL</code>)</td><td><strong>19.15</strong></td><td>13.05</td><td>5.435</td><td>0.9912</td><td><span class="badge badge-green">🟢 CHƠI ĐIỂM NGỌT 5/2 (1.0x — Đều tay)</span></td></tr><tr><td><strong>#7</strong></td><td class="left"><strong>Thứ 3</strong></td><td class="left">5 đài: <code>XSBT</code>, <code>XSVT</code>, <code>XSBL</code>, <code>XSDLK</code>, <code>XSQNM</code></td><td class="left"><strong>Bến Tre</strong> (<code>XSBT</code>)</td><td><strong>53.28</strong></td><td>23.03</td><td>74334354.054</td><td>0.9827</td><td><span class="badge badge-green">🟢 CHƠI ĐIỂM NGỌT 5/2 (1.0x — Đều tay)</span></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section id="section-2-station-comparison" class="card">
+    <h2>Khu vực 2 — Bảng Chấm Điểm &amp; So Sánh Toàn Bộ 7 Đài Mở Thưởng Trong Ngày</h2>
+    <p class="subtitle">
+      Kiểm định nhân quả nghiêm ngặt trước giờ mở thưởng (<code>draw_date &lt; 2026-10-31</code>) trên đa cửa sổ W ∈ {15, 30, 60} đối chiếu 1.000 kịch bản Monte Carlo Null (<code>seed=42</code>). Mốc hòa vốn đơn lồng: <code>10.6904%</code>.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Hạng</th>
+            <th class="left">Đài Mở Thưởng</th>
+            <th>Khu Vực &amp; Giờ Quay</th>
+            <th>Cỡ Mẫu 3 Năm</th>
+            <th>χ²_max vs Null (P90/P95)</th>
+            <th>BF10 &amp; Entropy</th>
+            <th>BOCD Run Length r*</th>
+            <th>OOS Rank-1 (Chục / Đơn Vị)</th>
+            <th>JointR1%</th>
+            <th>Bộ Số &amp; OOS ROI 3Y</th>
+            <th>AlphaScore</th>
+            <th>Phán Quyết</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>#1</strong></td><td class="left"><strong>Quảng Ngãi</strong> (<code>XSQNG</code>)</td><td>Miền Trung<br/><small>17:15 ICT</small></td><td>156 kỳ<br/><small>(&lt; 2026-10-24)</small></td><td><strong>18.52</strong><br/><small>P90=17.22 / P95=19.34</small></td><td>4.835<br/><small>H=0.996/0.997</small></td><td><span class="badge badge-blue">r*=50 kỳ</span></td><td>Chục: <strong>9.56%</strong><br/>Đơn vị: <strong>10.86%</strong></td><td><strong>1.038%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>4x1</code>: <strong>11, 31, 61, 91</strong><br/><span class="neg">ROI (4x1): -2.56%</span></td><td><strong>+3.16</strong></td><td><span class="badge badge-green">Đài Chủ Lực (Hạng 1)</span></td></tr><tr><td><strong>#2</strong></td><td class="left"><strong>Bình Phước</strong> (<code>XSBP</code>)</td><td>Miền Nam<br/><small>16:15 ICT</small></td><td>156 kỳ<br/><small>(&lt; 2026-10-24)</small></td><td><strong>18.39</strong><br/><small>P90=17.22 / P95=19.34</small></td><td>1.796<br/><small>H=0.994/0.997</small></td><td><span class="badge badge-blue">r*=25 kỳ</span></td><td>Chục: <strong>12.01%</strong><br/>Đơn vị: <strong>11.21%</strong></td><td><strong>1.346%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>2x2</code>: <strong>53, 58, 63, 68</strong><br/><span class="pos">ROI (2x2): +9.48%</span><br/><small class="pos">Best 5-cfg: +10.58%</small></td><td><strong>+37.25</strong></td><td><span class="badge badge-green">Đài Dự Phòng (Hạng 2)</span></td></tr><tr><td><strong>#3</strong></td><td class="left"><strong>Long An</strong> (<code>XSLA</code>)</td><td>Miền Nam<br/><small>16:15 ICT</small></td><td>156 kỳ<br/><small>(&lt; 2026-10-24)</small></td><td><strong>14.44</strong><br/><small>P90=17.22 / P95=19.34</small></td><td>1.365<br/><small>H=0.998/0.997</small></td><td><span class="badge badge-blue">r*=25 kỳ</span></td><td>Chục: <strong>9.71%</strong><br/>Đơn vị: <strong>10.81%</strong></td><td><strong>1.050%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>2x2</code>: <strong>11, 19, 31, 39</strong><br/><span class="neg">ROI (2x2): -18.98%</span></td><td><strong>+0.26</strong></td><td><span class="badge badge-red">Đứng Ngoài / Nhiễu Trắng (0x)</span></td></tr><tr><td><strong>#4</strong></td><td class="left"><strong>Hậu Giang</strong> (<code>XSHG</code>)</td><td>Miền Nam<br/><small>16:15 ICT</small></td><td>156 kỳ<br/><small>(&lt; 2026-10-24)</small></td><td><strong>14.15</strong><br/><small>P90=17.22 / P95=19.34</small></td><td>1.146<br/><small>H=0.998/0.998</small></td><td><span class="badge badge-blue">r*=6 kỳ</span></td><td>Chục: <strong>10.91%</strong><br/>Đơn vị: <strong>10.01%</strong></td><td><strong>1.092%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>1x4</code>: <strong>84, 85, 86, 88</strong><br/><span class="pos">ROI (1x4): +1.82%</span></td><td><strong>+9.66</strong></td><td><span class="badge badge-red">Đứng Ngoài / Nhiễu Trắng (0x)</span></td></tr><tr><td><strong>#5</strong></td><td class="left"><strong>TP. Hồ Chí Minh</strong> (<code>XSHCM</code>)</td><td>Miền Nam<br/><small>16:15 ICT</small></td><td>312 kỳ<br/><small>(&lt; 2026-10-26)</small></td><td><strong>12.04</strong><br/><small>P90=17.65 / P95=20.00</small></td><td>0.541<br/><small>H=0.998/0.995</small></td><td><span class="badge badge-red">⚠️ r*=4 (Thay bóng)</span></td><td>Chục: <strong>10.26%</strong><br/>Đơn vị: <strong>10.26%</strong></td><td><strong>1.053%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>1x4</code>: <strong>20, 21, 25, 27</strong><br/><span class="neg">ROI (1x4): -10.33%</span></td><td><strong>+2.72</strong></td><td><span class="badge badge-red">Đứng Ngoài / Nhiễu Trắng (0x)</span></td></tr><tr><td><strong>#6</strong></td><td class="left"><strong>Đà Nẵng</strong> (<code>XSDNG</code>)</td><td>Miền Trung<br/><small>17:15 ICT</small></td><td>312 kỳ<br/><small>(&lt; 2026-10-28)</small></td><td><strong>10.07</strong><br/><small>P90=17.65 / P95=20.00</small></td><td>0.294<br/><small>H=0.999/0.999</small></td><td><span class="badge badge-blue">r*=15 kỳ</span></td><td>Chục: <strong>10.07%</strong><br/>Đơn vị: <strong>9.88%</strong></td><td><strong>0.995%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>2x2</code>: <strong>50, 59, 80, 89</strong><br/><span class="neg">ROI (2x2): -16.25%</span></td><td><strong>-4.56</strong></td><td><span class="badge badge-red">Đứng Ngoài / Nhiễu Trắng (0x)</span></td></tr><tr><td><strong>#7</strong></td><td class="left"><strong>Đắk Nông</strong> (<code>XSDNO</code>)</td><td>Miền Trung<br/><small>17:15 ICT</small></td><td>156 kỳ<br/><small>(&lt; 2026-10-24)</small></td><td><strong>9.93</strong><br/><small>P90=17.22 / P95=19.34</small></td><td>0.327<br/><small>H=0.999/0.998</small></td><td><span class="badge badge-blue">r*=15 kỳ</span></td><td>Chục: <strong>10.01%</strong><br/>Đơn vị: <strong>9.16%</strong></td><td><strong>0.917%</strong><br/><small>(Chuẩn ≥ 1.105%)</small></td><td><code>2x2</code>: <strong>02, 04, 92, 94</strong><br/><span class="neg">ROI (2x2): -11.32%</span><br/><small class="neg">Best 5-cfg: -9.01%</small></td><td><strong>-10.55</strong></td><td><span class="badge badge-red">Đứng Ngoài / Nhiễu Trắng (0x)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Giải trình định lượng chi tiết từng đài mở thưởng hôm nay:</h3>
+    <ul>
+      <li><strong>Quảng Ngãi (XSQNG):</strong> Đài Quảng Ngãi (XSQNG - Miền Trung) ĐÀI CHỦ LỰC HẠNG 1 (LỊCH CHƠI 5/2 — ƯU TIÊN ĐỘ LỆCH LỒNG CẦU): dẫn đầu độ lệch vật lý lồng cầu trong ngày với Chi2_max = 18.52 (so với ngưỡng Monte Carlo P90 = 17.22, P95 = 19.34) và BF10_max = 4.83; xác suất trúng đồng thời Hạng-1 hai lồng cầu đạt JointR1 = 1.038% (so với ngưỡng Selective Alpha 1.105%; Lồng Chục = 9.56%, Lồng Đơn Vị = 10.86% so với điểm hòa vốn 10.69%) và ROI thực nghiệm OOS 3 năm = -2.56%. Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 18.52 (ngưỡng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 4.83, độ dài chế độ BOCD r_t = 50 kỳ. Cấu hình tối ưu &lt; D: 4x1 (11, 31, 61, 91) | Điểm Ngọt 5 số sweet_5: (31, 34, 61, 64, 69).</li>
+<li><strong>Bình Phước (XSBP):</strong> Đài Bình Phước (XSBP - Miền Nam) ĐẠT HỘI TỤ MẠNH (PEAK ALPHA): xác suất trúng đồng thời Hạng-1 hai lồng cầu đạt JointR1 = 1.346% (&gt;= ngưỡng 1.105%; Lồng Hàng Chục = 12.01%, Lồng Hàng Đơn Vị = 11.21% so với điểm hòa vốn 10.69%) và hiệu suất kiểm định thực nghiệm OOS 3 năm đạt ROI = +10.58% (&gt; 0%). Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 18.39 (ngưỡng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 1.80, độ dài chế độ BOCD r_t = 25 kỳ. Cấu hình tối ưu &lt; D: 2x2 (53, 58, 63, 68) | Điểm Ngọt 5 số sweet_5: (53, 58, 63, 68, 69).</li>
+<li><strong>Long An (XSLA):</strong> Đài Long An (XSLA - Miền Nam) BÁO NGHỈ / BỎ QUA (Nhiễu trắng): JointR1 = 1.050% chưa đạt ngưỡng lọc 1.105% và ROI thực nghiệm OOS 3 năm = -18.98% &lt;= 0% (Lồng Chục = 9.71%, Lồng Đơn Vị = 10.81%). Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 14.44 (ngưỡng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 1.36, độ dài chế độ BOCD r_t = 25 kỳ. Cấu hình tối ưu &lt; D: 2x2 (11, 19, 31, 39) | Điểm Ngọt 5 số sweet_5: (11, 19, 30, 31, 39).</li>
+<li><strong>Hậu Giang (XSHG):</strong> Đài Hậu Giang (XSHG - Miền Nam) BÁO NGHỈ / BỎ QUA (Nhiễu trắng): JointR1 = 1.092% chưa đạt ngưỡng lọc 1.105% (Lồng Chục = 10.91%, Lồng Đơn Vị = 10.01%). Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 14.15 (ngưỡng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 1.15, độ dài chế độ BOCD r_t = 6 kỳ. Cấu hình tối ưu &lt; D: 1x4 (84, 85, 86, 88) | Điểm Ngọt 5 số sweet_5: (84, 85, 86, 94, 96).</li>
+<li><strong>TP. Hồ Chí Minh (XSHCM):</strong> Đài TP. Hồ Chí Minh (XSHCM - Miền Nam) BÁO NGHỈ / BỎ QUA (Nhiễu trắng): JointR1 = 1.053% chưa đạt ngưỡng lọc 1.105% và ROI thực nghiệm OOS 3 năm = -10.33% &lt;= 0% (Lồng Chục = 10.26%, Lồng Đơn Vị = 10.26%). Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 12.04 (ngưỡng Monte Carlo P90 = 17.65, P95 = 20.00), hệ số Bayes BF10_max = 0.54, độ dài chế độ BOCD r_t = 4 kỳ. Cấu hình tối ưu &lt; D: 1x4 (20, 21, 25, 27) | Điểm Ngọt 5 số sweet_5: (21, 27, 51, 81, 87). CẢNH BÁO BOCD: Độ dài chuỗi chế độ r_t = 4 &lt;= 4 kỳ báo hiệu lồng cầu vừa có dấu hiệu đổi chế độ / thay bóng gần đây; cần ưu tiên kỷ luật bảo toàn vốn.</li>
+<li><strong>Đà Nẵng (XSDNG):</strong> Đài Đà Nẵng (XSDNG - Miền Trung) BÁO NGHỈ / BỎ QUA (Nhiễu trắng): JointR1 = 0.995% chưa đạt ngưỡng lọc 1.105% và ROI thực nghiệm OOS 3 năm = -16.25% &lt;= 0% (Lồng Chục = 10.07%, Lồng Đơn Vị = 9.88%). Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 10.07 (ngưỡng Monte Carlo P90 = 17.65, P95 = 20.00), hệ số Bayes BF10_max = 0.29, độ dài chế độ BOCD r_t = 15 kỳ. Cấu hình tối ưu &lt; D: 2x2 (50, 59, 80, 89) | Điểm Ngọt 5 số sweet_5: (50, 59, 80, 87, 89).</li>
+<li><strong>Đắk Nông (XSDNO):</strong> Đài Đắk Nông (XSDNO - Miền Trung) BÁO NGHỈ / BỎ QUA (Nhiễu trắng): JointR1 = 0.917% chưa đạt ngưỡng lọc 1.105% và ROI thực nghiệm OOS 3 năm = -9.01% &lt;= 0% (Lồng Chục = 10.01%, Lồng Đơn Vị = 9.16%). Kiểm định đa khung W thuộc {15, 30, 60} ghi nhận Chi2_max = 9.93 (ngưỡng Monte Carlo P90 = 17.22, P95 = 19.34), hệ số Bayes BF10_max = 0.33, độ dài chế độ BOCD r_t = 15 kỳ. Cấu hình tối ưu &lt; D: 2x2 (02, 04, 92, 94) | Điểm Ngọt 5 số sweet_5: (02, 04, 64, 92, 94).</li>
+    </ul>
+  </section>
+  <section id="section-3-probabilities-and-configs" class="card">
+    <h2>Khu vực 3 — Bảng Phân Phối Xác Suất 10 Quả Bóng (0–9), Ma Trận Nhiệt 100 Số (00–99) &amp; Toàn Bộ Phương Án Ghép Số Ngọt (Quảng Ngãi - XSQNG)</h2>
+    <div class="grid-2">
+      <div>
+        <h3>Lồng Hàng Chục (<code>tens_cage</code>) — Phân phối hiệu chuẩn P_AI(0..9)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Quả Bóng</th>
+                <th>Hạng</th>
+                <th>P_AI Hiệu Chuẩn</th>
+                <th>P_BOCD</th>
+                <th>P_Seq (Markov-Gap)</th>
+                <th>So Với Mốc 10.69%</th>
+              </tr>
+            </thead>
+            <tbody><tr><td><strong>Bóng 0</strong></td><td>Hạng 6</td><td><strong>10.04%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.2%;"></div></div></td><td>10.28%</td><td>10.03%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 1</strong></td><td>Hạng 3</td><td><strong>10.06%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.3%;"></div></div></td><td>10.44%</td><td>9.96%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 2</strong></td><td>Hạng 8</td><td><strong>9.97%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:49.8%;"></div></div></td><td>9.75%</td><td>10.28%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 3</strong></td><td>Hạng 2</td><td><strong>10.08%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.4%;"></div></div></td><td>10.56%</td><td>9.90%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 4</strong></td><td>Hạng 7</td><td><strong>10.01%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.1%;"></div></div></td><td>10.11%</td><td>9.91%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 5</strong></td><td>Hạng 10</td><td><strong>9.73%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:48.7%;"></div></div></td><td>8.03%</td><td>10.04%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 6</strong></td><td>Hạng 1</td><td><strong>10.13%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.6%;"></div></div></td><td>10.94%</td><td>9.90%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 7</strong></td><td>Hạng 5</td><td><strong>10.05%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.2%;"></div></div></td><td>10.35%</td><td>9.92%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 8</strong></td><td>Hạng 9</td><td><strong>9.88%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:49.4%;"></div></div></td><td>9.15%</td><td>9.98%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 9</strong></td><td>Hạng 4</td><td><strong>10.05%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.3%;"></div></div></td><td>10.40%</td><td>10.07%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3>Lồng Hàng Đơn Vị (<code>units_cage</code>) — Phân phối hiệu chuẩn P_AI(0..9)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Quả Bóng</th>
+                <th>Hạng</th>
+                <th>P_AI Hiệu Chuẩn</th>
+                <th>P_BOCD</th>
+                <th>P_Seq (Markov-Gap)</th>
+                <th>So Với Mốc 10.69%</th>
+              </tr>
+            </thead>
+            <tbody><tr><td><strong>Bóng 0</strong></td><td>Hạng 7</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>9.64%</td><td>9.84%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 1</strong></td><td>Hạng 1</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>10.90%</td><td>10.06%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 2</strong></td><td>Hạng 9</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>9.31%</td><td>9.87%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 3</strong></td><td>Hạng 6</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>9.87%</td><td>10.04%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 4</strong></td><td>Hạng 2</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>10.73%</td><td>9.94%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 5</strong></td><td>Hạng 5</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>10.31%</td><td>9.89%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 6</strong></td><td>Hạng 8</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>9.59%</td><td>9.99%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 7</strong></td><td>Hạng 4</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>10.35%</td><td>9.98%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 8</strong></td><td>Hạng 10</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>8.77%</td><td>10.18%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr><tr><td><strong>Bóng 9</strong></td><td>Hạng 3</td><td><strong>10.00%</strong><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:50.0%;"></div></div></td><td>10.52%</td><td>10.21%</td><td><span class="badge badge-blue">Dưới 10.69%</span></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <h3>Ma Trận Nhiệt 10 × 10 Của 100 Con Số (00–99) — Đánh dấu nổi bật bộ số khuyến nghị (11, 31, 61, 91) &amp; Điểm Ngọt 5 số sweet_5 (31, 34, 61, 64, 69)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Chục \ ĐV</th><th>ĐV 0</th><th>ĐV 1</th><th>ĐV 2</th><th>ĐV 3</th><th>ĐV 4</th><th>ĐV 5</th><th>ĐV 6</th><th>ĐV 7</th><th>ĐV 8</th><th>ĐV 9</th></tr>
+        </thead>
+        <tbody><tr><th>Chục 0</th><td class="heatmap-cell"><div><strong>00</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>01</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>02</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>03</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>04</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>05</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>06</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>07</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>08</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>09</strong></div><small>1.00%</small></td></tr><tr><th>Chục 1</th><td class="heatmap-cell"><div><strong>10</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended"><div><strong>11</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>12</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>13</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>14</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>15</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>16</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>17</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>18</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>19</strong></div><small>1.01%</small></td></tr><tr><th>Chục 2</th><td class="heatmap-cell"><div><strong>20</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>21</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>22</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>23</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>24</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>25</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>26</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>27</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>28</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>29</strong></div><small>1.00%</small></td></tr><tr><th>Chục 3</th><td class="heatmap-cell"><div><strong>30</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended heatmap-sweet5"><div><strong>31</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>32</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>33</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended heatmap-sweet5 heatmap-sweet5-satellite"><div><strong>34</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>35</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>36</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>37</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>38</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>39</strong></div><small>1.01%</small></td></tr><tr><th>Chục 4</th><td class="heatmap-cell"><div><strong>40</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>41</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>42</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>43</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>44</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>45</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>46</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>47</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>48</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>49</strong></div><small>1.00%</small></td></tr><tr><th>Chục 5</th><td class="heatmap-cell"><div><strong>50</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>51</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>52</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>53</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>54</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>55</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>56</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>57</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>58</strong></div><small>0.97%</small></td><td class="heatmap-cell"><div><strong>59</strong></div><small>0.97%</small></td></tr><tr><th>Chục 6</th><td class="heatmap-cell"><div><strong>60</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended heatmap-sweet5"><div><strong>61</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>62</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>63</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended heatmap-sweet5 heatmap-sweet5-satellite"><div><strong>64</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>65</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>66</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>67</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>68</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended heatmap-sweet5 heatmap-sweet5-satellite"><div><strong>69</strong></div><small>1.01%</small></td></tr><tr><th>Chục 7</th><td class="heatmap-cell"><div><strong>70</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>71</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>72</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>73</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>74</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>75</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>76</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>77</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>78</strong></div><small>1.00%</small></td><td class="heatmap-cell"><div><strong>79</strong></div><small>1.00%</small></td></tr><tr><th>Chục 8</th><td class="heatmap-cell"><div><strong>80</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>81</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>82</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>83</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>84</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>85</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>86</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>87</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>88</strong></div><small>0.99%</small></td><td class="heatmap-cell"><div><strong>89</strong></div><small>0.99%</small></td></tr><tr><th>Chục 9</th><td class="heatmap-cell"><div><strong>90</strong></div><small>1.01%</small></td><td class="heatmap-cell heatmap-recommended"><div><strong>91</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>92</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>93</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>94</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>95</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>96</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>97</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>98</strong></div><small>1.01%</small></td><td class="heatmap-cell"><div><strong>99</strong></div><small>1.01%</small></td></tr></tbody>
+      </table>
+    </div>
+    <h3>Bảng So Sánh Trực Diện Toàn Bộ Phương Án Ghép Số Ngọt (Sweet-Spot Ticket Configs: 2x2, sweet_5, 1x4, 4x1, 3x3, Hybrid)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Mã Cấu Hình</th>
+            <th class="left">Quy Tắc Ghép Bóng</th>
+            <th>Số Lượng</th>
+            <th class="left">Danh Sách Bộ Số Cụ Thể</th>
+            <th>Vốn Chuẩn 1.0x</th>
+            <th>Xác Suất 1 Giải</th>
+            <th>Xác Suất Nổ ≥1 Nháy / 18 Giải</th>
+            <th>Số Lô / 30 Kỳ (vs Hòa Vốn)</th>
+            <th>Tỷ Lệ Ngày Thắng</th>
+            <th>OOS ROI 3 Năm</th>
+            <th>Vai Trò</th>
+          </tr>
+        </thead>
+        <tbody><tr><td><code>2x2</code></td><td class="left">Bộ 2x2 = 4 số (1.0đ/số)</td><td>4 số</td><td class="left"><strong>31, 34, 61, 64</strong></td><td>4.0đ<br/><small>(72,000 VNĐ / 72.000đ/ngày)</small></td><td>4.04%</td><td><strong>52.40%</strong><br/><small>(Lý thuyết: 52.04%)</small></td><td>21.89 / 24.69 lô</td><td>51.35%</td><td class="neg">-11.32%</td><td><span class="badge badge-blue">Tham Khảo</span></td></tr><tr><td><code>sweet_5</code></td><td class="left">Bộ 5 số Điểm Ngọt Bà Cô (4 số 2x2 + 1 số Vệ tinh đỉnh = 5 số, 1.0đ/số)</td><td>5 số</td><td class="left"><strong>31, 34, 61, 64, 69</strong><br/><small>Lõi 2x2: 31, 34, 61, 64 + Vệ tinh: <code>69</code></small></td><td>5.0đ<br/><small>(90,000 VNĐ / 90.000đ/ngày)</small></td><td>5.05%</td><td><strong>60.68%</strong><br/><small>(Lý thuyết: 60.28%)</small></td><td>30.00 / 30.86 lô</td><td>63.06%</td><td class="neg">-2.78%</td><td><span class="badge badge-green">🎯 Điểm Ngọt Bà Cô (5 Số)</span></td></tr><tr><td><code>1x4</code></td><td class="left">Bộ 1x4 = 4 số (1.0đ/số)</td><td>4 số</td><td class="left"><strong>61, 64, 67, 69</strong></td><td>4.0đ<br/><small>(72,000 VNĐ / 72.000đ/ngày)</small></td><td>4.05%</td><td><strong>52.49%</strong></td><td>19.19 / 24.69 lô</td><td>49.55%</td><td class="neg">-22.27%</td><td><span class="badge badge-blue">Tham Khảo</span></td></tr><tr><td><code>4x1</code></td><td class="left">Bộ 4x1 = 4 số (1.0đ/số)</td><td>4 số</td><td class="left"><strong>11, 31, 61, 91</strong></td><td>4.0đ<br/><small>(72,000 VNĐ / 72.000đ/ngày)</small></td><td>4.03%</td><td><strong>52.32%</strong></td><td>24.05 / 24.69 lô</td><td>53.15%</td><td class="neg">-2.56%</td><td><span class="badge badge-green">⭐ Khuyến Nghị Chính</span></td></tr><tr><td><code>3x3</code></td><td class="left">Bộ 3x3 = 9 số (1.0đ/số)</td><td>9 số</td><td class="left"><strong>11, 14, 19, 31, 34, 39, 61, 64, 69</strong></td><td>9.0đ<br/><small>(162,000 VNĐ / 162.000đ/ngày)</small></td><td>9.08%</td><td><strong>81.97%</strong></td><td>48.92 / 55.54 lô</td><td>48.65%</td><td class="neg">-11.93%</td><td><span class="badge badge-blue">Tham Khảo</span></td></tr><tr><td><code>core_2x2_sat_3x3</code></td><td class="left">Core 2x2 (1.0đ) + Satellite 3x3 (0.5đ)</td><td>9 số</td><td class="left"><strong>Lõi (1.0x):</strong> 31, 34, 61, 64<br/><small><strong>Vệ tinh (0.5x):</strong> 11, 14, 19, 39, 69</small></td><td>6.5đ<br/><small>(117,000 VNĐ / 117.000đ/ngày)</small></td><td>6.56%</td><td><strong>70.51%</strong></td><td>35.41 / 40.11 lô</td><td>41.44%</td><td class="neg">-11.74%</td><td><span class="badge badge-blue">Tham Khảo</span></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section id="section-4-capital-guidance" class="card">
+    <h2>Khu vực 4 — Bảng Tư Vấn Đi Vốn CPPI / House-Money &amp; Kỷ Luật Tiền Chợ Đều Tay 1.0x</h2>
+    <div class="callout good">
+      <strong>🛡️ Kỷ luật Bảo toàn 100% Vốn gốc (CPPI / House-Money Gate 5 &amp; Gate 6):</strong> Vốn gốc Quỹ Chuẩn bất khả xâm phạm <code>W0 = 1,000,000 VNĐ (1.000.000đ)</code>. Áp dụng <strong>Lịch Chơi 5/2 &amp; Điểm Ngọt Đều Tay 1.0x</strong>: Khóa cứng hệ số đi vốn tối đa <code>1.00x</code> vào 5 ngày chơi và <code>0.00x</code> vào 2 ngày nghỉ định kỳ; tuyệt đối không nâng hệ số hay gấp thếp dù Quỹ Lãi Ròng đang dương lớn.<br/>
+      <strong>Giải trình đi vốn hôm nay:</strong> Thực thi Kỷ Luật Tiền Chợ Đều Tay 1.00x (72,000 VNĐ/ngày cho 4 số, tuyệt đối không gấp thếp). Quỹ Lãi Ròng hiện đạt 4,839,500 VNĐ trên vốn gốc 1,000,000 VNĐ.
+    </div>
+    <h3>🛡️ Kỷ Luật Tiền Chợ Đều Tay 1.0x (So sánh Bộ 4 số 2x2 &amp; Bộ 5 số sweet_5 ở mức 1.0x và 2.0x — Tuyệt đối không gấp thếp)</h3>
+    <div class="callout warn">
+      <strong>Quy tắc Tiền Chợ Xác Suất (Lịch 5/2 — Tuyệt đối không gấp thếp):</strong> Đánh đều tay 5 ngày/tuần ở hệ số cố định <code>1.0x</code> (hoặc quy mô gia đình cố định <code>2.0x</code>), nghỉ định kỳ <code>0.0x</code> vào 2 ngày lồng cầu cân bằng nhất tuần. Hoàn vốn + cà phê ở ngày nổ 1 nháy; thu tiền chợ ở ngày nổ 2–3 nháy; <strong>tuyệt đối không gấp thếp sau ngày trượt</strong>.
+    </div>
+    <div class="table-wrap">
+      <table id="flat-1x-grocery-comparison-table">
+        <thead>
+          <tr>
+            <th class="left">Cấu Hình Điểm Ngọt &amp; Bộ Số</th>
+            <th>Số Lượng</th>
+            <th>Tỷ Lệ Ngày Có Lời (K ≥ 1)</th>
+            <th>Xác Suất Nổ ≥ 2 Nháy (Thu Tiền Chợ)</th>
+            <th>Vốn Ngày 1.0x (18.000đ/số)</th>
+            <th>Lãi Ròng 1 Nháy (1.0x)</th>
+            <th>Lãi Ròng 2 Nháy (1.0x)</th>
+            <th>Quy Mô Gia Đình 2.0x (36.000đ/số — Đều Tay)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left"><strong>Bộ 4 số Chuẩn (<code>2x2</code>)</strong><br/><small>Số: <code>31, 34, 61, 64</code></small></td>
+            <td>4 số</td>
+            <td><strong>52.04%</strong></td>
+            <td>16.13%</td>
+            <td><strong>72.000đ</strong><br/><small>(72,000 VNĐ)</small></td>
+            <td class="pos"><strong>+27.500đ</strong><br/><small>(+27,500 VNĐ)</small></td>
+            <td class="pos"><strong>+127.000đ</strong><br/><small>(+127,000 VNĐ)</small></td>
+            <td>Vốn <strong>144.000đ/ngày</strong> (144,000 VNĐ)<br/><small>1 nháy: <span class="pos">+55.000đ</span> (+55,000đ) • 2 nháy: <span class="pos"><strong>+254.000đ</strong></span> (+254,000đ)</small></td>
+          </tr>
+          <tr>
+            <td class="left"><strong>Bộ 5 số Điểm Ngọt Bà Cô (<code>sweet_5</code>)</strong><br/><small>Số: <code>31, 34, 61, 64, 69</code></small></td>
+            <td>5 số</td>
+            <td><strong>60.28%</strong></td>
+            <td>22.65%</td>
+            <td><strong>90.000đ</strong><br/><small>(90,000 VNĐ)</small></td>
+            <td class="pos"><strong>+9.500đ</strong><br/><small>(+9,500 VNĐ)</small></td>
+            <td class="pos"><strong>+109.000đ</strong><br/><small>(+109,000 VNĐ)</small></td>
+            <td>Vốn <strong>180.000đ/ngày</strong> (180,000 VNĐ)<br/><small>1 nháy: <span class="pos">+19.000đ</span> (+19,000đ) • 2 nháy: <span class="pos"><strong>+218.000đ</strong></span> (+218,000đ)</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Bảng Quy Đổi Tiền Cược Mẫu Theo 4 Mức Vốn Tham Chiếu</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="left">Quy Mô Vốn Gia Đình Mẫu</th>
+            <th>Tỷ Lệ Quy Mô (κ)</th>
+            <th>Hệ Số Hôm Nay (m_D)</th>
+            <th>Tiền Cược / 1 Số</th>
+            <th>Tổng Tiền Cược / Ngày</th>
+            <th>Tiền Thu / 1 Nháy Nổ</th>
+            <th>Lãi Ròng Nổ 1 Nháy</th>
+            <th>Lãi Ròng Nổ 2 Nháy</th>
+            <th>Lãi Ròng Nổ 3 Nháy</th>
+          </tr>
+        </thead>
+        <tbody><tr><td class="left"><strong>Vốn 500k</strong><br/><small>500,000 VNĐ (500.000đ)</small></td><td>0.50x</td><td><strong>1.00x</strong></td><td>9,000 VNĐ/số</td><td><strong>36,000 VNĐ</strong></td><td>49,750 VNĐ/nháy</td><td class="pos">+13,750 VNĐ</td><td class="pos">+63,500 VNĐ</td><td class="pos">+113,250 VNĐ</td></tr><tr><td class="left"><strong>Vốn 1 Triệu</strong><br/><small>1,000,000 VNĐ (1.000.000đ)</small></td><td>1.00x</td><td><strong>1.00x</strong></td><td>18,000 VNĐ/số</td><td><strong>72,000 VNĐ</strong></td><td>99,500 VNĐ/nháy</td><td class="pos">+27,500 VNĐ</td><td class="pos">+127,000 VNĐ</td><td class="pos">+226,500 VNĐ</td></tr><tr><td class="left"><strong>Vốn 2 Triệu</strong><br/><small>2,000,000 VNĐ (2.000.000đ)</small></td><td>2.00x</td><td><strong>1.00x</strong></td><td>36,000 VNĐ/số</td><td><strong>144,000 VNĐ</strong></td><td>199,000 VNĐ/nháy</td><td class="pos">+55,000 VNĐ</td><td class="pos">+254,000 VNĐ</td><td class="pos">+453,000 VNĐ</td></tr><tr><td class="left"><strong>Vốn 5 Triệu</strong><br/><small>5,000,000 VNĐ (5.000.000đ)</small></td><td>5.00x</td><td><strong>1.00x</strong></td><td>90,000 VNĐ/số</td><td><strong>360,000 VNĐ</strong></td><td>497,500 VNĐ/nháy</td><td class="pos">+137,500 VNĐ</td><td class="pos">+635,000 VNĐ</td><td class="pos">+1,132,500 VNĐ</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section id="section-5-pipeline-audit-and-ledger" class="card">
+    <h2>Khu vực 5 — Nhật Ký Thu Thập Dữ Liệu (Data Pipeline Audit), Biểu Đồ Đường Cong Vốn &amp; Sổ Cái Đối Soát Quỹ Chuẩn (1.000.000 VNĐ)</h2>
+    <div class="grid-4" style="margin-bottom: 16px;">
+      <div class="kpi-box">
+        <div class="kpi-label">Trạng Thái DataSchemaGate (35 Đài)</div>
+        <div class="kpi-value" style="color: var(--green);">PASS 100% (35/35 Đài)</div>
+        <div style="font-size: 0.84rem; color: var(--muted);">Failover dự phòng: 0 đài</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Số Dư Quỹ Chuẩn Hiện Tại (W_t)</div>
+        <div class="kpi-value">5,839,500 VNĐ</div>
+        <div style="font-size: 0.84rem; color: var(--muted);">Vốn gốc W0 = 1,000,000 VNĐ</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Quỹ Lãi Ròng House-Money (C_t)</div>
+        <div class="kpi-value" style="color: var(--green);">4,839,500 VNĐ</div>
+        <div style="font-size: 0.84rem; color: var(--muted);">Lãi/Lỗ lũy kế: +4,839,500 VNĐ</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Sụt Giảm Tối Đa (Max Drawdown)</div>
+        <div class="kpi-value">416,250 VNĐ</div>
+        <div style="font-size: 0.84rem; color: var(--muted);">Đánh 171 ngày • Nghỉ 133 ngày</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>🔍 Nhật ký kiểm định đường ống dữ liệu (2026-10-31T05:00:00+07:00):</strong> Đã kiểm định thực tế thư mục data/raw_all: 35/35 đài hợp lệ qua DataSchemaGate &amp; SHA-256 (kỳ trước gần nhất=2026-10-30). | Kỳ mở thưởng đã chốt gần nhất: <code>2026-10-30</code> | Chữ ký SHA-256 Sổ cái: <code>ccf6b8d2d9acd0b0a9855479...</code>
+    </div>
+    <h3>Biểu Đồ Đường Cong Vốn Lũy Kế Của Quỹ Chuẩn Tham Chiếu (1.000.000 VNĐ)</h3>
+    <svg viewBox="0 0 920 280" width="100%" height="280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Biểu đồ Đường cong Vốn Quỹ Chuẩn 1.000.000 VNĐ">
+  <rect x="0" y="0" width="920" height="280" rx="10" fill="#0b1324" stroke="#334155" stroke-width="1" />
+  <line x1="88" y1="213.8" x2="888" y2="213.8" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6,4" />
+  <text x="80" y="217.8" fill="#fbbf24" font-size="11" text-anchor="end">W0 1,000,000đ</text>
+  <polygon points="88.0,238.0 88.0,213.8 90.6,212.9 93.3,205.4 95.9,199.1 98.6,199.1 101.2,197.8 103.8,196.7 106.5,196.7 109.1,195.3 111.8,193.9 114.4,177.9 117.0,177.9 119.7,176.5 122.3,176.5 125.0,176.5 127.6,180.1 130.2,183.6 132.9,183.6 135.5,183.6 138.2,182.3 140.8,182.3 143.4,182.3 146.1,182.3 148.7,180.9 151.4,179.5 154.0,179.5 156.6,183.1 159.3,183.1 161.9,183.1 164.6,183.1 167.2,186.6 169.8,190.2 172.5,190.2 175.1,183.9 177.8,183.9 180.4,183.9 183.0,177.7 185.7,176.3 188.3,179.9 191.0,179.9 193.6,183.4 196.3,183.4 198.9,183.4 201.5,187.0 204.2,185.6 206.8,179.3 209.5,179.3 212.1,178.0 214.7,178.0 217.4,178.0 220.0,176.6 222.7,180.2 225.3,178.8 227.9,178.8 230.6,182.4 233.2,182.4 235.9,182.4 238.5,171.2 241.1,169.8 243.8,168.5 246.4,168.5 249.1,172.0 251.7,174.4 254.3,174.4 257.0,173.1 259.6,171.7 262.3,170.3 264.9,170.3 267.5,173.9 270.2,176.3 272.8,176.3 275.5,170.0 278.1,158.8 280.7,157.5 283.4,157.5 286.0,156.1 288.7,156.1 291.3,156.1 293.9,159.7 296.6,163.2 299.2,161.9 301.9,161.9 304.5,160.5 307.1,163.5 309.8,163.5 312.4,162.1 315.1,155.8 317.7,154.5 320.3,154.5 323.0,158.0 325.6,157.1 328.3,157.1 330.9,150.9 333.5,144.6 336.2,138.3 338.8,138.3 341.5,141.9 344.1,144.3 346.7,144.3 349.4,142.9 352.0,141.5 354.7,145.1 357.3,145.1 359.9,129.0 362.6,129.0 365.2,129.0 367.9,132.6 370.5,131.2 373.1,124.9 375.8,124.9 378.4,123.6 381.1,123.6 383.7,123.6 386.3,127.1 389.0,130.7 391.6,124.4 394.3,124.4 396.9,128.0 399.6,128.0 402.2,128.0 404.8,131.5 407.5,135.1 410.1,133.7 412.8,133.7 415.4,132.4 418.0,132.4 420.7,132.4 423.3,131.0 426.0,129.6 428.6,133.2 431.2,133.2 433.9,131.8 436.5,131.8 439.2,131.8 441.8,135.4 444.4,129.1 447.1,127.8 449.7,127.8 452.4,126.4 455.0,125.3 457.6,125.3 460.3,128.8 462.9,122.6 465.6,116.3 468.2,116.3 470.8,119.9 473.5,122.8 476.1,122.8 478.8,126.4 481.4,129.9 484.0,128.6 486.7,128.6 489.3,127.2 492.0,129.6 494.6,129.6 497.2,128.2 499.9,122.0 502.5,115.7 505.2,115.7 507.8,119.2 510.4,121.6 513.1,121.6 515.7,120.3 518.4,118.9 521.0,122.5 523.6,122.5 526.3,121.1 528.9,121.1 531.6,121.1 534.2,119.7 536.8,123.3 539.5,121.9 542.1,121.9 544.8,125.5 547.4,125.5 550.0,125.5 552.7,124.1 555.3,122.8 558.0,121.4 560.6,121.4 563.2,125.0 565.9,125.0 568.5,125.0 571.2,128.5 573.8,122.3 576.4,125.8 579.1,125.8 581.7,125.8 584.4,125.8 587.0,125.8 589.7,124.4 592.3,123.1 594.9,116.8 597.6,116.8 600.2,120.4 602.9,120.4 605.5,120.4 608.1,119.0 610.8,122.6 613.4,121.2 616.1,121.2 618.7,115.0 621.3,115.0 624.0,115.0 626.6,118.5 629.3,107.3 631.9,101.1 634.5,101.1 637.2,99.7 639.8,99.7 642.5,99.7 645.1,88.5 647.7,87.2 650.4,90.7 653.0,90.7 655.7,89.4 658.3,89.4 660.9,89.4 663.6,92.9 666.2,91.6 668.9,85.3 671.5,85.3 674.1,88.9 676.8,88.9 679.4,88.9 682.1,83.6 684.7,82.3 687.3,85.8 690.0,85.8 692.6,84.5 695.3,84.5 697.9,84.5 700.5,88.0 703.2,86.7 705.8,85.3 708.5,85.3 711.1,79.0 713.7,79.0 716.4,79.0 719.0,79.0 721.7,77.7 724.3,76.3 726.9,76.3 729.6,75.0 732.2,75.0 734.9,75.0 737.5,75.0 740.1,73.6 742.8,67.4 745.4,67.4 748.1,70.9 750.7,70.9 753.3,70.9 756.0,70.9 758.6,74.5 761.3,73.1 763.9,73.1 766.5,76.7 769.2,76.7 771.8,76.7 774.5,76.7 777.1,75.3 779.7,69.0 782.4,69.0 785.0,67.7 787.7,67.7 790.3,67.7 793.0,67.7 795.6,71.2 798.2,69.9 800.9,69.9 803.5,63.6 806.2,63.6 808.8,63.6 811.4,63.6 814.1,57.3 816.7,56.0 819.4,56.0 822.0,54.6 824.6,54.6 827.3,54.6 829.9,54.6 832.6,58.2 835.2,56.8 837.8,56.8 840.5,60.4 843.1,60.4 845.8,60.4 848.4,60.4 851.0,63.9 853.7,67.5 856.3,67.5 859.0,61.2 861.6,61.2 864.2,61.2 866.9,61.2 869.5,59.9 872.2,58.5 874.8,58.5 877.4,52.2 880.1,52.2 882.7,52.2 885.4,52.2 888.0,54.6 888.0,238.0" fill="rgba(34, 197, 94, 0.14)" />
+  <polyline fill="none" stroke="#22c55e" stroke-width="2.6" points="88.0,213.8 90.6,212.9 93.3,205.4 95.9,199.1 98.6,199.1 101.2,197.8 103.8,196.7 106.5,196.7 109.1,195.3 111.8,193.9 114.4,177.9 117.0,177.9 119.7,176.5 122.3,176.5 125.0,176.5 127.6,180.1 130.2,183.6 132.9,183.6 135.5,183.6 138.2,182.3 140.8,182.3 143.4,182.3 146.1,182.3 148.7,180.9 151.4,179.5 154.0,179.5 156.6,183.1 159.3,183.1 161.9,183.1 164.6,183.1 167.2,186.6 169.8,190.2 172.5,190.2 175.1,183.9 177.8,183.9 180.4,183.9 183.0,177.7 185.7,176.3 188.3,179.9 191.0,179.9 193.6,183.4 196.3,183.4 198.9,183.4 201.5,187.0 204.2,185.6 206.8,179.3 209.5,179.3 212.1,178.0 214.7,178.0 217.4,178.0 220.0,176.6 222.7,180.2 225.3,178.8 227.9,178.8 230.6,182.4 233.2,182.4 235.9,182.4 238.5,171.2 241.1,169.8 243.8,168.5 246.4,168.5 249.1,172.0 251.7,174.4 254.3,174.4 257.0,173.1 259.6,171.7 262.3,170.3 264.9,170.3 267.5,173.9 270.2,176.3 272.8,176.3 275.5,170.0 278.1,158.8 280.7,157.5 283.4,157.5 286.0,156.1 288.7,156.1 291.3,156.1 293.9,159.7 296.6,163.2 299.2,161.9 301.9,161.9 304.5,160.5 307.1,163.5 309.8,163.5 312.4,162.1 315.1,155.8 317.7,154.5 320.3,154.5 323.0,158.0 325.6,157.1 328.3,157.1 330.9,150.9 333.5,144.6 336.2,138.3 338.8,138.3 341.5,141.9 344.1,144.3 346.7,144.3 349.4,142.9 352.0,141.5 354.7,145.1 357.3,145.1 359.9,129.0 362.6,129.0 365.2,129.0 367.9,132.6 370.5,131.2 373.1,124.9 375.8,124.9 378.4,123.6 381.1,123.6 383.7,123.6 386.3,127.1 389.0,130.7 391.6,124.4 394.3,124.4 396.9,128.0 399.6,128.0 402.2,128.0 404.8,131.5 407.5,135.1 410.1,133.7 412.8,133.7 415.4,132.4 418.0,132.4 420.7,132.4 423.3,131.0 426.0,129.6 428.6,133.2 431.2,133.2 433.9,131.8 436.5,131.8 439.2,131.8 441.8,135.4 444.4,129.1 447.1,127.8 449.7,127.8 452.4,126.4 455.0,125.3 457.6,125.3 460.3,128.8 462.9,122.6 465.6,116.3 468.2,116.3 470.8,119.9 473.5,122.8 476.1,122.8 478.8,126.4 481.4,129.9 484.0,128.6 486.7,128.6 489.3,127.2 492.0,129.6 494.6,129.6 497.2,128.2 499.9,122.0 502.5,115.7 505.2,115.7 507.8,119.2 510.4,121.6 513.1,121.6 515.7,120.3 518.4,118.9 521.0,122.5 523.6,122.5 526.3,121.1 528.9,121.1 531.6,121.1 534.2,119.7 536.8,123.3 539.5,121.9 542.1,121.9 544.8,125.5 547.4,125.5 550.0,125.5 552.7,124.1 555.3,122.8 558.0,121.4 560.6,121.4 563.2,125.0 565.9,125.0 568.5,125.0 571.2,128.5 573.8,122.3 576.4,125.8 579.1,125.8 581.7,125.8 584.4,125.8 587.0,125.8 589.7,124.4 592.3,123.1 594.9,116.8 597.6,116.8 600.2,120.4 602.9,120.4 605.5,120.4 608.1,119.0 610.8,122.6 613.4,121.2 616.1,121.2 618.7,115.0 621.3,115.0 624.0,115.0 626.6,118.5 629.3,107.3 631.9,101.1 634.5,101.1 637.2,99.7 639.8,99.7 642.5,99.7 645.1,88.5 647.7,87.2 650.4,90.7 653.0,90.7 655.7,89.4 658.3,89.4 660.9,89.4 663.6,92.9 666.2,91.6 668.9,85.3 671.5,85.3 674.1,88.9 676.8,88.9 679.4,88.9 682.1,83.6 684.7,82.3 687.3,85.8 690.0,85.8 692.6,84.5 695.3,84.5 697.9,84.5 700.5,88.0 703.2,86.7 705.8,85.3 708.5,85.3 711.1,79.0 713.7,79.0 716.4,79.0 719.0,79.0 721.7,77.7 724.3,76.3 726.9,76.3 729.6,75.0 732.2,75.0 734.9,75.0 737.5,75.0 740.1,73.6 742.8,67.4 745.4,67.4 748.1,70.9 750.7,70.9 753.3,70.9 756.0,70.9 758.6,74.5 761.3,73.1 763.9,73.1 766.5,76.7 769.2,76.7 771.8,76.7 774.5,76.7 777.1,75.3 779.7,69.0 782.4,69.0 785.0,67.7 787.7,67.7 790.3,67.7 793.0,67.7 795.6,71.2 798.2,69.9 800.9,69.9 803.5,63.6 806.2,63.6 808.8,63.6 811.4,63.6 814.1,57.3 816.7,56.0 819.4,56.0 822.0,54.6 824.6,54.6 827.3,54.6 829.9,54.6 832.6,58.2 835.2,56.8 837.8,56.8 840.5,60.4 843.1,60.4 845.8,60.4 848.4,60.4 851.0,63.9 853.7,67.5 856.3,67.5 859.0,61.2 861.6,61.2 864.2,61.2 866.9,61.2 869.5,59.9 872.2,58.5 874.8,58.5 877.4,52.2 880.1,52.2 882.7,52.2 885.4,52.2 888.0,54.6" />
+  <circle cx="88.0" cy="213.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>Khởi tạo: 1,000,000 VNĐ</title></circle>
+  <circle cx="90.6" cy="212.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-01: 1,027,500 VNĐ</title></circle>
+  <circle cx="93.3" cy="205.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-02: 1,254,000 VNĐ</title></circle>
+  <circle cx="95.9" cy="199.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-03: 1,444,500 VNĐ</title></circle>
+  <circle cx="98.6" cy="199.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-04: 1,444,500 VNĐ</title></circle>
+  <circle cx="101.2" cy="197.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-05: 1,485,750 VNĐ</title></circle>
+  <circle cx="103.8" cy="196.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-06: 1,520,125 VNĐ</title></circle>
+  <circle cx="106.5" cy="196.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-07: 1,520,125 VNĐ</title></circle>
+  <circle cx="109.1" cy="195.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-08: 1,561,375 VNĐ</title></circle>
+  <circle cx="111.8" cy="193.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-09: 1,602,625 VNĐ</title></circle>
+  <circle cx="114.4" cy="177.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-10: 2,091,625 VNĐ</title></circle>
+  <circle cx="117.0" cy="177.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-11: 2,091,625 VNĐ</title></circle>
+  <circle cx="119.7" cy="176.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-12: 2,132,875 VNĐ</title></circle>
+  <circle cx="122.3" cy="176.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-13: 2,132,875 VNĐ</title></circle>
+  <circle cx="125.0" cy="176.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-14: 2,132,875 VNĐ</title></circle>
+  <circle cx="127.6" cy="180.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-15: 2,024,875 VNĐ</title></circle>
+  <circle cx="130.2" cy="183.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-16: 1,916,875 VNĐ</title></circle>
+  <circle cx="132.9" cy="183.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-17: 1,916,875 VNĐ</title></circle>
+  <circle cx="135.5" cy="183.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-18: 1,916,875 VNĐ</title></circle>
+  <circle cx="138.2" cy="182.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-19: 1,958,125 VNĐ</title></circle>
+  <circle cx="140.8" cy="182.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-20: 1,958,125 VNĐ</title></circle>
+  <circle cx="143.4" cy="182.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-21: 1,958,125 VNĐ</title></circle>
+  <circle cx="146.1" cy="182.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-22: 1,958,125 VNĐ</title></circle>
+  <circle cx="148.7" cy="180.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-23: 1,999,375 VNĐ</title></circle>
+  <circle cx="151.4" cy="179.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-24: 2,040,625 VNĐ</title></circle>
+  <circle cx="154.0" cy="179.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-25: 2,040,625 VNĐ</title></circle>
+  <circle cx="156.6" cy="183.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-26: 1,932,625 VNĐ</title></circle>
+  <circle cx="159.3" cy="183.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-27: 1,932,625 VNĐ</title></circle>
+  <circle cx="161.9" cy="183.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-28: 1,932,625 VNĐ</title></circle>
+  <circle cx="164.6" cy="183.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-29: 1,932,625 VNĐ</title></circle>
+  <circle cx="167.2" cy="186.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-30: 1,824,625 VNĐ</title></circle>
+  <circle cx="169.8" cy="190.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-01-31: 1,716,625 VNĐ</title></circle>
+  <circle cx="172.5" cy="190.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-01: 1,716,625 VNĐ</title></circle>
+  <circle cx="175.1" cy="183.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-02: 1,907,125 VNĐ</title></circle>
+  <circle cx="177.8" cy="183.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-03: 1,907,125 VNĐ</title></circle>
+  <circle cx="180.4" cy="183.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-04: 1,907,125 VNĐ</title></circle>
+  <circle cx="183.0" cy="177.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-05: 2,097,625 VNĐ</title></circle>
+  <circle cx="185.7" cy="176.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-06: 2,138,875 VNĐ</title></circle>
+  <circle cx="188.3" cy="179.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-07: 2,030,875 VNĐ</title></circle>
+  <circle cx="191.0" cy="179.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-08: 2,030,875 VNĐ</title></circle>
+  <circle cx="193.6" cy="183.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-09: 1,922,875 VNĐ</title></circle>
+  <circle cx="196.3" cy="183.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-10: 1,922,875 VNĐ</title></circle>
+  <circle cx="198.9" cy="183.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-11: 1,922,875 VNĐ</title></circle>
+  <circle cx="201.5" cy="187.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-12: 1,814,875 VNĐ</title></circle>
+  <circle cx="204.2" cy="185.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-13: 1,856,125 VNĐ</title></circle>
+  <circle cx="206.8" cy="179.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-14: 2,046,625 VNĐ</title></circle>
+  <circle cx="209.5" cy="179.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-15: 2,046,625 VNĐ</title></circle>
+  <circle cx="212.1" cy="178.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-16: 2,087,875 VNĐ</title></circle>
+  <circle cx="214.7" cy="178.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-17: 2,087,875 VNĐ</title></circle>
+  <circle cx="217.4" cy="178.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-18: 2,087,875 VNĐ</title></circle>
+  <circle cx="220.0" cy="176.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-19: 2,129,125 VNĐ</title></circle>
+  <circle cx="222.7" cy="180.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-20: 2,021,125 VNĐ</title></circle>
+  <circle cx="225.3" cy="178.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-21: 2,062,375 VNĐ</title></circle>
+  <circle cx="227.9" cy="178.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-22: 2,062,375 VNĐ</title></circle>
+  <circle cx="230.6" cy="182.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-23: 1,954,375 VNĐ</title></circle>
+  <circle cx="233.2" cy="182.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-24: 1,954,375 VNĐ</title></circle>
+  <circle cx="235.9" cy="182.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-25: 1,954,375 VNĐ</title></circle>
+  <circle cx="238.5" cy="171.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-26: 2,294,125 VNĐ</title></circle>
+  <circle cx="241.1" cy="169.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-27: 2,335,375 VNĐ</title></circle>
+  <circle cx="243.8" cy="168.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-02-28: 2,376,625 VNĐ</title></circle>
+  <circle cx="246.4" cy="168.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-01: 2,376,625 VNĐ</title></circle>
+  <circle cx="249.1" cy="172.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-02: 2,268,625 VNĐ</title></circle>
+  <circle cx="251.7" cy="174.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-03: 2,196,625 VNĐ</title></circle>
+  <circle cx="254.3" cy="174.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-04: 2,196,625 VNĐ</title></circle>
+  <circle cx="257.0" cy="173.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-05: 2,237,875 VNĐ</title></circle>
+  <circle cx="259.6" cy="171.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-06: 2,279,125 VNĐ</title></circle>
+  <circle cx="262.3" cy="170.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-07: 2,320,375 VNĐ</title></circle>
+  <circle cx="264.9" cy="170.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-08: 2,320,375 VNĐ</title></circle>
+  <circle cx="267.5" cy="173.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-09: 2,212,375 VNĐ</title></circle>
+  <circle cx="270.2" cy="176.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-10: 2,140,375 VNĐ</title></circle>
+  <circle cx="272.8" cy="176.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-11: 2,140,375 VNĐ</title></circle>
+  <circle cx="275.5" cy="170.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-12: 2,330,875 VNĐ</title></circle>
+  <circle cx="278.1" cy="158.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-13: 2,670,625 VNĐ</title></circle>
+  <circle cx="280.7" cy="157.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-14: 2,711,875 VNĐ</title></circle>
+  <circle cx="283.4" cy="157.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-15: 2,711,875 VNĐ</title></circle>
+  <circle cx="286.0" cy="156.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-16: 2,753,125 VNĐ</title></circle>
+  <circle cx="288.7" cy="156.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-17: 2,753,125 VNĐ</title></circle>
+  <circle cx="291.3" cy="156.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-18: 2,753,125 VNĐ</title></circle>
+  <circle cx="293.9" cy="159.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-19: 2,645,125 VNĐ</title></circle>
+  <circle cx="296.6" cy="163.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-20: 2,537,125 VNĐ</title></circle>
+  <circle cx="299.2" cy="161.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-21: 2,578,375 VNĐ</title></circle>
+  <circle cx="301.9" cy="161.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-22: 2,578,375 VNĐ</title></circle>
+  <circle cx="304.5" cy="160.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-23: 2,619,625 VNĐ</title></circle>
+  <circle cx="307.1" cy="163.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-24: 2,529,625 VNĐ</title></circle>
+  <circle cx="309.8" cy="163.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-25: 2,529,625 VNĐ</title></circle>
+  <circle cx="312.4" cy="162.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-26: 2,570,875 VNĐ</title></circle>
+  <circle cx="315.1" cy="155.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-27: 2,761,375 VNĐ</title></circle>
+  <circle cx="317.7" cy="154.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-28: 2,802,625 VNĐ</title></circle>
+  <circle cx="320.3" cy="154.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-29: 2,802,625 VNĐ</title></circle>
+  <circle cx="323.0" cy="158.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-30: 2,694,625 VNĐ</title></circle>
+  <circle cx="325.6" cy="157.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-03-31: 2,722,125 VNĐ</title></circle>
+  <circle cx="328.3" cy="157.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-01: 2,722,125 VNĐ</title></circle>
+  <circle cx="330.9" cy="150.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-02: 2,912,625 VNĐ</title></circle>
+  <circle cx="333.5" cy="144.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-03: 3,103,125 VNĐ</title></circle>
+  <circle cx="336.2" cy="138.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-04: 3,293,625 VNĐ</title></circle>
+  <circle cx="338.8" cy="138.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-05: 3,293,625 VNĐ</title></circle>
+  <circle cx="341.5" cy="141.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-06: 3,185,625 VNĐ</title></circle>
+  <circle cx="344.1" cy="144.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-07: 3,113,625 VNĐ</title></circle>
+  <circle cx="346.7" cy="144.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-08: 3,113,625 VNĐ</title></circle>
+  <circle cx="349.4" cy="142.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-09: 3,154,875 VNĐ</title></circle>
+  <circle cx="352.0" cy="141.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-10: 3,196,125 VNĐ</title></circle>
+  <circle cx="354.7" cy="145.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-11: 3,088,125 VNĐ</title></circle>
+  <circle cx="357.3" cy="145.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-12: 3,088,125 VNĐ</title></circle>
+  <circle cx="359.9" cy="129.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-13: 3,577,125 VNĐ</title></circle>
+  <circle cx="362.6" cy="129.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-14: 3,577,125 VNĐ</title></circle>
+  <circle cx="365.2" cy="129.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-15: 3,577,125 VNĐ</title></circle>
+  <circle cx="367.9" cy="132.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-16: 3,469,125 VNĐ</title></circle>
+  <circle cx="370.5" cy="131.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-17: 3,510,375 VNĐ</title></circle>
+  <circle cx="373.1" cy="124.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-18: 3,700,875 VNĐ</title></circle>
+  <circle cx="375.8" cy="124.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-19: 3,700,875 VNĐ</title></circle>
+  <circle cx="378.4" cy="123.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-20: 3,742,125 VNĐ</title></circle>
+  <circle cx="381.1" cy="123.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-21: 3,742,125 VNĐ</title></circle>
+  <circle cx="383.7" cy="123.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-22: 3,742,125 VNĐ</title></circle>
+  <circle cx="386.3" cy="127.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-23: 3,634,125 VNĐ</title></circle>
+  <circle cx="389.0" cy="130.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-24: 3,526,125 VNĐ</title></circle>
+  <circle cx="391.6" cy="124.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-25: 3,716,625 VNĐ</title></circle>
+  <circle cx="394.3" cy="124.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-26: 3,716,625 VNĐ</title></circle>
+  <circle cx="396.9" cy="128.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-27: 3,608,625 VNĐ</title></circle>
+  <circle cx="399.6" cy="128.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-28: 3,608,625 VNĐ</title></circle>
+  <circle cx="402.2" cy="128.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-29: 3,608,625 VNĐ</title></circle>
+  <circle cx="404.8" cy="131.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-04-30: 3,500,625 VNĐ</title></circle>
+  <circle cx="407.5" cy="135.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-01: 3,392,625 VNĐ</title></circle>
+  <circle cx="410.1" cy="133.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-02: 3,433,875 VNĐ</title></circle>
+  <circle cx="412.8" cy="133.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-03: 3,433,875 VNĐ</title></circle>
+  <circle cx="415.4" cy="132.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-04: 3,475,125 VNĐ</title></circle>
+  <circle cx="418.0" cy="132.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-05: 3,475,125 VNĐ</title></circle>
+  <circle cx="420.7" cy="132.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-06: 3,475,125 VNĐ</title></circle>
+  <circle cx="423.3" cy="131.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-07: 3,516,375 VNĐ</title></circle>
+  <circle cx="426.0" cy="129.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-08: 3,557,625 VNĐ</title></circle>
+  <circle cx="428.6" cy="133.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-09: 3,449,625 VNĐ</title></circle>
+  <circle cx="431.2" cy="133.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-10: 3,449,625 VNĐ</title></circle>
+  <circle cx="433.9" cy="131.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-11: 3,490,875 VNĐ</title></circle>
+  <circle cx="436.5" cy="131.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-12: 3,490,875 VNĐ</title></circle>
+  <circle cx="439.2" cy="131.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-13: 3,490,875 VNĐ</title></circle>
+  <circle cx="441.8" cy="135.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-14: 3,382,875 VNĐ</title></circle>
+  <circle cx="444.4" cy="129.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-15: 3,573,375 VNĐ</title></circle>
+  <circle cx="447.1" cy="127.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-16: 3,614,625 VNĐ</title></circle>
+  <circle cx="449.7" cy="127.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-17: 3,614,625 VNĐ</title></circle>
+  <circle cx="452.4" cy="126.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-18: 3,655,875 VNĐ</title></circle>
+  <circle cx="455.0" cy="125.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-19: 3,690,250 VNĐ</title></circle>
+  <circle cx="457.6" cy="125.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-20: 3,690,250 VNĐ</title></circle>
+  <circle cx="460.3" cy="128.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-21: 3,582,250 VNĐ</title></circle>
+  <circle cx="462.9" cy="122.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-22: 3,772,750 VNĐ</title></circle>
+  <circle cx="465.6" cy="116.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-23: 3,963,250 VNĐ</title></circle>
+  <circle cx="468.2" cy="116.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-24: 3,963,250 VNĐ</title></circle>
+  <circle cx="470.8" cy="119.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-25: 3,855,250 VNĐ</title></circle>
+  <circle cx="473.5" cy="122.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-26: 3,765,250 VNĐ</title></circle>
+  <circle cx="476.1" cy="122.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-27: 3,765,250 VNĐ</title></circle>
+  <circle cx="478.8" cy="126.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-28: 3,657,250 VNĐ</title></circle>
+  <circle cx="481.4" cy="129.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-29: 3,549,250 VNĐ</title></circle>
+  <circle cx="484.0" cy="128.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-30: 3,590,500 VNĐ</title></circle>
+  <circle cx="486.7" cy="128.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-05-31: 3,590,500 VNĐ</title></circle>
+  <circle cx="489.3" cy="127.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-01: 3,631,750 VNĐ</title></circle>
+  <circle cx="492.0" cy="129.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-02: 3,559,750 VNĐ</title></circle>
+  <circle cx="494.6" cy="129.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-03: 3,559,750 VNĐ</title></circle>
+  <circle cx="497.2" cy="128.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-04: 3,601,000 VNĐ</title></circle>
+  <circle cx="499.9" cy="122.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-05: 3,791,500 VNĐ</title></circle>
+  <circle cx="502.5" cy="115.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-06: 3,982,000 VNĐ</title></circle>
+  <circle cx="505.2" cy="115.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-07: 3,982,000 VNĐ</title></circle>
+  <circle cx="507.8" cy="119.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-08: 3,874,000 VNĐ</title></circle>
+  <circle cx="510.4" cy="121.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-09: 3,802,000 VNĐ</title></circle>
+  <circle cx="513.1" cy="121.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-10: 3,802,000 VNĐ</title></circle>
+  <circle cx="515.7" cy="120.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-11: 3,843,250 VNĐ</title></circle>
+  <circle cx="518.4" cy="118.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-12: 3,884,500 VNĐ</title></circle>
+  <circle cx="521.0" cy="122.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-13: 3,776,500 VNĐ</title></circle>
+  <circle cx="523.6" cy="122.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-14: 3,776,500 VNĐ</title></circle>
+  <circle cx="526.3" cy="121.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-15: 3,817,750 VNĐ</title></circle>
+  <circle cx="528.9" cy="121.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-16: 3,817,750 VNĐ</title></circle>
+  <circle cx="531.6" cy="121.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-17: 3,817,750 VNĐ</title></circle>
+  <circle cx="534.2" cy="119.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-18: 3,859,000 VNĐ</title></circle>
+  <circle cx="536.8" cy="123.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-19: 3,751,000 VNĐ</title></circle>
+  <circle cx="539.5" cy="121.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-20: 3,792,250 VNĐ</title></circle>
+  <circle cx="542.1" cy="121.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-21: 3,792,250 VNĐ</title></circle>
+  <circle cx="544.8" cy="125.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-22: 3,684,250 VNĐ</title></circle>
+  <circle cx="547.4" cy="125.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-23: 3,684,250 VNĐ</title></circle>
+  <circle cx="550.0" cy="125.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-24: 3,684,250 VNĐ</title></circle>
+  <circle cx="552.7" cy="124.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-25: 3,725,500 VNĐ</title></circle>
+  <circle cx="555.3" cy="122.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-26: 3,766,750 VNĐ</title></circle>
+  <circle cx="558.0" cy="121.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-27: 3,808,000 VNĐ</title></circle>
+  <circle cx="560.6" cy="121.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-28: 3,808,000 VNĐ</title></circle>
+  <circle cx="563.2" cy="125.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-29: 3,700,000 VNĐ</title></circle>
+  <circle cx="565.9" cy="125.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-06-30: 3,700,000 VNĐ</title></circle>
+  <circle cx="568.5" cy="125.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-01: 3,700,000 VNĐ</title></circle>
+  <circle cx="571.2" cy="128.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-02: 3,592,000 VNĐ</title></circle>
+  <circle cx="573.8" cy="122.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-03: 3,782,500 VNĐ</title></circle>
+  <circle cx="576.4" cy="125.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-04: 3,674,500 VNĐ</title></circle>
+  <circle cx="579.1" cy="125.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-05: 3,674,500 VNĐ</title></circle>
+  <circle cx="581.7" cy="125.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-06: 3,674,500 VNĐ</title></circle>
+  <circle cx="584.4" cy="125.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-07: 3,674,500 VNĐ</title></circle>
+  <circle cx="587.0" cy="125.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-08: 3,674,500 VNĐ</title></circle>
+  <circle cx="589.7" cy="124.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-09: 3,715,750 VNĐ</title></circle>
+  <circle cx="592.3" cy="123.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-10: 3,757,000 VNĐ</title></circle>
+  <circle cx="594.9" cy="116.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-11: 3,947,500 VNĐ</title></circle>
+  <circle cx="597.6" cy="116.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-12: 3,947,500 VNĐ</title></circle>
+  <circle cx="600.2" cy="120.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-13: 3,839,500 VNĐ</title></circle>
+  <circle cx="602.9" cy="120.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-14: 3,839,500 VNĐ</title></circle>
+  <circle cx="605.5" cy="120.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-15: 3,839,500 VNĐ</title></circle>
+  <circle cx="608.1" cy="119.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-16: 3,880,750 VNĐ</title></circle>
+  <circle cx="610.8" cy="122.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-17: 3,772,750 VNĐ</title></circle>
+  <circle cx="613.4" cy="121.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-18: 3,814,000 VNĐ</title></circle>
+  <circle cx="616.1" cy="121.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-19: 3,814,000 VNĐ</title></circle>
+  <circle cx="618.7" cy="115.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-20: 4,004,500 VNĐ</title></circle>
+  <circle cx="621.3" cy="115.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-21: 4,004,500 VNĐ</title></circle>
+  <circle cx="624.0" cy="115.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-22: 4,004,500 VNĐ</title></circle>
+  <circle cx="626.6" cy="118.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-23: 3,896,500 VNĐ</title></circle>
+  <circle cx="629.3" cy="107.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-24: 4,236,250 VNĐ</title></circle>
+  <circle cx="631.9" cy="101.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-25: 4,426,750 VNĐ</title></circle>
+  <circle cx="634.5" cy="101.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-26: 4,426,750 VNĐ</title></circle>
+  <circle cx="637.2" cy="99.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-27: 4,468,000 VNĐ</title></circle>
+  <circle cx="639.8" cy="99.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-28: 4,468,000 VNĐ</title></circle>
+  <circle cx="642.5" cy="99.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-29: 4,468,000 VNĐ</title></circle>
+  <circle cx="645.1" cy="88.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-30: 4,807,750 VNĐ</title></circle>
+  <circle cx="647.7" cy="87.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-07-31: 4,849,000 VNĐ</title></circle>
+  <circle cx="650.4" cy="90.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-01: 4,741,000 VNĐ</title></circle>
+  <circle cx="653.0" cy="90.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-02: 4,741,000 VNĐ</title></circle>
+  <circle cx="655.7" cy="89.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-03: 4,782,250 VNĐ</title></circle>
+  <circle cx="658.3" cy="89.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-04: 4,782,250 VNĐ</title></circle>
+  <circle cx="660.9" cy="89.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-05: 4,782,250 VNĐ</title></circle>
+  <circle cx="663.6" cy="92.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-06: 4,674,250 VNĐ</title></circle>
+  <circle cx="666.2" cy="91.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-07: 4,715,500 VNĐ</title></circle>
+  <circle cx="668.9" cy="85.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-08: 4,906,000 VNĐ</title></circle>
+  <circle cx="671.5" cy="85.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-09: 4,906,000 VNĐ</title></circle>
+  <circle cx="674.1" cy="88.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-10: 4,798,000 VNĐ</title></circle>
+  <circle cx="676.8" cy="88.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-11: 4,798,000 VNĐ</title></circle>
+  <circle cx="679.4" cy="88.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-12: 4,798,000 VNĐ</title></circle>
+  <circle cx="682.1" cy="83.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-13: 4,956,750 VNĐ</title></circle>
+  <circle cx="684.7" cy="82.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-14: 4,998,000 VNĐ</title></circle>
+  <circle cx="687.3" cy="85.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-15: 4,890,000 VNĐ</title></circle>
+  <circle cx="690.0" cy="85.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-16: 4,890,000 VNĐ</title></circle>
+  <circle cx="692.6" cy="84.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-17: 4,931,250 VNĐ</title></circle>
+  <circle cx="695.3" cy="84.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-18: 4,931,250 VNĐ</title></circle>
+  <circle cx="697.9" cy="84.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-19: 4,931,250 VNĐ</title></circle>
+  <circle cx="700.5" cy="88.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-20: 4,823,250 VNĐ</title></circle>
+  <circle cx="703.2" cy="86.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-21: 4,864,500 VNĐ</title></circle>
+  <circle cx="705.8" cy="85.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-22: 4,905,750 VNĐ</title></circle>
+  <circle cx="708.5" cy="85.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-23: 4,905,750 VNĐ</title></circle>
+  <circle cx="711.1" cy="79.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-24: 5,096,250 VNĐ</title></circle>
+  <circle cx="713.7" cy="79.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-25: 5,096,250 VNĐ</title></circle>
+  <circle cx="716.4" cy="79.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-26: 5,096,250 VNĐ</title></circle>
+  <circle cx="719.0" cy="79.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-27: 5,096,250 VNĐ</title></circle>
+  <circle cx="721.7" cy="77.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-28: 5,137,500 VNĐ</title></circle>
+  <circle cx="724.3" cy="76.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-29: 5,178,750 VNĐ</title></circle>
+  <circle cx="726.9" cy="76.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-30: 5,178,750 VNĐ</title></circle>
+  <circle cx="729.6" cy="75.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-08-31: 5,220,000 VNĐ</title></circle>
+  <circle cx="732.2" cy="75.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-01: 5,220,000 VNĐ</title></circle>
+  <circle cx="734.9" cy="75.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-02: 5,220,000 VNĐ</title></circle>
+  <circle cx="737.5" cy="75.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-03: 5,220,000 VNĐ</title></circle>
+  <circle cx="740.1" cy="73.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-04: 5,261,250 VNĐ</title></circle>
+  <circle cx="742.8" cy="67.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-05: 5,451,750 VNĐ</title></circle>
+  <circle cx="745.4" cy="67.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-06: 5,451,750 VNĐ</title></circle>
+  <circle cx="748.1" cy="70.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-07: 5,343,750 VNĐ</title></circle>
+  <circle cx="750.7" cy="70.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-08: 5,343,750 VNĐ</title></circle>
+  <circle cx="753.3" cy="70.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-09: 5,343,750 VNĐ</title></circle>
+  <circle cx="756.0" cy="70.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-10: 5,343,750 VNĐ</title></circle>
+  <circle cx="758.6" cy="74.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-11: 5,235,750 VNĐ</title></circle>
+  <circle cx="761.3" cy="73.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-12: 5,277,000 VNĐ</title></circle>
+  <circle cx="763.9" cy="73.1" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-13: 5,277,000 VNĐ</title></circle>
+  <circle cx="766.5" cy="76.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-14: 5,169,000 VNĐ</title></circle>
+  <circle cx="769.2" cy="76.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-15: 5,169,000 VNĐ</title></circle>
+  <circle cx="771.8" cy="76.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-16: 5,169,000 VNĐ</title></circle>
+  <circle cx="774.5" cy="76.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-17: 5,169,000 VNĐ</title></circle>
+  <circle cx="777.1" cy="75.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-18: 5,210,250 VNĐ</title></circle>
+  <circle cx="779.7" cy="69.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-19: 5,400,750 VNĐ</title></circle>
+  <circle cx="782.4" cy="69.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-20: 5,400,750 VNĐ</title></circle>
+  <circle cx="785.0" cy="67.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-21: 5,442,000 VNĐ</title></circle>
+  <circle cx="787.7" cy="67.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-22: 5,442,000 VNĐ</title></circle>
+  <circle cx="790.3" cy="67.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-23: 5,442,000 VNĐ</title></circle>
+  <circle cx="793.0" cy="67.7" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-24: 5,442,000 VNĐ</title></circle>
+  <circle cx="795.6" cy="71.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-25: 5,334,000 VNĐ</title></circle>
+  <circle cx="798.2" cy="69.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-26: 5,375,250 VNĐ</title></circle>
+  <circle cx="800.9" cy="69.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-27: 5,375,250 VNĐ</title></circle>
+  <circle cx="803.5" cy="63.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-28: 5,565,750 VNĐ</title></circle>
+  <circle cx="806.2" cy="63.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-29: 5,565,750 VNĐ</title></circle>
+  <circle cx="808.8" cy="63.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-09-30: 5,565,750 VNĐ</title></circle>
+  <circle cx="811.4" cy="63.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-01: 5,565,750 VNĐ</title></circle>
+  <circle cx="814.1" cy="57.3" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-02: 5,756,250 VNĐ</title></circle>
+  <circle cx="816.7" cy="56.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-03: 5,797,500 VNĐ</title></circle>
+  <circle cx="819.4" cy="56.0" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-04: 5,797,500 VNĐ</title></circle>
+  <circle cx="822.0" cy="54.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-05: 5,838,750 VNĐ</title></circle>
+  <circle cx="824.6" cy="54.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-06: 5,838,750 VNĐ</title></circle>
+  <circle cx="827.3" cy="54.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-07: 5,838,750 VNĐ</title></circle>
+  <circle cx="829.9" cy="54.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-08: 5,838,750 VNĐ</title></circle>
+  <circle cx="832.6" cy="58.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-09: 5,730,750 VNĐ</title></circle>
+  <circle cx="835.2" cy="56.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-10: 5,772,000 VNĐ</title></circle>
+  <circle cx="837.8" cy="56.8" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-11: 5,772,000 VNĐ</title></circle>
+  <circle cx="840.5" cy="60.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-12: 5,664,000 VNĐ</title></circle>
+  <circle cx="843.1" cy="60.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-13: 5,664,000 VNĐ</title></circle>
+  <circle cx="845.8" cy="60.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-14: 5,664,000 VNĐ</title></circle>
+  <circle cx="848.4" cy="60.4" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-15: 5,664,000 VNĐ</title></circle>
+  <circle cx="851.0" cy="63.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-16: 5,556,000 VNĐ</title></circle>
+  <circle cx="853.7" cy="67.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-17: 5,448,000 VNĐ</title></circle>
+  <circle cx="856.3" cy="67.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-18: 5,448,000 VNĐ</title></circle>
+  <circle cx="859.0" cy="61.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-19: 5,638,500 VNĐ</title></circle>
+  <circle cx="861.6" cy="61.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-20: 5,638,500 VNĐ</title></circle>
+  <circle cx="864.2" cy="61.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-21: 5,638,500 VNĐ</title></circle>
+  <circle cx="866.9" cy="61.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-22: 5,638,500 VNĐ</title></circle>
+  <circle cx="869.5" cy="59.9" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-23: 5,679,750 VNĐ</title></circle>
+  <circle cx="872.2" cy="58.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-24: 5,721,000 VNĐ</title></circle>
+  <circle cx="874.8" cy="58.5" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-25: 5,721,000 VNĐ</title></circle>
+  <circle cx="877.4" cy="52.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-26: 5,911,500 VNĐ</title></circle>
+  <circle cx="880.1" cy="52.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-27: 5,911,500 VNĐ</title></circle>
+  <circle cx="882.7" cy="52.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-28: 5,911,500 VNĐ</title></circle>
+  <circle cx="885.4" cy="52.2" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-29: 5,911,500 VNĐ</title></circle>
+  <circle cx="888.0" cy="54.6" r="4" fill="#22c55e" stroke="#0f172a" stroke-width="1.5"><title>2026-10-30: 5,839,500 VNĐ</title></circle>
+  <text x="888.0" y="44.6" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">2026-10-30: 5,839,500 VNĐ</text>
+</svg>
+    <h3>Bảng Sao Kê Sổ Cái Đối Soát Quỹ Chuẩn (1.000.000 VNĐ)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ngày Quay</th>
+            <th>Trạng Thái</th>
+            <th>Phán Quyết</th>
+            <th class="left">Đài Khuyến Nghị</th>
+            <th>Cấu Hình &amp; Bộ Số</th>
+            <th>Hệ Số</th>
+            <th>Tiền Cược</th>
+            <th>Kết Quả Nổ (18 Giải)</th>
+            <th>Tiền Thu</th>
+            <th>Lãi / Lỗ Ròng</th>
+            <th>Số Dư Sau Đối Soát</th>
+            <th>Quỹ Lãi Ròng</th>
+          </tr>
+        </thead>
+        <tbody><tr><td><code>2026-10-31</code><br/><small>Thứ 7</small></td><td><span class="badge badge-amber">PENDING</span></td><td>PLAY_STANDARD</td><td class="left">Quảng Ngãi (<code>XSQNG</code>)</td><td><code>4x1</code>: 11, 31, 61, 91</td><td>1.00x</td><td>72,000đ</td><td>- nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,839,500đ</strong></td><td>4,839,500đ</td></tr><tr><td><code>2026-10-30</code><br/><small>Thứ 6</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_STANDARD</td><td class="left">Vĩnh Long (<code>XSVL</code>)</td><td><code>1x4</code>: 51, 54, 56, 58</td><td>1.00x</td><td>72,000đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="neg">-72,000đ</td><td><strong>5,839,500đ</strong></td><td>4,839,500đ</td></tr><tr><td><code>2026-10-29</code><br/><small>Thứ 5</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Tây Ninh - <code>XSTN</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>1x4</code>: 80, 85, 87, 88</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,911,500đ</strong></td><td>4,911,500đ</td></tr><tr><td><code>2026-10-28</code><br/><small>Thứ 4</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Cần Thơ - <code>XSCT</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>1x4</code>: 44, 45, 46, 47</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,911,500đ</strong></td><td>4,911,500đ</td></tr><tr><td><code>2026-10-27</code><br/><small>Thứ 3</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Đắk Lắk - <code>XSDLK</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 03, 09, 93, 99</span></td><td>0.00x</td><td>0đ</td><td>2 nháy<br/><small>99 (Giải Sáu (3)), 09 (Giải Tư (4))</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,911,500đ</strong></td><td>4,911,500đ</td></tr><tr><td><code>2026-10-26</code><br/><small>Thứ 2</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Phú Yên (<code>XSPY</code>)</td><td><code>1x4</code>: 11, 14, 18, 19</td><td>1.50x</td><td>108,000đ</td><td>2 nháy<br/><small>18 (Giải Tư (5)), 14 (Giải Tư (6))</small></td><td>298,500đ</td><td class="pos">+190,500đ</td><td><strong>5,911,500đ</strong></td><td>4,911,500đ</td></tr><tr><td><code>2026-10-25</code><br/><small>Chủ Nhật</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Tiền Giang - <code>XSTG</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>1x4</code>: 21, 25, 26, 27</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,721,000đ</strong></td><td>4,721,000đ</td></tr><tr><td><code>2026-10-24</code><br/><small>Thứ 7</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Bình Phước (<code>XSBP</code>)</td><td><code>2x2</code>: 50, 59, 60, 69</td><td>1.50x</td><td>108,000đ</td><td>1 nháy<br/><small>69 (Giải Nhất)</small></td><td>149,250đ</td><td class="pos">+41,250đ</td><td><strong>5,721,000đ</strong></td><td>4,721,000đ</td></tr><tr><td><code>2026-10-23</code><br/><small>Thứ 6</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Vĩnh Long (<code>XSVL</code>)</td><td><code>2x2</code>: 51, 54, 91, 94</td><td>1.50x</td><td>108,000đ</td><td>1 nháy<br/><small>51 (Giải Đặc Biệt)</small></td><td>149,250đ</td><td class="pos">+41,250đ</td><td><strong>5,679,750đ</strong></td><td>4,679,750đ</td></tr><tr><td><code>2026-10-22</code><br/><small>Thứ 5</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Quảng Bình - <code>XSQB</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 50, 53, 80, 83</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,638,500đ</strong></td><td>4,638,500đ</td></tr><tr><td><code>2026-10-21</code><br/><small>Thứ 4</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Cần Thơ - <code>XSCT</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 44, 45, 64, 65</span></td><td>0.00x</td><td>0đ</td><td>1 nháy<br/><small>45 (Giải Sáu (3))</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,638,500đ</strong></td><td>4,638,500đ</td></tr><tr><td><code>2026-10-20</code><br/><small>Thứ 3</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Đắk Lắk - <code>XSDLK</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 03, 09, 93, 99</span></td><td>0.00x</td><td>0đ</td><td>2 nháy<br/><small>93 (Giải Sáu (3)), 03 (Giải Nhì)</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,638,500đ</strong></td><td>4,638,500đ</td></tr><tr><td><code>2026-10-19</code><br/><small>Thứ 2</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Phú Yên (<code>XSPY</code>)</td><td><code>2x2</code>: 81, 89, 91, 99</td><td>1.50x</td><td>108,000đ</td><td>2 nháy<br/><small>81 (Giải Sáu (3)), 99 (Giải Tư (6))</small></td><td>298,500đ</td><td class="pos">+190,500đ</td><td><strong>5,638,500đ</strong></td><td>4,638,500đ</td></tr><tr><td><code>2026-10-18</code><br/><small>Chủ Nhật</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Đà Lạt (Lâm Đồng) - <code>XSDL</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>1x4</code>: 11, 15, 16, 19</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,448,000đ</strong></td><td>4,448,000đ</td></tr><tr><td><code>2026-10-17</code><br/><small>Thứ 7</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Bình Phước (<code>XSBP</code>)</td><td><code>2x2</code>: 51, 58, 61, 68</td><td>1.50x</td><td>108,000đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="neg">-108,000đ</td><td><strong>5,448,000đ</strong></td><td>4,448,000đ</td></tr><tr><td><code>2026-10-16</code><br/><small>Thứ 6</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Vĩnh Long (<code>XSVL</code>)</td><td><code>2x2</code>: 56, 57, 96, 97</td><td>1.50x</td><td>108,000đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="neg">-108,000đ</td><td><strong>5,556,000đ</strong></td><td>4,556,000đ</td></tr><tr><td><code>2026-10-15</code><br/><small>Thứ 5</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Quảng Bình - <code>XSQB</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 50, 53, 60, 63</span></td><td>0.00x</td><td>0đ</td><td>2 nháy<br/><small>60 (Giải Ba (2)), 60 (Giải Đặc Biệt)</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,664,000đ</strong></td><td>4,664,000đ</td></tr><tr><td><code>2026-10-14</code><br/><small>Thứ 4</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Cần Thơ - <code>XSCT</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 64, 65, 74, 75</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,664,000đ</strong></td><td>4,664,000đ</td></tr><tr><td><code>2026-10-13</code><br/><small>Thứ 3</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Bến Tre - <code>XSBT</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 05, 08, 75, 78</span></td><td>0.00x</td><td>0đ</td><td>1 nháy<br/><small>78 (Giải Tám)</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,664,000đ</strong></td><td>4,664,000đ</td></tr><tr><td><code>2026-10-12</code><br/><small>Thứ 2</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Phú Yên (<code>XSPY</code>)</td><td><code>2x2</code>: 81, 89, 91, 99</td><td>1.50x</td><td>108,000đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="neg">-108,000đ</td><td><strong>5,664,000đ</strong></td><td>4,664,000đ</td></tr><tr><td><code>2026-10-11</code><br/><small>Chủ Nhật</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Tiền Giang - <code>XSTG</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>1x4</code>: 91, 95, 96, 99</span></td><td>0.00x</td><td>0đ</td><td>1 nháy<br/><small>99 (Giải Năm)</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,772,000đ</strong></td><td>4,772,000đ</td></tr><tr><td><code>2026-10-10</code><br/><small>Thứ 7</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Bình Phước (<code>XSBP</code>)</td><td><code>2x2</code>: 50, 58, 60, 68</td><td>1.50x</td><td>108,000đ</td><td>1 nháy<br/><small>58 (Giải Tư (5))</small></td><td>149,250đ</td><td class="pos">+41,250đ</td><td><strong>5,772,000đ</strong></td><td>4,772,000đ</td></tr><tr><td><code>2026-10-09</code><br/><small>Thứ 6</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Vĩnh Long (<code>XSVL</code>)</td><td><code>2x2</code>: 56, 57, 96, 97</td><td>1.50x</td><td>108,000đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="neg">-108,000đ</td><td><strong>5,730,750đ</strong></td><td>4,730,750đ</td></tr><tr><td><code>2026-10-08</code><br/><small>Thứ 5</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Quảng Bình - <code>XSQB</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 50, 53, 60, 63</span></td><td>0.00x</td><td>0đ</td><td>2 nháy<br/><small>63 (Giải Sáu (2)), 50 (Giải Năm)</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,838,750đ</strong></td><td>4,838,750đ</td></tr><tr><td><code>2026-10-07</code><br/><small>Thứ 4</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Cần Thơ - <code>XSCT</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 43, 48, 63, 68</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,838,750đ</strong></td><td>4,838,750đ</td></tr><tr><td><code>2026-10-06</code><br/><small>Thứ 3</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Bến Tre - <code>XSBT</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>2x2</code>: 05, 08, 75, 78</span></td><td>0.00x</td><td>0đ</td><td>2 nháy<br/><small>08 (Giải Tư (4)), 08 (Giải Ba (1))</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,838,750đ</strong></td><td>4,838,750đ</td></tr><tr><td><code>2026-10-05</code><br/><small>Thứ 2</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Phú Yên (<code>XSPY</code>)</td><td><code>2x2</code>: 81, 84, 91, 94</td><td>1.50x</td><td>108,000đ</td><td>1 nháy<br/><small>81 (Giải Ba (2))</small></td><td>149,250đ</td><td class="pos">+41,250đ</td><td><strong>5,838,750đ</strong></td><td>4,838,750đ</td></tr><tr><td><code>2026-10-04</code><br/><small>Chủ Nhật</small></td><td><span class="badge badge-green">SETTLED</span></td><td>SKIP_NO_EDGE</td><td class="left"><span style="color:var(--muted);">NGHỈ (Quan sát Tiền Giang - <code>XSTG</code>)</span></td><td><span style="color:var(--muted);">Quan sát <code>1x4</code>: 91, 95, 96, 98</span></td><td>0.00x</td><td>0đ</td><td>0 nháy<br/><small>-</small></td><td>0đ</td><td class="pos">+0đ</td><td><strong>5,797,500đ</strong></td><td>4,797,500đ</td></tr><tr><td><code>2026-10-03</code><br/><small>Thứ 7</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Bình Phước (<code>XSBP</code>)</td><td><code>2x2</code>: 58, 59, 68, 69</td><td>1.50x</td><td>108,000đ</td><td>1 nháy<br/><small>69 (Giải Nhất)</small></td><td>149,250đ</td><td class="pos">+41,250đ</td><td><strong>5,797,500đ</strong></td><td>4,797,500đ</td></tr><tr><td><code>2026-10-02</code><br/><small>Thứ 6</small></td><td><span class="badge badge-green">SETTLED</span></td><td>PLAY_PEAK</td><td class="left">Vĩnh Long (<code>XSVL</code>)</td><td><code>2x2</code>: 56, 57, 96, 97</td><td>1.50x</td><td>108,000đ</td><td>2 nháy<br/><small>96 (Giải Bảy), 97 (Giải Đặc Biệt)</small></td><td>298,500đ</td><td class="pos">+190,500đ</td><td><strong>5,756,250đ</strong></td><td>4,756,250đ</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+</body>
+</html>

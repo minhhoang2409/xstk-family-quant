@@ -2,10 +2,10 @@
   "station_code": "XSGL",
   "station_name": "Gia Lai",
   "region": "Miền Trung",
-  "updated_at": "2026-10-26T11:03:32.056843+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-23",
-  "sha256": "c8e0c1de50f75c4d411356ca18d10aa55301180eb0fccfddd06655b68f9a6a82",
+  "updated_at": "2026-10-30T16:48:43.689166+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-10-30",
+  "sha256": "2bc5b2443fef30d50e6bed20812ce913d4ff8284b3a4de4f62bc32c64e13c39b",
   "draws": [
     {
       "station_code": "XSGL",
@@ -5069,6 +5069,30 @@
         "82",
         "58",
         "06"
+      ]
+    },
+    {
+      "station_code": "XSGL",
+      "draw_date": "2026-10-30",
+      "prizes_last2": [
+        "42",
+        "02",
+        "81",
+        "16",
+        "15",
+        "21",
+        "21",
+        "89",
+        "00",
+        "21",
+        "41",
+        "57",
+        "63",
+        "64",
+        "64",
+        "22",
+        "69",
+        "58"
       ]
     }
   ]

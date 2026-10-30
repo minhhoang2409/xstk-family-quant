@@ -2,10 +2,10 @@
   "station_code": "XSBD",
   "station_name": "Bình Dương",
   "region": "Miền Nam",
-  "updated_at": "2026-10-26T11:03:31.097100+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-23",
-  "sha256": "6c5780e10019dd692e2def1a863238b9b92c5aba9bb96ddb41dfdeb84d8fbdf5",
+  "updated_at": "2026-10-30T16:48:41.047899+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-10-30",
+  "sha256": "a6195a21f8a2af57f6d74e875d14987bd5b7938e0f7461c1545acb9de91b61df",
   "draws": [
     {
       "station_code": "XSBD",
@@ -5069,6 +5069,30 @@
         "06",
         "17",
         "18"
+      ]
+    },
+    {
+      "station_code": "XSBD",
+      "draw_date": "2026-10-30",
+      "prizes_last2": [
+        "17",
+        "29",
+        "23",
+        "10",
+        "31",
+        "75",
+        "29",
+        "63",
+        "64",
+        "78",
+        "66",
+        "57",
+        "56",
+        "21",
+        "69",
+        "16",
+        "74",
+        "57"
       ]
     }
   ]

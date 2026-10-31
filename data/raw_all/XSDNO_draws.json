@@ -2,10 +2,10 @@
   "station_code": "XSDNO",
   "station_name": "Đắk Nông",
   "region": "Miền Trung",
-  "updated_at": "2026-10-26T11:03:32.200500+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-24",
-  "sha256": "c22a294c221e0335688ad930089f95244afa11e1fc543b4e3004119e27a59dc6",
+  "updated_at": "2026-10-31T15:50:56.553146+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-10-31",
+  "sha256": "33420db628cf0b21d7d9196528d45049a9c89328919df3217c5fd36c3bb1da01",
   "draws": [
     {
       "station_code": "XSDNO",
@@ -5069,6 +5069,30 @@
         "09",
         "76",
         "94"
+      ]
+    },
+    {
+      "station_code": "XSDNO",
+      "draw_date": "2026-10-31",
+      "prizes_last2": [
+        "13",
+        "86",
+        "77",
+        "66",
+        "24",
+        "08",
+        "36",
+        "96",
+        "45",
+        "18",
+        "51",
+        "49",
+        "62",
+        "58",
+        "34",
+        "19",
+        "44",
+        "21"
       ]
     }
   ]

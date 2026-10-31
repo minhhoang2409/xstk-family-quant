@@ -2,10 +2,10 @@
   "station_code": "XSLA",
   "station_name": "Long An",
   "region": "Miền Nam",
-  "updated_at": "2026-10-26T11:03:31.193039+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-24",
-  "sha256": "3eaf59d8aab361581bf9e245c7827e93188bb8171b8e7e242c0bde1cdea90939",
+  "updated_at": "2026-10-31T15:50:47.701628+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-10-31",
+  "sha256": "24c46d203b3f91805fd1b01faa1788b8f6ac498abd4d2ff3b9225bdec56c7bf8",
   "draws": [
     {
       "station_code": "XSLA",
@@ -5069,6 +5069,30 @@
         "50",
         "85",
         "36"
+      ]
+    },
+    {
+      "station_code": "XSLA",
+      "draw_date": "2026-10-31",
+      "prizes_last2": [
+        "54",
+        "14",
+        "28",
+        "65",
+        "09",
+        "24",
+        "91",
+        "12",
+        "73",
+        "99",
+        "62",
+        "63",
+        "06",
+        "96",
+        "37",
+        "86",
+        "50",
+        "78"
       ]
     }
   ]

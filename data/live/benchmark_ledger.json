@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 99500,
-  "current_bankroll_vnd": 5839500,
-  "house_money_surplus_vnd": 4839500,
-  "peak_bankroll_vnd": 5911500,
+  "current_bankroll_vnd": 5966500,
+  "house_money_surplus_vnd": 4966500,
+  "peak_bankroll_vnd": 5966500,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 416250,
   "total_tracked_days": 304,
   "played_days": 171,
   "rest_days": 133,
-  "win_days": 110,
+  "win_days": 111,
   "loss_days": 60,
-  "total_cost_vnd": 17946000,
-  "total_revenue_vnd": 22785500,
-  "net_profit_vnd": 4839500,
-  "updated_at": "2026-10-31T05:00:00+07:00",
-  "sha256": "ccf6b8d2d9acd0b0a98554795b733e6659df626d46fa3c4b5599f68ce600e971",
+  "total_cost_vnd": 18018000,
+  "total_revenue_vnd": 22984500,
+  "net_profit_vnd": 4966500,
+  "updated_at": "2026-10-31T22:50:57+07:00",
+  "sha256": "1e60d5699b24f2cf97531fc9110a68bb9d8eeb755b5517a05d8b0481728f5cde",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -15418,7 +15418,7 @@
     {
       "draw_date": "2026-10-31",
       "weekday_vn": "Thứ 7",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_STANDARD",
       "chosen_station_code": "XSQNG",
       "chosen_station_name": "Quảng Ngãi",
@@ -15434,13 +15434,43 @@
       "bankroll_before_vnd": 5839500,
       "house_money_before_vnd": 4839500,
       "cost_vnd": 72000,
-      "actual_prizes_last2": [],
-      "hit_count_k": null,
-      "hit_details": [],
-      "revenue_vnd": 0,
-      "net_profit_vnd": 0,
-      "bankroll_after_vnd": 5839500,
-      "house_money_after_vnd": 4839500
+      "actual_prizes_last2": [
+        "28",
+        "90",
+        "20",
+        "05",
+        "64",
+        "04",
+        "40",
+        "51",
+        "11",
+        "14",
+        "45",
+        "44",
+        "31",
+        "58",
+        "70",
+        "03",
+        "35",
+        "60"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 8,
+          "prize_label": "Giải Tư (3)",
+          "number": "11"
+        },
+        {
+          "prize_index": 12,
+          "prize_label": "Giải Tư (7)",
+          "number": "31"
+        }
+      ],
+      "revenue_vnd": 199000,
+      "net_profit_vnd": 127000,
+      "bankroll_after_vnd": 5966500,
+      "house_money_after_vnd": 4966500
     }
   ]
 }

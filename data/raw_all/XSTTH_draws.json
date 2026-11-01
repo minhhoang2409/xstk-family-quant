@@ -2,10 +2,10 @@
   "station_code": "XSTTH",
   "station_name": "Thừa Thiên Huế",
   "region": "Miền Trung",
-  "updated_at": "2026-10-26T12:17:41.635287+00:00",
-  "draw_count": 397,
-  "last_draw_date": "2026-10-26",
-  "sha256": "2d0cecd6b3fe42a1daae286e498bb0da8cc5e538da780a9b11af31fa6bd47cf9",
+  "updated_at": "2026-11-01T16:54:12.506144+00:00",
+  "draw_count": 398,
+  "last_draw_date": "2026-11-01",
+  "sha256": "df6dac6b43f0cb6a8d01a43c21c04a194d22abd019828cf2ebb693bcbf380594",
   "draws": [
     {
       "station_code": "XSTTH",
@@ -9533,6 +9533,30 @@
         "15",
         "53",
         "17"
+      ]
+    },
+    {
+      "station_code": "XSTTH",
+      "draw_date": "2026-11-01",
+      "prizes_last2": [
+        "36",
+        "81",
+        "32",
+        "41",
+        "29",
+        "20",
+        "28",
+        "70",
+        "26",
+        "59",
+        "87",
+        "39",
+        "49",
+        "81",
+        "55",
+        "96",
+        "46",
+        "38"
       ]
     }
   ]

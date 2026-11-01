@@ -2,10 +2,10 @@
   "station_code": "XSDL",
   "station_name": "Đà Lạt (Lâm Đồng)",
   "region": "Miền Nam",
-  "updated_at": "2026-10-26T11:03:31.434984+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-25",
-  "sha256": "2782a3f1a6f1f45eb85afaf32256acd9484f11027b2c82a1e19f73057f04d697",
+  "updated_at": "2026-11-01T16:54:11.202848+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-11-01",
+  "sha256": "e2176d9ec87f69fbfd28a73d5adb03a4d69d1efa9d881256d7ee1dd55fc0bc3d",
   "draws": [
     {
       "station_code": "XSDL",
@@ -5069,6 +5069,30 @@
         "38",
         "32",
         "67"
+      ]
+    },
+    {
+      "station_code": "XSDL",
+      "draw_date": "2026-11-01",
+      "prizes_last2": [
+        "11",
+        "05",
+        "67",
+        "47",
+        "62",
+        "75",
+        "82",
+        "14",
+        "92",
+        "20",
+        "34",
+        "71",
+        "82",
+        "60",
+        "48",
+        "40",
+        "86",
+        "65"
       ]
     }
   ]

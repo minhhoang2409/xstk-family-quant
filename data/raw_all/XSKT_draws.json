@@ -2,10 +2,10 @@
   "station_code": "XSKT",
   "station_name": "Kon Tum",
   "region": "Miền Trung",
-  "updated_at": "2026-10-26T11:03:32.248005+00:00",
-  "draw_count": 211,
-  "last_draw_date": "2026-10-25",
-  "sha256": "b45ec84348bf21db0b5919d8d17c8967306022190421eed5ada34d7d1db01f0d",
+  "updated_at": "2026-11-01T16:54:16.272016+00:00",
+  "draw_count": 212,
+  "last_draw_date": "2026-11-01",
+  "sha256": "3d50298a3b8dc041b1118c9f9c53c56aa75b749b1a3640e4e4c13f7a34695018",
   "draws": [
     {
       "station_code": "XSKT",
@@ -5069,6 +5069,30 @@
         "51",
         "35",
         "30"
+      ]
+    },
+    {
+      "station_code": "XSKT",
+      "draw_date": "2026-11-01",
+      "prizes_last2": [
+        "57",
+        "05",
+        "18",
+        "91",
+        "45",
+        "62",
+        "75",
+        "77",
+        "45",
+        "13",
+        "88",
+        "22",
+        "00",
+        "01",
+        "53",
+        "17",
+        "95",
+        "16"
       ]
     }
   ]

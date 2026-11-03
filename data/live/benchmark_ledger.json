@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 99500,
-  "current_bankroll_vnd": 5894500,
-  "house_money_surplus_vnd": 4894500,
-  "peak_bankroll_vnd": 5966500,
+  "current_bankroll_vnd": 6021500,
+  "house_money_surplus_vnd": 5021500,
+  "peak_bankroll_vnd": 6021500,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 416250,
-  "total_tracked_days": 307,
-  "played_days": 173,
+  "total_tracked_days": 308,
+  "played_days": 174,
   "rest_days": 134,
-  "win_days": 111,
+  "win_days": 112,
   "loss_days": 61,
-  "total_cost_vnd": 18090000,
-  "total_revenue_vnd": 22984500,
-  "net_profit_vnd": 4894500,
-  "updated_at": "2026-11-03T05:00:00+07:00",
-  "sha256": "eb756436d5edc96b9c27aef63ae43a9ac7df6d8b5ee7787571c85355999826bc",
+  "total_cost_vnd": 18162000,
+  "total_revenue_vnd": 23183500,
+  "net_profit_vnd": 5021500,
+  "updated_at": "2026-11-04T05:00:00+07:00",
+  "sha256": "54c935beebf85da6d37c0c7c1cbd55ec9dfdb68deb49f47bae3d083ab7fc38f2",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -15573,7 +15573,7 @@
     {
       "draw_date": "2026-11-03",
       "weekday_vn": "Thứ 3",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_STANDARD",
       "chosen_station_code": "XSBT",
       "chosen_station_name": "Bến Tre",
@@ -15589,13 +15589,70 @@
       "bankroll_before_vnd": 5894500,
       "house_money_before_vnd": 4894500,
       "cost_vnd": 72000,
+      "actual_prizes_last2": [
+        "98",
+        "04",
+        "96",
+        "75",
+        "29",
+        "23",
+        "39",
+        "81",
+        "75",
+        "60",
+        "15",
+        "39",
+        "32",
+        "27",
+        "20",
+        "99",
+        "69",
+        "12"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 3,
+          "prize_label": "Giải Sáu (2)",
+          "number": "75"
+        },
+        {
+          "prize_index": 8,
+          "prize_label": "Giải Tư (3)",
+          "number": "75"
+        }
+      ],
+      "revenue_vnd": 199000,
+      "net_profit_vnd": 127000,
+      "bankroll_after_vnd": 6021500,
+      "house_money_after_vnd": 5021500
+    },
+    {
+      "draw_date": "2026-11-04",
+      "weekday_vn": "Thứ 4",
+      "settlement_status": "PENDING",
+      "verdict_tier": "PLAY_STANDARD",
+      "chosen_station_code": "XSDN",
+      "chosen_station_name": "Đồng Nai",
+      "chosen_region": "Miền Nam",
+      "chosen_config_id": "1x4",
+      "selected_numbers": [
+        "10",
+        "13",
+        "14",
+        "16"
+      ],
+      "recommended_multiplier": 1.0,
+      "bankroll_before_vnd": 6021500,
+      "house_money_before_vnd": 5021500,
+      "cost_vnd": 72000,
       "actual_prizes_last2": [],
       "hit_count_k": null,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 5894500,
-      "house_money_after_vnd": 4894500
+      "bankroll_after_vnd": 6021500,
+      "house_money_after_vnd": 5021500
     }
   ]
 }

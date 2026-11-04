@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 99500,
-  "current_bankroll_vnd": 6021500,
-  "house_money_surplus_vnd": 5021500,
-  "peak_bankroll_vnd": 6021500,
+  "current_bankroll_vnd": 6148500,
+  "house_money_surplus_vnd": 5148500,
+  "peak_bankroll_vnd": 6148500,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 416250,
-  "total_tracked_days": 308,
+  "total_tracked_days": 309,
   "played_days": 174,
-  "rest_days": 134,
-  "win_days": 112,
+  "rest_days": 135,
+  "win_days": 113,
   "loss_days": 61,
-  "total_cost_vnd": 18162000,
-  "total_revenue_vnd": 23183500,
-  "net_profit_vnd": 5021500,
-  "updated_at": "2026-11-04T05:00:00+07:00",
-  "sha256": "54c935beebf85da6d37c0c7c1cbd55ec9dfdb68deb49f47bae3d083ab7fc38f2",
+  "total_cost_vnd": 18234000,
+  "total_revenue_vnd": 23382500,
+  "net_profit_vnd": 5148500,
+  "updated_at": "2026-11-05T05:00:00+07:00",
+  "sha256": "0ac66a0aa5ff5569f0913ed446c5a2a02acae24bdc0d3af3c47b571340a9d265",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -15630,7 +15630,7 @@
     {
       "draw_date": "2026-11-04",
       "weekday_vn": "Thứ 4",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_STANDARD",
       "chosen_station_code": "XSDN",
       "chosen_station_name": "Đồng Nai",
@@ -15646,13 +15646,70 @@
       "bankroll_before_vnd": 6021500,
       "house_money_before_vnd": 5021500,
       "cost_vnd": 72000,
+      "actual_prizes_last2": [
+        "10",
+        "99",
+        "51",
+        "23",
+        "44",
+        "25",
+        "69",
+        "78",
+        "24",
+        "76",
+        "80",
+        "82",
+        "51",
+        "60",
+        "33",
+        "01",
+        "00",
+        "14"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 0,
+          "prize_label": "Giải Tám",
+          "number": "10"
+        },
+        {
+          "prize_index": 17,
+          "prize_label": "Giải Đặc Biệt",
+          "number": "14"
+        }
+      ],
+      "revenue_vnd": 199000,
+      "net_profit_vnd": 127000,
+      "bankroll_after_vnd": 6148500,
+      "house_money_after_vnd": 5148500
+    },
+    {
+      "draw_date": "2026-11-05",
+      "weekday_vn": "Thứ 5",
+      "settlement_status": "SETTLED",
+      "verdict_tier": "SKIP_NO_EDGE",
+      "chosen_station_code": "XSBDI",
+      "chosen_station_name": "Bình Định",
+      "chosen_region": "Miền Trung",
+      "chosen_config_id": "1x4",
+      "selected_numbers": [
+        "41",
+        "44",
+        "46",
+        "48"
+      ],
+      "recommended_multiplier": 0.0,
+      "bankroll_before_vnd": 6148500,
+      "house_money_before_vnd": 5148500,
+      "cost_vnd": 0,
       "actual_prizes_last2": [],
-      "hit_count_k": null,
+      "hit_count_k": 0,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 6021500,
-      "house_money_after_vnd": 5021500
+      "bankroll_after_vnd": 6148500,
+      "house_money_after_vnd": 5148500
     }
   ]
 }

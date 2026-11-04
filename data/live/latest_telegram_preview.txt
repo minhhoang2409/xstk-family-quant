@@ -1,26 +1,20 @@
-<b>📡 BẢN TIN 05:00 SÁNG — THỨ 4 (04/11/2026)</b>
+<b>📡 BẢN TIN 05:00 SÁNG — THỨ 5 (05/11/2026)</b>
 ────────────
 
 <b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>
-👉 🟢 <b>CÓ — HÔM NAY NÊN ĐÁNH (Đạt chuẩn / PLAY_STANDARD)</b>
-• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> ✅ <b>CHƠI ĐỀU TAY (1.0x)</b> — Thứ 4 (Hạng #4/7, Max Chi2=<code>17.15</code>) thuộc <b>5 ngày chơi (Thứ 6, Thứ 4, Thứ 7, Chủ Nhật, Thứ 3)</b>; 2 ngày nghỉ cân bằng nhất tuần: <b>Thứ 5, Thứ 2</b> (0.0x).
+👉 🔴 <b>KHÔNG NÊN ĐÁNH — HÔM NAY NGHỈ (SKIP_NO_EDGE)</b>
+• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> 🛑 <b>NGHỈ ĐỊNH KỲ (0.0x)</b> — Thứ 5 (Hạng #1/7, Max Chi2=<code>14.81</code>) thuộc <b>2 ngày lồng cầu cân bằng nhất tuần (Thứ 5, Thứ 2)</b>, nghỉ định kỳ để bảo toàn vốn.
 <i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>
 
 <b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>
-🏆 <b>Nên Đánh:</b> <b>Đồng Nai - Miền Nam</b> (XSDN — Quay 16:15) với:
-+ <b>Bộ số nên đánh nhất (1x4 - 4 số, ROI -21.17%):</b> <b>10, 13, 14, 16</b>
-+ 🎯 <b>Cấu hình Vé Điểm Ngọt Kép (18 giải - 18k/số, Trả 99.5k/nháy):</b>
-  • <b>Bộ 5 số Điểm Ngọt Bà Cô (<code>sweet_5</code> — 5 số, 60.28% ngày lời, vốn 1.0x = 90k: 1 nháy +9.5k, 2 nháy +109k):</b> <b>10, 13, 14, 83, 84</b> <i>(4 số 2x2 + vệ tinh <code>10</code>)</i>
-  • <b>Bộ 4 số Chuẩn (<code>2x2</code> — 4 số, 52.04% ngày lời, vốn 1.0x = 72k: 1 nháy +27.5k, 2 nháy +127k):</b> <b>13, 14, 83, 84</b>
-+ <b>Các bộ số tham khảo:</b> <code>2x2</code> (ROI -25.6%): 13, 14, 83, 84 | <code>4x1</code> (ROI -21.2%): 13, 23, 43, 83 | <code>3x3</code> (ROI -16.3%): 10, 13, 14, 40, 43, 44, 80, 83, 84 | <code>core_2x2_sat_3x3</code> (ROI -19.1%): 13, 14, 83, 84, 10, 40, 43, 44, 80
-
-• <b>Đài thứ nhì:</b> Không có đài thứ 2 đạt chuẩn hôm nay.
-• <i>Các đài còn lại không đánh: Sóc Trăng (XSST), Đà Nẵng (XSDNG), Khánh Hòa (XSKH), Cần Thơ (XSCT).</i>
+• <b>Không đánh đài nào hôm nay (CHỈ QUAN SÁT — 0.0x).</b>
+• <i>Đài quan sát tham khảo (Bình Định - Miền Trung, XSBDI):</i> Bộ <code>1x4</code>: <b>41, 44, 46, 48</b> | Bộ <code>sweet_5</code> (5 số): <b>41, 44, 46, 74, 76</b>
+• <i>Các đài nghỉ hôm nay: Bình Định (XSBDI), Tây Ninh (XSTN), Quảng Trị (XSQT), An Giang (XSAG), Bình Thuận (XSBTH), Quảng Bình (XSQB).</i>
 
 <b>🛡️ Kỷ Luật Tiền Chợ Đều Tay 1.0x (Tuyệt đối không gấp thếp)</b>
-• Hệ số vốn: <b>1.0x</b> (5 ngày chơi đều tay <code>1.0x</code>, 2 ngày cân bằng nhất tuần nghỉ <code>0.0x</code>; <b>tuyệt đối không gấp thếp</b>).
+• Hệ số vốn: <b>0.0x</b> (5 ngày chơi đều tay <code>1.0x</code>, 2 ngày cân bằng nhất tuần nghỉ <code>0.0x</code>; <b>tuyệt đối không gấp thếp</b>).
 • <code>sweet_5</code> (5 số, 90k): 1 nháy <b>+9.5k</b> (hoàn vốn + cà phê), 2 nháy <b>+109k</b> (<code>2.0x</code>: <b>+218k</b>) | <code>2x2</code> (4 số, 72k): 1 nháy <b>+27.5k</b>, 2 nháy <b>+127k</b> (<code>2.0x</code>: <b>+254k</b>).
 
 ────────────
 💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>
-🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-11-04.html">Xem Trang Web Giải Trình Chi Tiết Ngày 04/11/2026 (2026-11-04)</a>
+🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-11-05.html">Xem Trang Web Giải Trình Chi Tiết Ngày 05/11/2026 (2026-11-05)</a>

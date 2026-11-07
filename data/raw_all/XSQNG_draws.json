@@ -2,10 +2,10 @@
   "station_code": "XSQNG",
   "station_name": "Quảng Ngãi",
   "region": "Miền Trung",
-  "updated_at": "2026-10-31T15:50:54.807814+00:00",
-  "draw_count": 212,
-  "last_draw_date": "2026-10-31",
-  "sha256": "77b71764bbb60948167e1134c9e354b8104d4f908596cb0e42af1bb16f64aba2",
+  "updated_at": "2026-11-07T16:36:49.089790+00:00",
+  "draw_count": 213,
+  "last_draw_date": "2026-11-07",
+  "sha256": "12e9b6525c56297b4f1b645a2ab31b33256c0946855ce7272e24a5f318de366a",
   "draws": [
     {
       "station_code": "XSQNG",
@@ -5093,6 +5093,30 @@
         "03",
         "35",
         "60"
+      ]
+    },
+    {
+      "station_code": "XSQNG",
+      "draw_date": "2026-11-07",
+      "prizes_last2": [
+        "50",
+        "38",
+        "01",
+        "76",
+        "16",
+        "96",
+        "78",
+        "42",
+        "29",
+        "85",
+        "91",
+        "53",
+        "85",
+        "39",
+        "43",
+        "30",
+        "31",
+        "96"
       ]
     }
   ]

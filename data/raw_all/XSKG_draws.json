@@ -2,10 +2,10 @@
   "station_code": "XSKG",
   "station_name": "Kiên Giang",
   "region": "Miền Nam",
-  "updated_at": "2026-11-01T16:54:09.488746+00:00",
-  "draw_count": 212,
-  "last_draw_date": "2026-11-01",
-  "sha256": "12d8f69a43eb6489daa23da1015fb841a488e0321066dc267e1d3f9f89c68094",
+  "updated_at": "2026-11-08T16:46:23.948300+00:00",
+  "draw_count": 213,
+  "last_draw_date": "2026-11-08",
+  "sha256": "2cc4c4430dc846c8dfb3780c77b0e53df3aa703d904ec925d314554a14a8c797",
   "draws": [
     {
       "station_code": "XSKG",
@@ -5093,6 +5093,30 @@
         "93",
         "06",
         "77"
+      ]
+    },
+    {
+      "station_code": "XSKG",
+      "draw_date": "2026-11-08",
+      "prizes_last2": [
+        "10",
+        "48",
+        "80",
+        "60",
+        "49",
+        "52",
+        "44",
+        "04",
+        "52",
+        "51",
+        "67",
+        "50",
+        "69",
+        "38",
+        "82",
+        "40",
+        "11",
+        "57"
       ]
     }
   ]

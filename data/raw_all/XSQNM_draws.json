@@ -2,10 +2,10 @@
   "station_code": "XSQNM",
   "station_name": "Quảng Nam",
   "region": "Miền Trung",
-  "updated_at": "2026-11-03T22:16:35.953898+00:00",
-  "draw_count": 213,
-  "last_draw_date": "2026-11-03",
-  "sha256": "aa0e5f87bdf840d05e3b4af645a61b28b320fa2aa5f902379a40c0d60d8a7190",
+  "updated_at": "2026-11-10T22:20:41.639765+00:00",
+  "draw_count": 214,
+  "last_draw_date": "2026-11-10",
+  "sha256": "12390c4a9b89da1fc18876b67ee70f2f19eb6482a7925650a1900986c561403f",
   "draws": [
     {
       "station_code": "XSQNM",
@@ -5117,6 +5117,30 @@
         "13",
         "87",
         "54"
+      ]
+    },
+    {
+      "station_code": "XSQNM",
+      "draw_date": "2026-11-10",
+      "prizes_last2": [
+        "23",
+        "20",
+        "37",
+        "51",
+        "88",
+        "93",
+        "91",
+        "26",
+        "35",
+        "85",
+        "00",
+        "41",
+        "30",
+        "13",
+        "80",
+        "05",
+        "43",
+        "93"
       ]
     }
   ]

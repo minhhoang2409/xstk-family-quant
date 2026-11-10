@@ -2,10 +2,10 @@
   "station_code": "XSDT",
   "station_name": "Đồng Tháp",
   "region": "Miền Nam",
-  "updated_at": "2026-11-02T23:52:24.903966+00:00",
-  "draw_count": 213,
-  "last_draw_date": "2026-11-02",
-  "sha256": "d626411bad108e73faefc32233070bf719b8c7f0d242df1be8f7839284393cb8",
+  "updated_at": "2026-11-10T00:40:32.946197+00:00",
+  "draw_count": 214,
+  "last_draw_date": "2026-11-09",
+  "sha256": "9868c57a8cae26d19b8cc019c3f92f1e476124a439073baa5923f35aeb442ca0",
   "draws": [
     {
       "station_code": "XSDT",
@@ -5117,6 +5117,30 @@
         "93",
         "07",
         "21"
+      ]
+    },
+    {
+      "station_code": "XSDT",
+      "draw_date": "2026-11-09",
+      "prizes_last2": [
+        "38",
+        "21",
+        "88",
+        "52",
+        "43",
+        "11",
+        "96",
+        "51",
+        "62",
+        "56",
+        "50",
+        "35",
+        "08",
+        "78",
+        "95",
+        "11",
+        "83",
+        "00"
       ]
     }
   ]

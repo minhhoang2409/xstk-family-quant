@@ -2,10 +2,10 @@
   "station_code": "XSHCM",
   "station_name": "TP. Hồ Chí Minh",
   "region": "Miền Nam",
-  "updated_at": "2026-11-07T16:36:42.613515+00:00",
-  "draw_count": 532,
-  "last_draw_date": "2026-11-07",
-  "sha256": "c651c3af34f1dff8c50cedd3353dd5e3e2b04eb68d7a7d341a48eb972ce66681",
+  "updated_at": "2026-11-10T00:40:31.172693+00:00",
+  "draw_count": 533,
+  "last_draw_date": "2026-11-09",
+  "sha256": "f2622468f647a1dc75ee4273b1279f73fb8ecd17f62392b0d03d6982506ca78a",
   "draws": [
     {
       "station_code": "XSHCM",
@@ -12773,6 +12773,30 @@
         "40",
         "19",
         "88"
+      ]
+    },
+    {
+      "station_code": "XSHCM",
+      "draw_date": "2026-11-09",
+      "prizes_last2": [
+        "43",
+        "87",
+        "03",
+        "33",
+        "32",
+        "40",
+        "48",
+        "12",
+        "76",
+        "36",
+        "86",
+        "09",
+        "24",
+        "31",
+        "52",
+        "52",
+        "20",
+        "40"
       ]
     }
   ]

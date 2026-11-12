@@ -2,10 +2,10 @@
   "station_code": "XSBTH",
   "station_name": "Bình Thuận",
   "region": "Miền Nam",
-  "updated_at": "2026-11-05T22:39:41.450024+00:00",
-  "draw_count": 213,
-  "last_draw_date": "2026-11-05",
-  "sha256": "8ed4d6264b374c64f1e3ecd130cf415b89a7ecadee71d4b74fe893417723791a",
+  "updated_at": "2026-11-12T22:41:58.535032+00:00",
+  "draw_count": 214,
+  "last_draw_date": "2026-11-12",
+  "sha256": "201dd0f1b541204cde98e6776b7367cfdf3b36a30ae758aa2b412bf0afe0d331",
   "draws": [
     {
       "station_code": "XSBTH",
@@ -5117,6 +5117,30 @@
         "60",
         "55",
         "91"
+      ]
+    },
+    {
+      "station_code": "XSBTH",
+      "draw_date": "2026-11-12",
+      "prizes_last2": [
+        "77",
+        "51",
+        "03",
+        "74",
+        "48",
+        "72",
+        "01",
+        "89",
+        "27",
+        "24",
+        "96",
+        "40",
+        "44",
+        "06",
+        "42",
+        "70",
+        "57",
+        "31"
       ]
     }
   ]

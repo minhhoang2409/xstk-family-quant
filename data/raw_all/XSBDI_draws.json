@@ -2,10 +2,10 @@
   "station_code": "XSBDI",
   "station_name": "Bình Định",
   "region": "Miền Trung",
-  "updated_at": "2026-11-05T22:39:43.230355+00:00",
-  "draw_count": 213,
-  "last_draw_date": "2026-11-05",
-  "sha256": "9aacca3e335e51b259cfd5422d2c6d0d1e8ecdad1af9e62a635c23d30ba0b0cd",
+  "updated_at": "2026-11-12T22:42:00.201079+00:00",
+  "draw_count": 214,
+  "last_draw_date": "2026-11-12",
+  "sha256": "b40d494b446ceb6fa4250b667e5eb18fbe8330e0c5d6d1b45d190ab552ffba87",
   "draws": [
     {
       "station_code": "XSBDI",
@@ -5117,6 +5117,30 @@
         "51",
         "60",
         "00"
+      ]
+    },
+    {
+      "station_code": "XSBDI",
+      "draw_date": "2026-11-12",
+      "prizes_last2": [
+        "39",
+        "40",
+        "99",
+        "99",
+        "81",
+        "67",
+        "07",
+        "51",
+        "94",
+        "14",
+        "82",
+        "44",
+        "45",
+        "28",
+        "90",
+        "18",
+        "85",
+        "83"
       ]
     }
   ]

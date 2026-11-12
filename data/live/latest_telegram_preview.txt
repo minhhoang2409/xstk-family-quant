@@ -1,15 +1,15 @@
-<b>📡 BẢN TIN 05:00 SÁNG — THỨ 5 (12/11/2026)</b>
+<b>📡 BẢN TIN 05:00 SÁNG — THỨ 6 (13/11/2026)</b>
 ────────────
 
 <b>1. HÔM NAY CÓ NÊN ĐÁNH KHÔNG?</b>
 👉 🔴 <b>KHÔNG NÊN ĐÁNH — HÔM NAY NGHỈ (SKIP_NO_EDGE)</b>
-• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> 🛑 <b>NGHỈ ĐỊNH KỲ (0.0x)</b> — Thứ 5 (Hạng #1/7, Max Chi2=<code>13.87</code>) thuộc <b>2 ngày lồng cầu cân bằng nhất tuần (Thứ 5, Thứ 6)</b>, nghỉ định kỳ để bảo toàn vốn.
+• <b>Lịch Chơi 5/2 Theo Độ Cân Bằng Lồng Cầu:</b> 🛑 <b>NGHỈ ĐỊNH KỲ (0.0x)</b> — Thứ 6 (Hạng #2/7, Max Chi2=<code>16.06</code>) thuộc <b>2 ngày lồng cầu cân bằng nhất tuần (Thứ 5, Thứ 6)</b>, nghỉ định kỳ để bảo toàn vốn.
 <i>(Bằng chứng toán học &amp; lý do chi tiết xem trên trang Web bên dưới)</i>
 
 <b>2. NÊN ĐÁNH ĐÀI GÌ &amp; TỔ HỢP SỐ?</b>
 • <b>Không đánh đài nào hôm nay (CHỈ QUAN SÁT — 0.0x).</b>
-• <i>Đài quan sát tham khảo (Quảng Trị - Miền Trung, XSQT):</i> Bộ <code>2x2</code>: <b>55, 58, 95, 98</b> | Bộ <code>sweet_5</code> (5 số): <b>55, 57, 58, 95, 98</b>
-• <i>Các đài nghỉ hôm nay: Quảng Trị (XSQT), Bình Thuận (XSBTH), An Giang (XSAG), Tây Ninh (XSTN), Bình Định (XSBDI), Quảng Bình (XSQB).</i>
+• <i>Đài quan sát tham khảo (Vĩnh Long - Miền Nam, XSVL):</i> Bộ <code>2x2</code>: <b>14, 19, 54, 59</b> | Bộ <code>sweet_5</code> (5 số): <b>14, 19, 51, 54, 59</b>
+• <i>Các đài nghỉ hôm nay: Vĩnh Long (XSVL), Gia Lai (XSGL), Ninh Thuận (XSNT), Bình Dương (XSBD), Trà Vinh (XSTV).</i>
 
 <b>🛡️ Kỷ Luật Tiền Chợ Đều Tay 1.0x (Tuyệt đối không gấp thếp)</b>
 • Hệ số vốn: <b>0.0x</b> (5 ngày chơi đều tay <code>1.0x</code>, 2 ngày cân bằng nhất tuần nghỉ <code>0.0x</code>; <b>tuyệt đối không gấp thếp</b>).
@@ -17,4 +17,4 @@
 
 ────────────
 💡 <i>Bằng chứng giải trình nguyên nhân, kết quả đối soát và bảng đi vốn xem tại trang Web:</i>
-🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-11-12.html">Xem Trang Web Giải Trình Chi Tiết Ngày 12/11/2026 (2026-11-12)</a>
+🔗 <a href="https://minhhoang2409.github.io/xstk-family-quant/daily/2026-11-13.html">Xem Trang Web Giải Trình Chi Tiết Ngày 13/11/2026 (2026-11-13)</a>

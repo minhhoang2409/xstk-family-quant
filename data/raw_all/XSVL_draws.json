@@ -2,10 +2,10 @@
   "station_code": "XSVL",
   "station_name": "Vĩnh Long",
   "region": "Miền Nam",
-  "updated_at": "2026-11-06T22:03:55.933744+00:00",
-  "draw_count": 271,
-  "last_draw_date": "2026-11-06",
-  "sha256": "526a9478f39cf335ebe998979d5f2dfb56994ac908c533e615b0243a38895a2b",
+  "updated_at": "2026-11-13T22:33:47.622730+00:00",
+  "draw_count": 272,
+  "last_draw_date": "2026-11-13",
+  "sha256": "20c7470a26bca8ac821dd53add1593b9086af78bd2530ec440d1e51f84f88330",
   "draws": [
     {
       "station_code": "XSVL",
@@ -6509,6 +6509,30 @@
         "45",
         "99",
         "54"
+      ]
+    },
+    {
+      "station_code": "XSVL",
+      "draw_date": "2026-11-13",
+      "prizes_last2": [
+        "05",
+        "20",
+        "40",
+        "82",
+        "41",
+        "96",
+        "34",
+        "22",
+        "49",
+        "34",
+        "03",
+        "41",
+        "82",
+        "14",
+        "57",
+        "16",
+        "56",
+        "86"
       ]
     }
   ]

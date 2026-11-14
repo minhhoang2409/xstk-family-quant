@@ -2,10 +2,10 @@
   "station_code": "XSBP",
   "station_name": "Bình Phước",
   "region": "Miền Nam",
-  "updated_at": "2026-11-07T16:36:45.077752+00:00",
-  "draw_count": 213,
-  "last_draw_date": "2026-11-07",
-  "sha256": "9a78fcd7ba57c44de2af6a366208732cf052107e12ff9e06485eeac840cc4574",
+  "updated_at": "2026-11-14T16:42:54.681607+00:00",
+  "draw_count": 214,
+  "last_draw_date": "2026-11-14",
+  "sha256": "c8c42bc55ccfa51c423a253555e95a34a939569b31b65bf57025c6cc83b6e3d0",
   "draws": [
     {
       "station_code": "XSBP",
@@ -5117,6 +5117,30 @@
         "45",
         "29",
         "05"
+      ]
+    },
+    {
+      "station_code": "XSBP",
+      "draw_date": "2026-11-14",
+      "prizes_last2": [
+        "49",
+        "31",
+        "45",
+        "75",
+        "48",
+        "43",
+        "94",
+        "13",
+        "55",
+        "55",
+        "44",
+        "34",
+        "68",
+        "81",
+        "25",
+        "02",
+        "33",
+        "49"
       ]
     }
   ]

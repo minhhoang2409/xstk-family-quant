@@ -2,10 +2,10 @@
   "station_code": "XSTG",
   "station_name": "Tiền Giang",
   "region": "Miền Nam",
-  "updated_at": "2026-11-08T16:46:21.909045+00:00",
-  "draw_count": 213,
-  "last_draw_date": "2026-11-08",
-  "sha256": "27668391d81a9f433e4c10ad2543e5433da421b94b445f647225d89b33e55ef6",
+  "updated_at": "2026-11-15T21:44:03.391121+00:00",
+  "draw_count": 214,
+  "last_draw_date": "2026-11-15",
+  "sha256": "1ea0825e92548b0ddf54d284155f5767fb551afa36ac94a66277636f4cbb9ec2",
   "draws": [
     {
       "station_code": "XSTG",
@@ -5117,6 +5117,30 @@
         "35",
         "62",
         "95"
+      ]
+    },
+    {
+      "station_code": "XSTG",
+      "draw_date": "2026-11-15",
+      "prizes_last2": [
+        "34",
+        "88",
+        "54",
+        "62",
+        "01",
+        "96",
+        "25",
+        "55",
+        "41",
+        "61",
+        "81",
+        "77",
+        "66",
+        "96",
+        "59",
+        "49",
+        "66",
+        "52"
       ]
     }
   ]

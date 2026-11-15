@@ -2,10 +2,10 @@
   "station_code": "XSKH",
   "station_name": "Khánh Hòa",
   "region": "Miền Trung",
-  "updated_at": "2026-11-11T23:26:21.559197+00:00",
-  "draw_count": 401,
-  "last_draw_date": "2026-11-11",
-  "sha256": "1b37565934ee4623bc04ae4cf41ce236b5cfe9abedfd25289ef75102b6fff2bd",
+  "updated_at": "2026-11-15T21:44:10.395681+00:00",
+  "draw_count": 402,
+  "last_draw_date": "2026-11-15",
+  "sha256": "d3c22d56aca78c458692f6bef60ca506ca32c3b0912d678bcd59bfe20da0e0cc",
   "draws": [
     {
       "station_code": "XSKH",
@@ -9629,6 +9629,30 @@
         "32",
         "69",
         "81"
+      ]
+    },
+    {
+      "station_code": "XSKH",
+      "draw_date": "2026-11-15",
+      "prizes_last2": [
+        "07",
+        "33",
+        "21",
+        "57",
+        "47",
+        "44",
+        "82",
+        "16",
+        "54",
+        "88",
+        "97",
+        "07",
+        "33",
+        "28",
+        "37",
+        "72",
+        "27",
+        "37"
       ]
     }
   ]

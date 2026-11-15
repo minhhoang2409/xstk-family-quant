@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 99500,
-  "current_bankroll_vnd": 5744000,
-  "house_money_surplus_vnd": 4744000,
+  "current_bankroll_vnd": 5871000,
+  "house_money_surplus_vnd": 4871000,
   "peak_bankroll_vnd": 6176000,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 432000,
-  "total_tracked_days": 319,
-  "played_days": 182,
+  "total_tracked_days": 320,
+  "played_days": 183,
   "rest_days": 137,
-  "win_days": 114,
+  "win_days": 115,
   "loss_days": 67,
-  "total_cost_vnd": 18738000,
-  "total_revenue_vnd": 23482000,
-  "net_profit_vnd": 4744000,
-  "updated_at": "2026-11-15T05:00:00+07:00",
-  "sha256": "5c71fd2af067f5c6ddd6e45348cb04633ffcb58dc860597a6bdd49293c60db2e",
+  "total_cost_vnd": 18810000,
+  "total_revenue_vnd": 23681000,
+  "net_profit_vnd": 4871000,
+  "updated_at": "2026-11-16T05:00:00+07:00",
+  "sha256": "973b45999371dd2651c3f28d9fd1512aa34acc09275283da339d22460636eae2",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -16159,7 +16159,7 @@
     {
       "draw_date": "2026-11-15",
       "weekday_vn": "Chủ Nhật",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_STANDARD",
       "chosen_station_code": "XSDL",
       "chosen_station_name": "Đà Lạt (Lâm Đồng)",
@@ -16175,13 +16175,70 @@
       "bankroll_before_vnd": 5744000,
       "house_money_before_vnd": 4744000,
       "cost_vnd": 72000,
+      "actual_prizes_last2": [
+        "44",
+        "03",
+        "07",
+        "86",
+        "55",
+        "47",
+        "58",
+        "42",
+        "24",
+        "43",
+        "14",
+        "38",
+        "54",
+        "33",
+        "71",
+        "47",
+        "33",
+        "31"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 5,
+          "prize_label": "Giải Năm",
+          "number": "47"
+        },
+        {
+          "prize_index": 15,
+          "prize_label": "Giải Nhì",
+          "number": "47"
+        }
+      ],
+      "revenue_vnd": 199000,
+      "net_profit_vnd": 127000,
+      "bankroll_after_vnd": 5871000,
+      "house_money_after_vnd": 4871000
+    },
+    {
+      "draw_date": "2026-11-16",
+      "weekday_vn": "Thứ 2",
+      "settlement_status": "PENDING",
+      "verdict_tier": "PLAY_STANDARD",
+      "chosen_station_code": "XSHCM",
+      "chosen_station_name": "TP. Hồ Chí Minh",
+      "chosen_region": "Miền Nam",
+      "chosen_config_id": "1x4",
+      "selected_numbers": [
+        "52",
+        "53",
+        "57",
+        "59"
+      ],
+      "recommended_multiplier": 1.0,
+      "bankroll_before_vnd": 5871000,
+      "house_money_before_vnd": 4871000,
+      "cost_vnd": 72000,
       "actual_prizes_last2": [],
       "hit_count_k": null,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 5744000,
-      "house_money_after_vnd": 4744000
+      "bankroll_after_vnd": 5871000,
+      "house_money_after_vnd": 4871000
     }
   ]
 }

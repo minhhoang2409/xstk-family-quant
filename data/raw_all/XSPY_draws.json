@@ -2,10 +2,10 @@
   "station_code": "XSPY",
   "station_name": "Phú Yên",
   "region": "Miền Trung",
-  "updated_at": "2026-11-10T00:40:38.536278+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-09",
-  "sha256": "a620371a837200de5f4ffac0ffda99a49ed42834f5580d0ac7c1bc888f6ced61",
+  "updated_at": "2026-11-17T00:46:47.935493+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-16",
+  "sha256": "31e806e2f26aa9f7ec90317cebb1bc02a444487166d298b09072b19c98ed7c33",
   "draws": [
     {
       "station_code": "XSPY",
@@ -5141,6 +5141,30 @@
         "56",
         "24",
         "67"
+      ]
+    },
+    {
+      "station_code": "XSPY",
+      "draw_date": "2026-11-16",
+      "prizes_last2": [
+        "78",
+        "36",
+        "73",
+        "45",
+        "77",
+        "11",
+        "55",
+        "99",
+        "72",
+        "25",
+        "47",
+        "35",
+        "03",
+        "25",
+        "31",
+        "95",
+        "84",
+        "95"
       ]
     }
   ]

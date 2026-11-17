@@ -2,10 +2,10 @@
   "station_code": "XSBL",
   "station_name": "Bạc Liêu",
   "region": "Miền Nam",
-  "updated_at": "2026-11-10T22:20:37.627120+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-10",
-  "sha256": "5d9439023295c04eb49669de6d377885088dafd165490d8d16df1f549591535d",
+  "updated_at": "2026-11-17T23:50:19.380003+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-17",
+  "sha256": "236611d0df236fda60cdd430c3b9bb687195ca4b281f59ada8354833c2cc0152",
   "draws": [
     {
       "station_code": "XSBL",
@@ -5141,6 +5141,30 @@
         "06",
         "65",
         "32"
+      ]
+    },
+    {
+      "station_code": "XSBL",
+      "draw_date": "2026-11-17",
+      "prizes_last2": [
+        "52",
+        "58",
+        "15",
+        "63",
+        "76",
+        "59",
+        "25",
+        "40",
+        "91",
+        "38",
+        "85",
+        "22",
+        "73",
+        "95",
+        "00",
+        "16",
+        "45",
+        "34"
       ]
     }
   ]

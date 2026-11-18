@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 99500,
-  "current_bankroll_vnd": 5926000,
-  "house_money_surplus_vnd": 4926000,
+  "current_bankroll_vnd": 6053000,
+  "house_money_surplus_vnd": 5053000,
   "peak_bankroll_vnd": 6176000,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 432000,
-  "total_tracked_days": 322,
+  "total_tracked_days": 323,
   "played_days": 185,
-  "rest_days": 137,
-  "win_days": 117,
+  "rest_days": 138,
+  "win_days": 118,
   "loss_days": 67,
-  "total_cost_vnd": 18954000,
-  "total_revenue_vnd": 23880000,
-  "net_profit_vnd": 4926000,
-  "updated_at": "2026-11-18T05:00:00+07:00",
-  "sha256": "b4cf765043689f00b37e3e6a15cbdd221ef2cec47eb9e57498082efb57758d10",
+  "total_cost_vnd": 19026000,
+  "total_revenue_vnd": 24079000,
+  "net_profit_vnd": 5053000,
+  "updated_at": "2026-11-19T05:00:00+07:00",
+  "sha256": "e224f51d29d3c60964c1b95fef5a8cdba88c0f1cd2f02d4e8d88998b2ccefa73",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -16320,7 +16320,7 @@
     {
       "draw_date": "2026-11-18",
       "weekday_vn": "Thứ 4",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_STANDARD",
       "chosen_station_code": "XSST",
       "chosen_station_name": "Sóc Trăng",
@@ -16336,13 +16336,70 @@
       "bankroll_before_vnd": 5926000,
       "house_money_before_vnd": 4926000,
       "cost_vnd": 72000,
+      "actual_prizes_last2": [
+        "45",
+        "64",
+        "36",
+        "52",
+        "99",
+        "87",
+        "83",
+        "44",
+        "19",
+        "14",
+        "08",
+        "54",
+        "85",
+        "48",
+        "97",
+        "18",
+        "74",
+        "33"
+      ],
+      "hit_count_k": 2,
+      "hit_details": [
+        {
+          "prize_index": 10,
+          "prize_label": "Giải Tư (5)",
+          "number": "08"
+        },
+        {
+          "prize_index": 15,
+          "prize_label": "Giải Nhì",
+          "number": "18"
+        }
+      ],
+      "revenue_vnd": 199000,
+      "net_profit_vnd": 127000,
+      "bankroll_after_vnd": 6053000,
+      "house_money_after_vnd": 5053000
+    },
+    {
+      "draw_date": "2026-11-19",
+      "weekday_vn": "Thứ 5",
+      "settlement_status": "SETTLED",
+      "verdict_tier": "SKIP_NO_EDGE",
+      "chosen_station_code": "XSQT",
+      "chosen_station_name": "Quảng Trị",
+      "chosen_region": "Miền Trung",
+      "chosen_config_id": "1x4",
+      "selected_numbers": [
+        "55",
+        "56",
+        "57",
+        "58"
+      ],
+      "recommended_multiplier": 0.0,
+      "bankroll_before_vnd": 6053000,
+      "house_money_before_vnd": 5053000,
+      "cost_vnd": 0,
       "actual_prizes_last2": [],
-      "hit_count_k": null,
+      "hit_count_k": 0,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 5926000,
-      "house_money_after_vnd": 4926000
+      "bankroll_after_vnd": 6053000,
+      "house_money_after_vnd": 5053000
     }
   ]
 }

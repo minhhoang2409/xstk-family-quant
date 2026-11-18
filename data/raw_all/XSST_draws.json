@@ -2,10 +2,10 @@
   "station_code": "XSST",
   "station_name": "Sóc Trăng",
   "region": "Miền Nam",
-  "updated_at": "2026-11-11T23:26:18.160828+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-11",
-  "sha256": "8cbdb066f538b419dc3c5f4d0f77a1936a8244b2e0eb94a4714d8bb93ff6e760",
+  "updated_at": "2026-11-18T23:22:11.134694+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-18",
+  "sha256": "841d290cdcfbe229576c381df00f6602f8e816e125e2611d6f3afbf79e66dfd6",
   "draws": [
     {
       "station_code": "XSST",
@@ -5141,6 +5141,30 @@
         "50",
         "99",
         "85"
+      ]
+    },
+    {
+      "station_code": "XSST",
+      "draw_date": "2026-11-18",
+      "prizes_last2": [
+        "45",
+        "64",
+        "36",
+        "52",
+        "99",
+        "87",
+        "83",
+        "44",
+        "19",
+        "14",
+        "08",
+        "54",
+        "85",
+        "48",
+        "97",
+        "18",
+        "74",
+        "33"
       ]
     }
   ]

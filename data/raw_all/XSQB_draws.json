@@ -2,10 +2,10 @@
   "station_code": "XSQB",
   "station_name": "Quảng Bình",
   "region": "Miền Trung",
-  "updated_at": "2026-11-12T22:42:02.909661+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-12",
-  "sha256": "bc8b0dd0bf75cb2d5bcfdb29212080b2d574aed184412e83d99c7c0038791912",
+  "updated_at": "2026-11-19T23:32:39.101138+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-19",
+  "sha256": "1108779198176d038edf912c946d5c1acc0586a73c8cbdbaca8c14e192eb071e",
   "draws": [
     {
       "station_code": "XSQB",
@@ -5141,6 +5141,30 @@
         "32",
         "82",
         "64"
+      ]
+    },
+    {
+      "station_code": "XSQB",
+      "draw_date": "2026-11-19",
+      "prizes_last2": [
+        "02",
+        "72",
+        "13",
+        "77",
+        "68",
+        "93",
+        "16",
+        "48",
+        "53",
+        "24",
+        "34",
+        "49",
+        "87",
+        "76",
+        "94",
+        "65",
+        "80",
+        "87"
       ]
     }
   ]

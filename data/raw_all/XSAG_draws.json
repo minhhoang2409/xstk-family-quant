@@ -2,10 +2,10 @@
   "station_code": "XSAG",
   "station_name": "An Giang",
   "region": "Miền Nam",
-  "updated_at": "2026-11-12T22:41:57.131273+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-12",
-  "sha256": "09b8825afca87604212111f5eb573876b6ff8f24b95395a8ae328431dcc345cf",
+  "updated_at": "2026-11-19T23:32:31.619722+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-19",
+  "sha256": "5314eb7a952a22160f040d2494258397f5ce0daf18ad119e39179295b907135f",
   "draws": [
     {
       "station_code": "XSAG",
@@ -5141,6 +5141,30 @@
         "26",
         "91",
         "92"
+      ]
+    },
+    {
+      "station_code": "XSAG",
+      "draw_date": "2026-11-19",
+      "prizes_last2": [
+        "41",
+        "53",
+        "73",
+        "22",
+        "86",
+        "87",
+        "41",
+        "79",
+        "33",
+        "09",
+        "84",
+        "26",
+        "28",
+        "94",
+        "65",
+        "73",
+        "64",
+        "79"
       ]
     }
   ]

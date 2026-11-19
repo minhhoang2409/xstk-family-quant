@@ -2,10 +2,10 @@
   "station_code": "XSQT",
   "station_name": "Quảng Trị",
   "region": "Miền Trung",
-  "updated_at": "2026-11-12T22:42:01.656732+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-12",
-  "sha256": "042d284c75eb3b574cf0c9e1cb36a12e698c1121cf516ca8607fcf91b24abf72",
+  "updated_at": "2026-11-19T23:32:37.271697+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-19",
+  "sha256": "1924b91388ee9f676cc00a34dfb0b9d96e6197b9973249eff45f03f44fc79c67",
   "draws": [
     {
       "station_code": "XSQT",
@@ -5141,6 +5141,30 @@
         "37",
         "84",
         "21"
+      ]
+    },
+    {
+      "station_code": "XSQT",
+      "draw_date": "2026-11-19",
+      "prizes_last2": [
+        "11",
+        "12",
+        "99",
+        "94",
+        "90",
+        "71",
+        "31",
+        "59",
+        "64",
+        "80",
+        "65",
+        "56",
+        "11",
+        "67",
+        "37",
+        "77",
+        "76",
+        "08"
       ]
     }
   ]

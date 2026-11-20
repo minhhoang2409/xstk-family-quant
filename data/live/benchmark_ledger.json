@@ -3,21 +3,21 @@
   "starting_bankroll_vnd": 1000000,
   "base_stake_per_number_vnd": 18000,
   "payout_per_hit_vnd": 99500,
-  "current_bankroll_vnd": 6053000,
-  "house_money_surplus_vnd": 5053000,
+  "current_bankroll_vnd": 6080500,
+  "house_money_surplus_vnd": 5080500,
   "peak_bankroll_vnd": 6176000,
   "min_bankroll_vnd": 1000000,
   "max_drawdown_vnd": 432000,
-  "total_tracked_days": 324,
-  "played_days": 186,
+  "total_tracked_days": 325,
+  "played_days": 187,
   "rest_days": 138,
-  "win_days": 118,
+  "win_days": 119,
   "loss_days": 67,
-  "total_cost_vnd": 19026000,
-  "total_revenue_vnd": 24079000,
-  "net_profit_vnd": 5053000,
-  "updated_at": "2026-11-20T05:00:00+07:00",
-  "sha256": "1479d8c509fbe41617c6ca9b5d5f7a48d91be89d6b0af88c11d240f77e24feff",
+  "total_cost_vnd": 19098000,
+  "total_revenue_vnd": 24178500,
+  "net_profit_vnd": 5080500,
+  "updated_at": "2026-11-21T05:00:00+07:00",
+  "sha256": "597de068d12e744e363880306d6beb96e87d0455866bd4fc2911c2c89d06da31",
   "entries": [
     {
       "draw_date": "2026-01-01",
@@ -16429,7 +16429,7 @@
     {
       "draw_date": "2026-11-20",
       "weekday_vn": "Thứ 6",
-      "settlement_status": "PENDING",
+      "settlement_status": "SETTLED",
       "verdict_tier": "PLAY_STANDARD",
       "chosen_station_code": "XSVL",
       "chosen_station_name": "Vĩnh Long",
@@ -16445,13 +16445,65 @@
       "bankroll_before_vnd": 6053000,
       "house_money_before_vnd": 5053000,
       "cost_vnd": 72000,
+      "actual_prizes_last2": [
+        "65",
+        "01",
+        "30",
+        "87",
+        "63",
+        "23",
+        "75",
+        "71",
+        "45",
+        "17",
+        "05",
+        "56",
+        "95",
+        "84",
+        "91",
+        "58",
+        "73",
+        "01"
+      ],
+      "hit_count_k": 1,
+      "hit_details": [
+        {
+          "prize_index": 11,
+          "prize_label": "Giải Tư (6)",
+          "number": "56"
+        }
+      ],
+      "revenue_vnd": 99500,
+      "net_profit_vnd": 27500,
+      "bankroll_after_vnd": 6080500,
+      "house_money_after_vnd": 5080500
+    },
+    {
+      "draw_date": "2026-11-21",
+      "weekday_vn": "Thứ 7",
+      "settlement_status": "PENDING",
+      "verdict_tier": "PLAY_STANDARD",
+      "chosen_station_code": "XSBP",
+      "chosen_station_name": "Bình Phước",
+      "chosen_region": "Miền Nam",
+      "chosen_config_id": "2x2",
+      "selected_numbers": [
+        "55",
+        "58",
+        "65",
+        "68"
+      ],
+      "recommended_multiplier": 1.0,
+      "bankroll_before_vnd": 6080500,
+      "house_money_before_vnd": 5080500,
+      "cost_vnd": 72000,
       "actual_prizes_last2": [],
       "hit_count_k": null,
       "hit_details": [],
       "revenue_vnd": 0,
       "net_profit_vnd": 0,
-      "bankroll_after_vnd": 6053000,
-      "house_money_after_vnd": 5053000
+      "bankroll_after_vnd": 6080500,
+      "house_money_after_vnd": 5080500
     }
   ]
 }

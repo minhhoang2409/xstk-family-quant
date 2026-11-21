@@ -2,10 +2,10 @@
   "station_code": "XSHG",
   "station_name": "Hậu Giang",
   "region": "Miền Nam",
-  "updated_at": "2026-11-14T16:42:56.239439+00:00",
-  "draw_count": 214,
-  "last_draw_date": "2026-11-14",
-  "sha256": "dbce89c8ece4518dfca66cf4a26492d2184b294011549a0c39d8c4fa586844b4",
+  "updated_at": "2026-11-21T22:10:05.703756+00:00",
+  "draw_count": 215,
+  "last_draw_date": "2026-11-21",
+  "sha256": "cccf41c75fada2c70f104bf186e5d11664f4dcad0d2d5463c9b82f7058674092",
   "draws": [
     {
       "station_code": "XSHG",
@@ -5141,6 +5141,30 @@
         "46",
         "10",
         "90"
+      ]
+    },
+    {
+      "station_code": "XSHG",
+      "draw_date": "2026-11-21",
+      "prizes_last2": [
+        "44",
+        "88",
+        "00",
+        "50",
+        "46",
+        "59",
+        "19",
+        "60",
+        "49",
+        "44",
+        "76",
+        "31",
+        "08",
+        "88",
+        "28",
+        "46",
+        "43",
+        "18"
       ]
     }
   ]

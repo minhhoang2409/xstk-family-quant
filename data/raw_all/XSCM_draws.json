@@ -2,10 +2,10 @@
   "station_code": "XSCM",
   "station_name": "Cà Mau",
   "region": "Miền Nam",
-  "updated_at": "2026-11-17T00:46:44.448546+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-16",
-  "sha256": "7dfcd6406823b403645df96584b2cfe65163d179432170b533c46154bf0b5c60",
+  "updated_at": "2026-11-24T03:18:25.241212+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-23",
+  "sha256": "e6f1378adb482bdcef277b90018940f83de672aa676f68a410b498e6fafecbea",
   "draws": [
     {
       "station_code": "XSCM",
@@ -5165,6 +5165,30 @@
         "30",
         "24",
         "81"
+      ]
+    },
+    {
+      "station_code": "XSCM",
+      "draw_date": "2026-11-23",
+      "prizes_last2": [
+        "18",
+        "73",
+        "57",
+        "16",
+        "57",
+        "33",
+        "79",
+        "85",
+        "52",
+        "41",
+        "67",
+        "37",
+        "09",
+        "89",
+        "69",
+        "39",
+        "27",
+        "51"
       ]
     }
   ]

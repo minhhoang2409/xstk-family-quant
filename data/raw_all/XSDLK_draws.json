@@ -2,10 +2,10 @@
   "station_code": "XSDLK",
   "station_name": "Đắk Lắk",
   "region": "Miền Trung",
-  "updated_at": "2026-11-17T23:50:21.483173+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-17",
-  "sha256": "8fc3f7444c081b9815e08ac76d256d18d3739e5f2ac31916292260e415a0e696",
+  "updated_at": "2026-11-25T01:23:44.109867+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-24",
+  "sha256": "d17cfac40d37c9a25cb877908eea48dd8373085fc2b7b81baaaa0b4f7ddd73a6",
   "draws": [
     {
       "station_code": "XSDLK",
@@ -5165,6 +5165,30 @@
         "76",
         "72",
         "32"
+      ]
+    },
+    {
+      "station_code": "XSDLK",
+      "draw_date": "2026-11-24",
+      "prizes_last2": [
+        "80",
+        "52",
+        "73",
+        "43",
+        "65",
+        "42",
+        "79",
+        "05",
+        "98",
+        "02",
+        "56",
+        "51",
+        "70",
+        "34",
+        "59",
+        "69",
+        "59",
+        "29"
       ]
     }
   ]

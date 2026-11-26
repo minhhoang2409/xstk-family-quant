@@ -2,10 +2,10 @@
   "station_code": "XSCT",
   "station_name": "Cần Thơ",
   "region": "Miền Nam",
-  "updated_at": "2026-11-18T23:22:09.643117+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-18",
-  "sha256": "86541bf27396ec2706c2ebf78db67e4f295bd4ce9c08bcdd23a0ad696fe244f7",
+  "updated_at": "2026-11-26T00:58:40.287167+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-25",
+  "sha256": "442e9944e8233989e9ddd83a7eb308d727120031343097fa07b4ce120c49a8d3",
   "draws": [
     {
       "station_code": "XSCT",
@@ -5165,6 +5165,30 @@
         "66",
         "30",
         "57"
+      ]
+    },
+    {
+      "station_code": "XSCT",
+      "draw_date": "2026-11-25",
+      "prizes_last2": [
+        "80",
+        "86",
+        "16",
+        "11",
+        "95",
+        "25",
+        "93",
+        "44",
+        "05",
+        "14",
+        "55",
+        "63",
+        "52",
+        "22",
+        "50",
+        "11",
+        "72",
+        "09"
       ]
     }
   ]

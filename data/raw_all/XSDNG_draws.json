@@ -2,10 +2,10 @@
   "station_code": "XSDNG",
   "station_name": "Đà Nẵng",
   "region": "Miền Trung",
-  "updated_at": "2026-11-21T22:10:07.162946+00:00",
-  "draw_count": 404,
-  "last_draw_date": "2026-11-21",
-  "sha256": "142913f0ec6bfd38f8caa72096fe566611282d093f5b29edf83d1813245069f0",
+  "updated_at": "2026-11-26T00:58:44.051348+00:00",
+  "draw_count": 405,
+  "last_draw_date": "2026-11-25",
+  "sha256": "e2fd68e32a1462b04a3c298e00ba7645d2e14694468306b19f06b2a735ba8ec6",
   "draws": [
     {
       "station_code": "XSDNG",
@@ -9701,6 +9701,30 @@
         "82",
         "67",
         "14"
+      ]
+    },
+    {
+      "station_code": "XSDNG",
+      "draw_date": "2026-11-25",
+      "prizes_last2": [
+        "16",
+        "05",
+        "47",
+        "77",
+        "98",
+        "58",
+        "55",
+        "72",
+        "57",
+        "94",
+        "27",
+        "89",
+        "61",
+        "08",
+        "22",
+        "35",
+        "48",
+        "12"
       ]
     }
   ]

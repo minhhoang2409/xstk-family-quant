@@ -2,10 +2,10 @@
   "station_code": "XSDN",
   "station_name": "Đồng Nai",
   "region": "Miền Nam",
-  "updated_at": "2026-11-18T23:22:08.346821+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-18",
-  "sha256": "07ccd806f8fdef551745f7851b66e43dc7fd9f015cf3646ba5f7722d33f19641",
+  "updated_at": "2026-11-26T00:58:38.536761+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-25",
+  "sha256": "8c7bff551a84e93d8e2e6224d923c1114205f0f8f62ff96ebb4a7fa9b2bde0f1",
   "draws": [
     {
       "station_code": "XSDN",
@@ -5165,6 +5165,30 @@
         "25",
         "91",
         "57"
+      ]
+    },
+    {
+      "station_code": "XSDN",
+      "draw_date": "2026-11-25",
+      "prizes_last2": [
+        "17",
+        "06",
+        "25",
+        "02",
+        "74",
+        "53",
+        "12",
+        "57",
+        "17",
+        "46",
+        "13",
+        "67",
+        "88",
+        "90",
+        "68",
+        "85",
+        "32",
+        "77"
       ]
     }
   ]

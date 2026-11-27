@@ -2,10 +2,10 @@
   "station_code": "XSTN",
   "station_name": "Tây Ninh",
   "region": "Miền Nam",
-  "updated_at": "2026-11-19T23:32:29.822557+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-19",
-  "sha256": "efe0ff2ea11bc67dea66cb323b0bf4082033b70efed20dae1dfe9cd2966c0a82",
+  "updated_at": "2026-11-27T00:59:34.231411+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-26",
+  "sha256": "4723ec7a9c0a572eee1ff119d02e56ae73bc73693b84c59264d75d05e905aeac",
   "draws": [
     {
       "station_code": "XSTN",
@@ -5165,6 +5165,30 @@
         "61",
         "99",
         "92"
+      ]
+    },
+    {
+      "station_code": "XSTN",
+      "draw_date": "2026-11-26",
+      "prizes_last2": [
+        "22",
+        "88",
+        "98",
+        "69",
+        "77",
+        "62",
+        "20",
+        "56",
+        "03",
+        "44",
+        "80",
+        "49",
+        "77",
+        "38",
+        "90",
+        "37",
+        "20",
+        "53"
       ]
     }
   ]

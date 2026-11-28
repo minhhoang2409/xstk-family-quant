@@ -2,10 +2,10 @@
   "station_code": "XSNT",
   "station_name": "Ninh Thuận",
   "region": "Miền Trung",
-  "updated_at": "2026-11-20T23:03:49.896106+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-20",
-  "sha256": "ecc94818f41639dc91c57362be431baf319d2c00b3952568d93ffe44badd43e3",
+  "updated_at": "2026-11-28T00:31:29.265245+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-27",
+  "sha256": "e4f019155da18af612226e2df1f404a8acd50f873896a742dd03d7aacc2a9686",
   "draws": [
     {
       "station_code": "XSNT",
@@ -5165,6 +5165,30 @@
         "15",
         "14",
         "08"
+      ]
+    },
+    {
+      "station_code": "XSNT",
+      "draw_date": "2026-11-27",
+      "prizes_last2": [
+        "07",
+        "10",
+        "91",
+        "57",
+        "54",
+        "27",
+        "28",
+        "76",
+        "17",
+        "59",
+        "17",
+        "40",
+        "70",
+        "39",
+        "94",
+        "95",
+        "89",
+        "68"
       ]
     }
   ]

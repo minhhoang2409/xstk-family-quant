@@ -2,10 +2,10 @@
   "station_code": "XSTV",
   "station_name": "Trà Vinh",
   "region": "Miền Nam",
-  "updated_at": "2026-11-20T23:03:46.394216+00:00",
-  "draw_count": 215,
-  "last_draw_date": "2026-11-20",
-  "sha256": "9b42cb443bd1a9bf3ec3c6627cb9337bd82e28253bffdfd523ac6eb43a851018",
+  "updated_at": "2026-11-28T00:31:26.417619+00:00",
+  "draw_count": 216,
+  "last_draw_date": "2026-11-27",
+  "sha256": "b339923b0e0baae4a2a72b015392476ed69b5e2becbe118bd16818e9e20a50fd",
   "draws": [
     {
       "station_code": "XSTV",
@@ -5165,6 +5165,30 @@
         "93",
         "99",
         "57"
+      ]
+    },
+    {
+      "station_code": "XSTV",
+      "draw_date": "2026-11-27",
+      "prizes_last2": [
+        "04",
+        "21",
+        "28",
+        "19",
+        "71",
+        "46",
+        "45",
+        "78",
+        "61",
+        "87",
+        "19",
+        "49",
+        "92",
+        "92",
+        "41",
+        "93",
+        "87",
+        "39"
       ]
     }
   ]
